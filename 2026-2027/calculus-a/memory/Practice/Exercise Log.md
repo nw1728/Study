@@ -140,3 +140,6 @@ Side quest: Ethan asked where $\cos 0$ and $\cos\frac\pi4$ come from → derived
 **Set for Ethan (not yet done):**
 - $\int_1^4\frac{x^2+x}{x^{3/2}}dx$ — split-then-Power-Rule pattern (set 2026-09-16)
 - $\int_0^2 x\sqrt{x^2+1}\,dx$ — substitution, cold re-test, limits genuinely change; answer $\frac{5\sqrt5-1}3\approx3.3934466292$ (set 2026-09-17, **not revealed to Ethan**)
+
+## Lecture 4 — Vectors and 3D geometry
+*No exercises yet.* See [[L04 Vectors and 3D Geometry]].

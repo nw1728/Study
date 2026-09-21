@@ -1,7 +1,7 @@
 ---
 title: Calculus A — Memory Index
 tags: [calculus-a, index]
-updated: 2026-09-16
+updated: 2026-09-21
 ---
 
 # 📚 Calculus A — Memory Index
@@ -23,6 +23,7 @@ updated: 2026-09-16
 | 1 | 2026-09-01 | Functions, limits, continuity | ✅ done | [[L01 Functions Limits Continuity]] |
 | 2 | 2026-09-07 | Differentiation | ✅ done + heavy practice | [[L02 Differentiation]] |
 | 3 | 2026-09-14 | Integration | 🟡 theory noted, practice started 2026-09-16 (live notes still empty) | [[L03 Integration]] |
+| 4 | 2026-09-21 | Vectors, products, 3D geometry (lines, planes) | 🟡 theory noted from slides, no practice yet | [[L04 Vectors and 3D Geometry]] |
 
 ## 📐 Reference sheets
 - [[Derivative Rules]] — every derivative formula in one place
