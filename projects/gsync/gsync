@@ -15,6 +15,7 @@ Commit, rebase onto upstream and push every repo in the config.
 Options:
   --idle         only commit repos whose changes are older than IDLE_MINUTES
   --fast         cap AI_TIMEOUT at 20s (used before suspend/shutdown)
+  --ignore-lid   run even if laptop lid is closed or nearly closed
   -n, --dry-run  show which commits would be made; change nothing, no AI
   -h, --help     show this help
   -V, --version  show version
@@ -42,6 +43,7 @@ PROMPT_FILE=$GSYNC_HOME/prompt.md
 # Defaults, overridable in the config file.
 REPOS="$HOME/study $HOME/study/work"
 IDLE_MINUTES=10
+LID_MIN_ANGLE=15
 AI_CMD=cline
 AI_TIMEOUT=60
 MAX_DIFF_LINES=300
@@ -103,6 +105,81 @@ run_with_timeout() {
 	kill "$watcher" 2>/dev/null
 	wait "$watcher" 2>/dev/null
 	return $rc
+}
+
+# ---------------------------------------------------------------- hardware
+
+# read_lid_angle - print current MacBook physical lid angle in degrees, or fail.
+read_lid_angle() {
+	[ "$(uname -s)" = Darwin ] || return 1
+	if [ -n "$GSYNC_LID_CMD" ]; then
+		$GSYNC_LID_CMD 2>/dev/null && return 0
+	fi
+	if [ -x "$GSYNC_HOME/macos/lid-angle" ]; then
+		"$GSYNC_HOME/macos/lid-angle" 2>/dev/null && return 0
+	fi
+	if command -v gsync-lid-angle >/dev/null 2>&1; then
+		gsync-lid-angle 2>/dev/null && return 0
+	fi
+	if command -v python3 >/dev/null 2>&1; then
+		python3 -c '
+import ctypes, ctypes.util, sys
+try:
+    iokit = ctypes.cdll.LoadLibrary(ctypes.util.find_library("IOKit"))
+    cf = ctypes.cdll.LoadLibrary(ctypes.util.find_library("CoreFoundation"))
+    cf.CFNumberCreate.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_void_p]; cf.CFNumberCreate.restype = ctypes.c_void_p
+    cf.CFStringCreateWithCString.argtypes = [ctypes.c_void_p, ctypes.c_char_p, ctypes.c_uint32]; cf.CFStringCreateWithCString.restype = ctypes.c_void_p
+    cf.CFDictionaryCreateMutable.argtypes = [ctypes.c_void_p, ctypes.c_long, ctypes.c_void_p, ctypes.c_void_p]; cf.CFDictionaryCreateMutable.restype = ctypes.c_void_p
+    cf.CFDictionarySetValue.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_void_p]
+    iokit.IOHIDManagerCreate.argtypes = [ctypes.c_void_p, ctypes.c_uint32]; iokit.IOHIDManagerCreate.restype = ctypes.c_void_p
+    iokit.IOHIDManagerSetDeviceMatching.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+    iokit.IOHIDManagerOpen.argtypes = [ctypes.c_void_p, ctypes.c_uint32]; iokit.IOHIDManagerOpen.restype = ctypes.c_int
+    iokit.IOHIDManagerCopyDevices.argtypes = [ctypes.c_void_p]; iokit.IOHIDManagerCopyDevices.restype = ctypes.c_void_p
+    cf.CFSetGetCount.argtypes = [ctypes.c_void_p]; cf.CFSetGetCount.restype = ctypes.c_long
+    cf.CFSetGetValues.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+    iokit.IOHIDDeviceGetReport.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_long, ctypes.c_void_p, ctypes.POINTER(ctypes.c_long)]; iokit.IOHIDDeviceGetReport.restype = ctypes.c_int
+    iokit.IOHIDManagerClose.argtypes = [ctypes.c_void_p, ctypes.c_uint32]
+    cf.CFRelease.argtypes = [ctypes.c_void_p]
+
+    mgr = iokit.IOHIDManagerCreate(None, 0)
+    if not mgr: sys.exit(1)
+    def num(v): c = ctypes.c_int(v); return cf.CFNumberCreate(None, 9, ctypes.byref(c))
+    def s(str_val): return cf.CFStringCreateWithCString(None, str_val.encode("utf-8"), 0x08000100)
+    d = cf.CFDictionaryCreateMutable(None, 4, None, None)
+    for k, v in [("VendorID", 0x05AC), ("ProductID", 0x8104), ("UsagePage", 0x0020), ("Usage", 0x008A)]:
+        cf.CFDictionarySetValue(d, s(k), num(v))
+    iokit.IOHIDManagerSetDeviceMatching(mgr, d)
+    if iokit.IOHIDManagerOpen(mgr, 0) != 0: sys.exit(1)
+    devs = iokit.IOHIDManagerCopyDevices(mgr)
+    if not devs: sys.exit(1)
+    cnt = cf.CFSetGetCount(devs)
+    arr = (ctypes.c_void_p * cnt)()
+    cf.CFSetGetValues(devs, arr)
+    for dev in arr:
+        rep = (ctypes.c_uint8 * 8)(); rlen = ctypes.c_long(8)
+        if iokit.IOHIDDeviceGetReport(dev, 2, 1, rep, ctypes.byref(rlen)) == 0 and rlen.value >= 3:
+            print((rep[2] << 8) | rep[1])
+            sys.exit(0)
+except Exception:
+    pass
+sys.exit(1)
+' 2>/dev/null && return 0
+	fi
+	return 1
+}
+
+# check_lid_angle - return 0 if safe to sync, or 1 if lid is closed/closing.
+check_lid_angle() {
+	[ -n "$IGNORE_LID" ] && return 0
+	[ "$LID_MIN_ANGLE" -ge 0 ] 2>/dev/null || return 0
+	local angle
+	if angle=$(read_lid_angle); then
+		if [ "$angle" -le "$LID_MIN_ANGLE" ]; then
+			log "lid is closed or nearly closed (${angle}° <= ${LID_MIN_ANGLE}°), stopping to prevent backpack heat"
+			return 1
+		fi
+	fi
+	return 0
 }
 
 # ---------------------------------------------------------------- changes
@@ -423,10 +500,12 @@ sync_repo() {
 MODE=now
 FAST=
 DRY_RUN=
+IGNORE_LID=
 while [ $# -gt 0 ]; do
 	case $1 in
 	--idle) MODE=idle ;;
 	--fast) FAST=1 ;;
+	--ignore-lid) IGNORE_LID=1 ;;
 	-n | --dry-run) DRY_RUN=1 ;;
 	-h | --help)
 		usage
@@ -447,11 +526,17 @@ done
 
 [ -n "$FAST" ] && [ "$AI_TIMEOUT" -gt 20 ] && AI_TIMEOUT=20
 
-log "run started (mode=$MODE${FAST:+, fast}${DRY_RUN:+, dry run})"
+log "run started (mode=$MODE${FAST:+, fast}${DRY_RUN:+, dry run}${IGNORE_LID:+, ignore lid})"
+
+if ! check_lid_angle; then
+	exit 0
+fi
+
 status=0
 set -f
 for repo in $REPOS; do
 	set +f
+	check_lid_angle || exit 0
 	(sync_repo "$repo") || status=1
 done
 set +f

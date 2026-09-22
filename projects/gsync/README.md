@@ -62,8 +62,13 @@ Uninstall with `./install.sh --uninstall` (your config is kept).
 gsync            commit + rebase + push everything now
 gsync --idle     only commit repos untouched for IDLE_MINUTES (timer uses this)
 gsync --fast     cap the AI at 20 s (suspend/shutdown use this)
+gsync --ignore-lid run even if lid is closed/nearly closed
 gsync -n         dry run
 ```
+
+On macOS, `gsync` automatically detects the physical lid angle using the built-in
+lid angle sensor. If the lid is closed or nearly closed ($\le 15^\circ$), `gsync`
+stops immediately to prevent heating up the Mac while it is in a backpack.
 
 Logs: `~/.local/state/gsync/gsync.log`
 
@@ -74,6 +79,7 @@ Logs: `~/.local/state/gsync/gsync.log`
 ```sh
 REPOS="$HOME/study $HOME/study/work"
 IDLE_MINUTES=10
+LID_MIN_ANGLE=15     # -1 = disable lid check, 0 = only if fully closed
 AI_CMD="cline"       # "" = never use AI
 AI_TIMEOUT=60
 ```
