@@ -24,7 +24,7 @@ case ${FAKE_AI:-good} in
 good) echo '{"type":"run_result","text":"feat(app): add greeting module\n\n- print hello on start"}' ;;
 fenced) echo '{"type":"run_result","text":"```\nfix(app): handle empty input\n```"}' ;;
 bad) echo '{"type":"run_result","text":"Here is your commit message: Added stuff."}' ;;
-long) echo '{"type":"run_result","text":"feat(app): this summary line is far too long to be accepted by the validator ok"}' ;;
+long) echo '{"type":"run_result","text":"feat(app): this summary line is far too long to be accepted by the validator ok indeed"}' ;;
 fail) exit 1 ;;
 slow) sleep 30 ;;
 esac
@@ -274,6 +274,41 @@ setup "paths with spaces and glob characters"
 mkdir "my dir" && echo 1 >"my dir/[a].txt" && echo 2 >"my dir/a.txt"
 FAKE_AI=fail gs
 check "tree clean" is_clean
+
+setup "closed lid stops gsync without committing"
+echo x >file.txt
+GSYNC_LID_CMD="echo 0" FAKE_AI=fail "$GSYNC" >/dev/null 2>&1
+check "exit 0" eq "$?" "0"
+check "no commit" eq "$(count_commits)" "1"
+check "backpack heat logged" grep -q "stopping to prevent backpack heat" "$T/state/gsync.log"
+
+setup "nearly closed lid (<= LID_MIN_ANGLE) stops gsync"
+echo x >file.txt
+GSYNC_LID_CMD="echo 12" FAKE_AI=fail "$GSYNC" >/dev/null 2>&1
+check "exit 0" eq "$?" "0"
+check "no commit" eq "$(count_commits)" "1"
+
+setup "open lid (> LID_MIN_ANGLE) proceeds to commit"
+echo x >file.txt
+GSYNC_LID_CMD="echo 90" FAKE_AI=fail gs
+check "committed" eq "$(count_commits)" "2"
+
+setup "--ignore-lid commits even when lid is closed"
+echo x >file.txt
+GSYNC_LID_CMD="echo 5" FAKE_AI=fail "$GSYNC" --ignore-lid >/dev/null 2>&1
+check "exit 0" eq "$?" "0"
+check "committed" eq "$(count_commits)" "2"
+
+setup "LID_MIN_ANGLE=-1 disables lid angle check"
+echo 'LID_MIN_ANGLE=-1' >>"$GSYNC_CONFIG"
+echo x >file.txt
+GSYNC_LID_CMD="echo 0" FAKE_AI=fail gs
+check "committed" eq "$(count_commits)" "2"
+
+setup "sensor error/failure allows gsync to continue normally"
+echo x >file.txt
+GSYNC_LID_CMD="false" FAKE_AI=fail gs
+check "committed" eq "$(count_commits)" "2"
 
 printf '\n%d passed, %d failed\n' "$PASS" "$FAIL"
 [ "$FAIL" -eq 0 ]
