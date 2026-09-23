@@ -155,3 +155,5 @@ The IMU needs to send high-precision acceleration data (X, Y, Z axes)
 - Byte 7: Unused
 
 
+= How do you handle receiving and processing packets at high speed?
+For this step, i will actually implement some algorythms and tricks to handle the fast data
