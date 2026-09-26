@@ -1,7 +1,7 @@
 ---
 title: Exercise Log
 tags: [calculus-a, practice]
-updated: 2026-09-17
+updated: 2026-09-26
 ---
 
 # ✍️ Exercise Log
@@ -137,9 +137,52 @@ Side quest: Ethan asked where $\cos 0$ and $\cos\frac\pi4$ come from → derived
 > FTC I still hands you its derivative without ever computing it. That is what the theorem buys you.
 > Sanity check: at $x=3.7$, $\sin(3.7)<0$ so the answer is **positive** — sign behaves correctly.
 
-**Set for Ethan (not yet done):**
-- $\int_1^4\frac{x^2+x}{x^{3/2}}dx$ — split-then-Power-Rule pattern (set 2026-09-16)
-- $\int_0^2 x\sqrt{x^2+1}\,dx$ — substitution, cold re-test, limits genuinely change; answer $\frac{5\sqrt5-1}3\approx3.3934466292$ (set 2026-09-17, **not revealed to Ethan**)
+**Set for Ethan (still not done, as of 2026-09-26):**
+- $\int_1^4\frac{x^2+x}{x^{3/2}}dx$ — split-then-Power-Rule; answer $\frac{20}3\approx6.6666667$ (set 2026-09-16, **revealed only in the HTML page behind a click**)
+- $\int_0^2 x\sqrt{x^2+1}\,dx$ — substitution, cold re-test, limits genuinely change; answer $\frac{5\sqrt5-1}3\approx3.3934466292$ (set 2026-09-17, **not revealed**)
+- Absolute max/min of $f(x)=x^2-4x+1$ on $[0,5]$ — answer max $f(5)=6$, min $f(2)=-3$ (set 2026-09-26, **not revealed**)
+
+### Substitution — indefinite (2026-09-19 → 2026-09-21)
+| # | Problem | Substitution | Answer | Check |
+|---|---|---|---|---|
+| Ex 14 | $\int \frac{\cos^2(1/x)}{x^2}dx$ | power-reduction $\cos^2\theta=\frac{1+\cos2\theta}{2}$, then $u=\frac2x$ | $-\frac1{2x}-\frac{\sin(2/x)}4+C$ | ✅ central difference at $x=0.4,0.9,1.7,3.3,-1.2$; Simpson on $[1,2]$ matches $F(2)-F(1)=0.2669566105$ |
+| Ex 17 | $\int\sqrt{3-2s}\,ds$ | $u=3-2s$, $du=-2\,ds$ | $-\frac13(3-2s)^{3/2}+C$ | ✅ derivative check; Simpson on $[0,1]$ = $1.398717474$ |
+| Ex 29 | $\int\sqrt{x}\,\sin\!\big(x^{3/2}+1\big)dx$ | $u=x^{3/2}+1$, $du=\frac32\sqrt x\,dx$ | $-\frac23\cos\!\big(x^{3/2}+1\big)+C$ | ✅ Simpson on $[0,2]$ and $[1,3]$ match to 8–10 dp |
+| Ex 65 | $\int\frac{dy}{(\arctan y)(1+y^2)}$ | $u=\arctan y$, $du=\frac{dy}{1+y^2}$ | $\ln\lvert\arctan y\rvert+C$ | ✅ Simpson on $[1,3]$ and $[-4,-1]$ match to machine precision |
+
+> [!tip] The pattern worth memorising (Ex 65)
+> **Derivative on top, the thing itself on the bottom → $\ln\lvert\text{thing}\rvert$.** Spotting the pair is the whole exercise; the integration is one line.
+
+> [!warning] Ex 14 — the coefficient is not decoration
+> We lost time arguing whether the printed factor was $\frac1x$ or $\frac1{x^2}$. The rule that settles it: **the extra factor in the integrand has to be exactly $du$**, otherwise the substitution leaves an $x$ behind and dies. With $u=\frac2x$, $du=-\frac2{x^2}dx$ — so the $\frac1{x^2}$ is the version that works.
+
+### Substitution — definite, with converted limits (2026-09-21)
+| # | Problem | Technique | Answer | Check |
+|---|---|---|---|---|
+| Ex 31 | $\int_2^4\frac{dx}{x(\ln x)^2}$ | $u=\ln x$, limits $\ln2\to\ln4$ (Theorem 7) | $\frac1{\ln2}-\frac1{\ln4}=\frac1{2\ln2}\approx0.7213475204$ | ✅ Simpson $n=20000$ matches to 15 dp |
+| Ex 41 | $\int_0^1\frac{4}{\sqrt{4-s^2}}ds$ | standard form $\int\frac{ds}{\sqrt{a^2-s^2}}=\arcsin\frac sa$, $a=2$ | $4\arcsin\frac12=\frac{2\pi}3\approx2.0943951024$ | ✅ four independent methods agree to 13 dp |
+
+> [!warning] The two traps we priced out
+> **Ex 31:** keeping the old $x$-limits after substituting gives $0.25$ instead of $0.721$; reading $\ln(x^2)$ instead of $(\ln x)^2$ gives $0.3466$.
+> **Ex 41:** writing $4\arcsin s$ instead of $4\arcsin\frac s2$ gives $2\pi\approx6.283$; dropping the leading 4 gives $\frac\pi6\approx0.524$.
+
+### Area between curves (2026-09-24)
+| Problem | Technique | Answer | Check |
+|---|---|---|---|
+| Total shaded area between $y=2x^2$ and $y=x^4-2x^2$ | intersections $x^4-4x^2=0\Rightarrow x=0,\pm2$; top − bottom; even symmetry | $\int_{-2}^{2}(4x^2-x^4)dx=\frac{128}{15}\approx8.5333333$ | ✅ Simpson $n=2\,000\,000$ = $8.5333333333$ |
+
+**Structure:** two symmetric lobes across $x=0$, each worth $\frac{64}{15}\approx4.2667$.
+**Wrong routes, priced:** treating $\lvert x^4-2x^2\rvert$ as the area gives $5.150$; subtracting that from the parabola's area gives $5.516$. Neither is $8.533$.
+
+### Extrema vocabulary — refresher (2026-09-26)
+| Problem | Technique | Answer | Check |
+|---|---|---|---|
+| Absolute max/min of $f(x)=x^3-3x$ on $[-1.5,3]$ | $f'=3(x-1)(x+1)$; candidates $=$ critical points **plus both endpoints** | max $f(3)=18$ (endpoint), min $f(1)=-2$ | ✅ 700 001-point scan finds the same two |
+
+**Full candidate table:** $f(-1.5)=1.125$, $f(-1)=2$ (local max), $f(1)=-2$ (local min), $f(3)=18$.
+**The lesson:** the only real hilltop, $x=-1$, is *not* the absolute max. It loses 2 against 18 because the interval lets the curve keep climbing. Local champion ≠ global champion.
+
+**Also covered:** the First Derivative Test ($+\to-$ max, $-\to+$ min, no flip → neither, e.g. $x^3$ at $0$), the Extreme Value Theorem, and the four ways to check an integral — differentiate back (the king), eyeball the area, squeeze between $m(b-a)$ and $M(b-a)$, and sign sanity. All of it is now an interactive page: `html-visualization/extrema-and-integral-checks.html`.
 
 ## Lecture 4 — Vectors and 3D geometry
 *No exercises yet.* See [[L04 Vectors and 3D Geometry]].

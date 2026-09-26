@@ -1,0 +1,1139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peaks, Valleys, Areas</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.css">
+
+<style>
+/* ── tokens: same palette family as unit-circle.html so the course tools match ── */
+:root{
+  color-scheme: light;
+  --bg:#f6f8fc; --surface:#ffffff; --surface-2:#f0f4fb; --ink:#17213a; --muted:#647089;
+  --border:#dde4f0; --grid:#e3e9f4;
+  --accent:#3454d1; --accent-soft:#eef1fd;
+  --up:#0e9b74;   --up-soft:#e7f7f1;      /* uphill, positive, maximum */
+  --down:#e0524a; --down-soft:#fdeceb;    /* downhill, negative, minimum */
+  --flat:#b57608; --flat-soft:#fdf2df;    /* flat ground, critical point */
+  --shadow: 0 1px 2px rgba(23,33,58,.06), 0 8px 24px -12px rgba(23,33,58,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme: dark;
+    --bg:#0c111d; --surface:#131a2b; --surface-2:#1a2237; --ink:#e7ecf7; --muted:#8d98b3;
+    --border:#232c44; --grid:#202a42;
+    --accent:#8298ff; --accent-soft:#1a2140;
+    --up:#3ee0ab;   --up-soft:#103224;
+    --down:#ff8478; --down-soft:#35201e;
+    --flat:#f0b429; --flat-soft:#332611;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 28px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#0c111d; --surface:#131a2b; --surface-2:#1a2237; --ink:#e7ecf7; --muted:#8d98b3;
+  --border:#232c44; --grid:#202a42;
+  --accent:#8298ff; --accent-soft:#1a2140;
+  --up:#3ee0ab;   --up-soft:#103224;
+  --down:#ff8478; --down-soft:#35201e;
+  --flat:#f0b429; --flat-soft:#332611;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 12px 28px -14px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box;}
+html,body{margin:0;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  font-size:15px; line-height:1.62;
+  -webkit-text-size-adjust:100%;
+}
+.page{max-width:980px; margin:0 auto; padding:0 20px; padding-block:26px 64px;}
+
+/* ── type ── */
+h1{font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:clamp(26px,5vw,38px); line-height:1.15; margin:0 0 8px; text-wrap:balance;}
+h2{font-family:'Fraunces',Georgia,serif; font-weight:600; font-size:clamp(20px,3.4vw,26px); margin:0 0 4px; text-wrap:balance;}
+h3{font-size:16.5px; font-weight:650; margin:0 0 6px;}
+h4{font-size:14px; font-weight:650; margin:0 0 4px;}
+p{margin:0 0 12px; max-width:66ch;}
+a{color:var(--accent);}
+.lede{color:var(--muted); font-size:15.5px; max-width:64ch;}
+.eyebrow{font-size:11.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--muted);}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace; font-variant-numeric:tabular-nums;}
+strong{font-weight:650;}
+em.id{font-style:normal; font-family:'JetBrains Mono',monospace; font-size:.92em; color:var(--muted);}
+
+header.top{display:flex; gap:16px; align-items:flex-start; justify-content:space-between; margin-bottom:26px;}
+#theme{flex:0 0 auto; font:inherit; font-size:12.5px; padding:7px 12px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--muted); cursor:pointer;}
+#theme:hover{border-color:var(--accent); color:var(--accent);}
+
+section{margin:0 0 40px;}
+.sec-head{margin-bottom:16px;}
+.rule{height:1px; background:var(--border); border:0; margin:0 0 20px;}
+
+/* ── cards ── */
+.panel{background:var(--surface); border:1px solid var(--border); border-radius:16px; box-shadow:var(--shadow); padding:18px;}
+.cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:12px;}
+.card{background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:14px 15px;}
+.card .tag{display:inline-block; font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:3px 8px; border-radius:999px; margin-bottom:8px;}
+.tag.crit{background:var(--flat-soft); color:var(--flat);}
+.tag.max{background:var(--up-soft); color:var(--up);}
+.tag.min{background:var(--down-soft); color:var(--down);}
+.tag.abs{background:var(--accent-soft); color:var(--accent);}
+.tag.end{background:var(--surface-2); color:var(--muted);}
+.card p{margin:0; font-size:14px; line-height:1.55;}
+.card p + p{margin-top:8px;}
+.gaga{color:var(--muted); font-size:13.5px;}
+
+.note{border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:0 12px 12px 0; padding:13px 16px; margin:0 0 16px;}
+.note.warn{border-left-color:var(--down); background:var(--down-soft);}
+.note.good{border-left-color:var(--up); background:var(--up-soft);}
+.note p{margin:0; max-width:62ch; font-size:14.2px;}
+.note p + p{margin-top:8px;}
+.note .eyebrow{display:block; margin-bottom:5px;}
+
+/* ── interactive shell ── */
+.tool{background:var(--surface); border:1px solid var(--border); border-radius:18px; box-shadow:var(--shadow); overflow:hidden;}
+.tool-bar{display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:14px 16px; border-bottom:1px solid var(--border); background:var(--surface-2);}
+.chip{font-family:'JetBrains Mono',monospace; font-size:12.5px; padding:6px 11px; border-radius:999px; border:1px solid var(--border);
+      background:var(--surface); color:var(--ink); cursor:pointer; transition:background .15s,border-color .15s,transform .08s;}
+.chip:hover{border-color:var(--accent);}
+.chip[aria-pressed="true"]{background:var(--accent-soft); border-color:var(--accent); color:var(--accent); font-weight:600;}
+.chip:active{transform:scale(.96);}
+.tool-body{padding:16px;}
+.plot-wrap{position:relative; width:100%; aspect-ratio:16/10; min-height:250px;}
+@media (max-width:640px){ .plot-wrap{aspect-ratio:4/3;} }
+canvas{width:100%; height:100%; display:block; touch-action:none; border-radius:10px; cursor:ew-resize;}
+canvas:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+.readout{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+.stat{flex:1 1 130px; background:var(--surface-2); border:1px solid var(--border); border-radius:10px; padding:8px 11px;}
+.stat .k{display:block; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);}
+.stat .v{font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums; font-size:16px; font-weight:600;}
+.stat.is-up .v{color:var(--up);} .stat.is-down .v{color:var(--down);} .stat.is-flat .v{color:var(--flat);}
+
+.verdict{margin-top:12px; font-size:14.5px; padding:10px 13px; border-radius:11px; background:var(--surface-2); border:1px solid var(--border);}
+.verdict b{font-weight:650;}
+
+.sliders{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin-top:14px;}
+.slider label{display:flex; justify-content:space-between; font-size:12.5px; color:var(--muted); margin-bottom:2px;}
+.slider label .val{font-family:'JetBrains Mono',monospace; color:var(--ink); font-weight:600;}
+input[type=range]{width:100%; accent-color:var(--accent); cursor:pointer;}
+
+/* ── sign chart ── */
+.signchart{margin-top:16px;}
+.signbar{display:flex; height:42px; border-radius:10px; overflow:hidden; border:1px solid var(--border);}
+.signseg{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; min-width:0; font-size:12px; line-height:1.15; padding:0 4px; text-align:center;}
+.signseg.pos{background:var(--up-soft); color:var(--up);} .signseg.neg{background:var(--down-soft); color:var(--down);}
+.signseg .sym{font-family:'JetBrains Mono',monospace; font-size:15px; font-weight:700;}
+.signseg .word{font-size:10.5px; letter-spacing:.04em; text-transform:uppercase; font-weight:700; opacity:.85; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;}
+.flips{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;}
+.flip{font-size:12.5px; padding:5px 10px; border-radius:999px; border:1px solid var(--border); background:var(--surface-2);}
+.flip .mono{font-weight:600;}
+.flip.max{background:var(--up-soft); border-color:var(--up); color:var(--up);}
+.flip.min{background:var(--down-soft); border-color:var(--down); color:var(--down);}
+.flip.none{background:var(--flat-soft); border-color:var(--flat); color:var(--flat);}
+
+/* ── tables ── */
+.tablewrap{overflow-x:auto; margin:14px 0 0;}
+table{border-collapse:collapse; width:100%; min-width:400px; font-size:14px;}
+th,td{text-align:left; padding:8px 11px; border-bottom:1px solid var(--border);}
+th{font-size:11px; letter-spacing:.07em; text-transform:uppercase; color:var(--muted); font-weight:700;}
+td.num{font-family:'JetBrains Mono',monospace; font-variant-numeric:tabular-nums;}
+tr.win-max td{background:var(--up-soft);} tr.win-max td:first-child{box-shadow:inset 3px 0 0 var(--up);}
+tr.win-min td{background:var(--down-soft);} tr.win-min td:first-child{box-shadow:inset 3px 0 0 var(--down);}
+td .who{font-size:12.5px; color:var(--muted);}
+tr.win-max td .who{color:var(--up); font-weight:600;} tr.win-min td .who{color:var(--down); font-weight:600;}
+
+/* ── steps ── */
+ol.steps{counter-reset:s; list-style:none; padding:0; margin:0; display:grid; gap:11px;}
+ol.steps > li{counter-increment:s; position:relative; padding-left:40px; font-size:14.5px; max-width:70ch;}
+ol.steps > li::before{content:counter(s); position:absolute; left:0; top:1px; width:26px; height:26px; border-radius:8px;
+  background:var(--accent-soft); color:var(--accent); font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700;
+  display:grid; place-items:center;}
+ol.steps > li b{display:block; font-weight:650;}
+ol.steps ul{margin:6px 0 0; padding-left:18px; color:var(--muted); font-size:13.5px;}
+
+/* ── reveal ── */
+details{border:1px solid var(--border); border-radius:13px; background:var(--surface); margin:0 0 12px; overflow:hidden;}
+details[open]{box-shadow:var(--shadow);}
+summary{cursor:pointer; padding:13px 16px; font-weight:600; font-size:14.5px; list-style:none; display:flex; gap:10px; align-items:baseline;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:'▸'; color:var(--accent); font-size:12px; transform:translateY(-1px);}
+details[open] summary::before{content:'▾';}
+summary .ex{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); background:var(--surface-2); border:1px solid var(--border); border-radius:999px; padding:2px 8px; margin-left:auto; white-space:nowrap;}
+.reveal-body{padding:0 16px 16px; border-top:1px solid var(--border); padding-top:14px;}
+.reveal-body > *:last-child{margin-bottom:0;}
+
+.answer{background:var(--up-soft); border:1px solid var(--up); border-radius:11px; padding:11px 14px; margin-top:12px; font-size:14.5px;}
+.answer .eyebrow{color:var(--up); display:block; margin-bottom:3px;}
+
+.katex{font-size:1.02em;}
+.katex-display{margin:.6em 0; overflow-x:auto; overflow-y:hidden; padding:2px 0;}
+
+.legend{display:flex; flex-wrap:wrap; gap:14px; margin-top:12px; font-size:12.5px; color:var(--muted);}
+.legend span{display:flex; align-items:center; gap:6px;}
+.swatch{width:16px; height:3px; border-radius:2px; background:var(--accent);}
+.swatch.dash{background:repeating-linear-gradient(90deg,var(--accent) 0 5px,transparent 5px 9px); height:4px;}
+.swatch.dot{width:9px; height:9px; border-radius:50%;}
+.swatch.up{background:var(--up);} .swatch.down{background:var(--down);} .swatch.flat{background:var(--flat);}
+
+footer{border-top:1px solid var(--border); padding-top:16px; color:var(--muted); font-size:13px;}
+footer code{font-family:'JetBrains Mono',monospace; font-size:12.5px; background:var(--surface-2); padding:1px 5px; border-radius:5px;}
+
+@media (prefers-reduced-motion:reduce){ *{transition:none !important; animation:none !important;} }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="top">
+  <div>
+    <span class="eyebrow">Calculus A · Ethan · session of 26 Sep 2026</span>
+    <h1>Peaks, valleys, and how to check an area</h1>
+    <p class="lede">Two things we untangled: what <em>critical point</em>, <em>local</em> and <em>absolute</em> max/min actually mean, and how to prove an integral answer is right before you trust it. Drag the dot. Move the endpoints. Watch which point wins.</p>
+  </div>
+  <button id="theme" type="button">light / dark</button>
+</header>
+
+<!-- ══════════════════ PART 1 ══════════════════ -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Part 1 · the vocabulary</span>
+    <h2>The wrong instinct, first</h2>
+  </div>
+
+  <div class="note warn">
+    <span class="eyebrow">What everyone assumes</span>
+    <p>“<strong>The derivative is zero, so this is a maximum.</strong>” Nope. Gagal. Flat ground is only a <em>suspect</em>, not a verdict.</p>
+    <p>Gogo gaga version: imagine you are hiking with your eyes closed. Your feet can only feel the <strong>slope</strong>. When the ground goes flat, you might be standing on a hilltop, in the bottom of a valley, or on a flat landing halfway up a staircase that keeps going up. Your feet cannot tell the difference. You need one more test.</p>
+  </div>
+
+  <div class="note">
+    <span class="eyebrow">The one sentence that fixes it</span>
+    <p>The <em>turunan</em> \(f'(x)\) is not height. It is <strong>steepness</strong>. \(f(x)\) tells you how high you are; \(f'(x)\) tells you which way the ground tilts.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <span class="tag crit">critical point</span>
+      <p>An \(x\) where \(f'(x)=0\) (flat ground) or \(f'(x)\) does not exist (a sharp corner or a cliff), and \(x\) is inside the interval.</p>
+      <p class="gaga">Baby words: <strong>“a spot worth checking.”</strong> A suspect the police brought in. Not yet guilty.</p>
+    </div>
+    <div class="card">
+      <span class="tag max">local maximum</span>
+      <p>A point higher than everything in its own small neighbourhood. In symbols: \(f(c)\ge f(x)\) for all \(x\) near \(c\).</p>
+      <p class="gaga">Baby words: <strong>“the top of <em>this</em> hill.”</strong> There may be a much taller mountain 5 km away. Doesn't matter here.</p>
+    </div>
+    <div class="card">
+      <span class="tag min">local minimum</span>
+      <p>A point lower than everything nearby: \(f(c)\le f(x)\) for \(x\) near \(c\).</p>
+      <p class="gaga">Baby words: <strong>“the bottom of this valley.”</strong> Also called a relative minimum — same thing, different book.</p>
+    </div>
+    <div class="card">
+      <span class="tag abs">absolute max / min</span>
+      <p>The single highest and single lowest value of \(f\) over the <em>whole</em> interval \([a,b]\). Also called global.</p>
+      <p class="gaga">Baby words: <strong>“the champion.”</strong> One winner for highest, one for lowest, over the entire walk.</p>
+    </div>
+    <div class="card">
+      <span class="tag end">the two endpoints</span>
+      <p>\(x=a\) and \(x=b\) are candidates too, even though \(f'\) there is usually nowhere near zero.</p>
+      <p class="gaga">Baby words: <strong>“where the walk starts and stops.”</strong> Forgetting these is mistake #1 on the exam. The wall of the room can be the highest point in it.</p>
+    </div>
+    <div class="card">
+      <span class="tag abs">EVT</span>
+      <p>Extreme Value Theorem: if \(f\) is continuous on a <em>closed</em> interval \([a,b]\), then an absolute max and an absolute min are <strong>guaranteed to exist</strong>.</p>
+      <p class="gaga">Baby words: <strong>“no holes, no open ends → a winner exists.”</strong> On \((0,1)\) or with a jump, the winner can escape.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TOOL 1 ══════════════════ -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Interactive · walk the hill</span>
+    <h2>Feel the slope with your own hands</h2>
+  </div>
+  <p>Pick a function, then <strong>drag the dot along the curve</strong> (or click the picture and use ← →). The straight line glued to the dot is the tangent: its tilt <em>is</em> \(f'(x)\). Then drag the endpoint sliders and watch the champion change.</p>
+
+  <div class="tool">
+    <div class="tool-bar" id="fnChips" role="group" aria-label="Choose a function"></div>
+    <div class="tool-body">
+      <div class="plot-wrap"><canvas id="hill" tabindex="0" aria-label="Graph of the chosen function with a draggable tangent point"></canvas></div>
+
+      <div class="legend">
+        <span><i class="swatch"></i> the curve f(x)</span>
+        <span><i class="swatch flat"></i> tangent line — its tilt is f′(x)</span>
+        <span><i class="swatch dot flat"></i> critical point</span>
+        <span><i class="swatch dot up"></i> absolute max</span>
+        <span><i class="swatch dot down"></i> absolute min</span>
+      </div>
+
+      <div class="readout">
+        <div class="stat"><span class="k">x</span><span class="v" id="rx">–</span></div>
+        <div class="stat"><span class="k">height f(x)</span><span class="v" id="rfx">–</span></div>
+        <div class="stat" id="statSlope"><span class="k">slope f ′(x)</span><span class="v" id="rdfx">–</span></div>
+      </div>
+
+      <div class="verdict" id="verdict">–</div>
+
+      <div class="sliders">
+        <div class="slider">
+          <label for="sa">left endpoint <span class="val" id="sav">–</span></label>
+          <input type="range" id="sa">
+        </div>
+        <div class="slider">
+          <label for="sb">right endpoint <span class="val" id="sbv">–</span></label>
+          <input type="range" id="sb">
+        </div>
+      </div>
+
+      <div class="signchart">
+        <h4>Sign chart of \(f'\) — the First Derivative Test</h4>
+        <div class="signbar" id="signbar"></div>
+        <div class="flips" id="flips"></div>
+      </div>
+
+      <div class="tablewrap">
+        <h4>Candidate table — every suspect, and only \(f\) values</h4>
+        <table>
+          <thead><tr><th>candidate x</th><th>comes from</th><th>height f(x)</th><th>verdict</th></tr></thead>
+          <tbody id="candBody"></tbody>
+        </table>
+      </div>
+
+      <div class="note" id="fnNote" style="margin-top:16px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ RULES ══════════════════ -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">The two recipes</span>
+    <h2>First Derivative Test, then the candidate hunt</h2>
+  </div>
+
+  <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+    <div class="panel">
+      <h3>Is this critical point a hilltop or a valley?</h3>
+      <p class="gaga">Look at the sign of \(f'\) just left and just right of it. The <em>flip</em> is the whole answer.</p>
+      <div class="tablewrap" style="margin-top:6px;">
+        <table style="min-width:280px;">
+          <thead><tr><th>left → right</th><th>meaning</th><th>it is a…</th></tr></thead>
+          <tbody>
+            <tr><td class="num">+ → −</td><td>uphill then downhill</td><td><b style="color:var(--up)">local max</b></td></tr>
+            <tr><td class="num">− → +</td><td>downhill then uphill</td><td><b style="color:var(--down)">local min</b></td></tr>
+            <tr><td class="num">+ → +</td><td>uphill, brief pause, uphill</td><td><b style="color:var(--flat)">neither</b></td></tr>
+            <tr><td class="num">− → −</td><td>downhill, pause, downhill</td><td><b style="color:var(--flat)">neither</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="gaga" style="margin-top:10px;">Try function <em class="id">f(x) = x³</em> in the tool above: \(f'(0)=0\), perfectly flat, yet it is neither a max nor a min. That is the counterexample that kills the wrong instinct.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Absolute max/min on \([a,b]\) — 5 steps</h3>
+      <ol class="steps">
+        <li><b>Differentiate.</b> Find \(f'(x)\).</li>
+        <li><b>Solve \(f'(x)=0\).</b> Also note where \(f'\) does not exist. Keep only the ones <em>inside</em> \((a,b)\) — a critical point outside the interval is not on your walk.</li>
+        <li><b>Build the candidate list:</b> those critical points <strong>plus \(a\) plus \(b\)</strong>.</li>
+        <li><b>Plug every candidate into \(f\)</b>, never into \(f'\). You want heights now, not slopes.</li>
+        <li><b>Biggest value = absolute max. Smallest = absolute min.</b> Done. No sign chart needed for this job.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="note warn" style="margin-top:16px;">
+    <span class="eyebrow">Your four repeat traps</span>
+    <p><strong>1. Forgetting the endpoints.</strong> In the very example below, the champion <em>is</em> an endpoint and the pretty local max loses 2 against 18.</p>
+    <p><strong>2. Plugging candidates into \(f'\) instead of \(f\).</strong> You would be comparing steepness, then reporting it as height.</p>
+    <p><strong>3. Assuming flat means extreme.</strong> Suspect, not verdict. Do the sign flip.</p>
+    <p><strong>4. Ignoring the domain.</strong> For \(f(x)=\frac1x+\ln x\) nothing exists at \(x\le 0\), so \(x=0\) can never be a candidate.</p>
+  </div>
+</section>
+
+<!-- ══════════════════ WORKED EXAMPLES 1 ══════════════════ -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">From our own sessions</span>
+    <h2>Worked examples, step by step</h2>
+  </div>
+
+  <details open>
+    <summary>Find the absolute max and min of \(f(x)=x^3-3x\) on \([-1.5,\,3]\) <span class="ex">26 Sep session</span></summary>
+    <div class="reveal-body">
+      <ol class="steps">
+        <li><b>Differentiate.</b> Power Rule on each piece: \(f'(x)=3x^2-3\). Factor it, because factored form hands you the roots for free: \(f'(x)=3(x-1)(x+1)\).</li>
+        <li><b>Set it to zero.</b> \(3(x-1)(x+1)=0\Rightarrow x=-1\) and \(x=1\). Both sit inside \((-1.5,3)\), so both stay. <span class="gaga">These are the two flat spots on the walk.</span></li>
+        <li><b>Candidate list.</b> \(x=-1.5\) (left wall), \(x=-1\), \(x=1\), \(x=3\) (right wall). Four suspects.</li>
+        <li><b>Heights only — plug into \(f\):</b>
+          \[f(-1.5)=-3.375+4.5=1.125,\quad f(-1)=-1+3=2,\quad f(1)=1-3=-2,\quad f(3)=27-9=18\]
+        </li>
+        <li><b>Compare.</b> Biggest is \(18\), smallest is \(-2\).</li>
+      </ol>
+      <div class="answer">
+        <span class="eyebrow">Answer</span>
+        Absolute maximum \(f=18\) at \(x=3\) — <strong>an endpoint</strong>. Absolute minimum \(f=-2\) at \(x=1\).
+      </div>
+      <p style="margin-top:14px;"><strong>And the local story, from the sign chart:</strong> \(f'&gt;0\) on \((-1.5,-1)\), \(f'&lt;0\) on \((-1,1)\), \(f'&gt;0\) on \((1,3)\). So \(x=-1\) is a <b style="color:var(--up)">local max</b> (+ → −) with height 2, and \(x=1\) is a <b style="color:var(--down)">local min</b> (− → +) with height −2.</p>
+      <div class="note good">
+        <span class="eyebrow">✅ numerical check</span>
+        <p>We scanned 700 001 evenly spaced points across \([-1.5,3]\): the largest value found was \(18\) at \(x=3\), the smallest \(-2\) at \(x=1\). The algebra and the brute force agree.</p>
+      </div>
+      <div class="note warn">
+        <span class="eyebrow">The lesson of this one</span>
+        <p>The local max at \(x=-1\) <em>looks</em> like the answer on the graph — it is the only real hilltop. It loses anyway, 2 against 18, because the curve keeps climbing after the valley and the interval lets it climb all the way to \(x=3\). <strong>Local champion ≠ global champion.</strong></p>
+      </div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Absolute extremes of \(f(x)=\frac1x+\ln x\) on \([0.5,\,4]\) <span class="ex">Ex 39 · L02</span></summary>
+    <div class="reveal-body">
+      <ol class="steps">
+        <li><b>Domain first.</b> \(\ln x\) needs \(x&gt;0\) and \(\frac1x\) hates \(x=0\). The interval \([0.5,4]\) is safely positive, so we may continue.</li>
+        <li><b>Differentiate.</b> \(\frac1x=x^{-1}\) so its derivative is \(-x^{-2}\); the derivative of \(\ln x\) is \(\frac1x\). Together \(f'(x)=-\frac{1}{x^2}+\frac1x\).</li>
+        <li><b>One denominator.</b> Put both over \(x^2\): \(f'(x)=\dfrac{-1+x}{x^{2}}=\dfrac{x-1}{x^{2}}\). <span class="gaga">Only the <em>pembilang</em> can make a fraction zero. The <em>penyebut</em> only makes it undefined.</span></li>
+        <li><b>Set numerator to zero.</b> \(x-1=0\Rightarrow x=1\), inside \((0.5,4)\). Keep it.</li>
+        <li><b>Candidates and heights.</b>
+          \[f(0.5)=2+\ln 0.5\approx 1.3069,\quad f(1)=1+0=1,\quad f(4)=0.25+\ln 4\approx 1.6363\]
+        </li>
+      </ol>
+      <div class="answer">
+        <span class="eyebrow">Answer</span>
+        Absolute minimum \(f(1)=1\) at \(x=1\); absolute maximum \(f(4)=\tfrac14+\ln 4\approx 1.636\) at \(x=4\) — again an endpoint.
+      </div>
+      <p style="margin-top:12px;"><strong>Sign check:</strong> \(x^2\) is always positive, so the sign of \(f'\) is just the sign of \(x-1\): negative before 1, positive after. − → + means \(x=1\) is a local min, and it happens to be the global one too.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>The counterexample: \(f(x)=x^3\) on \([-1,\,1]\) — flat but neither <span class="ex">why “suspect only”</span></summary>
+    <div class="reveal-body">
+      <p>\(f'(x)=3x^2\). Setting \(3x^2=0\) gives \(x=0\), so \(x=0\) is a genuine critical point: the tangent there is perfectly horizontal.</p>
+      <p>But \(3x^2\) is positive on both sides of 0 (squares can't be negative). So the sign pattern is <span class="mono">+ → +</span>: <strong>no flip, no extremum</strong>. The path pauses for an instant and then continues uphill.</p>
+      <div class="answer">
+        <span class="eyebrow">Answer</span>
+        \(x=0\) is critical but is neither a local max nor a local min. The absolute extremes are the two endpoints: max \(f(1)=1\), min \(f(-1)=-1\).
+      </div>
+      <p class="gaga" style="margin-top:12px;">This shape has a name you will meet later: an <strong>inflection point with a horizontal tangent</strong>. Concavity flips there instead of direction.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════ PART 2 ══════════════════ -->
+<section>
+  <hr class="rule">
+  <div class="sec-head">
+    <span class="eyebrow">Part 2 · trust nothing</span>
+    <h2>Four ways to check an integral</h2>
+  </div>
+
+  <div class="note warn">
+    <span class="eyebrow">The wrong instinct</span>
+    <p>“<strong>I finished the algebra, so the answer is right.</strong>” Integration has no built-in alarm. A wrong antiderivative produces a perfectly clean-looking number. So you check — every time, with at least one of these four.</p>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <span class="tag abs">method 1 · the king</span>
+      <h4>Differentiate your answer</h4>
+      <p>If \(F'(x)\) gives you back exactly the thing under the integral sign, you are right. No exceptions, no opinions.</p>
+      <p class="gaga">Integrating and differentiating cancel each other out. This is the only check that <em>proves</em> the antiderivative.</p>
+    </div>
+    <div class="card">
+      <span class="tag up">method 2 · eyeball</span>
+      <h4>Estimate the area</h4>
+      <p>A definite integral is signed area. Sketch it roughly, count boxes. If your answer says 40 and the picture says “about 1”, stop.</p>
+      <p class="gaga">Catches factor-of-10 and sign disasters instantly.</p>
+    </div>
+    <div class="card">
+      <span class="tag min">method 3 · squeeze</span>
+      <h4>Bound it between two rectangles</h4>
+      <p>If \(m\le f(x)\le M\) on \([a,b]\), then \(m(b-a)\le\displaystyle\int_a^b f\le M(b-a)\).</p>
+      <p class="gaga">Two rectangles: the flattest one and the tallest one. The true area must hide between them.</p>
+    </div>
+    <div class="card">
+      <span class="tag crit">method 4 · sign sanity</span>
+      <h4>Which side of zero?</h4>
+      <p>Integrand positive all the way across → the answer must be positive. Negative all the way → negative.</p>
+      <p class="gaga">One second of thought, catches every dropped minus sign.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ TOOL 2 ══════════════════ -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">Interactive · check an integral</span>
+    <h2>See the three checks run on our own exercises</h2>
+  </div>
+  <p>These are integrals you actually solved in earlier sessions. Pick one, then switch the check.</p>
+
+  <div class="tool">
+    <div class="tool-bar" id="intChips" role="group" aria-label="Choose an integral"></div>
+    <div class="tool-bar" id="modeChips" role="group" aria-label="Choose a check" style="border-top:0;"></div>
+    <div class="tool-body">
+      <div id="intTitle" style="font-size:15px; margin-bottom:10px;"></div>
+      <div class="plot-wrap"><canvas id="area" aria-label="Graph of the integrand with the chosen check drawn on it"></canvas></div>
+      <div class="legend" id="intLegend"></div>
+
+      <div class="slider" id="nWrap" style="margin-top:14px;">
+        <label for="sn">number of slices n <span class="val" id="snv">–</span></label>
+        <input type="range" id="sn" min="1" max="120" step="1" value="12">
+      </div>
+
+      <div class="readout" id="intStats"></div>
+      <div class="verdict" id="intVerdict">–</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ WORKED EXAMPLES 2 ══════════════════ -->
+<section>
+  <div class="sec-head">
+    <span class="eyebrow">From our own sessions</span>
+    <h2>The integrals we solved, and how we knew they were right</h2>
+  </div>
+
+  <details>
+    <summary>\(\displaystyle\int_0^1 x\,e^{x^2}\,dx\) — substitution, and why it is even possible <span class="ex">Ex 35 · 17 Sep</span></summary>
+    <div class="reveal-body">
+      <div class="note warn">
+        <span class="eyebrow">Trap first</span>
+        <p>Instinct: “\(\int e^{ax}dx=\frac1a e^{ax}\), so divide by the inside.” That shortcut is <strong>only for a linear inside</strong>. Here the inside is \(x^2\), which is curved, so dividing is illegal: \(\frac{1}{x^2}e^{x^2}\) is <em>not</em> an antiderivative.</p>
+        <p>Worse: \(e^{x^2}\) on its own <strong>has no elementary antiderivative at all</strong>. The lonely \(x\) in front is the entire reason this problem is doable — it supplies the inner derivative that substitution needs.</p>
+      </div>
+      <ol class="steps">
+        <li><b>Name the inside.</b> \(u=x^2\). <span class="gaga">Always the thing wrapped inside another function.</span></li>
+        <li><b>Differentiate it.</b> \(du=2x\,dx\), so \(x\,dx=\tfrac12\,du\). <span class="gaga">The \(\frac12\) pays back the 2 that the Chain Rule would have produced.</span></li>
+        <li><b>Regroup and swap.</b> \(x e^{x^2}dx=e^{x^2}(x\,dx)=\tfrac12 e^{u}du\). Every \(x\) is gone — that is the signal the substitution worked.</li>
+        <li><b>Convert the limits.</b> \(x=0\to u=0\), \(x=1\to u=1\). <span class="gaga">They happen to look unchanged only because \(0^2=0\) and \(1^2=1\). Not a rule.</span></li>
+        <li><b>Integrate.</b> \(\tfrac12\int_0^1 e^u du=\tfrac12\big[e^u\big]_0^1=\tfrac12(e-1)\).</li>
+      </ol>
+      <div class="answer"><span class="eyebrow">Answer</span> \(\displaystyle\int_0^1 x e^{x^2}dx=\frac{e-1}{2}\approx 0.8591409142\)</div>
+      <p style="margin-top:12px;"><strong>Check 1 (differentiate back):</strong> \(\frac{d}{dx}\left[\tfrac12 e^{x^2}\right]=\tfrac12 e^{x^2}\cdot 2x = x e^{x^2}\) ✅ original integrand recovered.<br>
+      <strong>Check 3 (squeeze):</strong> on \([0,1]\) the integrand runs from 0 up to \(e\approx2.718\), so the area must lie in \([0,\,2.718]\). It does.<br>
+      <strong>Check 2 (numbers):</strong> Simpson's rule gives \(0.8591409142295\) — matches to 10 decimals.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>\(\displaystyle\int \sqrt{3-2s}\;ds\) — a linear inside, so the shortcut is legal <span class="ex">Ex 17 · 19 Sep</span></summary>
+    <div class="reveal-body">
+      <ol class="steps">
+        <li><b>Ask the question.</b> “Is there something <em>inside</em> something?” Yes: \(3-2s\) lives inside a square root. → substitution.</li>
+        <li><b>Substitute.</b> \(u=3-2s\), \(du=-2\,ds\), so \(ds=-\tfrac12 du\).</li>
+        <li><b>Rewrite.</b> \(\int u^{1/2}\left(-\tfrac12\right)du=-\tfrac12\cdot\frac{u^{3/2}}{3/2}=-\tfrac13 u^{3/2}\). <span class="gaga">Dividing by \(3/2\) means multiplying by \(2/3\) — that is where the \(\frac13\) comes from.</span></li>
+        <li><b>Go home to \(s\)</b>, and never forget the \(+C\).</li>
+      </ol>
+      <div class="answer"><span class="eyebrow">Answer</span> \(\displaystyle\int\sqrt{3-2s}\,ds=-\frac13(3-2s)^{3/2}+C\)</div>
+      <p style="margin-top:12px;"><strong>Check (differentiate back):</strong> \(-\frac13\cdot\frac32(3-2s)^{1/2}\cdot(-2)=(3-2s)^{1/2}=\sqrt{3-2s}\) ✅. Watch the two minus signs cancelling — that is exactly the step that goes wrong when rushed.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>\(\displaystyle\int \frac{dy}{(\arctan y)(1+y^2)}\) — the “derivative on top” pattern <span class="ex">Ex 65 · 21 Sep</span></summary>
+    <div class="reveal-body">
+      <p>Pattern to memorise: <strong>when the derivative of a thing sits on top and the thing itself sits on the bottom, the answer is \(\ln\lvert\text{thing}\rvert\).</strong></p>
+      <ol class="steps">
+        <li><b>Spot the pair.</b> The derivative of \(\arctan y\) is \(\frac{1}{1+y^2}\) — and there it is, already in the integrand.</li>
+        <li><b>Substitute.</b> \(u=\arctan y\Rightarrow du=\dfrac{dy}{1+y^{2}}\).</li>
+        <li><b>The integral collapses.</b> \(\displaystyle\int\frac{du}{u}=\ln\lvert u\rvert + C\).</li>
+      </ol>
+      <div class="answer"><span class="eyebrow">Answer</span> \(\ln\lvert\arctan y\rvert + C\)</div>
+      <p style="margin-top:12px;"><strong>Check:</strong> \(\frac{d}{dy}\ln\lvert\arctan y\rvert=\frac{1}{\arctan y}\cdot\frac{1}{1+y^2}\) ✅ — the Chain Rule hands back the original fraction.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>\(\displaystyle\int_2^4 \frac{dx}{x(\ln x)^2}\) — substitution with converted limits <span class="ex">Ex 31 · 21 Sep</span></summary>
+    <div class="reveal-body">
+      <ol class="steps">
+        <li><b>Substitute.</b> \(u=\ln x\Rightarrow du=\dfrac{dx}{x}\). The \(\frac{dx}{x}\) is sitting right there, so the swap is clean.</li>
+        <li><b>Convert the limits</b> (Theorem 7): \(x=2\to u=\ln 2\), \(x=4\to u=\ln 4\). <span class="gaga">Limits converted means you never go back to \(x\).</span></li>
+        <li><b>Integrate.</b> \(\displaystyle\int_{\ln 2}^{\ln 4}u^{-2}du=\Big[-\frac1u\Big]_{\ln 2}^{\ln 4}=\frac{1}{\ln 2}-\frac{1}{\ln 4}\).</li>
+        <li><b>Simplify.</b> \(\ln 4=2\ln 2\), so this is \(\frac{1}{\ln 2}-\frac{1}{2\ln 2}=\frac{1}{2\ln 2}\).</li>
+      </ol>
+      <div class="answer"><span class="eyebrow">Answer</span> \(\dfrac{1}{2\ln 2}\approx 0.7213475204\)</div>
+      <p style="margin-top:12px;"><strong>Check 4 (sign):</strong> on \([2,4]\) the integrand is positive, so the answer must be positive ✅. <strong>Check 3 (squeeze):</strong> the integrand falls from \(\approx1.041\) to \(\approx0.130\), width 2, so the area sits between \(0.26\) and \(2.08\) — and \(0.721\) does.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>\(\displaystyle\int_0^1 \frac{4}{\sqrt{4-s^2}}\,ds\) — recognising the arcsin form <span class="ex">Ex 41 · 21 Sep</span></summary>
+    <div class="reveal-body">
+      <p>Standard form to recognise on sight: \(\displaystyle\int\frac{ds}{\sqrt{a^2-s^2}}=\arcsin\frac{s}{a}+C\). Here \(a^2=4\), so \(a=2\).</p>
+      <ol class="steps">
+        <li><b>Pull the constant out.</b> \(4\displaystyle\int_0^1\frac{ds}{\sqrt{4-s^2}}\).</li>
+        <li><b>Apply the form.</b> \(4\Big[\arcsin\frac{s}{2}\Big]_0^1 = 4\left(\arcsin\tfrac12-\arcsin 0\right)\).</li>
+        <li><b>Unit circle values.</b> \(\arcsin\frac12=\frac{\pi}{6}\), \(\arcsin 0 = 0\).</li>
+        <li><b>Multiply.</b> \(4\cdot\frac{\pi}{6}=\frac{2\pi}{3}\).</li>
+      </ol>
+      <div class="answer"><span class="eyebrow">Answer</span> \(\dfrac{2\pi}{3}\approx 2.0943951024\)</div>
+      <p style="margin-top:12px;"><strong>Check 3 (squeeze):</strong> heights run from \(4/2=2\) to \(4/\sqrt3\approx2.309\) over a width of 1, so the area must be between 2 and 2.31 ✅ — \(2.094\) fits snugly.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Area between \(y=2x^2\) and \(y=x^4-2x^2\) <span class="ex">24 Sep</span></summary>
+    <div class="reveal-body">
+      <ol class="steps">
+        <li><b>Find where they meet.</b> \(2x^2=x^4-2x^2\Rightarrow x^4-4x^2=0\Rightarrow x^2(x^2-4)=0\), so \(x=0,\,\pm2\).</li>
+        <li><b>Decide who is on top.</b> Test \(x=1\): \(2(1)=2\) versus \(1-2=-1\). The parabola \(2x^2\) is above. It stays above across the whole span.</li>
+        <li><b>Integrate top minus bottom.</b> \(\displaystyle\int_{-2}^{2}\big[2x^2-(x^4-2x^2)\big]dx=\int_{-2}^{2}\big(4x^2-x^4\big)dx\).</li>
+        <li><b>Use symmetry.</b> Both terms are even, so integrate on \([0,2]\) and double: \(2\Big[\frac{4x^3}{3}-\frac{x^5}{5}\Big]_0^2=2\Big(\frac{32}{3}-\frac{32}{5}\Big)\).</li>
+        <li><b>Combine.</b> \(\frac{32}{3}-\frac{32}{5}=32\cdot\frac{2}{15}=\frac{64}{15}\), doubled gives \(\frac{128}{15}\).</li>
+      </ol>
+      <div class="answer"><span class="eyebrow">Answer</span> \(\dfrac{128}{15}\approx 8.5333333\)</div>
+      <p style="margin-top:12px;"><strong>Check 4 (sign):</strong> area is positive ✅. <strong>Trap avoided:</strong> integrating \(x^4-2x^2\) minus \(2x^2\) instead would give \(-\frac{128}{15}\) — the same size with the wrong sign, which is the classic “who is on top” mistake.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ══════════════════ YOUR TURN ══════════════════ -->
+<section>
+  <hr class="rule">
+  <div class="sec-head">
+    <span class="eyebrow">Your turn</span>
+    <h2>Two problems waiting for you</h2>
+  </div>
+  <p>Try each one on paper first. The reveal is there for <em>after</em> your attempt — and I deliberately left \(x^2-4x+1\) out of the interactive tool above so the graph doesn't spoil it.</p>
+
+  <details>
+    <summary>Problem A · absolute max and min of \(f(x)=x^2-4x+1\) on \([0,\,5]\) <span class="ex">set 26 Sep</span></summary>
+    <div class="reveal-body">
+      <p class="gaga">Before you open this: did you write down <strong>three</strong> candidates, not one?</p>
+      <ol class="steps">
+        <li><b>Differentiate.</b> \(f'(x)=2x-4\).</li>
+        <li><b>Set to zero.</b> \(2x-4=0\Rightarrow x=2\), inside \((0,5)\) ✅.</li>
+        <li><b>Candidates.</b> \(x=0\), \(x=2\), \(x=5\).</li>
+        <li><b>Heights.</b> \(f(0)=1\), \(f(2)=4-8+1=-3\), \(f(5)=25-20+1=6\).</li>
+        <li><b>Compare.</b> Largest 6, smallest −3.</li>
+      </ol>
+      <div class="answer">
+        <span class="eyebrow">Answer</span>
+        Absolute maximum \(f=6\) at \(x=5\) (endpoint). Absolute minimum \(f=-3\) at \(x=2\) (the critical point).
+      </div>
+      <p style="margin-top:12px;"><strong>Sign chart:</strong> \(f'&lt;0\) before \(x=2\), \(f'&gt;0\) after → − → + → local min, which is also the global min. This is an upward parabola, so its vertex being the lowest point is no surprise; the max had to come from an endpoint, and the far one wins.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Problem B · evaluate \(\displaystyle\int_1^4\frac{x^2+x}{x^{3/2}}\,dx\) <span class="ex">still open from 16 Sep</span></summary>
+    <div class="reveal-body">
+      <p class="gaga">First ask the technique question: “is there something <em>inside</em> something?” No — it is a fraction with a single power on the bottom. So <strong>split it</strong>, don't substitute.</p>
+      <ol class="steps">
+        <li><b>Split the fraction.</b> \(\dfrac{x^2}{x^{3/2}}+\dfrac{x}{x^{3/2}}\).</li>
+        <li><b>Subtract exponents.</b> \(x^{2-3/2}=x^{1/2}\) and \(x^{1-3/2}=x^{-1/2}\). So the integrand is \(\sqrt{x}+\frac{1}{\sqrt{x}}\).</li>
+        <li><b>Power Rule on each.</b> \(\int x^{1/2}dx=\frac{x^{3/2}}{3/2}=\frac23x^{3/2}\) and \(\int x^{-1/2}dx=\frac{x^{1/2}}{1/2}=2x^{1/2}\).</li>
+        <li><b>Evaluate at 4 and 1.</b> At \(x=4\): \(\frac23\cdot 8+2\cdot 2=\frac{16}{3}+4\). At \(x=1\): \(\frac23+2\).</li>
+        <li><b>Subtract.</b> \(\left(\frac{16}{3}+4\right)-\left(\frac23+2\right)=\frac{14}{3}+2=\frac{20}{3}\).</li>
+      </ol>
+      <div class="answer"><span class="eyebrow">Answer</span> \(\dfrac{20}{3}\approx 6.6666667\)</div>
+      <p style="margin-top:12px;"><strong>Check 3 (squeeze):</strong> on \([1,4]\) the integrand \(\sqrt x+\frac{1}{\sqrt x}\) runs from \(2\) (at \(x=1\)) to \(2.5\) (at \(x=4\)), width 3 → area between 6 and 7.5. \(6.667\) fits ✅. <strong>Check 1:</strong> differentiate \(\frac23x^{3/2}+2x^{1/2}\) → \(x^{1/2}+x^{-1/2}\) ✅.</p>
+    </div>
+  </details>
+</section>
+
+<footer>
+  <p>Built for Ethan · Calculus A, University of Twente · lecturer Carlos Pérez Arancibia.<br>
+  Lives in <code>html-visualization/extrema-and-integral-checks.html</code>. Companion tool: <code>unit-circle.html</code>. Notes: <code>memory/</code>.</p>
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/katex.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.11/contrib/auto-render.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $ = (s, r) => (r||document).querySelector(s);
+
+/* ── theme toggle ───────────────────────────────────────────── */
+const root = document.documentElement;
+$('#theme').addEventListener('click', () => {
+  const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  const cur = root.getAttribute('data-theme') || (dark ? 'dark' : 'light');
+  root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  drawHill(); drawArea();
+});
+
+/* ── read palette from CSS so both themes just work ─────────── */
+function tokens(){
+  const cs = getComputedStyle(root);
+  const g = n => cs.getPropertyValue(n).trim();
+  return {ink:g('--ink'), muted:g('--muted'), grid:g('--grid'), border:g('--border'),
+          surface:g('--surface'), surface2:g('--surface-2'), accent:g('--accent'),
+          accentSoft:g('--accent-soft'), up:g('--up'), upSoft:g('--up-soft'),
+          down:g('--down'), downSoft:g('--down-soft'), flat:g('--flat'), flatSoft:g('--flat-soft')};
+}
+
+/* ── tiny plotting helper shared by both canvases ───────────── */
+function makePlot(canvas, pad){
+  const ctx = canvas.getContext('2d');
+  const P = Object.assign({l:48, r:14, t:14, b:30}, pad || {});
+  let W = 300, H = 200, vx = [0,1], vy = [0,1];
+  function fit(){
+    const r = canvas.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = Math.max(200, r.width); H = Math.max(160, r.height);
+    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  const iw = () => W - P.l - P.r, ih = () => H - P.t - P.b;
+  const api = {
+    ctx, P,
+    get W(){return W;}, get H(){return H;},
+    fit,
+    view(xr, yr){ vx = xr; vy = yr; },
+    X: x => P.l + (x - vx[0]) / (vx[1] - vx[0]) * iw(),
+    Y: y => P.t + ih() - (y - vy[0]) / (vy[1] - vy[0]) * ih(),
+    invX: px => vx[0] + (px - P.l) / iw() * (vx[1] - vx[0]),
+    get vx(){return vx;}, get vy(){return vy;},
+    clear(){ const t = tokens(); ctx.clearRect(0,0,W,H); ctx.fillStyle = t.surface; ctx.fillRect(0,0,W,H); },
+    grid(){
+      const t = tokens();
+      ctx.font = "11px 'JetBrains Mono', monospace";
+      ctx.lineWidth = 1;
+      const xs = ticks(vx[0], vx[1]), ys = ticks(vy[0], vy[1]);
+      ctx.strokeStyle = t.grid;
+      xs.forEach(v => { const px = Math.round(api.X(v)) + .5;
+        ctx.beginPath(); ctx.moveTo(px, P.t); ctx.lineTo(px, P.t + ih()); ctx.stroke(); });
+      ys.forEach(v => { const py = Math.round(api.Y(v)) + .5;
+        ctx.beginPath(); ctx.moveTo(P.l, py); ctx.lineTo(P.l + iw(), py); ctx.stroke(); });
+      ctx.fillStyle = t.muted; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+      xs.forEach(v => ctx.fillText(fmtTick(v), api.X(v), P.t + ih() + 7));
+      ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+      ys.forEach(v => ctx.fillText(fmtTick(v), P.l - 8, api.Y(v)));
+      // axes
+      ctx.strokeStyle = t.border; ctx.lineWidth = 1.4;
+      if (vy[0] < 0 && vy[1] > 0){ const py = Math.round(api.Y(0)) + .5;
+        ctx.beginPath(); ctx.moveTo(P.l, py); ctx.lineTo(P.l + iw(), py); ctx.stroke(); }
+      if (vx[0] < 0 && vx[1] > 0){ const px = Math.round(api.X(0)) + .5;
+        ctx.beginPath(); ctx.moveTo(px, P.t); ctx.lineTo(px, P.t + ih()); ctx.stroke(); }
+    },
+    curve(f, x0, x1, color, width, dash){
+      ctx.save(); ctx.beginPath();
+      ctx.rect(P.l, P.t, iw(), ih()); ctx.clip();
+      ctx.strokeStyle = color; ctx.lineWidth = width || 2.4; ctx.lineJoin = 'round';
+      ctx.setLineDash(dash || []);
+      let started = false;
+      const N = 460;
+      for (let i = 0; i <= N; i++){
+        const x = x0 + (x1 - x0) * i / N, y = f(x);
+        if (!isFinite(y)){ started = false; continue; }
+        const px = api.X(x), py = api.Y(y);
+        if (!started){ ctx.moveTo(px, py); started = true; } else ctx.lineTo(px, py);
+      }
+      ctx.stroke(); ctx.setLineDash([]); ctx.restore();
+    },
+    dot(x, y, color, r, ring){
+      ctx.beginPath(); ctx.arc(api.X(x), api.Y(y), r || 5, 0, 7);
+      ctx.fillStyle = color; ctx.fill();
+      if (ring){ ctx.lineWidth = 2.5; ctx.strokeStyle = tokens().surface; ctx.stroke(); }
+    },
+    label(x, y, text, color, dy, align){
+      ctx.font = "600 12px 'JetBrains Mono', monospace";
+      ctx.fillStyle = color; ctx.textBaseline = 'bottom';
+      // keep the text inside the drawing area: flip the anchor near either wall
+      const px = api.X(x), w = ctx.measureText(text).width;
+      let a = align;
+      if (!a) a = (px + w/2 > W - P.r) ? 'right' : (px - w/2 < P.l) ? 'left' : 'center';
+      ctx.textAlign = a;
+      const nudge = a === 'right' ? -4 : a === 'left' ? 4 : 0;
+      ctx.fillText(text, px + nudge, api.Y(y) + (dy || -10));
+    }
+  };
+  return api;
+}
+function ticks(lo, hi){
+  const span = hi - lo, raw = span / 6, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+  const norm = raw / mag, step = (norm < 1.5 ? 1 : norm < 3 ? 2 : norm < 7 ? 5 : 10) * mag;
+  const out = []; for (let v = Math.ceil(lo/step)*step; v <= hi + 1e-9; v += step) out.push(+v.toFixed(10));
+  return out;
+}
+function fmtTick(v){ return Math.abs(v) < 1e-9 ? '0' : (Math.abs(v) >= 100 || Number.isInteger(v) ? String(v) : v.toFixed(Math.abs(v) < 1 ? 2 : 1)); }
+const fx = (v, n) => (isFinite(v) ? v.toFixed(n === undefined ? 3 : n) : '–');
+
+/* ══════════════════════════════════════════════════════════════
+   TOOL 1 — hill explorer
+   ══════════════════════════════════════════════════════════════ */
+const FUNCS = [
+  { name: 'x³ − 3x', pretty: 'f(x) = x³ − 3x', dTex: "f'(x) = 3x² − 3 = 3(x−1)(x+1)",
+    f: x => x*x*x - 3*x, d: x => 3*x*x - 3, crit: [-1, 1],
+    view: [-2.2, 3.4], dom: [-2.2, 3.4], a: -1.5, b: 3,
+    note: 'This is the one from our 26 Sep session. Two flat spots: a hilltop at x = −1 and a valley at x = 1. Yet the champion is the right endpoint, x = 3, at height 18. Pull the right endpoint down to about 1.5 and watch the title of "absolute max" jump back to the hilltop.' },
+  { name: 'x⁴ − 2x²', pretty: 'f(x) = x⁴ − 2x²', dTex: "f'(x) = 4x³ − 4x = 4x(x−1)(x+1)",
+    f: x => x*x*x*x - 2*x*x, d: x => 4*x*x*x - 4*x, crit: [-1, 0, 1],
+    view: [-1.9, 1.9], dom: [-1.8, 1.8], a: -1.6, b: 1.6,
+    note: 'The bottom curve from the 24 Sep area exercise. Three critical points: two valleys at x = ±1 and a small hilltop at x = 0 sitting above them. Classic "local max that is nowhere near the global max".' },
+  { name: '1/x + ln x', pretty: 'f(x) = 1/x + ln x', dTex: "f'(x) = (x − 1) / x²",
+    f: x => 1/x + Math.log(x), d: x => (x - 1)/(x*x), crit: [1],
+    view: [0.25, 5.2], dom: [0.3, 5], a: 0.5, b: 4,
+    note: 'Ex 39 from Lecture 2. The domain is x > 0 only, so x = 0 can never be a candidate. Its derivative is a fraction: only the numerator x − 1 can make it zero.' },
+  { name: 'x³', pretty: 'f(x) = x³', dTex: "f'(x) = 3x²",
+    f: x => x*x*x, d: x => 3*x*x, crit: [0],
+    view: [-1.6, 1.6], dom: [-1.5, 1.5], a: -1, b: 1,
+    note: 'The counterexample. x = 0 is genuinely critical — the tangent is flat, drag the dot there and read f′ = 0.00 — but the slope is positive on both sides, so it is neither a max nor a min. Flat is a suspect, never a verdict.' },
+  { name: 'sin x', pretty: 'f(x) = sin x', dTex: "f'(x) = cos x",
+    f: x => Math.sin(x), d: x => Math.cos(x), crit: [Math.PI/2, 3*Math.PI/2, 5*Math.PI/2],
+    view: [-0.3, 8], dom: [0, 7.8], a: 0, b: 4,
+    note: 'Endless critical points, but only the ones inside your interval count. With b = 4 only x = π/2 ≈ 1.571 is in play; push b past 4.71 and the valley at 3π/2 joins the candidate list and immediately takes the absolute minimum.' }
+];
+
+const hill = makePlot($('#hill'));
+let S = { i: 0, a: 0, b: 1, cx: 0 };
+
+function loadFn(i){
+  const F = FUNCS[i];
+  S.i = i; S.a = F.a; S.b = F.b; S.cx = F.a + (F.b - F.a) * 0.32;
+  const sa = $('#sa'), sb = $('#sb');
+  const step = (F.dom[1] - F.dom[0]) / 200;
+  sa.min = F.dom[0]; sa.max = F.dom[1]; sa.step = step; sa.value = S.a;
+  sb.min = F.dom[0]; sb.max = F.dom[1]; sb.step = step; sb.value = S.b;
+  $('#fnNote').innerHTML = '<span class="eyebrow">' + F.pretty + ' · ' + F.dTex + '</span><p>' + F.note + '</p>';
+  [...$('#fnChips').children].forEach((c, k) => c.setAttribute('aria-pressed', String(k === i)));
+  refreshHill();
+}
+
+function critIn(){ return FUNCS[S.i].crit.filter(c => c > S.a + 1e-9 && c < S.b - 1e-9).sort((p,q) => p-q); }
+
+function candidates(){
+  const F = FUNCS[S.i];
+  const list = [{x: S.a, from: 'left endpoint a'}];
+  critIn().forEach(c => list.push({x: c, from: "f'(x) = 0"}));
+  list.push({x: S.b, from: 'right endpoint b'});
+  list.forEach(o => o.y = F.f(o.x));
+  const ys = list.map(o => o.y);
+  const hi = Math.max.apply(null, ys), lo = Math.min.apply(null, ys);
+  list.forEach(o => { o.isMax = Math.abs(o.y - hi) < 1e-12; o.isMin = Math.abs(o.y - lo) < 1e-12; });
+  return list;
+}
+
+function drawHill(){
+  const F = FUNCS[S.i], t = tokens();
+  hill.fit();
+  // stable y-window over the whole view, so nothing jumps while dragging
+  let lo = Infinity, hi = -Infinity;
+  for (let k = 0; k <= 300; k++){
+    const x = F.view[0] + (F.view[1] - F.view[0]) * k / 300, y = F.f(x);
+    if (isFinite(y) && Math.abs(y) < 1e4){ lo = Math.min(lo, y); hi = Math.max(hi, y); }
+  }
+  const pad = (hi - lo) * 0.14 || 1;
+  hill.view(F.view, [lo - pad, hi + pad]);
+  hill.clear();
+
+  // interval band
+  const ctx = hill.ctx;
+  ctx.fillStyle = t.accentSoft;
+  ctx.fillRect(hill.X(S.a), hill.P.t, hill.X(S.b) - hill.X(S.a), hill.H - hill.P.t - hill.P.b);
+  hill.grid();
+
+  // curve: faded outside the interval, bold inside
+  hill.curve(F.f, F.view[0], S.a, t.muted, 1.4, [4,4]);
+  hill.curve(F.f, S.b, F.view[1], t.muted, 1.4, [4,4]);
+  hill.curve(F.f, S.a, S.b, t.accent, 2.8);
+
+  // endpoint walls
+  ctx.strokeStyle = t.accent; ctx.lineWidth = 1.2; ctx.setLineDash([3,4]);
+  [S.a, S.b].forEach(v => { const px = Math.round(hill.X(v)) + .5;
+    ctx.beginPath(); ctx.moveTo(px, hill.P.t); ctx.lineTo(px, hill.H - hill.P.b); ctx.stroke(); });
+  ctx.setLineDash([]);
+
+  // tangent line at the cursor
+  const x0 = S.cx, y0 = F.f(x0), m = F.d(x0);
+  if (isFinite(y0) && isFinite(m)){
+    const half = (F.view[1] - F.view[0]) * 0.17;
+    hill.curve(x => y0 + m * (x - x0), x0 - half, x0 + half, t.flat, 2.6);
+  }
+
+  // markers
+  const cands = candidates();
+  critIn().forEach(c => hill.dot(c, F.f(c), t.flat, 5.5, true));
+  cands.forEach(o => {
+    if (o.isMax) { hill.dot(o.x, o.y, t.up, 6.5, true); hill.label(o.x, o.y, 'MAX ' + fx(o.y,2), t.up, -14); }
+    if (o.isMin) { hill.dot(o.x, o.y, t.down, 6.5, true); hill.label(o.x, o.y, 'MIN ' + fx(o.y,2), t.down, 26); }
+  });
+  hill.dot(x0, y0, t.ink, 6, true);
+}
+
+function refreshHill(){
+  const F = FUNCS[S.i];
+  S.cx = Math.min(S.b, Math.max(S.a, S.cx));
+  $('#sav').textContent = 'a = ' + fx(S.a, 2);
+  $('#sbv').textContent = 'b = ' + fx(S.b, 2);
+
+  const y = F.f(S.cx), m = F.d(S.cx);
+  $('#rx').textContent = fx(S.cx, 2);
+  $('#rfx').textContent = fx(y, 3);
+  $('#rdfx').textContent = fx(m, 3);
+  const st = $('#statSlope');
+  st.className = 'stat ' + (Math.abs(m) < 0.02 ? 'is-flat' : m > 0 ? 'is-up' : 'is-down');
+  const word = Math.abs(m) < 0.02 ? '<b>flat ground</b> — the tangent is horizontal, so this x is a <b>critical point</b> (a suspect, not yet a max or a min)'
+    : m > 0 ? '<b>going uphill</b> — f is increasing here' : '<b>going downhill</b> — f is decreasing here';
+  $('#verdict').innerHTML = 'At x = ' + fx(S.cx,2) + ' the slope is f′ = ' + fx(m,3) + ', so the path is ' + word + '.';
+
+  // sign chart
+  const cuts = [S.a].concat(critIn(), [S.b]);
+  const bar = $('#signbar'); bar.innerHTML = '';
+  const segs = [];
+  for (let k = 0; k < cuts.length - 1; k++){
+    const mid = (cuts[k] + cuts[k+1]) / 2, s = F.d(mid);
+    segs.push({from: cuts[k], to: cuts[k+1], pos: s > 0});
+    const el = document.createElement('div');
+    el.className = 'signseg ' + (s > 0 ? 'pos' : 'neg');
+    el.style.flexGrow = String(Math.max(0.06, cuts[k+1] - cuts[k]));
+    el.innerHTML = '<span class="sym">' + (s > 0 ? '+' : '−') + '</span><span class="word">' + (s > 0 ? 'uphill' : 'downhill') + '</span>';
+    el.title = 'f′ ' + (s > 0 ? '> 0' : '< 0') + ' on (' + fx(cuts[k],2) + ', ' + fx(cuts[k+1],2) + ')';
+    bar.appendChild(el);
+  }
+  const flips = $('#flips'); flips.innerHTML = '';
+  if (!critIn().length){
+    flips.innerHTML = '<span class="flip">No critical point inside this interval — the champions can only be the two endpoints.</span>';
+  } else {
+    critIn().forEach((c, k) => {
+      const L = segs[k].pos, R = segs[k+1].pos;
+      const kind = (L && !R) ? 'max' : (!L && R) ? 'min' : 'none';
+      const txt = kind === 'max' ? '+ → − · local max' : kind === 'min' ? '− → + · local min' : (L?'+ → +':'− → −') + ' · no flip, neither';
+      const el = document.createElement('span');
+      el.className = 'flip ' + kind;
+      el.innerHTML = '<span class="mono">x = ' + fx(c,3) + '</span> &nbsp;' + txt + ' &nbsp;<span class="mono">f = ' + fx(F.f(c),3) + '</span>';
+      flips.appendChild(el);
+    });
+  }
+
+  // candidate table
+  const tb = $('#candBody'); tb.innerHTML = '';
+  candidates().forEach(o => {
+    const tr = document.createElement('tr');
+    tr.className = o.isMax ? 'win-max' : o.isMin ? 'win-min' : '';
+    const verdict = o.isMax && o.isMin ? 'max and min (flat function)' : o.isMax ? 'ABSOLUTE MAX' : o.isMin ? 'ABSOLUTE MIN' : 'loses';
+    tr.innerHTML = '<td class="num">' + fx(o.x,3) + '</td><td class="who">' + o.from + '</td><td class="num">' + fx(o.y,4) + '</td><td class="who">' + verdict + '</td>';
+    tb.appendChild(tr);
+  });
+
+  drawHill();
+}
+
+// chips
+FUNCS.forEach((F, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'chip'; b.textContent = F.name;
+  b.setAttribute('aria-pressed', 'false');
+  b.addEventListener('click', () => loadFn(i));
+  $('#fnChips').appendChild(b);
+});
+$('#sa').addEventListener('input', e => {
+  S.a = Math.min(+e.target.value, S.b - (FUNCS[S.i].dom[1]-FUNCS[S.i].dom[0])*0.05);
+  e.target.value = S.a; refreshHill();
+});
+$('#sb').addEventListener('input', e => {
+  S.b = Math.max(+e.target.value, S.a + (FUNCS[S.i].dom[1]-FUNCS[S.i].dom[0])*0.05);
+  e.target.value = S.b; refreshHill();
+});
+
+// drag along the curve
+const hc = $('#hill');
+let dragging = false;
+function setFromPointer(ev){
+  const r = hc.getBoundingClientRect();
+  S.cx = Math.min(S.b, Math.max(S.a, hill.invX(ev.clientX - r.left)));
+  refreshHill();
+}
+hc.addEventListener('pointerdown', e => { dragging = true; hc.setPointerCapture(e.pointerId); setFromPointer(e); });
+hc.addEventListener('pointermove', e => { if (dragging) setFromPointer(e); });
+hc.addEventListener('pointerup', () => { dragging = false; });
+hc.addEventListener('keydown', e => {
+  const step = (S.b - S.a) / (e.shiftKey ? 100 : 25);
+  if (e.key === 'ArrowLeft'){ S.cx = Math.max(S.a, S.cx - step); refreshHill(); e.preventDefault(); }
+  if (e.key === 'ArrowRight'){ S.cx = Math.min(S.b, S.cx + step); refreshHill(); e.preventDefault(); }
+});
+
+/* ══════════════════════════════════════════════════════════════
+   TOOL 2 — integral checks
+   ══════════════════════════════════════════════════════════════ */
+const INTS = [
+  { name: 'x·e^(x²)', title: 'Ex 35 &nbsp;·&nbsp; \\(\\displaystyle\\int_0^1 x e^{x^2}dx = \\frac{e-1}{2}\\)',
+    f: x => x*Math.exp(x*x), F: x => 0.5*Math.exp(x*x), a: 0, b: 1,
+    exact: (Math.E - 1)/2, exactTex: '(e−1)/2' },
+  { name: 'sin 2x', title: 'Ex 17 &nbsp;·&nbsp; \\(\\displaystyle\\int_0^{\\pi/8}\\sin 2x\\,dx = \\frac{2-\\sqrt2}{4}\\)',
+    f: x => Math.sin(2*x), F: x => -0.5*Math.cos(2*x), a: 0, b: Math.PI/8,
+    exact: (2 - Math.SQRT2)/4, exactTex: '(2−√2)/4' },
+  { name: '1/(x·ln²x)', title: 'Ex 31 &nbsp;·&nbsp; \\(\\displaystyle\\int_2^4\\frac{dx}{x(\\ln x)^2} = \\frac{1}{2\\ln 2}\\)',
+    f: x => 1/(x*Math.pow(Math.log(x),2)), F: x => -1/Math.log(x), a: 2, b: 4,
+    exact: 1/(2*Math.LN2), exactTex: '1/(2 ln 2)' },
+  { name: '4/√(4−s²)', title: 'Ex 41 &nbsp;·&nbsp; \\(\\displaystyle\\int_0^1\\frac{4\\,ds}{\\sqrt{4-s^2}} = \\frac{2\\pi}{3}\\)',
+    f: s => 4/Math.sqrt(4 - s*s), F: s => 4*Math.asin(s/2), a: 0, b: 1,
+    exact: 2*Math.PI/3, exactTex: '2π/3' }
+];
+const MODES = [
+  { id: 'slices', label: '② slice it up' },
+  { id: 'squeeze', label: '③ squeeze it' },
+  { id: 'back',    label: '① differentiate back' }
+];
+const area = makePlot($('#area'));
+let T = { i: 0, mode: 'slices', n: 12 };
+
+function extremes(I){
+  let lo = Infinity, hi = -Infinity;
+  for (let k = 0; k <= 400; k++){
+    const x = I.a + (I.b - I.a)*k/400, y = I.f(x);
+    if (isFinite(y)){ lo = Math.min(lo, y); hi = Math.max(hi, y); }
+  }
+  return {lo, hi};
+}
+function midpointSum(I, n){
+  const h = (I.b - I.a)/n; let s = 0;
+  for (let k = 0; k < n; k++) s += I.f(I.a + h*(k + 0.5));
+  return s*h;
+}
+function numDeriv(I, x){
+  const h = 1e-5;
+  return (I.F(x + h) - I.F(x - h)) / (2*h);
+}
+
+function drawArea(){
+  const I = INTS[T.i], t = tokens();
+  area.fit();
+  const e = extremes(I);
+  const span = (I.b - I.a);
+  const vx = [I.a - span*0.12, I.b + span*0.12];
+  let ylo = Math.min(0, e.lo), yhi = e.hi;
+  const pad = (yhi - ylo)*0.16 || 1;
+  area.view(vx, [ylo - pad*0.4, yhi + pad]);
+  area.clear(); area.grid();
+  const ctx = area.ctx;
+
+  if (T.mode === 'squeeze'){
+    // floor and ceiling rectangles
+    ctx.fillStyle = t.upSoft;
+    ctx.fillRect(area.X(I.a), area.Y(e.hi), area.X(I.b)-area.X(I.a), area.Y(0)-area.Y(e.hi));
+    ctx.fillStyle = t.downSoft;
+    ctx.fillRect(area.X(I.a), area.Y(e.lo), area.X(I.b)-area.X(I.a), area.Y(0)-area.Y(e.lo));
+    ctx.strokeStyle = t.up; ctx.lineWidth = 1.8; ctx.setLineDash([5,4]);
+    ctx.beginPath(); ctx.moveTo(area.X(I.a), area.Y(e.hi)); ctx.lineTo(area.X(I.b), area.Y(e.hi)); ctx.stroke();
+    ctx.strokeStyle = t.down;
+    ctx.beginPath(); ctx.moveTo(area.X(I.a), area.Y(e.lo)); ctx.lineTo(area.X(I.b), area.Y(e.lo)); ctx.stroke();
+    ctx.setLineDash([]);
+    area.label((I.a+I.b)/2, e.hi, 'ceiling M = ' + fx(e.hi,3), t.up, -8);
+    area.label((I.a+I.b)/2, e.lo, 'floor m = ' + fx(e.lo,3), t.down, 20);
+  } else if (T.mode === 'slices'){
+    const h = (I.b - I.a)/T.n;
+    for (let k = 0; k < T.n; k++){
+      const xm = I.a + h*(k + 0.5), y = I.f(xm);
+      const px = area.X(I.a + h*k), pw = area.X(I.a + h*(k+1)) - px;
+      ctx.fillStyle = t.accentSoft;
+      ctx.fillRect(px, area.Y(Math.max(y,0)), pw, Math.abs(area.Y(y) - area.Y(0)));
+      ctx.strokeStyle = t.accent; ctx.lineWidth = 1;
+      ctx.strokeRect(px + .5, area.Y(Math.max(y,0)) + .5, Math.max(1, pw - 1), Math.max(1, Math.abs(area.Y(y) - area.Y(0)) - 1));
+    }
+  } else {
+    // 'back' — shade lightly so the two curves stay the story
+    ctx.save(); ctx.beginPath();
+    ctx.moveTo(area.X(I.a), area.Y(0));
+    for (let k = 0; k <= 200; k++){ const x = I.a + span*k/200; ctx.lineTo(area.X(x), area.Y(I.f(x))); }
+    ctx.lineTo(area.X(I.b), area.Y(0)); ctx.closePath();
+    ctx.fillStyle = t.surface2; ctx.fill(); ctx.restore();
+  }
+
+  // the integrand itself
+  area.curve(I.f, vx[0], vx[1], t.muted, 1.4, [4,4]);
+  area.curve(I.f, I.a, I.b, t.accent, 3);
+
+  if (T.mode === 'back'){
+    area.curve(x => numDeriv(I, x), I.a, I.b, t.flat, 2.6, [7,5]);
+  }
+
+  // interval walls
+  ctx.strokeStyle = t.border; ctx.lineWidth = 1.3; ctx.setLineDash([3,4]);
+  [I.a, I.b].forEach(v => { const px = Math.round(area.X(v)) + .5;
+    ctx.beginPath(); ctx.moveTo(px, area.P.t); ctx.lineTo(px, area.H - area.P.b); ctx.stroke(); });
+  ctx.setLineDash([]);
+}
+
+function refreshArea(){
+  const I = INTS[T.i];
+  $('#intTitle').innerHTML = I.title;
+  $('#snv').textContent = 'n = ' + T.n;
+  $('#nWrap').hidden = (T.mode !== 'slices');
+  [...$('#intChips').children].forEach((c,k) => c.setAttribute('aria-pressed', String(k === T.i)));
+  [...$('#modeChips').children].forEach(c => c.setAttribute('aria-pressed', String(c.dataset.mode === T.mode)));
+
+  const stats = $('#intStats'), leg = $('#intLegend');
+  const e = extremes(I), width = I.b - I.a;
+  let html = '', vHtml = '', legHtml = '';
+
+  if (T.mode === 'slices'){
+    const s = midpointSum(I, T.n), gap = Math.abs(s - I.exact);
+    html = card('midpoint sum', fx(s,6)) + card('exact answer', fx(I.exact,6)) + card('gap', gap.toExponential(2));
+    vHtml = 'Each rectangle is a slice of the area: height f(midpoint), width (b−a)/n. With <b>n = ' + T.n +
+            '</b> the slices add up to <b>' + fx(s,6) + '</b>, while the exact answer ' + I.exactTex + ' is <b>' + fx(I.exact,6) +
+            '</b>. Drag n higher and the gap shrinks toward zero. That is <b>method 2</b>: the picture and the algebra must agree.';
+    legHtml = '<span><i class="swatch"></i> integrand f</span><span><i class="swatch" style="background:var(--accent-soft);height:10px;border:1px solid var(--accent)"></i> slices</span>';
+  } else if (T.mode === 'squeeze'){
+    const lo = e.lo*width, hi = e.hi*width, inside = I.exact >= Math.min(lo,hi) - 1e-12 && I.exact <= Math.max(lo,hi) + 1e-12;
+    html = card('floor m·(b−a)', fx(lo,4)) + card('answer', fx(I.exact,4)) + card('ceiling M·(b−a)', fx(hi,4));
+    vHtml = 'On this interval the integrand never drops below <b>m = ' + fx(e.lo,3) + '</b> and never rises above <b>M = ' + fx(e.hi,3) +
+            '</b>. Width is ' + fx(width,3) + ', so the area is trapped between <b>' + fx(lo,4) + '</b> and <b>' + fx(hi,4) + '</b>. Our answer ' +
+            I.exactTex + ' = ' + fx(I.exact,4) + (inside ? ' sits inside ✅' : ' falls OUTSIDE ❌ — something is wrong') +
+            '. That is <b>method 3</b>: it never proves an answer, but it catches a wrong one fast.';
+    legHtml = '<span><i class="swatch"></i> integrand f</span><span><i class="swatch up dash"></i> ceiling M</span><span><i class="swatch down dash"></i> floor m</span>';
+  } else {
+    let worst = 0;
+    for (let k = 1; k < 400; k++){
+      const x = I.a + width*k/400, dd = Math.abs(numDeriv(I, x) - I.f(x));
+      if (isFinite(dd)) worst = Math.max(worst, dd);
+    }
+    html = card('biggest mismatch', worst.toExponential(2)) + card('sample points', '399') + card('verdict', worst < 1e-4 ? 'identical' : 'different');
+    vHtml = 'The dashed gold curve is the <b>slope of our antiderivative F</b>, computed numerically. The blue curve is the original integrand <b>f</b>. ' +
+            'They lie on top of each other — the largest disagreement anywhere is ' + worst.toExponential(2) +
+            ', which is just rounding noise. That is <b>method 1, the king check</b>: differentiating the answer gives back what you started with, so F is correct. ' +
+            'Note it proves the <em>antiderivative</em>; the number still depends on plugging in the limits correctly.';
+    legHtml = '<span><i class="swatch"></i> integrand f</span><span><i class="swatch flat dash"></i> slope of F (should match exactly)</span>';
+  }
+  stats.innerHTML = html; $('#intVerdict').innerHTML = vHtml; leg.innerHTML = legHtml;
+  drawArea();
+}
+function card(k, v){ return '<div class="stat"><span class="k">' + k + '</span><span class="v">' + v + '</span></div>'; }
+
+INTS.forEach((I, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'chip'; b.textContent = I.name;
+  b.addEventListener('click', () => { T.i = i; refreshArea(); });
+  $('#intChips').appendChild(b);
+});
+MODES.forEach(m => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'chip'; b.textContent = m.label; b.dataset.mode = m.id;
+  b.addEventListener('click', () => { T.mode = m.id; refreshArea(); });
+  $('#modeChips').appendChild(b);
+});
+$('#sn').addEventListener('input', e => { T.n = +e.target.value; refreshArea(); });
+
+/* ── boot ───────────────────────────────────────────────────── */
+function boot(){
+  loadFn(0);
+  refreshArea();
+  if (window.renderMathInElement){
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: '\\[', right: '\\]', display: true},
+        {left: '\\(', right: '\\)', display: false}
+      ],
+      throwOnError: false
+    });
+  }
+}
+window.addEventListener('resize', () => { refreshHill(); drawArea(); });
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+</body>
+</html>

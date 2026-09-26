@@ -56,7 +56,7 @@ calculus-a/
 3. Log exercises with final answers in `memory/Practice/Exercise Log.md`.
 4. Add new error patterns to `memory/Practice/Common Mistakes.md`.
 5. Update lecture status and **Next up** in `memory/00 Index.md`.
-6. Remind Ethan to commit and push so the other laptop gets the notes. Do not commit unless Ethan asks.
+6. Remind Ethan to sync so the other laptop gets the notes. He has `gsync` for this — see below. Do not commit or run `gsync` unless Ethan asks.
 
 ## Reading lecture PDFs
 Claude's Read tool needs `pdftoppm` (poppler) to read PDFs. If it is missing, either:
@@ -107,6 +107,25 @@ Live progress is kept in **`memory/Current Progress.md`**, not here, so it is al
 - **Known correction:** the first handover's tangent to $x/(x-2)$ at $(3,3)$ is wrong; the correct line is $y=-2x+9$. Already fixed in the notes.
 
 ## Syncing between two laptops
+
+### `gsync` — Ethan's own sync tool (preferred)
+`gsync` is installed at `~/.local/bin/gsync`. One command replaces add/commit/pull/push:
+it walks every repo in its config, writes the commit message with AI, rebases onto upstream and pushes.
+
+```bash
+gsync            # commit + rebase + push every configured repo
+gsync -n         # dry run: show what would be committed, change nothing, no AI call
+gsync --idle     # only repos whose changes are older than IDLE_MINUTES
+gsync --fast     # cap the AI timeout at 20s (before suspend/shutdown)
+```
+Config: `~/.config/gsync/config` · Log: `~/.local/state/gsync/gsync.log`
+
+Use `gsync` at the end of a session instead of hand-writing a commit — but **only when Ethan asks**,
+since it pushes to GitHub immediately. `gsync -n` is always safe to run.
+It also fetches/rebases, so it covers the "pull first" half too, though a plain `git pull` at the
+start of a session is still the habit.
+
+### By hand, if `gsync` is unavailable
 - `git pull` before starting and commit + push after finishing. Don't take notes on both laptops at the same time, or the Markdown files will conflict.
 - If a merge conflict appears in a note, merge both sides by hand rather than picking one.
 - Obsidian's `.obsidian/workspace*.json` files change constantly. Suggest Ethan git-ignore them if they cause conflicts.

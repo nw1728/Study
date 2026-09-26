@@ -1,7 +1,7 @@
 ---
 title: Common Mistakes
 tags: [calculus-a, practice, mistakes]
-updated: 2026-09-17
+updated: 2026-09-26
 ---
 
 # ⚠️ Common Mistakes
@@ -45,9 +45,25 @@ Ethan's own errors from past sessions, each with its fix. Add new ones as they h
 | **Using "divide by $a$" on a non-linear inside**, e.g. $\int e^{x^2}dx=\frac1{x^2}e^{x^2}$ | The ÷$a$ shortcut is only valid when the inside is **linear** ($ax+b$). Curved inside → needs substitution, and only works if the inner derivative is present. $e^{x^2}$ alone has **no** elementary antiderivative |
 | Substitution: keeping old $x$-limits after switching to $u$ | Convert the limits or substitute back, never mix |
 | Area between curves as bottom − top | top − bottom; test a point |
+| **Keeping the old $x$-limits** after switching to $u$ (Ex 31) | Convert them: $x=2\to u=\ln2$. Mixing gives $0.25$ instead of $0.721$ |
+| Reading $(\ln x)^2$ as $\ln(x^2)$ (Ex 31) | $(\ln x)^2$ is the log **squared**; $\ln(x^2)=2\ln x$. Wrong reading gives $0.3466$ |
+| $\int\frac{ds}{\sqrt{a^2-s^2}}=\arcsin s$ (Ex 41) | It is $\arcsin\frac sa$ — the $a$ lives **inside**. Forgetting it turned $\frac{2\pi}3$ into $2\pi$ |
+| Dropping a constant that was factored out (Ex 41) | Park the constant in front and re-attach it: $4\cdot\frac\pi6=\frac{2\pi}3$, not $\frac\pi6$ |
+| Guessing $\int\cos^2(\cdot)$ directly (Ex 14) | No antiderivative by sight — use power reduction $\cos^2\theta=\frac{1+\cos2\theta}2$ first |
+| Treating the extra factor in a substitution problem as decoration (Ex 14) | That factor **is** $du$. If it doesn't match $du$ exactly, the substitution leaves an $x$ behind and fails |
+| Area between curves: using $\lvert\text{lower curve}\rvert$ as an area (2026-09-24) | Always $\int(\text{top}-\text{bottom})$ over the interval. The wrong route gave $5.15$ and $5.52$ instead of $\frac{128}{15}=8.53$ |
 | FTC II straight through a blow-up point | Check the interval first → improper integral |
 | **FTC I with the variable in the lower limit**, applied without flipping | $\int_b^a=-\int_a^b$ first, so $\frac{d}{dx}\int_{g(x)}^{a}f=-f(g(x))g'(x)$ — the minus is the whole trick (Ex 47) |
 | Forgetting $g'(x)$ in FTC I when the limit isn't plain $x$ | $\frac{d}{dx}\int_a^{g(x)}f=f(g(x))\cdot g'(x)$ — same inner-derivative habit as the Chain Rule |
+
+## Extrema (L02 material, re-taught 2026-09-26)
+| Mistake | Fix |
+|---|---|
+| **Forgetting the two endpoints** when hunting absolute max/min | Candidates = critical points **plus $a$ plus $b$**. In $x^3-3x$ on $[-1.5,3]$ the winner *is* the endpoint ($f(3)=18$) |
+| Treating $f'(c)=0$ as proof of a maximum | Critical point = **suspect only**. Do the sign flip: $+\to-$ max, $-\to+$ min, no flip → neither ($x^3$ at $0$) |
+| Plugging candidates into $f'$ instead of $f$ | Step 2 finds *where*; step 4 needs *how high*. Heights come from $f$ |
+| Keeping critical points that lie outside $[a,b]$ | They are not on the walk. Discard them |
+| Reporting the local max as the absolute max | Compare every candidate's height. Local champion ≠ global champion |
 
 ## Meta
 - **Not verifying.** Every final answer gets a check → [[Verification Methods]].
