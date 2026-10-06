@@ -1,7 +1,7 @@
 ---
 title: Common Mistakes
 tags: [calculus-a, practice, mistakes]
-updated: 2026-09-26
+updated: 2026-10-06
 ---
 
 # ⚠️ Common Mistakes
@@ -64,6 +64,36 @@ Ethan's own errors from past sessions, each with its fix. Add new ones as they h
 | Plugging candidates into $f'$ instead of $f$ | Step 2 finds *where*; step 4 needs *how high*. Heights come from $f$ |
 | Keeping critical points that lie outside $[a,b]$ | They are not on the walk. Discard them |
 | Reporting the local max as the absolute max | Compare every candidate's height. Local champion ≠ global champion |
+
+## Vectors & 3D geometry (L04, from the 2026-10-06 walkthrough)
+
+> [!important] The one diagnosis that explains most of it
+> **When a linear coefficient is POSITIVE, Ethan's sign flip is always right. When it is NEGATIVE, the flip disappears.**
+> Cause: a negative coefficient forces a **minus times minus** ($-(-3)=+3$), which is his oldest weak spot. Not a new error — the old one wearing a new face.
+> Fix: the one-line formula below removes the flip step entirely.
+
+| Mistake | Fix |
+|---|---|
+| **Measuring a distance from the origin instead of from the given point** (Ex 1.3) | $S(1,1,1)$ to $T(1,1,k)$ is $\lvert k-1\rvert$, **not** $\lvert k\rvert$. Write $\Delta z=k-(\text{z of }S)$ explicitly on paper. $k=-6$ gives distance $7$, not $5$ |
+| Forgetting that $\sqrt{(\cdot)^2}=\lvert\cdot\rvert$ gives **two** cases (Ex 1.3) | $\lvert k-1\rvert=5$ → $k=6$ **and** $k=-4$. The two answers are symmetric around the reference point, not around $0$ (check: their midpoint must be the reference) |
+| Reading the sphere's center straight off $(x+3)^2$ as $+3$ (Ex 2.3) | The master form is $(x-x_0)$, so the **sign inside the bracket is the opposite** of the center's coordinate. Or skip it: $x_0=-\frac{\text{coefficient}}{2}$ |
+| Paying a debt of $\frac b2$ instead of $\left(\frac b2\right)^2$ when completing the square (Ex 2.5) | $z^2-4z=(z-2)^2-\mathbf4$, not $-2$. Use $\text{debt}=x_0^2$ — it squares for you |
+| Reporting $a=\sqrt{\text{RHS}}$ as the radius without the root | Right side is $a^2$. RHS $=25$ → radius $5$, not $25$ |
+| Treating $a^2<0$ as an imaginary-radius sphere (Ex 2.5) | $a^2<0$ → **no real points at all, empty set.** $a^2>0$ sphere · $a^2=0$ a **single point** · $a^2<0$ nothing |
+| **Expanding a sphere equation when the question didn't ask** (Ex 2.1) | Standard form *is* the complete answer, and it is more informative. Every extra step is an extra chance to lose the constant ($-2$ became $-20$) |
+| "A vector is its distance" (Ex 3.4) | A vector is **length AND direction**. $\langle3,4,0\rangle$, $\langle5,0,0\rangle$, $\langle0,0,-5\rangle$ all have length $5$ but are three different vectors. **Two vectors are equal iff every component matches** |
+| Writing $\lvert w\rvert10$ for "the vector of length 10 along $w$" (Ex 3.6) | $\lvert w\rvert$ is a **number** — the bars destroy the direction. Write $\frac{L}{\lvert\mathbf w\rvert}\mathbf w$, or here simply $2\mathbf w$. Scalars go **in front** of the vector, never behind |
+| Mixing vector and scalar types in one equation | **Before writing $=$, check both sides are the same type.** arrow $=$ arrow ✓ · number $=$ number ✓ · arrow $=$ number ✗. $\mathbf u+5$ is nonsense |
+| Reversing $\overrightarrow{PQ}$ and $\overrightarrow{QP}$ | **END minus START.** Unlike the distance formula there is no square to protect you — wrong order points the arrow backwards. $\overrightarrow{QP}=-\overrightarrow{PQ}$ |
+| Dropping a "missing" component in $\mathbf i,\mathbf j,\mathbf k$ form | $2\mathbf i+5\mathbf k$ means $\langle2,\mathbf0,5\rangle$ — the $\mathbf j$ component is **zero, not absent**. Write the zero (this is the #1 cross-product killer in Materi 7) |
+| Calling $k<0$ parallel vectors "same direction" (Ex 4.3) | $k>0$ same direction, $k<0$ **opposite** direction ($180^\circ$). Both still count as *parallel*, and $\mathbf u\times\mathbf v=\mathbf0$ does not distinguish them |
+
+### The formulas that replaced the error-prone routes
+| Instead of | Use |
+|---|---|
+| halve → write bracket → read sign → flip | $x_0=-\dfrac{\text{coefficient}}2$, $\ \text{debt}=x_0^2$, $\ a^2=-(\text{const})+\sum\text{debt}$ |
+| computing components then taking the root | $\lvert k\mathbf u\rvert=\lvert k\rvert\lvert\mathbf u\rvert$ |
+| normalise then rescale | $\dfrac{L}{\lvert\mathbf w\rvert}\mathbf w$ in one step |
 
 ## Meta
 - **Not verifying.** Every final answer gets a check → [[Verification Methods]].

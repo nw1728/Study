@@ -1,7 +1,7 @@
 ---
 title: Calculus A — Memory Index
 tags: [calculus-a, index]
-updated: 2026-09-26
+updated: 2026-10-06
 ---
 
 # 📚 Calculus A — Memory Index
@@ -16,6 +16,7 @@ updated: 2026-09-26
 - [[Student Profile]] — who Ethan is, how he learns best
 - [[Teaching Playbook]] — how the instructor (Claude) runs lectures and practice
 - [[Session Log]] — what happened in each session, newest first
+- 🧸 [[L04 Walkthrough (Gogo Gaga)]] — Lecture 4 taught **per materi, in Bahasa Indonesia**, with the exercises and corrections. This is the format Ethan asked for on 2026-10-06; **continue it**
 
 ## 🎓 Lectures
 | # | Date | Topic | Status | Note |
@@ -23,7 +24,7 @@ updated: 2026-09-26
 | 1 | 2026-09-01 | Functions, limits, continuity | ✅ done | [[L01 Functions Limits Continuity]] |
 | 2 | 2026-09-07 | Differentiation | ✅ done + heavy practice | [[L02 Differentiation]] |
 | 3 | 2026-09-14 | Integration | 🟡 theory noted; FTC I/II + substitution + one area problem practised (live notes still empty) | [[L03 Integration]] |
-| 4 | 2026-09-21 | Vectors, products, 3D geometry (lines, planes) | 🟡 theory noted from slides, **no practice yet** | [[L04 Vectors and 3D Geometry]] |
+| 4 | 2026-09-21 | Vectors, products, 3D geometry (lines, planes) | 🟡 **Materi 1–4 of 8 taught + practised** (coords, spheres, vectors, vector ops); Materi 5–8 to go | [[L04 Vectors and 3D Geometry]] · [[L04 Walkthrough (Gogo Gaga)]] |
 
 ## 📐 Reference sheets
 - [[Derivative Rules]] — every derivative formula in one place
@@ -44,11 +45,13 @@ updated: 2026-09-26
 > The first handover lists the tangent to $g(x)=\frac{x}{x-2}$ at $(3,3)$ as $y=\frac16x+\frac53$. That is actually the tangent to $f(x)=\sqrt{x+1}$ at $(8,3)$. The correct tangent for $g$ is $y=-2x+9$ (slope $g'(3)=-2$). Corrected in [[Exercise Log]].
 
 ## 🎯 Next up
+- [ ] **▶️ L04 Materi 5 — dot product** (slides 8–9). Three promises outstanding: the one-line perpendicular test $\mathbf u\cdot\mathbf v=0$, the "vector = length **and** direction" correction it depends on, and the type trap (**dot product returns a NUMBER**). See [[Current Progress]]
+- [ ] L04 Materi 6 projection · Materi 7 cross product (longest) · Materi 8 lines & planes
+- [ ] Re-offer **KDE Connect** so Ethan can send handwritten working from his tab
 - [ ] **Set for Ethan (3 open):** $f(x)=x^2-4x+1$ on $[0,5]$ · $\int_1^4\frac{x^2+x}{x^{3/2}}dx$ · $\int_0^2x\sqrt{x^2+1}\,dx$ — ask for his attempt first
 - [ ] Integration by parts (incl. twice), then trig integrals
 - [ ] Improper integrals — Type I and II, the $p$-test
 - [ ] More area between curves
-- [ ] **Lecture 4 practice** — vectors, dot/cross product, lines and planes (nothing done yet)
 - [ ] Lecture 3 live notes → [[L03 Integration]] (still empty)
 - [ ] Still pending from L02: related rates, optimization word problems, 2nd-derivative test, concavity/inflection
 
@@ -59,7 +62,7 @@ memory/
 ├── Current Progress.md      ← read first on any device
 ├── Student Profile.md
 ├── Teaching Playbook.md
-├── Lectures/                ← one note per lecture
+├── Lectures/                ← one note per lecture + the L04 walkthrough
 ├── Reference/               ← formula sheets
 ├── Practice/                ← exercise log + mistakes
 ├── Sessions/                ← session log

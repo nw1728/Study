@@ -5,13 +5,14 @@ date: 2026-09-21
 slides: ../../lectures_slides/lecture_4.pdf
 tags: [calculus-a, lecture, vectors, 3d-geometry]
 status: in-progress
-updated: 2026-09-21
+updated: 2026-10-06
 ---
 
 # Lecture 4 — Vectors, Products, and Geometry in 3D Space
 
 Back to [[00 Index]] · Prev: [[L03 Integration]]
 Practice: [[Exercise Log#Lecture 4 — Vectors and 3D geometry]] · Checking answers: [[Verification Methods]]
+🧸 **Taught version:** [[L04 Walkthrough (Gogo Gaga)]] — the same material split into 8 *materi*, in Bahasa Indonesia, with exercises and corrections. Materi 1–4 done (2026-10-06).
 
 > [!abstract] Big picture
 > We leave the flat $xy$-plane and go to **3D space**. A **vector** is an arrow: it has a length and a direction.

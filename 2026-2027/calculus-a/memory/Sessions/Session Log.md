@@ -1,12 +1,29 @@
 ---
 title: Session Log
 tags: [calculus-a, sessions]
-updated: 2026-09-26
+updated: 2026-10-06
 ---
 
 # 🗓️ Session Log
 
 Back to [[00 Index]] · Newest first
+
+## 2026-10-06 — Lecture 4 taught per materi, in Bahasa Indonesia (Claude Code)
+- **Format change, mid-session, at Ethan's request.** He first asked for all 24 slides of Lecture 4 explained one by one. I started and got through slides 1–22, then he interrupted: *"bisa ga per materi, satu-satu, dan ada latihan di tiap materi, dan dicampur bahasa Indonesia?"* Switched immediately. **This is now the standing format** — recorded in [[Current Progress]] and [[Teaching Playbook]].
+- Split Lecture 4 into **8 materi**; full teaching walkthrough written to [[L04 Walkthrough (Gogo Gaga)]]. **Materi 1–4 done, all passed.** 22 exercises, all in [[Exercise Log]].
+- **Materi 1 — 3D coords + distance.** Framing that landed: *"3D itu bukan 2D yang lebih susah, 3D itu 2D PLUS SATU ANGKA."* Derived the distance formula as **Pythagoras twice** (floor diagonal, then height) and showed why the first square root gets eaten. Right-hand rule done physically with his own hand.
+  - **Ex 1.3 was the teaching moment:** $S(1,1,1)$ to $T(1,1,k)$ with distance 5. He answered $k=6$ or $-6$; the truth is $k=6$ or $k=-4$, because the distance is $\lvert k-1\rvert$, not $\lvert k\rvert$. **He measured from the origin instead of from $S$.** Priced it — $k=-6$ gives distance $7$.
+  - **Ex 1.5:** he derived the right-angle test himself ($a^2+b^2-c^2=0$) but said he could not prove it. Confirmed his rule is exactly right and added the missing condition: **$c$ must be the longest side** (counter-demo with $c=4$ giving $18\neq0$).
+- **Materi 2 — spheres + completing the square.** Three of five exercises leaked, and all three leaks had **one cause**: when a linear coefficient is **negative**, his sign flip disappears (it forces a minus times minus, his oldest weak spot). Positive coefficients were always fine — that contrast is what made the diagnosis clean.
+  - Replaced the error-prone route with a **one-line formula**: $x_0=-\frac{\text{coef}}2$, $\text{debt}=x_0^2$, $a^2=-(\text{const})+\sum\text{debt}$. Verified against all three worked spheres including the fractional slide-4 one.
+  - **Ex 2.1 lesson was not arithmetic:** his linear terms were all correct; he lost the constant only because he **expanded an equation nobody asked him to expand**. Told him standard form is the complete, lower-risk answer.
+  - **Ex 2.5 was a deliberate trap** ($a^2=-4$, no sphere exists). His number was off ($-6$, from paying a debt of $\frac b2$ instead of $(\frac b2)^2$) **but he reported the impossible negative radius instead of quietly fixing it to look normal — which was the actual test, and he passed.** Taught the trichotomy: $a^2>0$ sphere, $a^2=0$ a single point, $a^2<0$ nothing at all.
+- **Materi 3 — vectors. 6/6, zero sign errors** (including $3-(-1)=4$, the minus-minus that cost him twice an hour earlier). Core framing: *"titik itu TEMPAT, vektor itu PERJALANAN"*, and the free-vector idea.
+  - **Ex 3.4 wording fix:** he justified two vectors being equal with *"vektor itu jaraknya, terlepas dari letaknya"*. Second half right, first half dangerous. Priced it: $\langle3,4,0\rangle$, $\langle5,0,0\rangle$, $\langle0,0,-5\rangle$ all have length 5 but are three different vectors. Fixed to **"equal iff every component matches"**. Flagged why it matters: Materi 5 asks him to distinguish arrows of equal length and different direction.
+  - **Ex 3.6 — he asked about notation himself** (*"$\lvert w\rvert10$, bener ga sih simbolnya gitu?"*). It is wrong: $\lvert w\rvert$ is already a number. Gave the type rule — **before writing $=$, check both sides are the same type** — and the elegant answer $2\mathbf w$, since the stretch factor is $\frac{10}{\lvert w\rvert}=2$.
+- **Materi 4 — vector operations. 6/6.** The easy materi, used mainly to install the **parallel idea** $\mathbf u=k\mathbf v$ (needed for slides 14 and 22) and to drill the type-check habit via Ex 4.4, which he got all four of, reasoning explicitly by type. **Ex 4.5 showed transfer** — he produced both $c=4$ and $c=-4$ unprompted, carrying the Ex 1.3 absolute-value lesson across three materi. Only gap: Ex 4.3 asked same-or-opposite direction and he answered only the $k$; added that $k<0$ means **opposite** direction, and that $\mathbf u\times\mathbf v=\mathbf0$ will not distinguish $0^\circ$ from $180^\circ$ either.
+- **Constraint discovered:** Ethan can only send **final answers**. His working is handwritten in Samsung Notes on his tab and he has no transfer path to the laptop. Reverse-engineering his errors from the numbers alone worked well (the Materi 2 diagnosis came entirely from that), so it is not blocking. **Offered to set up KDE Connect** on the Arch laptop so he can send photos — he has not taken it up, re-offer next session.
+- He stopped after Materi 4 to rest and asked for everything to be saved. **Next session starts at Materi 5 (dot product)**, where three promises are already outstanding — see [[Current Progress]].
 
 ## 2026-09-26 — Extrema vocabulary + integral checking, then an interactive page (Claude Code)
 - **Part 1 — the vocabulary tangle.** Sorted out critical point vs local vs absolute max/min using a hiking analogy ($f'$ = steepness, not height; a critical point is a *suspect*, not a verdict). Covered the Extreme Value Theorem and the First Derivative Test.

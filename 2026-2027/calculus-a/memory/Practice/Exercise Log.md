@@ -1,7 +1,7 @@
 ---
 title: Exercise Log
 tags: [calculus-a, practice]
-updated: 2026-09-26
+updated: 2026-10-06
 ---
 
 # ✍️ Exercise Log
@@ -185,4 +185,65 @@ Side quest: Ethan asked where $\cos 0$ and $\cos\frac\pi4$ come from → derived
 **Also covered:** the First Derivative Test ($+\to-$ max, $-\to+$ min, no flip → neither, e.g. $x^3$ at $0$), the Extreme Value Theorem, and the four ways to check an integral — differentiate back (the king), eyeball the area, squeeze between $m(b-a)$ and $M(b-a)$, and sign sanity. All of it is now an interactive page: `html-visualization/extrema-and-integral-checks.html`.
 
 ## Lecture 4 — Vectors and 3D geometry
-*No exercises yet.* See [[L04 Vectors and 3D Geometry]].
+
+Taught per-materi in Bahasa Indonesia, gogo gaga register — full teaching walkthrough in [[L04 Walkthrough (Gogo Gaga)]]. Slide theory in [[L04 Vectors and 3D Geometry]].
+Ethan sent **final answers only** this session (handwriting is in Samsung Notes on his tab, no transfer path to the laptop yet). Error patterns were reverse-engineered from the numbers, which worked fine.
+
+### Materi 1 — 3D coordinates and distance (2026-10-06)
+| # | Problem | Technique | Answer | Ethan |
+|---|---|---|---|---|
+| 1.1 | distance $P(1,2,3)$–$Q(4,6,3)$ | $\Delta z=0$ → disguised 2D, $3$-$4$-$5$ | $5$ | ✅ |
+| 1.2 | distance $A(-2,1,4)$–$B(3,-3,-2)$ | $25+16+36$ | $\sqrt{77}\approx8.775$ | ✅ |
+| 1.3 | $S(1,1,1)$, $T(1,1,k)$, $\lvert ST\rvert=5$ → find $k$ | $\sqrt{(k-1)^2}=\lvert k-1\rvert=5$, two cases | $k=6$ **or** $k=-4$ | ⚠️ said $6$ or $-6$ |
+| 1.4 | T/F: dist $(5,0,0)\to O$ $=$ dist $(0,0,-5)\to O$ | squares kill signs; all three axes equivalent | true, both $5$ | ✅ |
+| 1.5 | sides of $\triangle$ $A(0,0,0)$, $B(4,0,0)$, $C(4,3,0)$; right-angled? | distance formula ×3, then $a^2+b^2=c^2$ | $3,4,5$; right angle **at $B$** | ✅ concept |
+
+**1.3 — the whole lesson.** Ethan measured from the origin instead of from $S$. The distance is $\lvert k-1\rvert$, not $\lvert k\rvert$. Priced it: $k=-6$ gives distance $\mathbf 7$, not $5$. The two answers sit symmetrically around $z=1$, not around $0$ (midpoint of $-4$ and $6$ is $1$ ✓).
+**1.5 — Ethan derived the test himself** ($a^2+b^2-c^2=0$) but did not trust it. Added the missing condition: **$c$ must be the longest side.** Counter-demo: with $c=4$, $3^2+5^2-4^2=18\neq0$ — looks non-right although it is right. The right angle is always at the vertex **not** touched by the hypotenuse.
+
+### Materi 2 — spheres and completing the square (2026-10-06)
+| # | Problem | Answer | Ethan |
+|---|---|---|---|
+| 2.1 | equation of sphere, center $(1,-2,3)$, $a=4$ | $(x-1)^2+(y+2)^2+(z-3)^2=16$ | ⚠️ constant $-20$, should be $-2$ |
+| 2.2 | center & radius of $(x+4)^2+(y-1)^2+z^2=9$ | $(-4,1,0)$, $a=3$ | ✅ |
+| 2.3 | center & radius of $x^2+y^2+z^2-6x+4y-2z-11=0$ | $(3,-2,1)$, $a=5$ | ⚠️ got $(-3,-2,-1)$ |
+| 2.4 | center & radius of $x^2+y^2+z^2+2x=0$; through the origin? | $(-1,0,0)$, $a=1$; **yes**, origin sits exactly on the surface | ✅ (part 2 unanswered) |
+| 2.5 | center & radius of $x^2+y^2+z^2-4z+8=0$ | $a^2=-4$ → **no sphere exists**, empty set | ⚠️ got $a^2=-6$, **but correctly reported the impossibility** |
+
+**The one-line formula introduced here** (kills both of Ethan's error types at once):
+$$x_0=-\frac{\text{coefficient}}{2},\qquad \text{debt}=x_0^2,\qquad a^2=-(\text{constant})+\textstyle\sum\text{debt}$$
+Verified against all three worked spheres, including the fractional slide-4 one ($a^2=-1+\frac94+4=\frac{21}4$ ✓).
+
+**2.5 is a deliberate trap and Ethan passed its real test** — he reported a negative under the root instead of quietly "fixing" it to look normal. Teaching point: $a^2>0$ → sphere · $a^2=0$ → **a single point** · $a^2<0$ → **nothing at all**. Proof of emptiness: at the center the left side equals $4$, which is its global minimum, and we need $0$ — unreachable (an L02 extremum argument).
+
+### Materi 3 — vectors, component form, magnitude (2026-10-06) — **6/6**
+| # | Problem | Answer | Ethan |
+|---|---|---|---|
+| 3.1a | $\overrightarrow{PQ}$, $P(2,-1,4)$, $Q(5,3,-2)$ | $\langle3,4,-6\rangle$ | ✅ |
+| 3.1b | $\overrightarrow{QP}$ | $\langle-3,-4,6\rangle$ | ✅ reasoned it from $-\overrightarrow{PQ}$ |
+| 3.1c | $\lvert\overrightarrow{PQ}\rvert$ | $\sqrt{61}\approx7.810$ | ✅ |
+| 3.2 | $\lvert\langle-2,6,-3\rangle\rvert$ | $7$ | ✅ |
+| 3.3 | $3\mathbf i-4\mathbf j+12\mathbf k$ → components, magnitude | $\langle3,-4,12\rangle$, $13$ | ✅ |
+| 3.4 | is $\overrightarrow{AB}$ ($A(1,1,1)\to B(4,5,1)$) the same vector as $\overrightarrow{CD}$ ($C(0,0,0)\to D(3,4,0)$)? | yes — both $\langle3,4,0\rangle$ | ✅ answer, ⚠️ reasoning |
+| 3.5 | unit vector along $\langle1,2,2\rangle$ | $\langle\frac13,\frac23,\frac23\rangle$ | ✅ |
+| 3.6 | direction of $\langle0,3,-4\rangle$, length $10$ | $\langle0,6,-8\rangle$ (i.e. $2\mathbf w$) | ✅ answer, ⚠️ notation |
+
+**Zero sign errors this round** — including $3-(-1)=4$, the minus-minus that cost him twice in Materi 2.
+**3.4 wording fix:** Ethan said *"vektor itu jaraknya, terlepas dari letaknya"*. The second half is exactly right; the first half is dangerous. Priced it: $\langle3,4,0\rangle$, $\langle5,0,0\rangle$, $\langle0,0,-5\rangle$ all have length $5$ but are three different vectors. **Two vectors are equal iff all components match** (which guarantees length *and* direction).
+**3.6 notation:** he wrote $\lvert w\rvert10$ and asked whether that was right. It is not — $\lvert w\rvert$ is already a **number** ($5$), so the expression reads "5 10". Correct forms: $10\cdot\frac{\mathbf w}{\lvert\mathbf w\rvert}$, or simply $2\mathbf w$ since the stretch factor is $\frac{10}{\lvert\mathbf w\rvert}=2$. General rule recorded: **vector with direction $\mathbf w$ and length $L$ is $\frac{L}{\lvert\mathbf w\rvert}\mathbf w$.**
+
+### Materi 4 — vector operations (2026-10-06) — **6/6**
+| # | Problem | Answer | Ethan |
+|---|---|---|---|
+| 4.1a | $\mathbf u+\mathbf v$, $\mathbf u=\langle2,-1,3\rangle$, $\mathbf v=\langle-1,4,0\rangle$ | $\langle1,3,3\rangle$ | ✅ |
+| 4.1b | $3\mathbf u$ | $\langle6,-3,9\rangle$ | ✅ |
+| 4.1c | $2\mathbf u-3\mathbf v$ | $\langle7,-14,6\rangle$ | ✅ ($4-(-3)=7$) |
+| 4.2 | $\lvert\frac17\mathbf u\rvert$, $\mathbf u=\langle6,-2,3\rangle$ | $1$ | ✅ used the shortcut |
+| 4.3 | are $\langle2,-4,6\rangle$, $\langle-3,6,-9\rangle$ parallel? find $k$; same or opposite direction? | yes, $k=-\frac32$, **opposite** direction | ✅ $k$; ⚠️ direction unanswered |
+| 4.4 | which are meaningful: $\langle1,2,3\rangle+\langle4,5,6\rangle$ · $+7$ · $7\cdot$ · $\lvert\cdot\rvert+7$ | $\langle5,7,9\rangle$ · nonsense · $\langle7,14,21\rangle$ · $\sqrt{14}+7$ | ✅ all four, reasoned by **type** |
+| 4.5 | all scalars $c$ with $\lvert c\langle1,-2,2\rangle\rvert=12$ | $c=4$ **or** $c=-4$ | ✅ got both unprompted |
+| 4.6 | midpoint of $A(1,0,2)$, $B(3,2,-1)$ via vectors | $M(2,1,\frac12)$ | ✅ |
+
+**4.3 nuance added:** $k>0$ → parallel, same direction ($0^\circ$); $k<0$ → parallel, **opposite** direction ($180^\circ$). Both are still called "parallel", and the Materi 7 test $\mathbf u\times\mathbf v=\mathbf 0$ does not distinguish them either.
+**4.5 shows transfer:** the "absolute value → two answers" lesson from 1.3 came back unprompted.
+**4.6** was done the vector way ($A+\frac12\overrightarrow{AB}$) and cross-checked with the high-school midpoint formula — the vector route is the one reused for line equations in Materi 8.

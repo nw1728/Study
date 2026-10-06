@@ -1,7 +1,7 @@
 ---
 title: Teaching Playbook
 tags: [calculus-a, workflow]
-updated: 2026-09-18
+updated: 2026-10-06
 ---
 
 # 🧑‍🏫 Teaching Playbook
@@ -56,6 +56,34 @@ Before integrating, ask out loud: **"is there something *inside* something?"**
 2. **No, it's a fraction** with a single power on the bottom → **split the fraction**, rewrite each piece as a power, then Power Rule
 3. **No, it's a product of unrelated functions** → integration by parts
 Make Ethan answer this question himself before any algebra happens.
+
+## 📚 "Per materi" mode — how Ethan wants a lecture taught (asked 2026-10-06)
+
+> [!important] This replaces "explain the slides one by one"
+> On 2026-10-06 Ethan asked for all 24 slides of Lecture 4 explained one by one. Partway through he **stopped me** and asked instead for:
+> **per materi, satu-satu, dengan latihan di tiap materi, dan dicampur Bahasa Indonesia.**
+> Slide-by-slide is too passive for him. He needs to *do* something before the next idea arrives.
+
+**The loop:**
+1. **Publish the map first.** Split the lecture into 6–10 **materi** (topics), as a table with slide ranges and a status column. He wants to see how far he has to go.
+2. **Teach ONE materi.** Gogo gaga register (see above). Name the wrong instinct, baby-talk the formula, derive the *why*, give 1–2 fully worked examples with a ✅ numerical check.
+3. **Give 5–6 exercises** for that materi only. Mix the types: forward, backward (read the answer off a given form), conceptual/no-calculation, and **one deliberate trap**.
+4. **Stop. Wait for his answers.** Do not continue to the next materi in the same message.
+5. **Correct every single answer**, one by one, even the right ones — say *why* it is right. For wrong ones, **reverse-engineer the error** and price it numerically.
+6. **Recap table** (per exercise: ✅ / ⚠️), name the one pattern that explains the leaks, then next materi.
+
+**Exercise design that works on him:**
+- Put **one trap per set** and tell him afterwards it was a trap — he enjoys it and it sticks.
+- Build in **callbacks**: an exercise in materi 4 that needs the lesson from materi 1. He transfers well, and seeing himself transfer motivates him.
+- Choose numbers that come out **whole** ($3$-$4$-$5$, $3$-$4$-$12$-$13$, $\lvert v\rvert=7$). He uses the cleanliness as a self-check.
+- Ask at least one **"is this meaningful or nonsense?"** question — it builds the type-checking habit that prevents notation errors.
+
+**Bahasa Indonesia:** not decoration. He engages visibly more. Useful vocabulary he already uses or picked up:
+*panah* (arrow), *panjang* (length), *arah* (direction), *sejajar* (parallel), *tegak lurus* (perpendicular), *titik* (point), *garis* (line), *bidang* (plane), *jarak* (distance), *pusat* (centre), *selisih* (difference), *utang* (the debt in completing the square), *turunan*, *pembilang*, *penyebut*.
+Keep headings and formulas in the usual notation; switch to Indonesian for the explanation, the analogies and the warnings.
+
+> [!warning] He can only send final answers (as of 2026-10-06)
+> His working is handwritten in **Samsung Notes on his tab**, with no transfer path to the laptop. Diagnosing from final answers alone works — the whole Materi 2 diagnosis came from that. Still worth offering **KDE Connect** (Arch ↔ Android) so he can send photos and get his actual steps checked.
 
 ## Note-keeping rules (Obsidian)
 - Every file is Markdown, math in `$...$` / `$$...$$`
