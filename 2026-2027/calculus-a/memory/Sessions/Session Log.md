@@ -1,12 +1,31 @@
 ---
 title: Session Log
 tags: [calculus-a, sessions]
-updated: 2026-10-06
+updated: 2026-10-07
 ---
 
 # 🗓️ Session Log
 
 Back to [[00 Index]] · Newest first
+
+## 2026-10-07 — L04 Materi 5: dot product (Claude Code)
+- Picked up exactly where [[Current Progress]] said to: **Materi 5 of 8, dot product (slides 8–9)**, in the standing per-materi format (one materi → exercises → wait → correct every answer → next). Walkthrough updated in [[L04 Walkthrough (Gogo Gaga)]]; 8 answers logged in [[Exercise Log]].
+- **All three outstanding promises paid**, as flagged in the handover:
+  1. The perpendicularity test became one line: $\mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0$, replacing the long $a^2+b^2-c^2=0$ route he derived himself back in Ex 1.5.
+  2. Leaned on the Ex 3.4 correction — **a vector is length AND direction** — by framing the dot product as *the tool that measures the direction part*. Stated plainly that the topic cannot land under "vector = distance".
+  3. Opened on the type trap: **two arrows in, one NUMBER out.** Named the summing step as the thing that kills the arrow.
+- **Taught the "why" in full**, which is what he responds to: derived $\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf u\rvert\lvert\mathbf v\rvert}$ from the law of cosines plus $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$, and **verified step 2 numerically** on random vectors (both sides $15.380$). Analogy that carried it: pushing a box — along the motion, sideways (zero), backwards (negative), i.e. $W=\mathbf F\cdot\mathbf d$.
+- Installed two free checks: **sign of the dot product gives the angle type without any magnitudes**, and **$\lvert\cos\theta\rvert\le1$ always** (so $1.4$ is not a strange angle, it is broken arithmetic).
+- **Result: 6 right, 1 half, 1 trap — Materi 5 passed.** Correct: 5.1a/b, 5.3, 5.5, 5.6a/b.
+- **Ex 5.2 was the half.** Algebra perfect to $k^2=4$, then only $k=2$ came back. Priced it: $k=-2$ gives $\langle-2,-2,3\rangle\cdot\langle-2,5,2\rangle=0$, i.e. also exactly $90^\circ$, and a $k=-3\ldots3$ table showed there are precisely two roots.
+  - **Sharper diagnosis than "sign error", and recorded in [[Common Mistakes]]:** his *arithmetic* on negatives is fixed — Ex 5.1 contained two minus-times-minus and both were right, and Materi 3–5 are all at zero sign errors. What leaked is **completeness**. He already owns the rule (Ex 1.3, Ex 4.5, both unprompted) but has it bound to the trigger *"there are $\lvert\cdot\rvert$ bars"* rather than *"a square is being opened"* — the same rule, since $\sqrt{k^2}=\lvert k\rvert$. Drill given: **write $\pm$ before computing**, then look for a reason to drop the negative. Re-test due in Materi 8.
+- **Ex 5.4 was the deliberate trap, and the best moment of the session.** He answered "all five meaningful" (only three are) **and asked a question that explained his own failure**: *"apakah $*$ dan $\cdot$ itu sama?"* Without knowing which operation a dot denotes he cannot know the output type, so the type check cannot run — notation doubt upstream, error downstream.
+  - Answered honestly, including the inconvenient part: **the textbook and the slides use the same dot for scalar multiplication and for the dot product**, so his confusion was legitimate, not sloppiness. Gave the operand rule: number·arrow $=$ scalar multiple (arrow) · arrow·arrow $=$ dot product (number) · arrow·number $=$ does not exist. Same for $\lvert\cdot\rvert$: magnitude around an arrow, absolute value around a number. **The symbol does not tell you the operation — the operands do.**
+  - Sharpest contrast of the set: $(\mathbf u\cdot\mathbf v)+7$ is legal, $(\mathbf u\cdot\mathbf v)+\mathbf w$ is not — one letter apart, and the second is the Materi 4 error $\mathbf u+5$ written backwards. New general lesson recorded: **the dot product changes the type mid-expression, so the type check must be re-run on every line.**
+- **Ex 5.6b is worth keeping:** he derived $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$ himself from the arithmetic (*"u.u kan jadinya u^2 semua, jadi tinggal akar 49"*) and **this time trusted his own finding** — the behaviour that was missing in Ex 1.5. That property is the planned entry point for Materi 6, since $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$ removes every square root from the projection formula.
+- Other things he did right and should be told again: he answered 5.1b from the sign alone without touching the ugly magnitudes ($5.3852$, $5.9161$), and in 5.3 he kept surds unevaluated so $\sqrt2\cdot\sqrt2$ collapsed cleanly to $2$ and gave an exact $\frac12$.
+- He asked to **save** after the corrections rather than continue. **Next session starts at Materi 6 (vector projection, slide 10)** — short, one slide, with the $\lvert\mathbf v\rvert^2$ vs $\lvert\mathbf v\rvert$ trap flagged up front.
+- **KDE Connect re-offered** (so he can send handwritten working from Samsung Notes on his tab) — still not taken up.
 
 ## 2026-10-06 — Lecture 4 taught per materi, in Bahasa Indonesia (Claude Code)
 - **Format change, mid-session, at Ethan's request.** He first asked for all 24 slides of Lecture 4 explained one by one. I started and got through slides 1–22, then he interrupted: *"bisa ga per materi, satu-satu, dan ada latihan di tiap materi, dan dicampur bahasa Indonesia?"* Switched immediately. **This is now the standing format** — recorded in [[Current Progress]] and [[Teaching Playbook]].

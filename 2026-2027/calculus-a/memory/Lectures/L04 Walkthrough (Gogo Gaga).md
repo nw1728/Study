@@ -2,9 +2,10 @@
 title: "L04 Walkthrough — Materi per Materi (Gogo Gaga, Bahasa Indonesia)"
 lecture: 4
 date: 2026-10-06
+sessions: [2026-10-06, 2026-10-07]
 tags: [calculus-a, lecture, vectors, 3d-geometry, walkthrough, bahasa-indonesia]
 status: in-progress
-updated: 2026-10-06
+updated: 2026-10-07
 ---
 
 # 🧸 L04 Walkthrough — Materi per Materi
@@ -24,8 +25,8 @@ Back to [[00 Index]] · Teori dari slide: [[L04 Vectors and 3D Geometry]] · Lat
 | 2 | Bola (sphere) + melengkapkan kuadrat | 4 | ✅ lulus |
 | 3 | Vektor: bentuk komponen + panjang | 5–6 | ✅ lulus |
 | 4 | Operasi vektor (tambah, kali skalar) | 7 | ✅ lulus |
-| 5 | **Dot product** — sudut & tegak lurus | 8–9 | ⬜ **lanjut di sini** |
-| 6 | Proyeksi vektor (bayangan) | 10 | ⬜ |
+| 5 | **Dot product** — sudut & tegak lurus | 8–9 | ✅ lulus |
+| 6 | Proyeksi vektor (bayangan) | 10 | ⬜ **lanjut di sini** |
 | 7 | **Cross product** + luas + determinan | 11–17 | ⬜ |
 | 8 | Garis & bidang (+ jarak, sudut) | 18–24 | ⬜ |
 
@@ -381,30 +382,211 @@ Kasus ini $k$ **negatif** → arahnya **berlawanan**, dan 1.5× lebih panjang. *
 
 ---
 
-# 📈 Perkembangan Ethan selama walkthrough ini
+# 📘 MATERI 5 — Dot product (sudut & tegak lurus)
 
-| | Materi 1 | Materi 2 | Materi 3 | Materi 4 |
-|---|---|---|---|---|
-| Error tanda | 1 | 3 | **0** | **0** |
-| Error konsep | 0 | 0 | 0 | 0 |
-| Error notasi/bahasa | 0 | 0 | 1 | 0 |
-| Skor angka | 4.5/5 | 2.5/5 | 6/6 | 6/6 |
+Diajarkan **2026-10-07**. Materi pertama di Lecture 4 yang **mengubah jenis**: dua panah masuk, **satu angka** keluar.
 
-**Kesimpulan:** konsepnya **paham** di semua materi. Yang bocor di Materi 1–2 murni **aritmetika tanda**, dan setelah rumus satu baris ($x_0=-\frac{\text{koef}}2$) plus kebiasaan cek-jenis diberikan, **bocornya berhenti total** di Materi 3–4.
+## Tiga instinct salah yang dibunuh dulu
+1. **"Kali dua vektor ya kali komponennya, jadi panah baru."** Salah — hasilnya **ANGKA**, panahnya mati.
+2. **"Kalau cuma angka, itu pasti panjangnya."** Bukan panjang — yang diukur adalah **ARAH**.
+3. **"Vektor itu jaraknya"** (error 3.4 yang harus dibereskan sebelum materi ini). Dot product adalah **alat untuk mengukur bagian arahnya**; kalau vektor cuma jarak, tidak ada arah untuk diukur.
 
-**Hal-hal yang terbawa dengan baik antar materi:**
-- Nilai mutlak → **dua jawaban** (1.3 → 4.5, tanpa diingatkan)
-- Cek-jenis panah vs angka (3.6 → 4.4)
-- Jalan pintas $\lvert k\mathbf u\rvert=\lvert k\rvert\lvert\mathbf u\rvert$ (4.2, dan sudah dipakai diam-diam di 3.6 lewat $2\mathbf w$)
-- Membiarkan jawaban dalam bentuk akar, tidak memaksa jadi desimal
+## Rumus
+$$\mathbf u\cdot\mathbf v=u_1v_1+u_2v_2+u_3v_3\qquad(\textbf{ANGKA})$$
+**Bahasa bayi:** *"kalikan pasangan sejenis — $x$ dengan $x$, $y$ dengan $y$, $z$ dengan $z$ — lalu JUMLAHKAN jadi satu angka."*
+
+> [!important] Kata kuncinya **JUMLAHKAN**
+> Penjumlahan itulah yang membunuh panahnya. Berhenti sebelum menjumlahkan → masih tiga angka (panah). Setelah dijumlahkan → satu angka, tidak ada arah lagi.
+
+## Kenapa benda ini ada: dia mengukur sudut
+$$\cos\theta=\frac{\mathbf u\cdot\mathbf v}{|\mathbf u||\mathbf v|},\qquad 0\le\theta\le\pi$$
+
+**Analogi yang dipakai (gaya engineering): dorong kotak.**
+| cara mendorong | dot product |
+|---|---|
+| lurus searah jalannya kotak | **besar** (tenaga masuk semua) |
+| miring | sedang |
+| tegak lurus (tekan ke bawah, kotak jalan ke depan) | **NOL** — tidak membantu sama sekali |
+| ke belakang (menahan) | **negatif** |
+
+Di fisika ini memang rumus kerja: $W=\mathbf F\cdot\mathbf d$.
+
+## Sifat jembatan — yang menyatukan Materi 3 dan 5
+$$\mathbf u\cdot\mathbf u=u_1^2+u_2^2+u_3^2=|\mathbf u|^2\qquad\Longrightarrow\qquad |\mathbf u|=\sqrt{\mathbf u\cdot\mathbf u}$$
+**Bahasa bayi:** *"dot product sebuah vektor dengan dirinya sendiri = panjangnya dikuadratkan."* Itu **persis isi dalam akar** rumus panjang Materi 3.
+
+## Turunan rumus $\cos\theta$ (dikerjakan penuh, Ethan suka bagian "kenapa")
+Segitiga dari $\mathbf u$ dan $\mathbf v$ yang ekornya ketemu; sisi ketiga $=\mathbf u-\mathbf v$.
+1. **Aturan cosinus:** $|\mathbf u-\mathbf v|^2=|\mathbf u|^2+|\mathbf v|^2-2|\mathbf u||\mathbf v|\cos\theta$
+2. **Jabarkan pakai sifat jembatan:** $(\mathbf u-\mathbf v)\cdot(\mathbf u-\mathbf v)=\mathbf u\cdot\mathbf u-2\,\mathbf u\cdot\mathbf v+\mathbf v\cdot\mathbf v=|\mathbf u|^2-2(\mathbf u\cdot\mathbf v)+|\mathbf v|^2$
+3. **Sandingkan**, coret $|\mathbf u|^2$ dan $|\mathbf v|^2$, bagi $-2$:
+$$\mathbf u\cdot\mathbf v=|\mathbf u||\mathbf v|\cos\theta$$
+
+✅ **Cek numerik langkah 2** dengan $\mathbf u=\langle1.3,-2.1,0.7\rangle$, $\mathbf v=\langle-0.4,1.1,2.2\rangle$: kedua ruas $=15.380$ ✓
+
+## Janji #1 dibayar — tes tegak lurus jadi satu baris
+$$\mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0$$
+Karena $\cos90^\circ=0$, jadi pembilangnya harus nol. **Tidak perlu panjang, tidak perlu Pythagoras, tidak perlu akar.**
+Ini menggantikan jalan panjang yang Ethan turunkan sendiri di Latihan 1.5 ($a^2+b^2-c^2=0$).
+*Orthogonal = tegak lurus = perpendicular* — tiga kata, satu arti.
+
+## Tanda dot product = jenis sudut
+Penyebut $|\mathbf u||\mathbf v|$ **selalu positif**, jadi **tanda $\cos\theta$ = tanda dot product**.
+
+| $\mathbf u\cdot\mathbf v$ | $\theta$ | nama |
+|---|---|---|
+| $>0$ | $0^\circ$–$90^\circ$ | **lancip** (*acute*) |
+| $=0$ | tepat $90^\circ$ | **tegak lurus** |
+| $<0$ | $90^\circ$–$180^\circ$ | **tumpul** (*obtuse*) |
+
+> [!tip] Hadiah gratis
+> Pertanyaan "lancip atau tumpul?" dijawab **tanpa menghitung panjang sama sekali** — cukup lihat tandanya. Jangan pernah hitung akar untuk pertanyaan ini.
+
+Ekstrem: $\theta=0$ → $\mathbf u\cdot\mathbf v=|\mathbf u||\mathbf v|$ (maksimum) · $\theta=\pi$ → $-|\mathbf u||\mathbf v|$ (minimum).
+Dot product **membedakan** arah sama vs berlawanan (positif vs negatif) — catatan: cross product di Materi 7 **tidak bisa**.
+
+## Contoh yang dikerjakan
+| # | Soal | Jalan | Jawaban |
+|---|---|---|---|
+| W1 | $\langle2,3,-1\rangle\cdot\langle4,-1,5\rangle$ | $8-3-5$ | $0$ → **tegak lurus** ($90.0000^\circ$ ✓) |
+| W2 | sudut $\langle2,0,0\rangle$, $\langle3,3,0\rangle$ | $6/(2\cdot3\sqrt2)=\frac1{\sqrt2}$ | $45^\circ$ ✓ |
+| W3 | sudut $\langle1,2,2\rangle$, $\langle-2,-2,-1\rangle$ | $-8/9$ | $152.73^\circ$ (tumpul) ✓ |
+
+**Pengamatan bonus dari W2:** ganti $\mathbf u$ jadi $\langle100,0,0\rangle$, sudutnya **tetap** $45^\circ$. Penyebut $|\mathbf u||\mathbf v|$ tugasnya **membuang panjang** supaya tersisa cuma arah. **Sudut tidak peduli panjang.**
+
+## Sifat-sifat (slide 9) — dan yang TIDAK ada di daftar
+| Sifat | Bahasa bayi |
+|---|---|
+| $\mathbf u\cdot\mathbf v=\mathbf v\cdot\mathbf u$ | **urutan tidak penting** (beda dengan $\overrightarrow{PQ}$ vs $\overrightarrow{QP}$!) |
+| $(c\mathbf u)\cdot\mathbf v=c(\mathbf u\cdot\mathbf v)$ | skalar ditarik keluar |
+| $\mathbf u\cdot(\mathbf v+\mathbf w)=\mathbf u\cdot\mathbf v+\mathbf u\cdot\mathbf w$ | boleh dibagikan |
+| $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$ | sifat jembatan |
+| $\mathbf 0\cdot\mathbf u=0$ | vektor nol dot apa pun = angka $0$ |
+
+> [!warning] $\mathbf u\cdot(\mathbf v\cdot\mathbf w)$ tidak ada dan tidak akan pernah ada
+> $\mathbf v\cdot\mathbf w$ sudah jadi **ANGKA**, dan operasi "panah dot angka" tidak ada. Dot product **wajib dua panah**.
+
+### Cek-jenis versi Materi 5
+| Ekspresi | Jenis | Sah? |
+|---|---|---|
+| $\mathbf u\cdot\mathbf v$ | ANGKA | ✓ |
+| $(\mathbf u\cdot\mathbf v)\mathbf w$ | angka × panah = PANAH | ✓ (kali skalar) |
+| $\mathbf u\cdot\mathbf v+3$ | angka + angka = ANGKA | ✓ |
+| $\mathbf u\cdot(\mathbf v\cdot\mathbf w)$ | panah dot angka | ✗ |
+| $\mathbf u\cdot\mathbf v+\mathbf w$ | angka + panah | ✗ |
+
+> [!important] Pelajaran besar yang muncul di sini
+> $\mathbf u\cdot\mathbf v+3$ **sah**, padahal $\mathbf u+5$ omong kosong (Materi 4). Bedanya: dot product **sudah mengubah jenisnya** dari panah ke angka.
+> **Jenis bisa berubah di tengah ekspresi — jadi cek-jenis harus dilakukan setiap baris, bukan sekali di awal.**
+
+## Cek gratis yang ditanamkan
+1. **$\cos\theta$ WAJIB di $[-1,1]$.** Dapat $1.4$ → bukan sudut aneh, itu **salah hitung**. Cek aritmetika termurah di materi ini.
+2. **Tanda dulu, angka kemudian.** Tanda dot product sudah memberi jenis sudut; kalau $\arccos$-nya melanggar, ada salah ketik.
+3. **$\mathbf u\cdot\mathbf u$ harus positif** dan harus $=|\mathbf u|^2$ — pakai untuk mengecek panjang.
+
+## Resep 3 baris
+```
+1. u . v  = kalikan pasangan sejenis, JUMLAHKAN -> satu ANGKA
+2. tanda  = jenis sudut:  + lancip | 0 tegak lurus | - tumpul
+3. sudut  = cos(theta) = (u.v)/(|u||v|), lalu arccos
+```
+
+## ✍️ Latihan Materi 5 — jawaban Ethan (6 benar, 1 setengah, 1 kena jebakan) — **LULUS**
+| # | Soal | Jawaban Ethan | Hasil |
+|---|---|---|---|
+| 5.1a | $\langle2,-3,4\rangle\cdot\langle-1,5,3\rangle$ | $-5$ | ✅ (dua minus-minus, dua-duanya benar) |
+| 5.1b | jenis sudutnya, **tanpa hitung panjang** | tumpul, "karena minus" | ✅ penalaran tepat ($99.03^\circ$) |
+| 5.2 | **semua** $k$ dengan $\langle k,-2,3\rangle\perp\langle k,5,2\rangle$ | $k=2$ | ⚠️ **hilang $k=-2$** |
+| 5.3 | sudut $\langle1,1,0\rangle$, $\langle0,1,1\rangle$ | $\cos\theta=\frac12$, $\theta=60^\circ$ | ✅ |
+| 5.4 | sah atau omong kosong (5 ekspresi) | "semuanya sah" | ❌ **jebakan** — (b) dan (e) omong kosong |
+| 5.5 | sudut dari $\lvert u\rvert=5$, $\lvert v\rvert=4$, $\mathbf u\cdot\mathbf v=-10$ | $\cos120^\circ=-\frac12$ | ✅ |
+| 5.6a | $\mathbf u\cdot\mathbf u$ untuk $\langle2,-3,6\rangle$ | $49$ | ✅ |
+| 5.6b | $\lvert\mathbf u\rvert$ tanpa hitung ulang akar | $7$, dengan alasan benar | ✅✅ |
+
+### Koreksi 5.2 — akar negatifnya hilang
+$\mathbf u\cdot\mathbf v=k^2-10+6=k^2-4$. Sampai $k^2=4$ **sempurna**; langkah terakhirnya yang bocor.
+$$k^2=4\ \Longrightarrow\ |k|=2\ \Longrightarrow\ k=+2\ \textbf{atau}\ k=-2$$
+✅ Dibuktikan dengan angka: $k=-2$ memberi $\langle-2,-2,3\rangle\cdot\langle-2,5,2\rangle=4-10+6=0$ → **tegak lurus juga**, $90.0000^\circ$. Tabel $k=-3\ldots3$ ditunjukkan supaya terlihat hanya ada **dua** akar.
+
+> [!important] Diagnosis: pemicunya terpasang di tempat yang salah
+> Ethan **sudah bisa** aturan ini — Latihan 1.3 ($k=6$ dan $-4$) dan 4.5 ($c=\pm4$), dua-duanya tanpa diingatkan. Tapi dia memasangnya ke pemicu **"ada tanda $\lvert\cdot\rvert$"**, bukan ke pemicu **"ada kuadrat yang dibuka"**.
+> Aturannya sama, karena $\sqrt{k^2}=\lvert k\rvert$ — tanda mutlak itu cuma kuadrat yang sudah dibuka.
+> **Latihan mental yang diberikan:** setiap kali muncul $(\cdot)^2=\text{angka}$, tulis $\pm$ **dulu**, baru tanya "ada alasan membuang yang negatif?" (panjang/radius tidak boleh negatif). Tidak ada alasan → dua-duanya jawaban.
+> Akan diuji lagi di **Materi 8** (jarak titik ke bidang punya nilai mutlak di pembilangnya).
+
+### Koreksi 5.4 — jebakannya, dan pertanyaan Ethan yang menjelaskan kenapa dia kena
+Ethan menjawab "semuanya ada arti" **dan bertanya**: *"apakah $*$ dan $\cdot$ itu sama?"* — pertanyaan terbaik di sesi ini, karena **itu tepat akar masalahnya**: kalau dia tidak yakin operasinya apa, dia tidak bisa tahu jenis hasilnya, jadi cek-jenisnya **tidak mungkin dijalankan**. Kebingungan notasi di **hulu**, errornya di **hilir**.
+
+| Ekspresi | Jenis | Putusan |
+|---|---|---|
+| (a) $(\mathbf u\cdot\mathbf v)+7$ | angka + angka | ✅ sah |
+| (b) $\mathbf u\cdot(\mathbf v\cdot\mathbf w)$ | panah dot angka | ❌ omong kosong |
+| (c) $(\mathbf u\cdot\mathbf v)\mathbf w$ | angka × panah = panah | ✅ sah (kali skalar) |
+| (d) $\lvert\mathbf u\cdot\mathbf v\rvert$ | nilai mutlak sebuah angka | ✅ sah |
+| (e) $(\mathbf u\cdot\mathbf v)+\mathbf w$ | angka + panah | ❌ omong kosong |
+
+**Inti jebakannya:** (a) sah tapi (e) tidak — bedanya cuma benda terakhirnya. **Satu huruf mengubah soal sah jadi omong kosong.**
+(e) adalah error $\mathbf u+5$ dari Materi 4, ditulis mundur.
+
+> [!important] Jawaban untuk pertanyaan $*$ vs $\cdot$ — simpan, ini kunci membaca notasi Lecture 4
+> Dijawab **jujur**, termasuk bagian yang membingungkan: **di buku teks dan di slide, kali skalar ($c\,\mathbf u$) dan dot product ($\mathbf u\cdot\mathbf v$) sering memakai titik yang SAMA.** Jadi Ethan memang berhak bingung — di chat titiknya saya pisah ($*$ vs $\cdot$), di ujian tidak.
+> **Cara membedakannya: lihat JENIS benda di kiri dan kanan titik.**
+> | kiri · kanan | operasinya | hasilnya |
+> |---|---|---|
+> | angka · panah | kali skalar | PANAH |
+> | panah · panah | dot product | ANGKA |
+> | angka · angka | kali biasa | ANGKA |
+> | panah · angka | — | ✗ tidak ada |
+>
+> **Simbolnya tidak memberi tahu operasinya. BENDANYA yang memberi tahu.** Itu sebabnya cek-jenis bukan hiasan — itu satu-satunya cara membaca notasi ini.
+> Hal yang sama berlaku untuk $\lvert\cdot\rvert$: **panjang** kalau isinya panah, **nilai mutlak** kalau isinya angka.
+
+### Catatan untuk jawaban yang benar
+- **5.1b:** Ethan **tidak menyentuh panjang** sama sekali — padahal $\lvert u\rvert=5.3852$, $\lvert v\rvert=5.9161$, akar jelek. Itu disiplin, bukan kebetulan.
+- **5.3:** dia **membiarkan bentuk akar** sampai akhir, jadi $\sqrt2\cdot\sqrt2$ mati bersih jadi $2$ → $\cos\theta=\frac12$ eksak, bukan $0.4999\ldots$. Kebiasaan yang harus dijaga.
+- **5.5:** **tidak ada satu komponen pun diberikan** dan dia tetap dapat sudutnya. Pelajarannya: rumus sudut cuma butuh **tiga angka** (dot product + dua panjang); komponen itu cuma jalan untuk mendapatkannya, bukan bahan wajib. Perlu diingatkan: tulis kesimpulannya terang-terangan ($\theta=120^\circ$), bukan hanya $\cos120^\circ=-\frac12$.
+- **5.6b:** dia **menemukan sifat jembatan sendiri** dari angkanya (*"u.u kan jadinya u^2 semua, jadi tinggal akar 49"*) — dan kali ini **dia percaya** pada penemuannya, tidak seperti di Latihan 1.5. Kemajuan sikap, bukan cuma kemampuan.
+- **Sifat jembatan ini langsung dipakai di Materi 6**, karena rumus proyeksi punya $\lvert\mathbf v\rvert^2$ di penyebut — dan $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$ dihitung **tanpa akar sama sekali**. Ethan sudah menemukan sendiri trik yang membuat Materi 6 gampang; tagih itu di awal Materi 6.
 
 ---
 
-# ⏭️ Lanjut dari sini — Materi 5
+# 📈 Perkembangan Ethan selama walkthrough ini
 
-**Dot product** (slide 8–9). Janji yang sudah dibuat ke Ethan dan harus ditagih:
-1. **"Materi 5 akan membuat tes siku-siku jadi satu baris"** (dijanjikan di koreksi 1.5) → $\mathbf u\cdot\mathbf v=0$
-2. Materi 5 butuh pemahaman **"vektor = panjang DAN arah"** yang sudah dibetulkan di 3.4 — dot product adalah alat yang **mengukur arah**, dan itu tidak akan masuk akal kalau "vektor = jarak".
-3. Kebiasaan **cek-jenis** dari 4.4 akan langsung diuji: **dot product menghasilkan ANGKA, bukan panah.** Itu jebakan terbesar Materi 5.
+| | Materi 1 | Materi 2 | Materi 3 | Materi 4 | Materi 5 |
+|---|---|---|---|---|---|
+| Error tanda (aritmetika) | 1 | 3 | **0** | **0** | **0** |
+| Error kelengkapan (akar hilang) | 1 | 0 | 0 | 0 | 1 |
+| Error konsep | 0 | 0 | 0 | 0 | 0 |
+| Error notasi/bahasa | 0 | 0 | 1 | 0 | 1 (jebakan) |
+| Skor angka | 4.5/5 | 2.5/5 | 6/6 | 6/6 | 6.5/8 |
 
-Urutan berikutnya: Materi 5 (dot) → 6 (proyeksi) → 7 (cross, yang paling panjang) → 8 (garis & bidang).
+**Kesimpulan:** konsepnya **paham di semua materi**. Yang bocor di Materi 1–2 murni **aritmetika tanda**, dan setelah rumus satu baris ($x_0=-\frac{\text{koef}}2$) plus kebiasaan cek-jenis diberikan, **bocornya berhenti total** mulai Materi 3.
+
+> [!important] Pola yang tersisa setelah Materi 5 — bentuknya BERUBAH, dan itu kabar baik
+> Dulu: salah **menghitung** minus (minus × minus hilang). Sekarang sudah sembuh — di 5.1 dua minus-minus dua-duanya benar.
+> Sekarang: salah **kelengkapan** — berhenti setelah menemukan **satu** jawaban padahal ada dua ($k^2=4$).
+> Jadi bukan aritmetikanya lagi, tapi **pemicu "tulis $\pm$"-nya yang terlalu sempit** (terpasang di $\lvert\cdot\rvert$, belum di kuadrat).
+
+**Hal-hal yang terbawa dengan baik antar materi:**
+- Nilai mutlak → **dua jawaban** (1.3 → 4.5, tanpa diingatkan) — tapi **belum** terbawa ke kuadrat (5.2)
+- Cek-jenis panah vs angka (3.6 → 4.4) — diuji keras di 5.4, perlu diperkuat
+- Jalan pintas $\lvert k\mathbf u\rvert=\lvert k\rvert\lvert\mathbf u\rvert$ (4.2)
+- Membiarkan jawaban dalam bentuk akar, tidak memaksa jadi desimal (3.x, dan lagi di 5.3)
+- **Memakai jalan pintas yang diajarkan, bukan jalan panjangnya** (5.1b: tanda saja, tanpa panjang)
+- **Bertanya kalau notasinya bikin ragu** (3.6, dan lagi di 5.4) — selalu beri penghargaan, ini kelas error termurah
+
+---
+
+# ⏭️ Lanjut dari sini — Materi 6
+
+**Proyeksi vektor** (slide 10). Materi pendek: satu slide, satu rumus utama.
+$$\text{proj}_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{|\mathbf v|^2}\,\mathbf v\qquad\text{komponen skalar}=|\mathbf u|\cos\theta=\frac{\mathbf u\cdot\mathbf v}{|\mathbf v|}$$
+
+Yang harus dilakukan saat membuka Materi 6:
+1. **Tagih temuan Ethan sendiri dari 5.6b.** Penyebutnya $\lvert\mathbf v\rvert^2$, dan $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$ — jadi **tidak ada akar sama sekali** di rumus proyeksi vektor. Dia sudah menemukan itu; mulai dari situ supaya rumusnya terasa miliknya.
+2. **Jebakan utama: $\lvert\mathbf v\rvert^2$ (versi vektor) vs $\lvert\mathbf v\rvert$ (versi skalar).** Ini kesalahan klasik di materi ini. Tandai dari awal: *"hasil panah butuh penyebut kuadrat, hasil angka butuh penyebut biasa."*
+3. **Cek-jenis lagi** — proyeksi menghasilkan **PANAH**, komponen skalar menghasilkan **ANGKA**. Dua rumus mirip, dua jenis berbeda. Setelah 5.4, ini harus dieksplisitkan.
+4. Hubungkan ke tanda: $\theta$ lancip → proyeksi searah $\mathbf v$; $\theta$ tumpul → **berlawanan** dengan $\mathbf v$ (komponen skalar negatif). Pakai tabel tanda dari Materi 5.
+5. Contoh slide 10 sudah siap: $\mathbf u=6\mathbf i+3\mathbf j+2\mathbf k$ ke $\mathbf v=\mathbf i-2\mathbf j-2\mathbf k$ → $\mathbf u\cdot\mathbf v=-4$, $\lvert\mathbf v\rvert^2=9$, proyeksi $=-\frac49\mathbf i+\frac89\mathbf j+\frac89\mathbf k$, komponen skalar $=-\frac43$ (negatif → tumpul).
+
+Urutan berikutnya: Materi 6 (proyeksi) → 7 (cross product, yang paling panjang — minus di $\mathbf j$ adalah pembunuhnya) → 8 (garis & bidang).

@@ -1,7 +1,7 @@
 ---
 title: Common Mistakes
 tags: [calculus-a, practice, mistakes]
-updated: 2026-10-06
+updated: 2026-10-07
 ---
 
 # ⚠️ Common Mistakes
@@ -71,6 +71,10 @@ Ethan's own errors from past sessions, each with its fix. Add new ones as they h
 > **When a linear coefficient is POSITIVE, Ethan's sign flip is always right. When it is NEGATIVE, the flip disappears.**
 > Cause: a negative coefficient forces a **minus times minus** ($-(-3)=+3$), which is his oldest weak spot. Not a new error — the old one wearing a new face.
 > Fix: the one-line formula below removes the flip step entirely.
+>
+> **Update 2026-10-07 — the leak changed shape, and that is progress.** The *arithmetic* is fixed (Ex 5.1 had two minus-times-minus and both were right; Materi 3, 4 and 5 are all at zero sign errors). What remains is **completeness**: he stops after finding **one** solution when there are two (Ex 5.2, $k^2=4$).
+> He owns the rule already — Ex 1.3 and Ex 4.5, both unprompted — but it is **attached to the wrong trigger**: *"there are $\lvert\cdot\rvert$ bars"* instead of *"a square is being opened"*. Same rule, since $\sqrt{k^2}=\lvert k\rvert$.
+> Fix: widen the trigger. **Every time $(\cdot)^2=\text{number}$ appears, write $\pm$ first**, then look for a reason to discard the negative. Due for a re-test in Materi 8 (point-to-plane distance).
 
 | Mistake | Fix |
 |---|---|
@@ -87,6 +91,21 @@ Ethan's own errors from past sessions, each with its fix. Add new ones as they h
 | Reversing $\overrightarrow{PQ}$ and $\overrightarrow{QP}$ | **END minus START.** Unlike the distance formula there is no square to protect you — wrong order points the arrow backwards. $\overrightarrow{QP}=-\overrightarrow{PQ}$ |
 | Dropping a "missing" component in $\mathbf i,\mathbf j,\mathbf k$ form | $2\mathbf i+5\mathbf k$ means $\langle2,\mathbf0,5\rangle$ — the $\mathbf j$ component is **zero, not absent**. Write the zero (this is the #1 cross-product killer in Materi 7) |
 | Calling $k<0$ parallel vectors "same direction" (Ex 4.3) | $k>0$ same direction, $k<0$ **opposite** direction ($180^\circ$). Both still count as *parallel*, and $\mathbf u\times\mathbf v=\mathbf0$ does not distinguish them |
+
+### Dot product (Materi 5, 2026-10-07)
+| Mistake | Fix |
+|---|---|
+| **Stopping at one root of $k^2=4$** (Ex 5.2) | $k^2=4\Rightarrow\lvert k\rvert=2\Rightarrow k=\pm2$. Verified: $k=-2$ also gives $\mathbf u\cdot\mathbf v=0$, i.e. exactly $90^\circ$. **Write $\pm$ before computing**, then ask whether a length/radius justifies discarding the negative |
+| Treating $\mathbf u\cdot(\mathbf v\cdot\mathbf w)$ as computable (Ex 5.4) | $\mathbf v\cdot\mathbf w$ is already a **NUMBER**, and "arrow dot number" does not exist. The dot product needs **two arrows**. Not "the answer is zero" — **there is no answer** |
+| $(\mathbf u\cdot\mathbf v)+\mathbf w$ (Ex 5.4) | number $+$ arrow $=$ nonsense. This is the Materi 4 error $\mathbf u+5$ written backwards |
+| Assuming the type check only has to be done once per problem | **The dot product changes the type mid-expression.** $\mathbf u+5$ is nonsense but $\mathbf u\cdot\mathbf v+5$ is fine, because the dot already turned the arrow into a number. **Re-check every line** |
+| Expecting the symbol to tell you the operation | It does not — **the operands do.** Textbooks use the *same* dot for scalar multiplication and the dot product: number $\cdot$ arrow $=$ scalar multiple (arrow) · arrow $\cdot$ arrow $=$ dot product (number) · arrow $\cdot$ number $=$ ✗. Same for $\lvert\cdot\rvert$: **magnitude** around an arrow, **absolute value** around a number |
+| Multiplying vectors component-by-component into a new vector | $\mathbf u\cdot\mathbf v$ is **one number**. The *summing* step is what kills the arrow — stop before summing and you still have three numbers |
+| Computing magnitudes just to answer "acute or obtuse?" | Only the **sign** is needed. $\lvert\mathbf u\rvert\lvert\mathbf v\rvert$ is always positive, so $\operatorname{sign}(\cos\theta)=\operatorname{sign}(\mathbf u\cdot\mathbf v)$: $>0$ acute · $=0$ right · $<0$ obtuse. Ethan did this correctly in Ex 5.1b — keep it |
+| Using the long route ($a^2+b^2-c^2=0$) for a perpendicularity test | $\mathbf u\perp\mathbf v\iff\mathbf u\cdot\mathbf v=0$. No magnitudes, no Pythagoras, no roots |
+| Converting surds to decimals too early | Ex 5.3: keeping $\sqrt2\cdot\sqrt2$ unevaluated gives exactly $2$ and a clean $\cos\theta=\frac12$; decimals give $0.4999\ldots$ and hide the $60^\circ$ |
+| Answering with $\cos\theta$ when the question asked for $\theta$ (Ex 5.5) | State the conclusion the question wants: $\theta=120^\circ$, not just $\cos120^\circ=-\frac12$ |
+| Not using $\lvert\cos\theta\rvert\le1$ as an error check | $\cos\theta$ **cannot** exceed $1$ or fall below $-1$. Getting $1.4$ is not a strange angle, it is **arithmetic that went wrong**. Cheapest check in the whole topic |
 
 ### The formulas that replaced the error-prone routes
 | Instead of | Use |

@@ -1,7 +1,7 @@
 ---
 title: Exercise Log
 tags: [calculus-a, practice]
-updated: 2026-10-06
+updated: 2026-10-07
 ---
 
 # ✍️ Exercise Log
@@ -247,3 +247,35 @@ Verified against all three worked spheres, including the fractional slide-4 one 
 **4.3 nuance added:** $k>0$ → parallel, same direction ($0^\circ$); $k<0$ → parallel, **opposite** direction ($180^\circ$). Both are still called "parallel", and the Materi 7 test $\mathbf u\times\mathbf v=\mathbf 0$ does not distinguish them either.
 **4.5 shows transfer:** the "absolute value → two answers" lesson from 1.3 came back unprompted.
 **4.6** was done the vector way ($A+\frac12\overrightarrow{AB}$) and cross-checked with the high-school midpoint formula — the vector route is the one reused for line equations in Materi 8.
+
+### Materi 5 — dot product, angles, orthogonality (2026-10-07) — **6 right, 1 half, 1 trap** → passed
+| # | Problem | Answer | Ethan |
+|---|---|---|---|
+| 5.1a | $\langle2,-3,4\rangle\cdot\langle-1,5,3\rangle$ | $-5$ | ✅ two minus-times-minus, both right |
+| 5.1b | acute / right / obtuse, **without computing magnitudes** | **obtuse** ($\theta=99.03^\circ$) | ✅ reasoned purely from the sign |
+| 5.2 | **all** $k$ with $\langle k,-2,3\rangle\perp\langle k,5,2\rangle$ | $k^2-4=0$ → $k=2$ **or** $k=-2$ | ⚠️ gave only $k=2$ |
+| 5.3 | angle between $\langle1,1,0\rangle$ and $\langle0,1,1\rangle$ | $\cos\theta=\frac12$ → $\theta=60^\circ$ | ✅ |
+| 5.4 | meaningful or nonsense: (a) $(\mathbf u\cdot\mathbf v)+7$ (b) $\mathbf u\cdot(\mathbf v\cdot\mathbf w)$ (c) $(\mathbf u\cdot\mathbf v)\mathbf w$ (d) $\lvert\mathbf u\cdot\mathbf v\rvert$ (e) $(\mathbf u\cdot\mathbf v)+\mathbf w$ | sah · ✗ · sah · sah · ✗ | ❌ said all five were meaningful — **the trap** |
+| 5.5 | angle from $\lvert\mathbf u\rvert=5$, $\lvert\mathbf v\rvert=4$, $\mathbf u\cdot\mathbf v=-10$ (no components given) | $\cos\theta=-\frac12$ → $\theta=120^\circ$ | ✅ |
+| 5.6a | $\mathbf u\cdot\mathbf u$ for $\mathbf u=\langle2,-3,6\rangle$ | $49$ | ✅ |
+| 5.6b | $\lvert\mathbf u\rvert$ **without** redoing the magnitude formula | $7$, via $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$ | ✅✅ reasoning stated correctly and unprompted |
+
+All values verified numerically. Worked examples used in the teaching: $\langle2,3,-1\rangle\cdot\langle4,-1,5\rangle=0$ ($90.0000^\circ$), $\langle2,0,0\rangle$ vs $\langle3,3,0\rangle$ ($45^\circ$), $\langle1,2,2\rangle$ vs $\langle-2,-2,-1\rangle$ ($\cos=-\frac89$, $152.73^\circ$). The $\cos\theta$ formula was derived from the law of cosines plus $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$, and step 2 of that derivation was checked numerically on random vectors (both sides $=15.380$).
+
+**5.2 — the negative root vanished, and the diagnosis is sharper than "sign error".** His algebra was perfect up to $k^2=4$; only the last step leaked. Priced it: $k=-2$ gives $\langle-2,-2,3\rangle\cdot\langle-2,5,2\rangle=4-10+6=0$, i.e. **also exactly $90^\circ$**. A table of $k=-3\ldots3$ showed only two roots exist.
+He already owns this rule — Ex 1.3 ($k=6$ or $-4$) and Ex 4.5 ($c=\pm4$), both unprompted. But he has it **attached to the wrong trigger**: "there are absolute-value bars" rather than "a square is being opened". Same rule, since $\sqrt{k^2}=\lvert k\rvert$. Drill given: **whenever $(\cdot)^2=\text{number}$ appears, write $\pm$ first**, then ask whether anything (a length, a radius) justifies discarding the negative. Will be tested again in Materi 8, where point-to-plane distance carries an absolute value.
+
+**5.4 — the trap, and Ethan diagnosed his own failure.** He answered "all meaningful" **and asked**: *"apakah $*$ dan $\cdot$ itu sama?"* That question **is** the root cause — without knowing which operation a dot denotes, he cannot know the output type, so the type-check cannot run at all. Notation doubt upstream, error downstream.
+Answered honestly, including the confusing part: **textbooks and the slides use the same dot for scalar multiplication ($c\,\mathbf u$) and for the dot product ($\mathbf u\cdot\mathbf v$)**, so his confusion was legitimate. The rule given:
+
+| left · right | operation | result |
+|---|---|---|
+| number · arrow | scalar multiple | ARROW |
+| arrow · arrow | dot product | NUMBER |
+| number · number | ordinary product | NUMBER |
+| arrow · number | — | ✗ does not exist |
+
+**The symbol does not tell you the operation; the operands do.** Same for $\lvert\cdot\rvert$ — magnitude if it wraps an arrow, absolute value if it wraps a number.
+Sharpest contrast of the set: **(a) $\mathbf u\cdot\mathbf v+7$ is legal but (e) $\mathbf u\cdot\mathbf v+\mathbf w$ is not** — one letter apart. (e) is the Materi 4 error $\mathbf u+5$ written backwards. New general lesson: **the dot product changes the type mid-expression, so the type check must be re-run on every line, not once at the start.**
+
+**Notes on the correct answers:** 5.1b — he never touched the magnitudes ($5.3852$, $5.9161$, ugly roots), exactly as asked; that is discipline, not luck. 5.3 — he kept surds unevaluated so $\sqrt2\cdot\sqrt2$ died cleanly into $2$, giving exact $\frac12$ instead of $0.4999\ldots$. 5.5 — **no components were given at all** and he still got the angle; the lesson drawn was that the angle formula needs only **three numbers** (one dot product, two lengths), components being merely a route to them. He should be reminded to state $\theta=120^\circ$ explicitly rather than only $\cos120^\circ=-\frac12$. 5.6b — he **derived $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$ himself** from the arithmetic, and this time **trusted his own finding** (unlike Ex 1.5). That property is the entry point for Materi 6, where $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$ removes every square root from the projection formula.
