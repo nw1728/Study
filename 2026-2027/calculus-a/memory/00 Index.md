@@ -31,6 +31,7 @@ updated: 2026-10-07
 - [[Integration Rules]] — antiderivatives, techniques, improper integrals
 - [[Verification Methods]] — how to check an answer before trusting it
 - 🔵 [Interactive unit circle](https://claude.ai/artifact/VL1xCLnf4rfz58ezkdLZeG) — drag the angle, read off $\cos\theta$ and $\sin\theta$ (built 2026-09-16). Local copy: `html-visualization/unit-circle.html`
+- 🟣 [Bayangan Vektor](https://claude.ai/artifact/Ff6iJ5L3aBUcUx4PXTukF6) — drag two arrows and watch the shadow of $\mathbf u$ fall on the line of $\mathbf v$: live $\mathbf u\cdot\mathbf v$, $c$, the projection, the scalar component, and the running proof that **sisa $\cdot\,\mathbf v=0$**; plus a 3D step-by-step checker and a "wrong formula" ghost arrow for the $\lvert\mathbf v\rvert$ vs $\lvert\mathbf v\rvert^2$ trap (built 2026-10-07, Materi 6). Local copy: `html-visualization/vector-projection.html`
 - 🟢 `html-visualization/extrema-and-integral-checks.html` — peaks, valleys and the four integral checks: drag the tangent point, drag the interval endpoints, live sign chart and candidate table, plus Riemann slices / squeeze bounds / differentiate-back on Ex 35, 17, 31, 41 (built 2026-09-26)
 
 ## ✍️ Practice

@@ -31,7 +31,7 @@ Back to [[00 Index]] · History: [[Session Log]]
 
 ## Last session
 - **Date:** 2026-10-07
-- **Type:** L04 **Materi 5 — dot product** (slides 8–9), per materi, gogo gaga, Bahasa Indonesia
+- **Type:** L04 **Materi 5 — dot product** (slides 8–9) taught and passed, then **Materi 6 — projection** taught; Ethan asked for a visualizer mid-materi and one was built
 - **What happened:**
   - **Materi 5 taught and passed: 6 right, 1 half, 1 trap** (8 answer-parts). Full teaching text in [[L04 Walkthrough (Gogo Gaga)]], answers in [[Exercise Log]], new error patterns in [[Common Mistakes]].
   - **All three promises from the previous handover were paid:** the one-line perpendicular test $\mathbf u\cdot\mathbf v=0$, the "vector = length AND direction" framing (dot product = the tool that *measures direction*), and the type trap (**two arrows in, one NUMBER out**).
@@ -39,7 +39,8 @@ Back to [[00 Index]] · History: [[Session Log]]
   - **Ex 5.2 (half):** perfect to $k^2=4$, then only $k=2$ came back. $k=-2$ is equally valid (priced: it also gives exactly $90^\circ$).
   - **Ex 5.4 (the trap):** he said all five expressions were meaningful; only three are. **But he asked the question that explains it** — *"apakah `*` dan `.` itu sama?"* — so the root cause was notation doubt, not carelessness.
   - **Ex 5.6b was the high point:** he derived $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$ himself from the arithmetic **and trusted it** (the behaviour missing back in Ex 1.5).
-  - He asked to **save** after the corrections rather than start Materi 6.
+  - He asked to **save** after the corrections, then asked to continue, so **Materi 6 (projection) was taught in full** — including the derivation from "parallel to $\mathbf v$" + "remainder perpendicular to $\mathbf v$", the $\lvert\mathbf v\rvert^2$-is-two-$\lvert\mathbf v\rvert$s explanation, and three worked examples. **Latihan 6.1–6.6 were set and are still unanswered.**
+  - **He then said he did not understand the shadow idea and asked for an HTML visualizer** — so one was built and published (see Tools below). **This is the first time he has asked for a tool himself**; previous ones were offered. Worth noting: when a geometric idea does not land in text, he will now ask for a picture rather than go quiet.
   - **KDE Connect re-offered, still not taken up.** He can only send **final answers** (handwriting lives in Samsung Notes on his tab). Reverse-engineering from numbers keeps working, so it is not blocking.
 
 ## Where we are now
@@ -58,11 +59,13 @@ Back to [[00 Index]] · History: [[Session Log]]
 | **L04 Materi 3** vectors, components, magnitude | ✅ **lulus** (6/6) |
 | **L04 Materi 4** vector operations | ✅ **lulus** (6/6) |
 | **L04 Materi 5** dot product, angles, orthogonality | ✅ **lulus** (6.5/8) |
-| **L04 Materi 6** projection | ⬜ **START HERE** |
+| **L04 Materi 6** projection | 🟡 **taught 2026-10-07 + visualizer built; Latihan 6.1–6.6 AWAITING HIS ANSWERS** |
 | L04 Materi 7 cross product, area, determinants | ⬜ |
 | L04 Materi 8 lines & planes, distances, angles | ⬜ |
 
-**Last exercise worked:** Materi 5, Latihan 5.6 — $\mathbf u=\langle2,-3,6\rangle$ → $\mathbf u\cdot\mathbf u=49$, so $\lvert\mathbf u\rvert=7$ without touching the magnitude formula ✓
+**Open exercise set, awaiting his answers:** Materi 6, **Latihan 6.1–6.6** — (6.1) proj of $\langle4,1,-2\rangle$ on $\langle2,-1,2\rangle$; (6.2) scalar component of $\langle1,2,2\rangle$ on $\langle-2,-2,-1\rangle$ + direction; (6.3) $\langle5,0,0\rangle$ on $\langle3,4,0\rangle$ + the "can a shadow beat the pole?" check; (6.4) is $\text{proj}_{\mathbf v}\mathbf u=\text{proj}_{\mathbf u}\mathbf v$?; (6.5) type check, 4 expressions; (6.6) the perpendicular and parallel edge cases. **Answers are in `html-visualization/vector-projection.html` only as live computation — do not hand them over before his attempt.**
+
+**Last exercise marked:** Materi 5, Latihan 5.6 — $\mathbf u=\langle2,-3,6\rangle$ → $\mathbf u\cdot\mathbf u=49$, so $\lvert\mathbf u\rvert=7$ without touching the magnitude formula ✓
 
 **Set for Ethan, still unanswered (older, from L02/L03):**
 1. $f(x)=x^2-4x+1$ on $[0,5]$ — absolute max/min (set 2026-09-26). *Answer: max $f(5)=6$, min $f(2)=-3$ — do not reveal before his attempt.*
@@ -70,18 +73,19 @@ Back to [[00 Index]] · History: [[Session Log]]
 3. $\int_0^2x\sqrt{x^2+1}\,dx$ — substitution, cold re-test (set 2026-09-17). *Answer $\frac{5\sqrt5-1}3$, never revealed.*
 
 ## ▶️ Continue with
-1. **Materi 6 — vector projection (slide 10).** Short: one slide, one main formula. Plan already written at the end of [[L04 Walkthrough (Gogo Gaga)]]:
+1. **Mark Latihan 6.1–6.6** when Ethan sends them (all verified numerically already; see [[Exercise Log]] for the key). Watch specifically for: the $\lvert\mathbf v\rvert$ vs $\lvert\mathbf v\rvert^2$ swap in 6.1/6.3, a missing sign in 6.2, and whether the type habit from 5.4 finally holds in 6.5.
+2. **Materi 7 — cross product (slides 11–17), the longest one.** The $\mathbf j$ minus sign is the killer; make him write the zero $\mathbf j$ component explicitly. Then Materi 8 (lines & planes) — **re-test the $\pm$ habit there**.
+3. *(reference, already delivered)* **Materi 6 — vector projection (slide 10).** Short: one slide, one main formula. Plan already written at the end of [[L04 Walkthrough (Gogo Gaga)]]:
    $$\text{proj}_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf v\rvert^2}\mathbf v\qquad\text{scalar component}=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf v\rvert}$$
    - **Open by cashing in his own Ex 5.6b discovery:** $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$, so the projection formula has **no square roots at all**. He found that property himself — start there so the formula feels like his.
    - **Flag the main trap up front:** $\lvert\mathbf v\rvert^2$ in the *vector* formula vs $\lvert\mathbf v\rvert$ in the *scalar* one. Mnemonic given in the plan: *"arrow answer needs the squared denominator, number answer needs the plain one."*
    - **Make the type check explicit** — projection returns an **ARROW**, scalar component returns a **NUMBER**. After Ex 5.4 this cannot be left implicit.
    - Slide 10's worked example is ready: $\mathbf u=6\mathbf i+3\mathbf j+2\mathbf k$ onto $\mathbf v=\mathbf i-2\mathbf j-2\mathbf k$ → $-\frac49\mathbf i+\frac89\mathbf j+\frac89\mathbf k$, scalar component $-\frac43$ (negative → obtuse).
-2. Then Materi 7 (cross product, the longest one — the $\mathbf j$ minus sign is the killer; write the zero $\mathbf j$ component explicitly) and Materi 8 (lines & planes).
-3. Re-offer **KDE Connect** so he can send handwritten working.
-4. The three old open problems above.
-5. **Leftovers from L03:** integration by parts, trig integrals, improper integrals ($p$-test), more area between curves.
-6. **Leftovers from L02:** related rates, optimization word problems, second-derivative test, concavity/inflection.
-7. L03 live lecture notes are still an empty section in [[L03 Integration]].
+4. Re-offer **KDE Connect** so he can send handwritten working.
+5. The three old open problems above.
+6. **Leftovers from L03:** integration by parts, trig integrals, improper integrals ($p$-test), more area between curves.
+7. **Leftovers from L02:** related rates, optimization word problems, second-derivative test, concavity/inflection.
+8. L03 live lecture notes are still an empty section in [[L03 Integration]].
 
 ## Watch out for (right now)
 - **The negative solution evaporating.** This is *the* live leak, and its shape changed on 2026-10-07 — which is progress. His **sign arithmetic is fixed** (Ex 5.1 had two minus-times-minus, both right; Materi 3, 4 and 5 all at zero sign errors). What leaks now is **completeness**: he stops at one root when there are two ($k^2=4\to$ only $k=2$).
@@ -109,4 +113,9 @@ Back to [[00 Index]] · History: [[Session Log]]
 ## Tools built for this course
 - 🔵 [Interactive unit circle](https://claude.ai/artifact/VL1xCLnf4rfz58ezkdLZeG) — drag the angle, read off $\cos\theta$, $\sin\theta$ (2026-09-16). Local copy: `html-visualization/unit-circle.html`. **He used it twice on 2026-10-07** to recognise $\frac1{\sqrt2}\to45^\circ$ and $-\frac12\to120^\circ$ — it is paying off.
 - 🟢 `html-visualization/extrema-and-integral-checks.html` — peaks, valleys and the four integral checks (2026-09-26). Open it in a browser; needs internet for the rendered math.
-- 💡 *Idea, not built yet:* an interactive 3D vector page for Materi 6–7 (drag two arrows; watch the dot product, the angle, the projection shadow and the cross product update live). Now **more** valuable than before — the projection "shadow" in Materi 6 and the right-hand rule in Materi 7 are both hard to convey in text.
+- 🟣 [Bayangan Vektor](https://claude.ai/artifact/Ff6iJ5L3aBUcUx4PXTukF6) — **built 2026-10-07, on Ethan's request**, because he said he did not understand the shadow idea. Drag the tips of $\mathbf u$ and $\mathbf v$; everything updates live: $\mathbf u\cdot\mathbf v$, $\mathbf v\cdot\mathbf v$, $c$, the projection arrow, its length, the scalar component, $\theta$ and the angle type. Local copy: `html-visualization/vector-projection.html`. Three deliberate teaching devices:
+  - **`sisa · v` shown live and never leaving zero** no matter how he drags — that is step 2 of the derivation happening in front of him.
+  - A **"rumus salah" ghost arrow** using $\lvert\mathbf v\rvert$ instead of $\lvert\mathbf v\rvert^2$, which visibly becomes longer than $\mathbf u$ itself — a shadow longer than the pole.
+  - A **3D tab** that shows the computation step by step and draws the picture *in the plane spanned by $\mathbf u$ and $\mathbf v$*, to make "3D is the same picture, just tilted" literal.
+  - **Latihan 6.1–6.6 are deliberately NOT presets** (same policy as the 2026-09-26 tool). The 2D tab instead has three *challenges* that make him discover the perpendicular and parallel cases by dragging, so Ex 6.6 stays his to answer.
+- 💡 *Idea, not built yet:* an interactive page for **Materi 7** — two arrows plus the cross product vector, the right-hand rule and the parallelogram area. The right-hand rule is the hardest thing in Lecture 4 to convey in text.

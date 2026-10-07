@@ -26,8 +26,8 @@ Back to [[00 Index]] · Teori dari slide: [[L04 Vectors and 3D Geometry]] · Lat
 | 3 | Vektor: bentuk komponen + panjang | 5–6 | ✅ lulus |
 | 4 | Operasi vektor (tambah, kali skalar) | 7 | ✅ lulus |
 | 5 | **Dot product** — sudut & tegak lurus | 8–9 | ✅ lulus |
-| 6 | Proyeksi vektor (bayangan) | 10 | ⬜ **lanjut di sini** |
-| 7 | **Cross product** + luas + determinan | 11–17 | ⬜ |
+| 6 | Proyeksi vektor (bayangan) | 10 | 🟡 diajarkan + ada visualizer; latihan belum dijawab |
+| 7 | **Cross product** + luas + determinan | 11–17 | ⬜ **lanjut di sini** |
 | 8 | Garis & bidang (+ jarak, sudut) | 18–24 | ⬜ |
 
 ---
@@ -550,6 +550,94 @@ Ethan menjawab "semuanya ada arti" **dan bertanya**: *"apakah $*$ dan $\cdot$ it
 
 ---
 
+# 📘 MATERI 6 — Proyeksi vektor (bayangan)
+
+Diajarkan **2026-10-07**. Materi pendek: satu slide, satu rumus utama. Dibuka dengan **menagih temuan Ethan sendiri dari 5.6b** — karena $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$, rumus proyeksi vektor **tidak punya akar sama sekali**. Rumus yang kelihatan menakutkan itu sudah dia buat gampang sendiri, sehari sebelumnya.
+
+> [!important] 🧰 Ada visualizer untuk materi ini — Ethan yang MINTA
+> [Bayangan Vektor](https://claude.ai/artifact/Ff6iJ5L3aBUcUx4PXTukF6) · lokal: `html-visualization/vector-projection.html`
+> Dibuat di tengah materi ini karena Ethan bilang *"aku agak gak ngerti soal bayangan ini, bisakah kamu buatin aku html visualizer?"* — **pertama kali dia meminta tool sendiri** (sebelumnya selalu ditawarkan). Catat polanya: kalau ide geometris tidak mendarat lewat teks, dia sekarang **minta gambar**, bukan diam.
+
+## Tiga instinct salah yang dibunuh dulu
+1. **"Proyeksi = memotong u jadi lebih pendek."** Bukan memotong — **memindahkan u ke garisnya v**. Arahnya ikut v (atau kebalikan v), bukan potongan u.
+2. **"$\text{proj}_{\mathbf v}\mathbf u=\text{proj}_{\mathbf u}\mathbf v$."** Urutan **penting**. Di Materi 5 $\mathbf u\cdot\mathbf v=\mathbf v\cdot\mathbf u$ sehingga urutan tidak penting — kebiasaan itu **tidak boleh dibawa** ke sini.
+3. **"Ada dua rumus mirip, pakai saja yang mana."** Dua rumus itu **beda jenis hasilnya**, dan tertukarnya $\lvert\mathbf v\rvert$ dengan $\lvert\mathbf v\rvert^2$ adalah kesalahan nomor satu di materi ini.
+
+## Analogi yang dipakai: tiang miring dan tanah
+$\mathbf v$ = **tanah**, $\mathbf u$ = **tiang miring**, matahari tepat di atas menyinari **tegak lurus tanah**. $\text{proj}_{\mathbf v}\mathbf u$ = **bayangan tiang di tanah**.
+
+Dua sifat yang mendefinisikannya (dan yang dipakai menurunkan rumusnya):
+1. $\text{proj}_{\mathbf v}\mathbf u$ **sejajar** $\mathbf v$ — bayangan ada *di* tanah.
+2. **sisanya** $\mathbf u-\text{proj}_{\mathbf v}\mathbf u$ **tegak lurus** $\mathbf v$ — sinarnya turun tegak lurus.
+
+## Turunan rumus — dua alat Materi 5, tidak ada yang baru
+1. **Sifat 1** → sejajar = kelipatan (Materi 4), jadi $\text{proj}_{\mathbf v}\mathbf u=c\,\mathbf v$. **Tugasnya tinggal mencari satu angka $c$.**
+2. **Sifat 2** → pakai tes tegak lurus satu baris dari Materi 5: $(\mathbf u-c\mathbf v)\cdot\mathbf v=0$
+3. **Distributif** (slide 9): $\mathbf u\cdot\mathbf v-c(\mathbf v\cdot\mathbf v)=0$
+4. $c=\dfrac{\mathbf u\cdot\mathbf v}{\mathbf v\cdot\mathbf v}$
+5. **Sifat jembatan 5.6b**: $\mathbf v\cdot\mathbf v=\lvert\mathbf v\rvert^2$
+
+$$\boxed{\ \text{proj}_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf v\rvert^2}\,\mathbf v\ }\qquad\qquad \text{komponen skalar}=\lvert\mathbf u\rvert\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf v\rvert}$$
+
+(Rumus skalar diturunkan dengan memasukkan $\cos\theta$ Materi 5 ke $\lvert\mathbf u\rvert\cos\theta$ — **$\lvert\mathbf u\rvert$-nya mati**.)
+
+> [!tip] Seluruh Materi 6 adalah Materi 5 yang dipakai dua kali
+> Langkah 2 memakai "dot $=0$ artinya tegak lurus"; langkah 5 memakai temuan Ethan sendiri. Tidak ada alat baru di materi ini.
+
+## ⚠️ Jebakan utama: kenapa satu $\lvert\mathbf v\rvert^2$ dan satunya $\lvert\mathbf v\rvert$
+**Jangan dihafal.** Panah $=$ panjang $\times$ arah, jadi:
+$$\text{proj}_{\mathbf v}\mathbf u=\underbrace{\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf v\rvert}}_{\text{panjang bayangan}}\times\underbrace{\frac{\mathbf v}{\lvert\mathbf v\rvert}}_{\text{arah satuan}}=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf v\rvert^2}\mathbf v$$
+
+> [!important] $\lvert\mathbf v\rvert^2$ itu **dua $\lvert\mathbf v\rvert$ dengan dua pekerjaan**
+> $\lvert\mathbf v\rvert$ pertama → menghitung **PANJANG** bayangannya.
+> $\lvert\mathbf v\rvert$ kedua → mengubah $\mathbf v$ jadi **ARAH SATUAN**.
+> Versi skalar cuma butuh panjang → **satu** $\lvert\mathbf v\rvert$. Versi vektor butuh panjang **dan** arah → **dua**.
+> Ini mengikat langsung ke koreksi 3.4: **vektor = panjang DAN arah.** Kalau vektor dibaca "cuma jarak", $\lvert\mathbf v\rvert^2$ akan selamanya terasa acak.
+
+## Cek-jenis sebagai pengingat rumus (bukan cuma penangkap error)
+| Jawaban yang diminta | Penyebut yang benar |
+|---|---|
+| berbentuk $\langle\cdot,\cdot,\cdot\rangle$ | $\lvert\mathbf v\rvert^2$ |
+| berbentuk satu angka | $\lvert\mathbf v\rvert$ |
+
+**Jenis jawabannya memberi tahu rumus mana yang benar** — tidak perlu menghafal. Ini kebiasaan 4.4/5.4 yang naik pangkat jadi alat.
+
+## Contoh yang dikerjakan
+| # | Soal | Hasil |
+|---|---|---|
+| W2 | $\langle3,4,0\rangle$ ke $\langle1,0,0\rangle$ | $\text{proj}=\langle3,0,0\rangle$, skalar $3$ |
+| W1 | **slide 10:** $\langle6,3,2\rangle$ ke $\langle1,-2,-2\rangle$ | $\mathbf u\cdot\mathbf v=-4$, $\mathbf v\cdot\mathbf v=9$, $\text{proj}=\langle-\frac49,\frac89,\frac89\rangle$, skalar $-\frac43$ ✓ |
+| W3 | urutan dibalik: $\text{proj}_{\mathbf u}\mathbf v$ dengan $\mathbf u=\langle3,4,0\rangle$, $\mathbf v=\langle1,0,0\rangle$ | $\langle\frac9{25},\frac{12}{25},0\rangle$, panjang $0.6$ — **beda 5× dari $\text{proj}_{\mathbf v}\mathbf u$** |
+
+**Pengamatan W2 yang paling membantu:** bayangan $\langle3,4,0\rangle$ di sumbu-$x$ adalah $\langle3,0,0\rangle$ — **persis komponen $x$-nya.**
+> **Proyeksi ke sumbu = membaca komponennya.** Materi 6 menjelaskan apa arti notasi komponen yang dia pakai sejak Materi 3.
+
+**Dari W1:** $\lvert\text{proj}\rvert=\frac{12}9=\frac43=\lvert{-\frac43}\rvert$ ✓, dan $\theta=100.98^\circ$ (tumpul) konsisten dengan tanda negatifnya. Ditekankan: **tanda negatif bukan panjang negatif** — artinya bayangannya di sisi berlawanan dari $\mathbf v$.
+
+## Empat cek gratis yang ditanamkan
+1. $\lvert\text{proj}_{\mathbf v}\mathbf u\rvert=\lvert\text{komponen skalar}\rvert$ — dua rumus, satu panjang.
+2. $\lvert\text{proj}_{\mathbf v}\mathbf u\rvert\le\lvert\mathbf u\rvert$ — **bayangan tidak boleh lebih panjang dari tiangnya.** Cek ini yang langsung menangkap jebakan $\lvert\mathbf v\rvert$ vs $\lvert\mathbf v\rvert^2$.
+3. Tanda komponen skalar $=$ tanda $\mathbf u\cdot\mathbf v$.
+4. $\text{proj}_{\mathbf v}\mathbf u$ harus **kelipatan** $\mathbf v$ — komponennya proporsional dengan komponen $\mathbf v$.
+
+## ✍️ Latihan Materi 6 — ⏳ BELUM DIJAWAB (diberikan 2026-10-07)
+| # | Soal | Kunci (jangan dibocorkan sebelum dia mencoba) |
+|---|---|---|
+| 6.1 | $\langle4,1,-2\rangle$ ke $\langle2,-1,2\rangle$: proj + komponen skalar | $\mathbf u\cdot\mathbf v=3$, $\mathbf v\cdot\mathbf v=9$, $c=\frac13$ → $\langle\frac23,-\frac13,\frac23\rangle$; skalar $=1$ |
+| 6.2 | $\langle1,2,2\rangle$ ke $\langle-2,-2,-1\rangle$: komponen skalar + arahnya | $-\frac83$, **berlawanan** arah $\mathbf v$ |
+| 6.3 | $\langle5,0,0\rangle$ ke $\langle3,4,0\rangle$: proj, skalar, lalu bandingkan $\lvert\text{proj}\rvert$ dengan $\lvert\mathbf u\rvert$ | $\langle\frac95,\frac{12}5,0\rangle$; skalar $3$; $3\le5$ ✓ masuk akal |
+| 6.4 | apakah $\text{proj}_{\mathbf v}\mathbf u=\text{proj}_{\mathbf u}\mathbf v$? mana yang lebih panjang? | **tidak sama**; $\langle3,0,0\rangle$ (panjang $3$) vs $\langle\frac9{25},\frac{12}{25},0\rangle$ (panjang $0.6$) |
+| 6.5 | cek-jenis: (a) $\text{proj}_{\mathbf v}\mathbf u+\mathbf u$ (b) $(\text{proj}_{\mathbf v}\mathbf u)\cdot\mathbf v$ (c) $\text{proj}_{\mathbf v}\mathbf u+\lvert\mathbf u\rvert$ (d) $\text{proj}_{\mathbf v}(\mathbf u\cdot\mathbf v)$ | sah · sah · **✗** · **✗** |
+| 6.6 | kasus ekstrem: (a) $\mathbf u\perp\mathbf v$ (b) $\mathbf u\parallel\mathbf v$ | (a) $\mathbf 0$ (b) $\mathbf u$ sendiri |
+
+> [!warning] Yang harus diawasi saat mengoreksi
+> - **6.1 dan 6.3:** apakah $\lvert\mathbf v\rvert$ tertukar dengan $\lvert\mathbf v\rvert^2$. Di 6.3 rute salah memberi $\langle9,12,0\rangle$ — panjang $15$, **tiga kali lebih panjang dari $\mathbf u$**, dan 6.3(c) memang dirancang supaya keabsurdannya kelihatan sendiri.
+> - **6.2:** tanda negatifnya hilang atau tidak. Dia bisa mengeceknya sendiri — pasangan ini sama dengan contoh W3 Materi 5 ($152.73^\circ$, tumpul), jadi jawabannya **wajib** negatif.
+> - **6.5:** apakah kebiasaan cek-jenis akhirnya pegang setelah jatuh di 5.4. Dua yang omong kosong, sama seperti 5.4.
+> - **6.6:** jawaban konseptual. Visualizer sengaja **tidak** memberi preset tegak-lurus/sejajar; sebagai gantinya ada **tiga tantangan geser** supaya dia menemukannya sendiri lalu merumuskannya dengan kata-katanya.
+
+---
+
 # 📈 Perkembangan Ethan selama walkthrough ini
 
 | | Materi 1 | Materi 2 | Materi 3 | Materi 4 | Materi 5 |
@@ -577,16 +665,18 @@ Ethan menjawab "semuanya ada arti" **dan bertanya**: *"apakah $*$ dan $\cdot$ it
 
 ---
 
-# ⏭️ Lanjut dari sini — Materi 6
+# ⏭️ Lanjut dari sini — Materi 7
 
-**Proyeksi vektor** (slide 10). Materi pendek: satu slide, satu rumus utama.
-$$\text{proj}_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{|\mathbf v|^2}\,\mathbf v\qquad\text{komponen skalar}=|\mathbf u|\cos\theta=\frac{\mathbf u\cdot\mathbf v}{|\mathbf v|}$$
+**Cross product** (slide 11–17). **Materi terpanjang di Lecture 4.**
 
-Yang harus dilakukan saat membuka Materi 6:
-1. **Tagih temuan Ethan sendiri dari 5.6b.** Penyebutnya $\lvert\mathbf v\rvert^2$, dan $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$ — jadi **tidak ada akar sama sekali** di rumus proyeksi vektor. Dia sudah menemukan itu; mulai dari situ supaya rumusnya terasa miliknya.
-2. **Jebakan utama: $\lvert\mathbf v\rvert^2$ (versi vektor) vs $\lvert\mathbf v\rvert$ (versi skalar).** Ini kesalahan klasik di materi ini. Tandai dari awal: *"hasil panah butuh penyebut kuadrat, hasil angka butuh penyebut biasa."*
-3. **Cek-jenis lagi** — proyeksi menghasilkan **PANAH**, komponen skalar menghasilkan **ANGKA**. Dua rumus mirip, dua jenis berbeda. Setelah 5.4, ini harus dieksplisitkan.
-4. Hubungkan ke tanda: $\theta$ lancip → proyeksi searah $\mathbf v$; $\theta$ tumpul → **berlawanan** dengan $\mathbf v$ (komponen skalar negatif). Pakai tabel tanda dari Materi 5.
-5. Contoh slide 10 sudah siap: $\mathbf u=6\mathbf i+3\mathbf j+2\mathbf k$ ke $\mathbf v=\mathbf i-2\mathbf j-2\mathbf k$ → $\mathbf u\cdot\mathbf v=-4$, $\lvert\mathbf v\rvert^2=9$, proyeksi $=-\frac49\mathbf i+\frac89\mathbf j+\frac89\mathbf k$, komponen skalar $=-\frac43$ (negatif → tumpul).
+Urutan isinya: definisi (tegak lurus keduanya, $\lvert\mathbf u\rvert\lvert\mathbf v\rvert\sin\theta$, right-handed) → rumus komponen → tabel $\mathbf i\mathbf j\mathbf k$ → sifat (anticommutative!) → uji sejajar → luas jajaran genjang → bentuk determinan.
 
-Urutan berikutnya: Materi 6 (proyeksi) → 7 (cross product, yang paling panjang — minus di $\mathbf j$ adalah pembunuhnya) → 8 (garis & bidang).
+Yang harus diperhatikan saat mengajarnya:
+1. **Minus di $\mathbf j$ adalah pembunuhnya.** Bentuk determinan punya $-\mathbf j$ di depan minornya. Gabungkan dengan kebocoran lamanya (tanda negatif) → ini titik risiko tertinggi di seluruh Lecture 4.
+2. **Tulis komponen nol secara eksplisit.** Peringatan dari 3.6 ($2\mathbf i+5\mathbf k$ berarti $\langle2,\mathbf 0,5\rangle$) baru benar-benar menggigit di sini — ini penyebab error cross product nomor satu.
+3. **Cek-jenis berbalik arah lagi:** Materi 5 menghasilkan **angka**, Materi 6 menghasilkan **panah dan angka**, Materi 7 menghasilkan **panah**. Setelah 5.4 dan 6.5, sebutkan jenisnya di tiap langkah.
+4. **Cek gratis yang kuat:** $(\mathbf u\times\mathbf v)\cdot\mathbf u$ dan $(\mathbf u\times\mathbf v)\cdot\mathbf v$ **harus dua-duanya nol.** Itu memakai Materi 5 untuk memeriksa Materi 7 — dan dia suka cek numerik seperti ini.
+5. **Dot $=0$ → tegak lurus. Cross $=\mathbf 0$ → sejajar.** Sandingkan eksplisit; dan ingatkan bahwa cross **tidak membedakan** $0^\circ$ dari $180^\circ$ (sudah dijanjikan di koreksi 4.3).
+6. **Pertimbangkan membuat visualizer lagi** — right-hand rule adalah hal tersulit di Lecture 4 untuk disampaikan lewat teks, dan Ethan sekarang sudah terbukti memakai tool-nya. Pola dari `vector-projection.html` bisa dipakai ulang.
+
+Lalu Materi 8 (garis & bidang) — **di situ kebiasaan $\pm$ diuji ulang** lewat jarak titik ke bidang.
