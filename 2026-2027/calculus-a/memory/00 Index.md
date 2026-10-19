@@ -1,7 +1,7 @@
 ---
 title: Calculus A — Memory Index
 tags: [calculus-a, index]
-updated: 2026-10-07
+updated: 2026-10-19
 ---
 
 # 📚 Calculus A — Memory Index
@@ -25,6 +25,7 @@ updated: 2026-10-07
 | 2 | 2026-09-07 | Differentiation | ✅ done + heavy practice | [[L02 Differentiation]] |
 | 3 | 2026-09-14 | Integration | 🟡 theory noted; FTC I/II + substitution + one area problem practised (live notes still empty) | [[L03 Integration]] |
 | 4 | 2026-09-21 | Vectors, products, 3D geometry (lines, planes) | 🟡 **Materi 1–5 of 8 taught + practised** (coords, spheres, vectors, vector ops, dot product); Materi 6–8 to go | [[L04 Vectors and 3D Geometry]] · [[L04 Walkthrough (Gogo Gaga)]] |
+| 5 | 2026-09-28 | Curves and vector functions (parametric, polar, $\mathbf r(t)$) | 🟡 **note written from slides 2026-10-19**: 9-materi map + overview + one easy example per materi; no exercises done yet | [[L05 Curves and Vector Functions]] |
 
 ## 📐 Reference sheets
 - [[Derivative Rules]] — every derivative formula in one place
@@ -49,6 +50,7 @@ updated: 2026-10-07
 - [x] ~~L04 Materi 5 — dot product~~ ✅ **passed 2026-10-07** (6 right, 1 half, 1 trap). All three promises paid: $\mathbf u\cdot\mathbf v=0$ as the one-line perpendicular test, the "length **and** direction" framing, and the NUMBER-not-arrow type trap
 - [ ] **▶️ L04 Materi 6 — vector projection** (slide 10). Short, one formula. Open by cashing in his own Ex 5.6b discovery ($\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$ → **no square roots**), and flag the $\lvert\mathbf v\rvert^2$ vs $\lvert\mathbf v\rvert$ trap up front. Full plan at the end of [[L04 Walkthrough (Gogo Gaga)]]
 - [ ] L04 Materi 7 cross product (longest — the $\mathbf j$ minus sign) · Materi 8 lines & planes (re-test the $\pm$ habit here)
+- [ ] **L05 Curves and Vector Functions** — map + overview + easy examples delivered 2026-10-19 ([[L05 Curves and Vector Functions]]). **Nothing practised yet.** Teach per materi with exercises, starting at Materi 1 (parametric curves). ⚠️ L05 Materi 7 needs L04 Materi 7 (cross product) first
 - [ ] Re-offer **KDE Connect** so Ethan can send handwritten working from his tab
 - [ ] **Set for Ethan (3 open):** $f(x)=x^2-4x+1$ on $[0,5]$ · $\int_1^4\frac{x^2+x}{x^{3/2}}dx$ · $\int_0^2x\sqrt{x^2+1}\,dx$ — ask for his attempt first
 - [ ] Integration by parts (incl. twice), then trig integrals
