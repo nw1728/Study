@@ -4,9 +4,10 @@ import express from 'express'
 import { mountDoor, requireLogin } from './auth/door.js'
 import { readSession } from './auth/session.js'
 import { contentRoutes } from './routes/contentRoutes.js'
+import { uploadFileRoutes, uploadRoutes } from './routes/uploadRoutes.js'
 import { sameOrigin } from './security/sameOrigin.js'
 
-export function createApp({ config, store, users }) {
+export function createApp({ config, store, users, uploads }) {
   const app = express()
   app.disable('x-powered-by')
 
@@ -29,6 +30,8 @@ export function createApp({ config, store, users }) {
   })
 
   app.use('/api', contentRoutes({ store, requireLoggedIn }))
+  app.use('/api', uploadRoutes({ uploads, requireLoggedIn }))
+  app.use(uploadFileRoutes({ uploads }))
 
   return app
 }

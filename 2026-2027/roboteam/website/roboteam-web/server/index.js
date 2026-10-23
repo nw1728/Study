@@ -6,6 +6,7 @@ import { createApp } from './app.js'
 import { loadConfig, loadEnvFile } from './config.js'
 import { ContentStore } from './content/ContentStore.js'
 import { loadDefaults } from './content/seed.js'
+import { UploadStore } from './uploads/UploadStore.js'
 import { UserStore } from './users/UserStore.js'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
@@ -25,7 +26,9 @@ const users = new UserStore({
 })
 await users.ensureFirstOwner()
 
-const app = createApp({ config, store, users })
+const uploads = new UploadStore({ storageDir: config.storageDir })
+
+const app = createApp({ config, store, users, uploads })
 
 if (config.isProduction) {
   const dist = path.join(ROOT, 'dist')
