@@ -4,6 +4,7 @@ import crypto from 'node:crypto'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { contentTypeIds } from '../../shared/contentTypes/index.js'
+import { isWellShaped } from './shape.js'
 
 const VERSIONS_KEPT = 30
 
@@ -61,7 +62,16 @@ export class ContentStore {
 
   async read(typeId) {
     const stored = await readJson(this.#file(typeId))
-    return stored ?? this.defaults[typeId]
+    if (stored === null) return this.defaults[typeId]
+
+    // Parsing is not enough: a file can be valid JSON and still be the wrong
+    // kind of thing, and the site would carry that all the way to a .map.
+    if (!isWellShaped(typeId, stored)) {
+      console.warn(`[content] ${typeId}.json has the wrong shape; showing the built-in content`)
+      return this.defaults[typeId]
+    }
+
+    return stored
   }
 
   async readAll() {

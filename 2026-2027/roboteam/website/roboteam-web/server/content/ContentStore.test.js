@@ -25,6 +25,15 @@ test('read returns the default when the file is corrupt JSON', async () => {
   assert.deepEqual(await store.read('events'), DEFAULTS.events)
 })
 
+test('read returns the default when the file is valid JSON of the wrong shape', async () => {
+  // Hand-editing these files is an expected workflow, and `{}` where a list
+  // belongs used to reach a component's .map and unmount the whole site.
+  const { store, storageDir } = await aStore()
+  await fs.mkdir(path.join(storageDir, 'content'), { recursive: true })
+  await fs.writeFile(path.join(storageDir, 'content', 'events.json'), '{}')
+  assert.deepEqual(await store.read('events'), DEFAULTS.events)
+})
+
 test('write then read returns the written value', async () => {
   const { store } = await aStore()
   const value = [{ id: 'a', title: 'A' }]
