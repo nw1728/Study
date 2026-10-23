@@ -21,7 +21,7 @@ export default {
     { name: 'time', label: 'Time', type: 'text', placeholder: '11:00 – 17:00' },
     { name: 'note', label: 'Extra note', type: 'text' },
     { name: 'description', label: 'Description', type: 'textarea' },
-    { name: 'image', label: 'Image', type: 'text', placeholder: '/images/events/…' },
+    { name: 'image', label: 'Image', type: 'image', placeholder: '/images/events/…' },
     { name: 'registerUrl', label: 'Register link', type: 'url' },
   ],
 }

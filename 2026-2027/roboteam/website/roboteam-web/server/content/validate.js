@@ -4,15 +4,27 @@
 import { getContentType } from '../../shared/contentTypes/index.js'
 
 const URL_SCHEMES = ['http:', 'https:']
+const TEXTUAL = ['text', 'textarea', 'select', 'url', 'image']
+// Where an image may point: a file we serve ourselves, or an outside link.
+const IMAGE_PREFIXES = ['/images/', '/uploads/']
 
 function isBlank(value) {
-  return value === undefined || value === null || String(value).trim() === ''
+  if (value === undefined || value === null) return true
+  // Only a string can be blank. Anything else is a type problem, not an empty one,
+  // and checkField reports it as such.
+  return typeof value === 'string' && value.trim() === ''
 }
 
 /** Checks one field of one item. Returns a message, or null when it's fine. */
 function checkField(field, value) {
   if (isBlank(value)) {
     return field.required ? `${field.label} is required` : null
+  }
+
+  // A text field holding an object or an array would be stored as-is and then
+  // crash the page that renders it, so the type is checked before anything else.
+  if (TEXTUAL.includes(field.type) && typeof value !== 'string') {
+    return `${field.label} must be text`
   }
 
   switch (field.type) {
@@ -31,13 +43,22 @@ function checkField(field, value) {
         : `${field.label} must be one of: ${field.options.join(', ')}`
     case 'url':
       try {
-        if (!URL_SCHEMES.includes(new URL(String(value)).protocol)) {
+        if (!URL_SCHEMES.includes(new URL(value).protocol)) {
           return `${field.label} must start with http:// or https://`
         }
       } catch {
         return `${field.label} must be a valid link`
       }
       return null
+    case 'image': {
+      if (IMAGE_PREFIXES.some((prefix) => value.startsWith(prefix))) return null
+      try {
+        if (URL_SCHEMES.includes(new URL(value).protocol)) return null
+      } catch {
+        // falls through to the message below
+      }
+      return `${field.label} must be a path like ${IMAGE_PREFIXES[0]}photo.jpg, or an http(s) link`
+    }
     default: {
       // text and textarea
       if (field.max !== undefined && String(value).length > field.max) {
@@ -52,8 +73,10 @@ function checkField(field, value) {
 function cleanItem(fields, item) {
   const cleaned = {}
   for (const field of fields) {
-    if (isBlank(item[field.name])) continue
-    cleaned[field.name] = field.type === 'number' ? Number(item[field.name]) : item[field.name]
+    const value = item[field.name]
+    if (isBlank(value)) continue
+    // Store the checked value, not the raw input: a number as a number, text trimmed.
+    cleaned[field.name] = field.type === 'number' ? Number(value) : value.trim()
   }
   return cleaned
 }

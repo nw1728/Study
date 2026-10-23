@@ -92,3 +92,38 @@ test('strips fields not in the description', () => {
   assert.equal(result.ok, true)
   assert.equal('evil' in result.value[0], false)
 })
+
+test('rejects a non-string for a text field', () => {
+  const result = validateContent('events', [anEvent({ title: { evil: 1 } })])
+  assert.equal(result.ok, false)
+  assert.ok(errorFor(result, 'title'))
+})
+
+test('rejects an array for a text field', () => {
+  const result = validateContent('events', [anEvent({ place: ['a', 'b'] })])
+  assert.equal(result.ok, false)
+  assert.ok(errorFor(result, 'place'))
+})
+
+test('rejects a non-string for a select field', () => {
+  const result = validateContent('events', [anEvent({ month: { toString: 'OCT' } })])
+  assert.equal(result.ok, false)
+  assert.ok(errorFor(result, 'month'))
+})
+
+test('stores text trimmed', () => {
+  const result = validateContent('events', [anEvent({ title: '  Science Day  ' })])
+  assert.equal(result.ok, true)
+  assert.equal(result.value[0].title, 'Science Day')
+})
+
+test('rejects an image path that is neither a site path nor a link', () => {
+  const result = validateContent('events', [anEvent({ image: 'javascript:alert(1)' })])
+  assert.equal(result.ok, false)
+  assert.ok(errorFor(result, 'image'))
+})
+
+test('accepts an image path under /images/', () => {
+  const result = validateContent('events', [anEvent({ image: '/images/events/expo.jpg' })])
+  assert.equal(result.ok, true, JSON.stringify(result.errors))
+})
