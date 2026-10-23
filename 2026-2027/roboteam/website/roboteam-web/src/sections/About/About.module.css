@@ -1,0 +1,41 @@
+.columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  margin-top: 56px;
+}
+
+.columns h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.columns p {
+  color: var(--text-muted);
+}
+
+.spaced {
+  margin-top: 32px;
+}
+
+.skills {
+  list-style: none;
+  margin-top: 14px;
+}
+
+.skills li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.skills li::before {
+  content: '→ ';
+  color: var(--lavender);
+}
+
+@media (max-width: 800px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}

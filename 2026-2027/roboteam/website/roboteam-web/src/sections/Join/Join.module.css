@@ -1,0 +1,48 @@
+.join {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--brand) 60%, transparent), transparent 65%);
+  filter: blur(30px);
+}
+
+.content {
+  position: relative;
+}
+
+.label {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lavender);
+}
+
+.title {
+  margin: 12px 0 20px;
+  font-size: clamp(44px, 7vw, 96px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.title em {
+  font-style: normal;
+  font-weight: 200;
+  color: var(--lavender);
+}
+
+.lead {
+  color: var(--text-muted);
+  font-size: 17px;
+  margin-bottom: 32px;
+}

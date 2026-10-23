@@ -1,0 +1,21 @@
+// Shown as names for now. Add a `logo` field later to show images instead.
+export const partners = [
+  'University of Twente',
+  'Saxion',
+  'Demcon',
+  'Xsens',
+  'VDL ETG Almelo',
+  'RS Group',
+  'Benchmark',
+  'STMicroelectronics',
+  'Ansys',
+  'Würth Elektronik',
+  'Eurocircuits',
+  'Bossard',
+  'JBC Soldering',
+  'Loctite',
+  'Polymaker',
+  'ETC',
+  'Rosenxt',
+  'Liefveld coffee',
+]

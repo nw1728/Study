@@ -1,0 +1,32 @@
+.button {
+  display: inline-block;
+  padding: 12px 26px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 400;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
+}
+
+.small {
+  padding: 8px 18px;
+}
+
+.primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.primary:hover {
+  background: var(--brand-bright);
+}
+
+.ghost {
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.ghost:hover {
+  border-color: var(--lavender);
+}

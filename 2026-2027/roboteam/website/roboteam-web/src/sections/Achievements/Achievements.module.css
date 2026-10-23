@@ -1,0 +1,36 @@
+.timeline {
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  align-items: baseline;
+  gap: 20px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.year {
+  font-size: 36px;
+  font-weight: 200;
+  color: var(--lavender);
+}
+
+.result {
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.competition {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+@media (max-width: 800px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}

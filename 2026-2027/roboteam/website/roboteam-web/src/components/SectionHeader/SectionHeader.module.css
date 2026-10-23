@@ -1,0 +1,34 @@
+.label {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  font-weight: 400;
+}
+
+.title {
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 12px 0 20px;
+}
+
+/* A thinner second half, like the logo: "Next up: <span>ERC 2026.</span>" */
+.title span {
+  font-weight: 200;
+}
+
+.lead {
+  color: var(--text-muted);
+  max-width: 620px;
+  font-size: 17px;
+}
+
+.center {
+  text-align: center;
+}
+
+.center .lead {
+  margin-inline: auto;
+}

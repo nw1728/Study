@@ -1,0 +1,51 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--ink) 72%, transparent);
+  border-bottom: 1px solid var(--line);
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  height: 64px;
+  font-size: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  margin-right: 4px;
+}
+
+.brand span {
+  font-weight: 200;
+}
+
+.links {
+  display: flex;
+  gap: 26px;
+  color: var(--text-muted);
+}
+
+.links a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 800px) {
+  .links {
+    display: none;
+  }
+}

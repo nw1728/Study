@@ -1,0 +1,113 @@
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  will-change: transform;
+}
+
+.active {
+  opacity: 1;
+}
+
+.flipper {
+  transition: transform 0.25s var(--ease);
+}
+
+.facingLeft .flipper {
+  transform: scaleX(-1);
+}
+
+.cursor svg {
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px color-mix(in srgb, var(--brand-bright) 50%, transparent));
+}
+
+/* ---- drawing ---- */
+.body {
+  fill: var(--brand);
+  stroke: var(--lavender);
+  stroke-width: 1.5;
+}
+
+.leg {
+  fill: none;
+  stroke: var(--lavender);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.wheel {
+  fill: var(--ink);
+  stroke: var(--lavender);
+  stroke-width: 1.5;
+}
+
+.spokes {
+  stroke: var(--lavender);
+  stroke-width: 1;
+}
+
+.eye {
+  fill: #fff;
+}
+
+.arm,
+.gripper {
+  fill: none;
+  stroke: var(--text);
+  stroke-linecap: round;
+}
+
+.arm {
+  stroke-width: 2.5;
+}
+
+.gripper {
+  stroke-width: 1.5;
+}
+
+/* ---- arm movement ---- */
+.shoulder {
+  transform-origin: 46px 22px;
+  transition: transform 0.3s var(--ease);
+}
+
+.elbow {
+  transform-origin: 56px 14px;
+  transition: transform 0.3s var(--ease);
+}
+
+/* hovering a link/button: arm lifts and points */
+.pointing .shoulder {
+  transform: rotate(-30deg);
+}
+
+.pointing .elbow {
+  transform: rotate(-40deg);
+}
+
+/* click: arm reaches down and grabs */
+.grabbing .shoulder {
+  animation: reach 0.6s var(--ease);
+}
+
+.grabbing .elbow {
+  animation: bend 0.6s var(--ease);
+}
+
+@keyframes reach {
+  40% {
+    transform: rotate(40deg);
+  }
+}
+
+@keyframes bend {
+  40% {
+    transform: rotate(35deg);
+  }
+}

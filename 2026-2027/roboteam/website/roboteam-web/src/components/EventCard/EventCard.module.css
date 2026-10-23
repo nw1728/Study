@@ -1,0 +1,36 @@
+.card {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 84px 1fr;
+  gap: 24px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+}
+
+.date {
+  text-align: center;
+}
+
+.date b {
+  display: block;
+  font-size: 44px;
+  font-weight: 200;
+  line-height: 1;
+}
+
+.date span {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--lavender);
+}
+
+.title {
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.details {
+  color: var(--text-muted);
+  font-size: 14px;
+}

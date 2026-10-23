@@ -1,0 +1,23 @@
+/*
+ * Colour palette and fonts. Every colour comes from the logo purple (#5A1C74).
+ * Use these variables in CSS instead of raw hex codes, e.g. color: var(--text-muted);
+ *
+ * Rule: --brand is too dark for text on --ink. For purple text, use --lavender.
+ */
+:root {
+  --brand: #5a1c74;        /* logo purple: fills, buttons */
+  --brand-bright: #8b4fb0; /* glows, hover borders */
+  --lavender: #c7a4e8;     /* purple text and accent words on dark */
+
+  --ink: #0e0a14;          /* page background */
+  --surface: #17111f;      /* cards */
+  --line: #2a2135;         /* hairline borders */
+  --paper: #f6f3f9;        /* light band (contact) */
+
+  --text: #f4f1f7;
+  --text-muted: #a69cb3;
+  --text-on-paper: #5d5468;
+
+  --font: 'Poppins', system-ui, sans-serif;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

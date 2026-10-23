@@ -1,0 +1,65 @@
+/* The one light band on the page */
+.contact {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  width: 260px;
+}
+
+.label {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+
+.title {
+  margin: 12px 0 20px;
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 48px;
+}
+
+.columns small {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-on-paper);
+}
+
+.columns a,
+.columns address {
+  font-style: normal;
+  font-size: 19px;
+  font-weight: 400;
+  color: var(--brand);
+}
+
+.columns address span {
+  display: block;
+}
+
+@media (max-width: 800px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}

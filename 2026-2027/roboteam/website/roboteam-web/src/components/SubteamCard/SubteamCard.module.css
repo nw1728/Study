@@ -1,0 +1,32 @@
+.card {
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  transition:
+    border-color 0.3s,
+    transform 0.3s;
+}
+
+.card:hover {
+  border-color: var(--brand-bright);
+  transform: translateY(-3px);
+}
+
+.number {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--lavender);
+}
+
+.name {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 10px 0 6px;
+}
+
+.description {
+  color: var(--text-muted);
+  font-size: 14px;
+}

@@ -1,0 +1,44 @@
+.footer {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+  padding: 64px 0 40px;
+}
+
+.logo {
+  width: 200px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+}
+
+.footer h4 {
+  color: var(--text);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.footer li {
+  list-style: none;
+  padding: 3px 0;
+}
+
+.footer a:hover {
+  color: var(--text);
+}
+
+.bottom {
+  border-top: 1px solid var(--line);
+  padding: 20px 0;
+  font-size: 12px;
+}
+
+@media (max-width: 800px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+}

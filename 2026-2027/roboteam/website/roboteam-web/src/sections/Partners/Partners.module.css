@@ -1,0 +1,30 @@
+/* A grid of cells with hairline borders between them */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.partner {
+  padding: 30px 16px;
+  text-align: center;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 400;
+  transition:
+    color 0.3s,
+    background 0.3s;
+}
+
+.partner:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.cta {
+  margin-top: 28px;
+}
