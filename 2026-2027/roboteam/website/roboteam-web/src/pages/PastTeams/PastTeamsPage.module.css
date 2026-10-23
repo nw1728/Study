@@ -1,0 +1,111 @@
+/* a vertical line down the left, with each generation hanging off it */
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 72px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 0;
+  left: 59px;
+  width: 1px;
+  background: var(--line);
+}
+
+.generation {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 40px;
+}
+
+.marker {
+  position: relative;
+  text-align: center;
+}
+
+.marker b {
+  display: block;
+  padding: 4px 0;
+  background: var(--ink); /* covers the line behind the number */
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--lavender);
+}
+
+.marker span {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 2px 6px;
+  background: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.photo {
+  width: 100%;
+  max-height: 460px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+}
+
+.story {
+  max-width: 680px;
+  margin-top: 18px;
+  font-size: 17px;
+}
+
+.members {
+  margin-top: 16px;
+}
+
+.members summary {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--lavender);
+  cursor: pointer;
+}
+
+.members ul {
+  list-style: none;
+  columns: 3 180px;
+  column-gap: 24px;
+  margin-top: 14px;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+
+.members li {
+  padding: 3px 0;
+  break-inside: avoid;
+}
+
+@media (max-width: 800px) {
+  .timeline::before {
+    display: none;
+  }
+
+  .generation {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .marker {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .marker b,
+  .marker span {
+    background: none;
+  }
+}

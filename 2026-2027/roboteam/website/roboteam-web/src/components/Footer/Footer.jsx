@@ -1,4 +1,5 @@
-import { navLinks } from '../../data/navigation.js'
+import SmartLink from '../SmartLink/SmartLink.jsx'
+import { navLinks, footerLinks } from '../../data/navigation.js'
 import { socials } from '../../data/socials.js'
 import logo from '../../assets/images/whitefg_purplebg.png'
 import styles from './Footer.module.css'
@@ -16,9 +17,9 @@ export default function Footer() {
         <div>
           <h4>Explore</h4>
           <ul>
-            {navLinks.map((link) => (
+            {[...navLinks, ...footerLinks].map((link) => (
               <li key={link.href}>
-                <a href={link.href}>{link.label}</a>
+                <SmartLink href={link.href}>{link.label}</SmartLink>
               </li>
             ))}
           </ul>
@@ -28,9 +29,7 @@ export default function Footer() {
           <ul>
             {socials.map((social) => (
               <li key={social.href}>
-                <a href={social.href} target="_blank" rel="noreferrer">
-                  {social.label}
-                </a>
+                <SmartLink href={social.href}>{social.label}</SmartLink>
               </li>
             ))}
           </ul>

@@ -1,0 +1,314 @@
+/* ---- the tall section and its pinned stage ---- */
+.story {
+  position: relative;
+  height: 450vh; /* how long the story lasts while scrolling */
+  padding: 0;
+}
+
+.stage {
+  position: sticky;
+  top: 64px; /* below the navbar */
+  height: calc(100vh - 64px);
+  overflow: hidden;
+}
+
+.scene {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---- the big centered headline ---- */
+.headlines {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  translate: -50% 0;
+  width: min(780px, 100% - 48px);
+  display: grid;
+  text-align: center;
+}
+
+/* all headlines sit in the same spot; only the current one is visible */
+.headlines > * {
+  grid-area: 1 / 1;
+}
+
+.headline {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.4s,
+    visibility 0s 0.4s;
+}
+
+.shown {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.6vw, 58px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.text,
+.buttons {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s var(--ease) 0.25s,
+    transform 0.6s var(--ease) 0.25s;
+}
+
+.shown .text,
+.shown .buttons {
+  opacity: 1;
+  transform: none;
+}
+
+.text {
+  max-width: 540px;
+  margin: 16px auto 0;
+  color: var(--text-muted);
+  font-size: 17px;
+}
+
+.buttons {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.introLabel {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--lavender);
+}
+
+.introTitle {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 96px);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+/* Aldrich has one weight, so "Twente" stands apart by colour instead of thickness */
+.thin {
+  color: var(--lavender);
+}
+
+/* ---- mission log (bottom left) ---- */
+.log {
+  position: absolute;
+  left: max(24px, (100% - 1080px) / 2);
+  bottom: 28px;
+  width: min(420px, 100% - 48px);
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.logTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 10px;
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lavender);
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+.logLine {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  column-gap: 8px;
+  padding: 3px 0;
+}
+
+.sol {
+  color: var(--text-muted);
+}
+
+/* the command types itself out, then the reply appears */
+.command {
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--text);
+  width: calc(var(--chars) * 1ch);
+  max-width: 100%;
+  animation: type 0.7s steps(var(--chars)) both;
+}
+
+.reply {
+  grid-column: 2;
+  color: var(--lavender);
+  animation: appear 0.3s 0.75s both;
+}
+
+@keyframes type {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* ---- sol counter (bottom right) ---- */
+.solCounter {
+  position: absolute;
+  right: max(24px, (100% - 1080px) / 2);
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+}
+
+.solCounter small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.solCounter b {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.orbit {
+  width: 40px;
+  height: 40px;
+}
+
+.orbit > circle {
+  fill: none;
+  stroke: var(--line);
+}
+
+.orbitDot {
+  transform-origin: 20px 20px;
+}
+
+.orbitDot circle {
+  fill: var(--lavender);
+}
+
+/* ---- phones: headline on top, rover in the middle, a one-line log at the bottom ---- */
+@media (max-width: 800px) {
+  .story {
+    height: 350vh;
+  }
+
+  .stage {
+    height: calc(100svh - 64px); /* svh: ignores the phone's browser bar sliding in and out */
+  }
+
+  .headlines {
+    top: 3%;
+  }
+
+  .introLabel {
+    font-size: 11px;
+  }
+
+  .introTitle {
+    font-size: 46px;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .text {
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .buttons {
+    margin-top: 16px;
+  }
+
+  .scene {
+    top: 34%;
+    bottom: 96px;
+  }
+
+  .log {
+    bottom: 12px;
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .logTitle {
+    margin-bottom: 4px;
+  }
+
+  /* only the newest line fits */
+  .logLine:not(:last-child) {
+    display: none;
+  }
+
+  .logLine {
+    grid-template-columns: 56px 1fr;
+  }
+
+  .solCounter {
+    display: none;
+  }
+}
+
+/* ---- reduced motion: nothing pinned, everything visible ---- */
+.static {
+  height: auto;
+}
+
+.static .stage {
+  position: relative;
+  top: 0;
+}
+
+.static .log .command,
+.static .log .reply {
+  animation: none;
+}
+
+.staticList {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+  padding: 80px 0;
+}

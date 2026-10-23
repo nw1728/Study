@@ -1,0 +1,233 @@
+.pet {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+  will-change: transform;
+}
+
+.active {
+  opacity: 1;
+}
+
+/* RoverPet.jsx rotates this to the driving direction */
+.flipper {
+  transform-origin: 50% 60%;
+}
+
+.mover {
+  transform-origin: 50% 100%;
+}
+
+.pet svg {
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 4px 10px color-mix(in srgb, var(--brand-bright) 50%, transparent));
+}
+
+/* ---- mood bubble ---- */
+.bubble {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  translate: -50% 0;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--lavender);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.bubble:not(:empty) {
+  opacity: 1;
+  animation: float 1.6s ease-in-out infinite;
+}
+
+/* ---- drawing ---- */
+.body {
+  fill: var(--brand);
+  stroke: var(--lavender);
+  stroke-width: 1.5;
+}
+
+.leg {
+  fill: none;
+  stroke: var(--lavender);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.wheel {
+  fill: var(--ink);
+  stroke: var(--lavender);
+  stroke-width: 1.5;
+}
+
+.spokes {
+  stroke: var(--lavender);
+  stroke-width: 1;
+}
+
+.eye {
+  fill: #fff;
+  transform-origin: 21px 8px;
+  transition: transform 0.3s;
+}
+
+.arm,
+.gripper {
+  fill: none;
+  stroke: var(--text);
+  stroke-linecap: round;
+}
+
+.arm {
+  stroke-width: 2.5;
+}
+
+.gripper {
+  stroke-width: 1.5;
+}
+
+/* moving parts and their pivot points */
+.mast {
+  transform-origin: 18px 20px;
+  transition: transform 0.4s var(--ease);
+}
+
+.shoulder {
+  transform-origin: 46px 22px;
+  transition: transform 0.4s var(--ease);
+}
+
+.elbow {
+  transform-origin: 56px 14px;
+  transition: transform 0.4s var(--ease);
+}
+
+/* ---- moods ---- */
+
+/* happy: arm up, little hops */
+.pet[data-mood='happy'] .mover {
+  animation: hop 0.5s ease-in-out infinite;
+}
+.pet[data-mood='happy'] .shoulder {
+  transform: rotate(-35deg);
+}
+
+/* sad: head hangs, arm drops, slow sigh */
+.pet[data-mood='sad'] .mast,
+.pet[data-mood='lonely'] .mast {
+  transform: rotate(28deg);
+}
+.pet[data-mood='sad'] .shoulder,
+.pet[data-mood='lonely'] .shoulder {
+  transform: rotate(35deg);
+}
+.pet[data-mood='sad'] .mover,
+.pet[data-mood='lonely'] .mover {
+  animation: sigh 2.4s ease-in-out infinite;
+}
+
+/* dance: wiggle and wave the arm */
+.pet[data-mood='dance'] .mover {
+  animation: dance 0.8s ease-in-out infinite;
+}
+.pet[data-mood='dance'] .shoulder {
+  animation: wave 0.4s ease-in-out infinite alternate;
+}
+
+/* curious: head tilts, eye widens */
+.pet[data-mood='curious'] .mast {
+  transform: rotate(-14deg);
+}
+.pet[data-mood='curious'] .eye {
+  transform: scale(1.5);
+}
+
+/* sleepy: eye closes, arm rests, slow breathing */
+.pet[data-mood='sleepy'] .eye {
+  transform: scaleY(0.15);
+}
+.pet[data-mood='sleepy'] .mast {
+  transform: rotate(18deg);
+}
+.pet[data-mood='sleepy'] .shoulder {
+  transform: rotate(40deg);
+}
+.pet[data-mood='sleepy'] .mover {
+  animation: breathe 3s ease-in-out infinite;
+}
+
+/* arriving at a click: arm reaches down and grabs */
+.grabbing .shoulder {
+  animation: reach 0.6s var(--ease);
+}
+.grabbing .elbow {
+  animation: bend 0.6s var(--ease);
+}
+
+@keyframes hop {
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes sigh {
+  50% {
+    transform: translateY(2px) scaleY(0.96);
+  }
+}
+
+@keyframes dance {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  25% {
+    transform: translateY(-6px);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+  75% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes wave {
+  from {
+    transform: rotate(-45deg);
+  }
+  to {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes breathe {
+  50% {
+    transform: scaleY(0.94);
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes reach {
+  40% {
+    transform: rotate(40deg);
+  }
+}
+
+@keyframes bend {
+  40% {
+    transform: rotate(35deg);
+  }
+}

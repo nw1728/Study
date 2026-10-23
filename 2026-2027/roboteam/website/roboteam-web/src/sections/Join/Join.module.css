@@ -29,15 +29,15 @@
 
 .title {
   margin: 12px 0 20px;
-  font-size: clamp(44px, 7vw, 96px);
-  font-weight: 600;
-  letter-spacing: -0.03em;
+  font-family: var(--font-display);
+  font-size: clamp(40px, 6.4vw, 88px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1.05;
 }
 
 .title em {
   font-style: normal;
-  font-weight: 200;
   color: var(--lavender);
 }
 

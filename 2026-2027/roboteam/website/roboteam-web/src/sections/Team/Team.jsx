@@ -1,6 +1,7 @@
 import Reveal from '../../components/Reveal/Reveal.jsx'
 import SectionHeader from '../../components/SectionHeader/SectionHeader.jsx'
 import SubteamCard from '../../components/SubteamCard/SubteamCard.jsx'
+import Button from '../../components/Button/Button.jsx'
 import { subteams } from '../../data/subteams.js'
 import styles from './Team.module.css'
 
@@ -20,6 +21,11 @@ export default function Team() {
             </Reveal>
           ))}
         </div>
+        <Reveal className={styles.more}>
+          <Button href="/past-teams" variant="ghost">
+            Meet the past teams
+          </Button>
+        </Reveal>
       </div>
     </section>
   )

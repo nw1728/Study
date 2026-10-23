@@ -2,13 +2,29 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <!-- favicons live in public/favicon/ (files there are served as-is at /favicon/...) -->
+    <link rel="icon" href="/favicon/favicon.ico" sizes="32x32" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <meta name="theme-color" content="#5a1c74" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="RoboTeam Twente: student team at Future Factory building a Mars rover for the European Rover Challenge." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=JetBrains+Mono:wght@400;500&family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
     <title>RoboTeam Twente</title>
+    <script>
+      // Pick the theme before the page draws: saved choice first, otherwise the device setting.
+      try {
+        const saved = localStorage.getItem('theme')
+        const prefersLight = matchMedia('(prefers-color-scheme: light)').matches
+        document.documentElement.dataset.theme = saved || (prefersLight ? 'light' : 'dark')
+      } catch {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

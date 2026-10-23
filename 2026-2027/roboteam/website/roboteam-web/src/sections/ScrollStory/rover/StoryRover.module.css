@@ -1,0 +1,65 @@
+/* Every stroke of the drawing. --drawn (0..1) is set by StoryDirector to draw lines in. */
+.line {
+  fill: none;
+  stroke: var(--lavender);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--drawn, 1));
+  opacity: calc(var(--drawn, 1) * 20);
+  vector-effect: non-scaling-stroke;
+}
+
+.accent {
+  stroke: var(--brand-bright);
+}
+
+.joint {
+  fill: var(--ink);
+}
+
+.lens {
+  fill: var(--ink);
+  transition: fill 0.4s;
+}
+
+/* camera "looks at you" near the end */
+.svg [data-looking='true'] .lens {
+  fill: var(--lavender);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* the faint dotted rover shown before it draws itself */
+.ghost .line {
+  stroke: var(--text-muted);
+  stroke-dasharray: 0.004 0.012;
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+.sample {
+  fill: var(--lavender);
+  opacity: 0;
+}
+
+/* mood symbol above the rover's head, same idea as the rover pet */
+.bubble {
+  font-family: var(--font);
+  font-size: 34px;
+  font-weight: 600;
+  fill: var(--lavender);
+  transition: opacity 0.3s;
+}
+
+.flagText {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  fill: var(--lavender);
+  opacity: var(--drawn, 1);
+}

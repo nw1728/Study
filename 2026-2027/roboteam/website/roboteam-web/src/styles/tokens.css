@@ -13,11 +13,30 @@
   --surface: #17111f;      /* cards */
   --line: #2a2135;         /* hairline borders */
   --paper: #f6f3f9;        /* light band (contact) */
+  --on-paper: #0e0a14;     /* text on the light band, same in both themes */
 
   --text: #f4f1f7;
   --text-muted: #a69cb3;
   --text-on-paper: #5d5468;
 
-  --font: 'Poppins', system-ui, sans-serif;
+  --font: 'Saira', system-ui, sans-serif; /* body text, links, buttons; variable font, any weight 100–900 */
+  --font-display: 'Aldrich', 'Saira', sans-serif; /* headlines and big numbers; only has one weight */
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace; /* labels, data, the blueprint feel */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/*
+ * Light mode: same names, lighter values. The theme is set on <html data-theme="light|dark">
+ * (see index.html and hooks/useTheme.js). Brand purple stays the same.
+ */
+:root[data-theme='light'] {
+  --lavender: #7b3fa0;     /* darker, so purple text stays readable on white */
+
+  --ink: #fbf9fd;
+  --surface: #ffffff;
+  --line: #e7e0ee;
+  --paper: #efe7f5;        /* the contact band becomes a soft purple tint */
+
+  --text: #1a1320;
+  --text-muted: #5d5468;
 }

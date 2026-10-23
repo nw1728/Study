@@ -44,8 +44,78 @@
   color: var(--text);
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ---- phones: menu button + fold-down menu ---- */
+.menuButton {
+  display: none;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.menuButton span {
+  width: 14px;
+  height: 1.5px;
+  background: var(--text);
+  transition: transform 0.3s var(--ease);
+}
+
+/* the two lines turn into an X */
+.open span:first-child {
+  transform: translateY(3.25px) rotate(45deg);
+}
+
+.open span:last-child {
+  transform: translateY(-3.25px) rotate(-45deg);
+}
+
+.mobileMenu {
+  display: none;
+}
+
 @media (max-width: 800px) {
   .links {
+    display: none;
+  }
+
+  .menuButton {
+    display: flex;
+  }
+
+  .mobileMenu {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 24px 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .actions {
+    gap: 8px;
+  }
+
+  .mobileMenu a {
+    padding: 14px 0;
+    font-family: var(--font-display);
+    font-size: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+/* very narrow phones: "RoboTeam" only, so the buttons fit on one line */
+@media (max-width: 420px) {
+  .brand span {
     display: none;
   }
 }

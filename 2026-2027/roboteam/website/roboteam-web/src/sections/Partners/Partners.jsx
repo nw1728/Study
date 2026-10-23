@@ -17,7 +17,7 @@ export default function Partners() {
           ))}
         </Reveal>
         <Reveal className={styles.cta}>
-          <Button href="#contact" variant="ghost">
+          <Button href="/contact" variant="ghost">
             Become a partner
           </Button>
         </Reveal>

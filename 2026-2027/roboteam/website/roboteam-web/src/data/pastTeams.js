@@ -1,0 +1,68 @@
+// Every generation of RoboTeam Twente, newest first. Shown on /past-teams.
+// Copied from the previous website; check names with the team before publishing.
+export const pastTeams = [
+  {
+    years: '2024–2025',
+    generation: 9,
+    photo: '/images/past-teams/2024-2025.jpg',
+    story: 'RoboTeam #9 made significant progress towards reinforcement learning, which would have been revolutionary for the competition. The team also set up its own (one-time) competition in Hannover.',
+    members: ['Deef van der Linde', 'Flim de Jong', 'Dylan Bruggeman', 'Jonathan Jeuring', 'Yuying Ba', 'Farida Elsadany', 'Omar Moustaga', 'Birlik Tubekbay', 'Lu Na Izquierdo Collantes', 'Reyhan Iri', 'Amine Ansri', 'Gulin Kesapli', 'Adeline Muchanga', 'Raswanth Vetrivel', 'Amirreza Akrami', 'Marijn Buitenweg', 'Adham Elhabashy', 'Crina Gurev', 'Hamza Elkady', 'Seif Elblalisy'],
+  },
+  {
+    years: '2023–2024',
+    generation: 8,
+    photo: '/images/past-teams/2023-2024.jpg',
+    story: 'At RoboCup 2024 in Eindhoven, RoboTeam #8 secured a podium finish in the Passing Challenge, one of the most technically demanding competitions in international robot soccer, against top university teams from around the world.',
+    members: ['Robin Roetenberg', 'Jonathan Willegers', 'Jorn de Jong', 'Chris Krommendijk', 'Luuk Winters', 'Jan Geert Kroijenga', 'Csongor Buzogany', 'Dario Captani', 'Leonie Hoekstra', 'Bas van der Kaaden', 'Razvan Petrea', 'Prawin Kumar', 'Julie Muchembled', 'Greg Ward', 'Simone Tollardo', 'Juan José González Torres', 'Moustafa Mahmoud', 'George Fawzi Ayad'],
+  },
+  {
+    years: '2022–2023',
+    generation: 7,
+    photo: '/images/past-teams/2022-2023.jpg',
+    story: 'RoboTeam #7 was the first generation to receive the open-source award at RoboCup, and further brought the new corporate identity to life.',
+    // "Thijs Bink Brunon Bojków" is written like this on the old site: probably two people, check with the team
+    members: ['Emy Ganzeboom', 'Umer Javed', 'Tom Meulenkamp', 'Mrinal Magar', 'Thijs Bink Brunon Bojków', 'Jibbe Andringa', 'Nikolai Schauer', 'Beatrice Beretta', 'Hilke van den Born', 'Silas Hoevers', 'Jitka Bojorge-Alvarez'],
+  },
+  {
+    years: '2021–2022',
+    generation: 6,
+    photo: '/images/past-teams/2021-2022.jpg',
+    story: 'RoboTeam #6 finished 3rd at RoboCup in Bangkok, Thailand, and was the first team to fly under the new purple banner and logo.',
+    members: ['Anne van Harten', 'Lotte Steenmeijer', 'Franka van Jaarsveld', 'Tijmen Westeneng', 'Floris Heinen', 'Sander Sijtsma', 'Elias Gudmundsson', 'Sarah Onrust', 'Oscar Lawson', 'Sabine van der Werff', 'Alexander de Ranitz', 'Agata Sowa', 'Martin Miksik', 'Dawid Kulikowski', 'Max Thielen', 'Corentin Monat', 'Elisa Dankers', 'Rohit Aggarwal', 'Aryan Kapoor', 'Stelios Diamantopoulos', 'Karina Skurule', 'Tijmen Smit', 'Emiel Steerneman', 'Cassandra Post', 'Jaro Kuiken'],
+  },
+  {
+    years: '2020–2021',
+    generation: 5,
+    photo: '/images/past-teams/2020-2021.jpg',
+    story: 'RoboTeam #5 took part in the first online RoboCup ever, after the physical RoboCup in Bordeaux could not take place.',
+    members: ['Cassandra Post', 'Floris Hoek', 'Franka van Jaarsveld', 'Jaro Kuiken', 'Alejandro López Téllez', 'Bruno Silva', 'Casper de Regt', 'David Elskamp', 'Dawid Kulikowski', 'Emiel Steerneman', 'Ioana Miu', 'Jayanshi Tripathi', 'Joost Bonekamp', 'Koen Vonk', 'Luuk Klein Nagelvoort', 'Martin Miksik', 'Max Lievense', 'Nathalie Kamp', 'Rohit Aggarwal', 'Rolf van der Hulst', 'Tycho van Leersum', 'Vicente Pinto', 'Víctor Antonio Carmona', 'Vignesh Balaji Vijayan', 'Yuhanun Citgez'],
+  },
+  {
+    years: '2019–2020',
+    generation: 4,
+    photo: '/images/past-teams/2019-2020.jpg',
+    story: 'RoboTeam #4 made promising mechanical developments and improved the maintainability and durability of the software and electronics for future teams. Their RoboCup in Bordeaux was postponed, but their work carried RoboTeam #5 forward.',
+    members: ['Casper de Regt', 'Jente van Werven', 'Selina Zwerver', 'Luuk Klein Nagelvoort', 'Emiel Steerneman', 'Sabine van der Werff', 'Luc Schoot Uiterkamp', 'Lars Poort', 'Finn Prinsenberg', 'Rik Schrijver', 'Jordi Luong', 'Paul Vacariu', 'Haico Dorenbos', 'Timo van der Kuil', 'Yuhanun Citgez', 'Àngel Lorente Rogel', 'Carina Campisi'],
+  },
+  {
+    years: '2018–2019',
+    generation: 3,
+    photo: '/images/past-teams/2018-2019.jpg',
+    story: 'RoboTeam #3 vastly improved the software and communication of the robots, laying a solid foundation for every team after them. At RoboCup in Sydney they placed 5th overall: the best result in RoboCup soccer for RoboTeam Twente.',
+    members: ['Rob Verbeek', 'Barış İmre', 'Selina Zwerver', 'Pepijn de Vos', 'Rolf van der Hulst', 'Cas Doornkamp', 'Lukas Bos', 'Antonio Sanchez Martin', 'Freek Nijweide', 'Emil Kerimov', 'Koen Hertenberg', 'Alice Petry', 'Simen Bootsma', 'Inkeri Kollmann', 'Thijs Luttikhuis'],
+  },
+  {
+    years: '2017–2018',
+    generation: 2,
+    photo: '/images/past-teams/2017-2018.jpg',
+    story: 'RoboTeam #2 significantly improved the robots, reaching 7th place overall at RoboCup and 3rd for most innovative team.',
+    members: ['Emiel Steerneman', 'Jelle Zult', 'Jeroen Weener', 'Nahuel Manterola', 'Anouk Leunissen', 'Cas Doornkamp', 'Luka Sculac', 'Stefan Tersteeg', 'Wouter van Veelen', 'Zahra van Egdom', 'Christophe van der Walt', 'Gaël Humblot-Renaux', 'Haichuan Wang', 'Sebastian Schipper', 'Leon Klute'],
+  },
+  {
+    years: '2016–2017',
+    generation: 1,
+    photo: '/images/past-teams/2016-2017.jpg',
+    story: 'RoboTeam #1: the very first RoboTeam. Besides founding the team, they immediately reached 14th place at RoboCup.',
+    members: ['Ewoud Croll', 'Bob Rubbens', 'Stefan Tolboom', 'Wybe Westra', 'Roel Plompen', 'Boi Okken', 'Dennis de Weerdt', 'Hans Van Der Heijde', 'Iris Weijers', 'Jim Hoekstra', 'Klaas De Haan', 'Rick Timmer', 'Rik Freije'],
+  },
+]

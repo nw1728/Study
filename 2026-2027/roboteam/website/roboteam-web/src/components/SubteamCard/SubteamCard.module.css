@@ -1,4 +1,6 @@
 .card {
+  display: flex;
+  flex-direction: column;
   height: 100%;
   background: var(--surface);
   border: 1px solid var(--line);
@@ -29,4 +31,12 @@
 .description {
   color: var(--text-muted);
   font-size: 14px;
+}
+
+.more {
+  margin-top: auto;
+  padding-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--lavender);
 }

@@ -1,0 +1,147 @@
+/* ---- tabs ---- */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.tabs button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    color 0.3s,
+    border-color 0.3s,
+    background 0.3s;
+}
+
+.tabs button span {
+  font-family: var(--font-mono);
+  font-size: 12px;
+}
+
+.tabs button:hover {
+  color: var(--text);
+}
+
+.tabs .activeTab {
+  color: var(--text);
+  border-color: var(--brand-bright);
+  background: color-mix(in srgb, var(--brand) 25%, transparent);
+}
+
+/* ---- activity cards ---- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+}
+
+.level {
+  align-self: flex-start;
+  margin-bottom: 12px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--lavender);
+}
+
+.card h3 {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 14px 0;
+  padding: 12px 0;
+  border-block: 1px solid var(--line);
+}
+
+.facts dt {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.facts dd {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.text {
+  color: var(--text-muted);
+}
+
+.points {
+  list-style: none;
+  margin: 14px 0;
+}
+
+.points li {
+  padding: 4px 0;
+  font-size: 15px;
+}
+
+.points li::before {
+  content: '→ ';
+  color: var(--lavender);
+}
+
+.tagline {
+  margin-top: auto;
+  padding-top: 10px;
+  color: var(--lavender);
+}
+
+/* ---- get in touch ---- */
+.contact {
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.contactTitle {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.5vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.contactText {
+  margin: 14px 0 28px;
+  color: var(--text-muted);
+}
+
+.note {
+  max-width: 520px;
+  margin: 24px auto 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}

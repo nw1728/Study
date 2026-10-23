@@ -1,40 +1,42 @@
+import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar.jsx'
 import Footer from './components/Footer/Footer.jsx'
-import RoverCursor from './components/RoverCursor/RoverCursor.jsx'
-import Hero from './sections/Hero/Hero.jsx'
-import Statement from './sections/Statement/Statement.jsx'
-import Stats from './sections/Stats/Stats.jsx'
-import About from './sections/About/About.jsx'
-import Achievements from './sections/Achievements/Achievements.jsx'
-import Team from './sections/Team/Team.jsx'
-import Events from './sections/Events/Events.jsx'
-import Alumni from './sections/Alumni/Alumni.jsx'
-import Partners from './sections/Partners/Partners.jsx'
-import News from './sections/News/News.jsx'
-import Join from './sections/Join/Join.jsx'
-import Contact from './sections/Contact/Contact.jsx'
+import RoverPet from './components/RoverPet/RoverPet.jsx'
+import ScrollManager from './components/ScrollManager/ScrollManager.jsx'
+import HomePage from './pages/Home/HomePage.jsx'
+import JoinPage from './pages/Join/JoinPage.jsx'
+import EventsPage from './pages/Events/EventsPage.jsx'
+import NewsPage from './pages/News/NewsPage.jsx'
+import NewsArticlePage from './pages/NewsArticle/NewsArticlePage.jsx'
+import EducationPage from './pages/Education/EducationPage.jsx'
+import ContactPage from './pages/Contact/ContactPage.jsx'
+import PastTeamsPage from './pages/PastTeams/PastTeamsPage.jsx'
+import SubteamPage from './pages/Subteam/SubteamPage.jsx'
+import NotFoundPage from './pages/NotFound/NotFoundPage.jsx'
 
-// The front page, top to bottom. To reorder or remove a section, edit this list.
+// Every page of the site, by address. Navbar, footer and the rover pet are shared by all pages.
+// The addresses match the previous website, so old links keep working.
 export default function App() {
   return (
     <>
+      <ScrollManager />
       <Navbar />
       <main>
-        <Hero />
-        <Statement />
-        <Stats />
-        <About />
-        <Achievements />
-        <Team />
-        <Events />
-        <Alumni />
-        <Partners />
-        <News />
-        <Join />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/join" element={<JoinPage />} />
+          <Route path="/events" element={<EventsPage />} />
+          <Route path="/news" element={<NewsPage />} />
+          <Route path="/news/:id" element={<NewsArticlePage />} />
+          <Route path="/education" element={<EducationPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/past-teams" element={<PastTeamsPage />} />
+          <Route path="/team/:slug" element={<SubteamPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </main>
       <Footer />
-      <RoverCursor />
+      <RoverPet />
     </>
   )
 }

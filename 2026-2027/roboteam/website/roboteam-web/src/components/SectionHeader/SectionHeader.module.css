@@ -1,22 +1,25 @@
 .label {
+  font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--lavender);
   font-weight: 400;
 }
 
 .title {
-  font-size: clamp(34px, 4.5vw, 56px);
-  font-weight: 600;
-  letter-spacing: -0.025em;
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.2vw, 52px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1.1;
   margin: 12px 0 20px;
 }
 
-/* A thinner second half, like the logo: "Next up: <span>ERC 2026.</span>" */
-.title span {
-  font-weight: 200;
+/* A softer second half: "Next up: <span>ERC 2026.</span>".
+   :not([class]) skips the word wrappers WordRise adds, so plain titles stay white. */
+.title > span:not([class]) {
+  color: var(--lavender);
 }
 
 .lead {

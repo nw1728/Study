@@ -17,6 +17,17 @@
   transform: translateX(64px);
 }
 
+/* phones: a short slide, so nothing pokes out past the screen edge */
+@media (max-width: 800px) {
+  .left {
+    transform: translateX(-20px);
+  }
+
+  .right {
+    transform: translateX(20px);
+  }
+}
+
 .visible {
   opacity: 1;
   transform: none;

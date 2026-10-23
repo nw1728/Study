@@ -1,0 +1,26 @@
+/* each word is a window; the word inside slides up into it */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.12em; /* room for letters like g and y */
+  margin-bottom: -0.12em;
+}
+
+.inner {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.8s var(--ease);
+  transition-delay: calc(var(--i) * 60ms);
+}
+
+.shown .inner {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner {
+    transform: none;
+    transition: none;
+  }
+}

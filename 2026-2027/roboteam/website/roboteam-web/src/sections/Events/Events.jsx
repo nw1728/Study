@@ -1,6 +1,7 @@
 import Reveal from '../../components/Reveal/Reveal.jsx'
 import SectionHeader from '../../components/SectionHeader/SectionHeader.jsx'
 import EventCard from '../../components/EventCard/EventCard.jsx'
+import Button from '../../components/Button/Button.jsx'
 import { events } from '../../data/events.js'
 import styles from './Events.module.css'
 
@@ -18,6 +19,11 @@ export default function Events() {
             </Reveal>
           ))}
         </div>
+        <Reveal className={styles.more}>
+          <Button href="/events" variant="ghost">
+            All event details
+          </Button>
+        </Reveal>
       </div>
     </section>
   )

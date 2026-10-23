@@ -17,7 +17,7 @@ export default function Join() {
           We're always looking for motivated students.
         </Reveal>
         <Reveal order={3}>
-          <Button href="https://roboteamtwente.nl/join">Join us</Button>
+          <Button href="/join">See open positions</Button>
         </Reveal>
       </div>
     </section>

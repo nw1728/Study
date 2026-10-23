@@ -20,6 +20,15 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
+  transition:
+    background 0.4s,
+    color 0.4s;
+}
+
+/* side slide-ins must never make the page scroll sideways (phones ignore the body rule) */
+main,
+footer {
+  overflow-x: clip;
 }
 
 a {
@@ -34,6 +43,12 @@ img {
 
 section {
   padding: 120px 0;
+}
+
+@media (max-width: 800px) {
+  section {
+    padding: 80px 0;
+  }
 }
 
 /* Centered content column used inside every section */
