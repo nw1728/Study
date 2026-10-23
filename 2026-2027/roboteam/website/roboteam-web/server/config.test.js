@@ -40,6 +40,21 @@ test('throws when AUTH_MODE=dev and NODE_ENV=production', () => {
   assert.throws(() => loadConfig(anEnv({ NODE_ENV: 'production' })), /production/)
 })
 
+test('throws when AUTH_MODE=dev and PUBLIC_URL is a real address', () => {
+  // The second lock: NODE_ENV is easy to forget (a systemd unit that runs
+  // `node server/index.js` never sets it), but a deployment must change
+  // PUBLIC_URL, because it is both the Origin check and the Google redirect.
+  assert.throws(
+    () => loadConfig(anEnv({ PUBLIC_URL: 'https://roboteamtwente.nl' })),
+    /localhost/,
+  )
+})
+
+test('allows AUTH_MODE=dev on 127.0.0.1', () => {
+  const config = loadConfig(anEnv({ PUBLIC_URL: 'http://127.0.0.1:3000' }))
+  assert.equal(config.authMode, 'dev')
+})
+
 test('allows AUTH_MODE=google with NODE_ENV=production', () => {
   const config = loadConfig(
     anEnv({
