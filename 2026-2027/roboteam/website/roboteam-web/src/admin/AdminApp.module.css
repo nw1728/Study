@@ -6,3 +6,91 @@
   font-family: var(--font-mono);
   font-size: 0.85rem;
 }
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.85rem 1.2rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brandNote {
+  color: var(--lavender);
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.devFlag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fca5a5;
+  border: 1px solid #7f1d1d;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+}
+
+.email {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.signOut {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.82rem;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+}
+
+.signOut:hover {
+  color: var(--text);
+  border-color: var(--lavender);
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  min-height: 0;
+}
+
+.main {
+  padding: 1.4rem clamp(1rem, 3vw, 2rem);
+  min-width: 0;
+}
+
+@media (max-width: 48rem) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+}

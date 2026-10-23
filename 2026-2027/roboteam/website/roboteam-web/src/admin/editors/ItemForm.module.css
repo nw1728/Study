@@ -1,0 +1,10 @@
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.9rem;
+  padding: 0.25rem 0 0.75rem;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}

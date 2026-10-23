@@ -1,0 +1,114 @@
+.list {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.empty {
+  color: var(--muted);
+  margin: 0;
+}
+
+.item {
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  padding: 0.55rem 0.8rem;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.toggle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  padding: 0.3rem 0;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.caret {
+  color: var(--lavender);
+  font-size: 0.8rem;
+}
+
+.name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.untitled {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.flag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fca5a5;
+  border: 1px solid #7f1d1d;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  flex-shrink: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.actions button {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
+.actions button:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--lavender);
+}
+
+.actions button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.remove:hover:not(:disabled) {
+  color: #fca5a5;
+  border-color: #7f1d1d;
+}
+
+.add {
+  justify-self: start;
+  background: none;
+  border: 1px dashed var(--line);
+  border-radius: 0.6rem;
+  color: var(--lavender);
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 0.9rem;
+  cursor: pointer;
+}
+
+.add:hover {
+  border-color: var(--lavender);
+}

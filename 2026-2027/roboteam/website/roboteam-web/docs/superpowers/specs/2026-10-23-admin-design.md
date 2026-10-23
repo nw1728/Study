@@ -1,7 +1,7 @@
 # Admin mode: design
 
-Date: 2026-10-23
-Status: draft, waiting for Ethan's approval
+Date: 2026-10-23 (revised 2026-10-24)
+Status: **approved, in build.** Ethan approved on 2026-10-24: build the real admin now, with a development login door; swap in Google on Monday 2026-10-26.
 
 ## Intent
 
@@ -60,7 +60,7 @@ The site will run on **a small server in the RoboTeam office** (Ethan's decision
                                         ──► saved as JSON file + history copy
 ```
 
-**Status (2026-10-23): on hold. The sub-pages were built first.** The server must answer every page address (`/join`, `/team/:slug`, …) with `index.html` so the React router can show the right page.
+**Status (2026-10-24): in build.** The sub-pages were built first. The server must answer every page address (`/join`, `/team/:slug`, …) with `index.html` so the React router can show the right page.
 
 **One server process** does everything: serves the built site, the admin page, the API and the Google login. In the office it sits behind **Caddy**, a small web server that gets HTTPS certificates automatically.
 
@@ -115,6 +115,24 @@ Content types for phase 1 (matching today's `src/data/`): `events`, `partners`, 
   4. It sets a session cookie: signed with `SESSION_SECRET`, `HttpOnly`, `Secure`, `SameSite=Lax`, expires after 8 hours. The cookie holds only the email, name and expiry. **The role is looked up again on every request**, so removing someone or changing their role takes effect immediately, not after 8 hours.
 - `POST /auth/logout` clears the cookie. `GET /api/me` tells the admin page who's logged in.
 - **Google Cloud setup (one time):** create an OAuth client in Google Cloud Console under the RoboTeam Workspace and set the consent screen to **"Internal"**. Then Google itself only lets accounts from the organisation sign in, which is a second lock on top of the server check. The redirect URIs are `http://localhost:3000/auth/google/callback` (development) and `https://<site domain>/auth/google/callback` (office).
+
+## The development door (added 2026-10-24, Ethan's call)
+
+Ethan is a normal user on the team's Google Workspace; **the team manager holds the admin and Google Cloud rights**. The OAuth client therefore can't exist before **Monday 2026-10-26**. Rather than wait, we build the **real admin** — really saving, really changing the live site — with only the Google door replaced by a development one.
+
+**This changes nothing behind the door.** The session cookie, the access list, owner vs editor, and the "no access yet" screen are identical either way. Google only decides *who knocked*. Swapping it in means filling in `server/auth/google.js`, setting four values in `.env`, and changing `AUTH_MODE`. No admin-page code changes.
+
+The door is one swappable piece: `server/auth/door.js` picks the login routes by `AUTH_MODE` (`dev` or `google`), and everything downstream (`session.js`, `requireLogin.js`, `requireOwner.js`) never knows which one ran.
+
+**The development door:** `GET /auth/dev` shows a small plain page with an email box and an owner/editor picker. It checks the email ends in `@roboteamtwente.nl`, then sets **the same session cookie** the Google door would. This lets us test the access list, both roles, and the refused-login screen before Monday.
+
+> [!warning] The trap this guards against
+> A fake login that survives into production hands the site to anyone who finds `/admin`.
+> Not a comment reminding us to remove it — **a server that refuses to boot**:
+> - `config.js` **throws on start** if `AUTH_MODE=dev` and `NODE_ENV=production`.
+> - `AUTH_MODE` has **no default**. An unset value stops the server, so nobody gets a fake door by forgetting a setting.
+> - In `dev` mode the server prints a loud banner on every start.
+> - The dev routes are **not registered at all** unless `AUTH_MODE=dev`; in `google` mode `/auth/dev` is a plain 404.
 
 ## Access list
 
@@ -282,15 +300,19 @@ STORAGE_DIR=./server/storage
 
 ## Build order
 
+Revised 2026-10-24 for the development door. Google moved from step 4 to the end, because it's the only step that waits on someone else.
+
 1. `shared/contentTypes/` + `ContentStore` + `validate`, with tests for validation and safe writing.
-2. Server API (read and write), with the login check stubbed out. Seed from `src/data`.
+2. Server API (read and write), behind the **development door**. Seed from `src/data`.
 3. Public site switches to `useContent()` with fallbacks. The site must look exactly the same as before.
-4. Google login (needs the OAuth client from Google Cloud).
-5. Admin page: login screen → sidebar → list editor → fields → save → errors.
-6. Images: upload route and the image field.
-7. History and restore.
-8. Team access: UserStore + routes + the Team access page.
+4. Admin page: login screen → sidebar → list editor → fields → save → errors.
+5. Images: upload route and the image field.
+6. History and restore.
+7. Team access: UserStore + routes + the Team access page.
+8. **Google login** — swap the door (needs the OAuth client from Google Cloud, Monday 2026-10-26).
 9. Deployment files plus a step-by-step guide for the office machine.
+
+**Proving it works early:** steps 1–4 are built for **one content type (`events`) end to end** before the other ten are added. Editing an event in `/admin` and seeing it change on the live front page is the signal that the whole machine works. The remaining types are then one description file each, with no new routes or form code.
 
 ## Testing
 

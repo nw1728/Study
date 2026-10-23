@@ -1,0 +1,110 @@
+import { useEffect, useState } from 'react'
+import ListEditor, { withGeneratedIds } from './editors/ListEditor.jsx'
+import { getContent, getMeta, putContent } from './api.js'
+import styles from './ContentEditor.module.css'
+
+/** Turns the server's flat error list into errors[index][field]. */
+function byItem(errors) {
+  const byIndex = {}
+  const general = []
+  for (const error of errors) {
+    if (error.index === null || error.field === null) {
+      general.push(error.message)
+      continue
+    }
+    byIndex[error.index] ??= {}
+    byIndex[error.index][error.field] = error.message
+  }
+  return { byIndex, general }
+}
+
+function when(iso) {
+  if (!iso) return null
+  return new Date(iso).toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
+
+export default function ContentEditor({ type }) {
+  const [items, setItems] = useState(null)
+  const [dirty, setDirty] = useState(false)
+  const [errors, setErrors] = useState({ byIndex: {}, general: [] })
+  const [meta, setMeta] = useState({ savedAt: null, savedBy: null })
+  const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    setItems(null)
+    setDirty(false)
+    setErrors({ byIndex: {}, general: [] })
+    getContent(type.id).then(setItems)
+    getMeta(type.id).then(setMeta)
+  }, [type])
+
+  // Nobody should lose ten minutes of typing to a stray tab close.
+  useEffect(() => {
+    if (!dirty) return
+    const warn = (event) => event.preventDefault()
+    window.addEventListener('beforeunload', warn)
+    return () => window.removeEventListener('beforeunload', warn)
+  }, [dirty])
+
+  async function save() {
+    setSaving(true)
+    const toSave = withGeneratedIds(type, items)
+    const result = await putContent(type.id, toSave)
+    setSaving(false)
+
+    if (!result.ok) {
+      setErrors(byItem(result.errors))
+      return
+    }
+
+    setItems(toSave)
+    setErrors({ byIndex: {}, general: [] })
+    setDirty(false)
+    setMeta({ savedAt: result.savedAt, savedBy: result.savedBy })
+  }
+
+  if (!items) return <p className={styles.loading}>Loading {type.label.toLowerCase()}…</p>
+
+  return (
+    <section className={styles.editor}>
+      <header className={styles.head}>
+        <h1 className={styles.title}>
+          {type.label}
+          {dirty && <span className={styles.dot} title="Unsaved changes" />}
+        </h1>
+        <button type="button" className={styles.save} onClick={save} disabled={!dirty || saving}>
+          {saving ? 'Saving…' : 'Save'}
+        </button>
+      </header>
+
+      {errors.general.length > 0 && (
+        <div className={styles.problem}>
+          {errors.general.map((message) => (
+            <p key={message}>{message}</p>
+          ))}
+        </div>
+      )}
+
+      <ListEditor
+        type={type}
+        items={items}
+        errors={errors.byIndex}
+        onChange={(next) => {
+          setItems(next)
+          setDirty(true)
+        }}
+      />
+
+      <p className={styles.meta}>
+        {meta.savedBy
+          ? `Last saved by ${meta.savedBy} · ${when(meta.savedAt)}`
+          : 'Not saved through the admin yet — showing what the site ships with.'}
+      </p>
+    </section>
+  )
+}

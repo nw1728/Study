@@ -1,0 +1,40 @@
+import NumberField from './fields/NumberField.jsx'
+import SelectField from './fields/SelectField.jsx'
+import TextField from './fields/TextField.jsx'
+import TextareaField from './fields/TextareaField.jsx'
+import styles from './ItemForm.module.css'
+
+// One component per field type. Anything not listed falls back to a text box,
+// so a new field type shows up as editable rather than disappearing.
+const COMPONENTS = {
+  number: NumberField,
+  select: SelectField,
+  textarea: TextareaField,
+}
+
+/**
+ * One item's fields, built from the content type's description. It knows
+ * nothing about events in particular, which is why the other content types
+ * need no new form code.
+ */
+export default function ItemForm({ type, item, errors, onChange }) {
+  return (
+    <div className={styles.form}>
+      {type.fields
+        .filter((field) => !field.generated)
+        .map((field) => {
+          const Field = COMPONENTS[field.type] ?? TextField
+          return (
+            <div key={field.name} className={field.type === 'textarea' ? styles.wide : ''}>
+              <Field
+                field={field}
+                value={item[field.name]}
+                error={errors?.[field.name]}
+                onChange={(value) => onChange({ ...item, [field.name]: value })}
+              />
+            </div>
+          )
+        })}
+    </div>
+  )
+}
