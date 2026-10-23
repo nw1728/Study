@@ -1,11 +1,13 @@
-// The built-in defaults: the same `src/data/*.js` files the site has always used.
+// The built-in defaults, as the server sees them.
 //
-// They do two jobs. On the very first start they fill the storage folder, so
-// nothing written before the admin existed is lost. Afterwards they stay as the
-// fallback: if a content file is missing or unreadable, the site shows these
-// instead of nothing.
-import { events } from '../../src/data/events.js'
+// The content itself lives in shared/contentDefaults.js, which the public site
+// imports too — one list, so a type can never have a default on one side only.
+import { assertDefaultsComplete, contentDefaults } from '../../shared/contentDefaults.js'
+import { contentTypeIds } from '../../shared/contentTypes/index.js'
 
 export async function loadDefaults() {
-  return { events }
+  // Stops the server here, naming the type, rather than letting a visitor meet
+  // a page with nothing to fall back to.
+  assertDefaultsComplete(contentDefaults, contentTypeIds)
+  return contentDefaults
 }

@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "dev:server": "node --watch server/index.js",
     "start": "NODE_ENV=production node server/index.js",
-    "test": "node --test \"server/**/*.test.js\""
+    "test": "node --test \"server/**/*.test.js\" \"shared/**/*.test.js\" \"src/**/*.test.js\""
   },
   "dependencies": {
     "express": "^5.3.0",
