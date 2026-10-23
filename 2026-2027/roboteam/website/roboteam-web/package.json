@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:server": "node --watch server/index.js",
+    "start": "NODE_ENV=production node server/index.js",
+    "test": "node --test \"server/**/*.test.js\""
   },
   "dependencies": {
     "express": "^5.3.0",
