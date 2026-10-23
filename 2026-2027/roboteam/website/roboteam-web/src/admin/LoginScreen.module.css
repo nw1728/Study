@@ -28,7 +28,7 @@
 }
 
 .text {
-  color: var(--muted);
+  color: var(--text-muted);
   margin: 0 0 0.5rem;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .back {
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 0.85rem;
   margin-top: 0.5rem;
 }

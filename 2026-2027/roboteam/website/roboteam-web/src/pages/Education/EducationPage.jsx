@@ -5,10 +5,11 @@ import Button from '../../components/Button/Button.jsx'
 import ActivityCard from './ActivityCard.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
 import { activityGroups, educationIntro, educationNote } from '../../data/education.js'
-import { contact } from '../../data/contact.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './EducationPage.module.css'
 
 export default function EducationPage() {
+  const contact = useContent('contact')
   usePageTitle('Education')
   const [activeId, setActiveId] = useState(activityGroups[0].id)
   const activeGroup = activityGroups.find((group) => group.id === activeId)

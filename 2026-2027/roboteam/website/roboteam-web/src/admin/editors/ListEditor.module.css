@@ -5,7 +5,7 @@
 }
 
 .empty {
-  color: var(--muted);
+  color: var(--text-muted);
   margin: 0;
 }
 
@@ -50,7 +50,7 @@
 }
 
 .untitled {
-  color: var(--muted);
+  color: var(--text-muted);
   font-weight: 400;
 }
 
@@ -76,7 +76,7 @@
   background: none;
   border: 1px solid var(--line);
   border-radius: 0.4rem;
-  color: var(--muted);
+  color: var(--text-muted);
   cursor: pointer;
   font-size: 0.85rem;
   width: 1.9rem;

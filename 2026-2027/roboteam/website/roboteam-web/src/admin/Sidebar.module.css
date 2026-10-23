@@ -20,7 +20,7 @@
   background: none;
   border: 0;
   border-radius: 0.5rem;
-  color: var(--muted);
+  color: var(--text-muted);
   font: inherit;
   padding: 0.5rem 0.7rem;
   cursor: pointer;
@@ -39,7 +39,7 @@
 
 .site {
   margin-top: auto;
-  color: var(--muted);
+  color: var(--text-muted);
   font-size: 0.85rem;
   padding: 0 0.7rem;
 }

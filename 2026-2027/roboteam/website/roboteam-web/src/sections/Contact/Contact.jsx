@@ -1,9 +1,11 @@
 import Reveal from '../../components/Reveal/Reveal.jsx'
-import { contact } from '../../data/contact.js'
+import { useContent } from '../../content/useContent.js'
 import logo from '../../assets/images/purplefg_nobackground.png'
 import styles from './Contact.module.css'
 
 export default function Contact() {
+  const contact = useContent('contact')
+
   return (
     <section id="contact" className={styles.contact}>
       <div className="wrap">
@@ -23,14 +25,16 @@ export default function Contact() {
             <small>Email</small>
             <a href={`mailto:${contact.email}`}>{contact.email}</a>
           </Reveal>
-          <Reveal order={1}>
-            <small>Phone</small>
-            <a href={`tel:${contact.phone.replaceAll(' ', '')}`}>{contact.phone}</a>
-          </Reveal>
+          {contact.phone && (
+            <Reveal order={1}>
+              <small>Phone</small>
+              <a href={`tel:${contact.phone.replaceAll(' ', '')}`}>{contact.phone}</a>
+            </Reveal>
+          )}
           <Reveal order={2}>
             <small>Visit</small>
             <address>
-              {contact.address.map((line) => (
+              {(contact.address ?? []).map((line) => (
                 <span key={line}>{line}</span>
               ))}
             </address>

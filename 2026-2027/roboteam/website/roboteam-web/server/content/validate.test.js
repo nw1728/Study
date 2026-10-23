@@ -127,3 +127,58 @@ test('accepts an image path under /images/', () => {
   const result = validateContent('events', [anEvent({ image: '/images/events/expo.jpg' })])
   assert.equal(result.ok, true, JSON.stringify(result.errors))
 })
+
+test('a single type stores one item, not a list', () => {
+  const result = validateContent('contact', {
+    email: 'info@roboteamtwente.nl',
+    address: ['Future Factory', ' Capitool 25 '],
+    mapsUrl: 'https://maps.app.goo.gl/x',
+  })
+  assert.equal(result.ok, true)
+  assert.equal(Array.isArray(result.value), false)
+  assert.deepEqual(result.value.address, ['Future Factory', 'Capitool 25'])
+})
+
+test('a single type refuses a list', () => {
+  const result = validateContent('contact', [])
+  assert.equal(result.ok, false)
+  assert.match(result.errors[0].message, /one item/)
+})
+
+test('a single type reports a missing required field by name', () => {
+  const result = validateContent('contact', { address: ['Future Factory'] })
+  assert.equal(result.ok, false)
+  assert.equal(result.errors[0].field, 'email')
+})
+
+test('a required list-of-text that is empty is reported by name', () => {
+  const result = validateContent('contact', { email: 'a@b.nl', address: [] })
+  assert.equal(result.ok, false)
+  assert.equal(result.errors[0].field, 'address')
+  assert.match(result.errors[0].message, /required/)
+})
+
+test('a partner with a logo and a website is stored whole', () => {
+  const result = validateContent('partners', [
+    { id: 'demcon', name: 'Demcon', logo: '/uploads/abc.png', url: 'https://demcon.com' },
+  ])
+  assert.equal(result.ok, true)
+  assert.deepEqual(result.value[0], {
+    id: 'demcon',
+    name: 'Demcon',
+    logo: '/uploads/abc.png',
+    url: 'https://demcon.com',
+  })
+})
+
+test('a partner without a logo or website is fine', () => {
+  const result = validateContent('partners', [{ id: 'saxion', name: 'Saxion' }])
+  assert.equal(result.ok, true)
+  assert.deepEqual(result.value[0], { id: 'saxion', name: 'Saxion' })
+})
+
+test('a partner logo may not be an arbitrary path', () => {
+  const result = validateContent('partners', [{ id: 'a', name: 'A', logo: '/etc/passwd' }])
+  assert.equal(result.ok, false)
+  assert.equal(result.errors[0].field, 'logo')
+})

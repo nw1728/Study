@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: grid;
   place-items: center;
-  color: var(--muted);
+  color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 0.85rem;
 }
@@ -55,14 +55,14 @@
 .email {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 .signOut {
   background: none;
   border: 1px solid var(--line);
   border-radius: 999px;
-  color: var(--muted);
+  color: var(--text-muted);
   font: inherit;
   font-size: 0.82rem;
   padding: 0.3rem 0.8rem;

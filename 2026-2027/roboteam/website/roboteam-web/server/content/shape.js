@@ -19,8 +19,6 @@ export function isWellShaped(typeId, value) {
   if (!type) return false
 
   switch (type.kind) {
-    case 'textList':
-      return Array.isArray(value) && value.every((entry) => typeof entry === 'string')
     case 'single':
       return isPlainObject(value)
     default:

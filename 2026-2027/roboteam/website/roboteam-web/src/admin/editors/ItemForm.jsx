@@ -1,6 +1,7 @@
 import NumberField from './fields/NumberField.jsx'
 import SelectField from './fields/SelectField.jsx'
 import TextField from './fields/TextField.jsx'
+import TextListField from './fields/TextListField.jsx'
 import TextareaField from './fields/TextareaField.jsx'
 import styles from './ItemForm.module.css'
 
@@ -10,7 +11,11 @@ const COMPONENTS = {
   number: NumberField,
   select: SelectField,
   textarea: TextareaField,
+  'list-of-text': TextListField,
 }
+
+// Field types that get the full width of the form rather than a column.
+const WIDE = ['textarea', 'list-of-text']
 
 /**
  * One item's fields, built from the content type's description. It knows
@@ -25,7 +30,7 @@ export default function ItemForm({ type, item, errors, onChange }) {
         .map((field) => {
           const Field = COMPONENTS[field.type] ?? TextField
           return (
-            <div key={field.name} className={field.type === 'textarea' ? styles.wide : ''}>
+            <div key={field.name} className={WIDE.includes(field.type) ? styles.wide : ''}>
               <Field
                 field={field}
                 value={item[field.name]}

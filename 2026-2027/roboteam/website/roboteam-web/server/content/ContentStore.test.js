@@ -3,6 +3,7 @@ import fs from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import test from 'node:test'
+import { contentTypeIds } from '../../shared/contentTypes/index.js'
 import { ContentStore } from './ContentStore.js'
 
 const DEFAULTS = { events: [{ id: 'default-event', title: 'Default' }] }
@@ -109,5 +110,5 @@ test('a failed write leaves the previous file intact', async () => {
 
 test('readAll covers every known content type', async () => {
   const { store } = await aStore()
-  assert.deepEqual(Object.keys(await store.readAll()), ['events'])
+  assert.deepEqual(Object.keys(await store.readAll()), contentTypeIds)
 })

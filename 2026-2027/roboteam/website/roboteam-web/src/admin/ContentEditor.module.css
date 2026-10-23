@@ -8,7 +8,7 @@
 }
 
 .loading {
-  color: var(--muted);
+  color: var(--text-muted);
   font-family: var(--font-mono);
   font-size: 0.85rem;
 }
@@ -71,6 +71,6 @@
 .meta {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--muted);
+  color: var(--text-muted);
   margin: 0;
 }

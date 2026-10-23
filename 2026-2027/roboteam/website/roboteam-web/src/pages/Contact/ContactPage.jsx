@@ -2,18 +2,46 @@ import PageHero from '../../components/PageHero/PageHero.jsx'
 import Reveal from '../../components/Reveal/Reveal.jsx'
 import SmartLink from '../../components/SmartLink/SmartLink.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
-import { contact } from '../../data/contact.js'
+import { useContent } from '../../content/useContent.js'
 import { socials } from '../../data/socials.js'
 import styles from './ContactPage.module.css'
 
-const cards = [
-  { label: 'General', value: contact.email, href: `mailto:${contact.email}`, note: 'Questions, partnerships, press' },
-  { label: 'Workshops', value: contact.educationEmail, href: `mailto:${contact.educationEmail}`, note: 'Book a workshop, demo or tour' },
-  { label: 'Phone', value: contact.phone, href: `tel:${contact.phone.replaceAll(' ', '')}` },
-  { label: 'Visit', value: contact.address.join(', '), href: contact.mapsUrl, note: 'Open in Google Maps →' },
-]
+/**
+ * The four cards, from whatever contact details are filled in. Each one is
+ * left out when its detail is empty, so clearing the phone number in the
+ * admin removes the card instead of leaving "tel:" behind.
+ */
+function cardsFrom(contact) {
+  const address = (contact.address ?? []).join(', ')
+  return [
+    contact.email && {
+      label: 'General',
+      value: contact.email,
+      href: `mailto:${contact.email}`,
+      note: 'Questions, partnerships, press',
+    },
+    contact.educationEmail && {
+      label: 'Workshops',
+      value: contact.educationEmail,
+      href: `mailto:${contact.educationEmail}`,
+      note: 'Book a workshop, demo or tour',
+    },
+    contact.phone && {
+      label: 'Phone',
+      value: contact.phone,
+      href: `tel:${contact.phone.replaceAll(' ', '')}`,
+    },
+    address && {
+      label: 'Visit',
+      value: address,
+      href: contact.mapsUrl,
+      note: contact.mapsUrl && 'Open in Google Maps →',
+    },
+  ].filter(Boolean)
+}
 
 export default function ContactPage() {
+  const cards = cardsFrom(useContent('contact'))
   usePageTitle('Contact')
 
   return (

@@ -16,6 +16,11 @@ export function validateContent(typeId, value) {
     return refuse(`${type.label} must be a list`)
   }
 
+  // One item rather than a list: contact, join, the education intro.
+  if (type.kind === 'single' && Array.isArray(value)) {
+    return refuse(`${type.label} is one item, not a list`)
+  }
+
   const items = type.kind === 'list' ? value : [value]
   const errors = []
   const seenIds = new Set()

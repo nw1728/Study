@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import ItemForm from './editors/ItemForm.jsx'
 import ListEditor from './editors/ListEditor.jsx'
 import { withGeneratedIds } from './editors/generateIds.js'
 import { getContent, getMeta, putContent } from './api.js'
@@ -53,7 +54,9 @@ export default function ContentEditor({ type }) {
 
   async function save() {
     setSaving(true)
-    const toSave = withGeneratedIds(type, items)
+    // Only a list has ids to fill in: a single item and a list of plain lines
+    // have nothing to be known by.
+    const toSave = type.kind === 'list' ? withGeneratedIds(type, items) : items
     const result = await putContent(type.id, toSave)
     setSaving(false)
 
@@ -66,6 +69,11 @@ export default function ContentEditor({ type }) {
     setErrors({ byIndex: {}, general: [] })
     setDirty(false)
     setMeta({ savedAt: result.savedAt, savedBy: result.savedBy })
+  }
+
+  function change(next) {
+    setItems(next)
+    setDirty(true)
   }
 
   if (!items) return <p className={styles.loading}>Loading {type.label.toLowerCase()}…</p>
@@ -90,15 +98,13 @@ export default function ContentEditor({ type }) {
         </div>
       )}
 
-      <ListEditor
-        type={type}
-        items={items}
-        errors={errors.byIndex}
-        onChange={(next) => {
-          setItems(next)
-          setDirty(true)
-        }}
-      />
+      {type.kind === 'single' && (
+        <ItemForm type={type} item={items} errors={errors.byIndex[0]} onChange={change} />
+      )}
+
+      {type.kind === 'list' && (
+        <ListEditor type={type} items={items} errors={errors.byIndex} onChange={change} />
+      )}
 
       <p className={styles.meta}>
         {meta.savedBy

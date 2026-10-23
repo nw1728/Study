@@ -1,0 +1,67 @@
+/* Rows are lines of text, not paragraphs: a readable width, not the page. */
+.rows {
+  display: grid;
+  gap: 0.35rem;
+  max-width: 42rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.row input {
+  flex: 1;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.actions button {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.8rem;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.actions button:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--lavender);
+}
+
+.actions button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.remove:hover:not(:disabled) {
+  color: #fca5a5;
+  border-color: #7f1d1d;
+}
+
+.add {
+  justify-self: start;
+  background: none;
+  border: 1px dashed var(--line);
+  border-radius: 0.5rem;
+  color: var(--lavender);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  margin-top: 0.15rem;
+}
+
+.add:hover {
+  border-color: var(--lavender);
+}

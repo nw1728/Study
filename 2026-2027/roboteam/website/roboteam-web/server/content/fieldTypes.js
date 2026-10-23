@@ -12,6 +12,16 @@ const URL_SCHEMES = ['http:', 'https:']
 // Where an image may point: a file we serve ourselves, or an outside link.
 const IMAGE_PREFIXES = ['/images/', '/uploads/']
 
+/** The description of one row of a list-of-text, so errors can name it. */
+function rowField(field, index) {
+  return { ...field, type: field.of ?? 'text', of: undefined, label: `${field.label} row ${index + 1}` }
+}
+
+/** The entry that checks one row of a list-of-text. */
+function rowOf(field) {
+  return fieldTypes[field.of ?? 'text']
+}
+
 /**
  * Whether a value counts as "not filled in".
  *
@@ -78,6 +88,30 @@ export const fieldTypes = {
         : `${field.label} must be one of: ${field.options.join(', ')}`
     },
     clean: text.clean,
+  },
+  // A list of plain values: partner names, address lines, bullet points, the
+  // pages of a newsletter. `of` says what one row is — text unless stated.
+  'list-of-text': {
+    blank(value) {
+      if (value === undefined || value === null) return true
+      return Array.isArray(value) && value.every(isBlankValue)
+    },
+    check(field, value) {
+      if (!Array.isArray(value)) return `${field.label} must be a list`
+      for (const [index, row] of value.entries()) {
+        // A half-filled row is not an error: the editor added three boxes and
+        // used two. clean() drops them.
+        if (isBlankValue(row)) continue
+        const message = rowOf(field, index).check(rowField(field, index), row)
+        if (message) return message
+      }
+      return null
+    },
+    clean(field, value) {
+      return value
+        .filter((row) => !isBlankValue(row))
+        .map((row, index) => rowOf(field, index).clean(rowField(field, index), row))
+    },
   },
   number: {
     check(field, value) {
