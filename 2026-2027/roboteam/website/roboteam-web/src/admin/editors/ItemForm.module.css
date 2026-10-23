@@ -1,6 +1,8 @@
 .form {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  /* min() so a narrow screen drops to one column instead of forcing a
+     13rem column wider than the space there is. */
+  grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
   gap: 0.9rem;
   padding: 0.25rem 0 0.75rem;
 }

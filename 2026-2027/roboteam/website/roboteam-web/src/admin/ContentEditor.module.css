@@ -1,5 +1,8 @@
 .editor {
   display: grid;
+  /* Without this the single column sizes to its widest child and the whole
+     editor grows past a phone screen. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   align-content: start;
 }

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import ListEditor, { withGeneratedIds } from './editors/ListEditor.jsx'
+import ListEditor from './editors/ListEditor.jsx'
+import { withGeneratedIds } from './editors/generateIds.js'
 import { getContent, getMeta, putContent } from './api.js'
 import styles from './ContentEditor.module.css'
 
@@ -35,10 +36,9 @@ export default function ContentEditor({ type }) {
   const [meta, setMeta] = useState({ savedAt: null, savedBy: null })
   const [saving, setSaving] = useState(false)
 
+  // AdminApp gives this component a key per content type, so switching type
+  // remounts it with fresh state rather than clearing state in an effect.
   useEffect(() => {
-    setItems(null)
-    setDirty(false)
-    setErrors({ byIndex: {}, general: [] })
     getContent(type.id).then(setItems)
     getMeta(type.id).then(setMeta)
   }, [type])

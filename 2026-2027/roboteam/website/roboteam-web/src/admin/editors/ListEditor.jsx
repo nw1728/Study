@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import ItemForm from './ItemForm.jsx'
-import { uniqueSlug } from './slug.js'
 import styles from './ListEditor.module.css'
 
 /** Moves the item at `from` to `to`, without changing the original array. */
@@ -109,18 +108,4 @@ export default function ListEditor({ type, items, errors, onChange }) {
       </button>
     </div>
   )
-}
-
-/**
- * Fills in the generated ids just before saving, so a new item gets one and an
- * existing item keeps the id it is already known by.
- */
-export function withGeneratedIds(type, items) {
-  const taken = items.map((item) => item.id).filter(Boolean)
-  return items.map((item) => {
-    if (item.id) return item
-    const id = uniqueSlug(type.itemLabel(item) ?? '', taken)
-    taken.push(id)
-    return { ...item, id }
-  })
 }

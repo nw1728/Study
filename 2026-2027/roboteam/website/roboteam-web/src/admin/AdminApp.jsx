@@ -54,7 +54,7 @@ export default function AdminApp() {
       <div className={styles.body}>
         <Sidebar types={TYPES} activeId={activeId} onPick={setActiveId} />
         <main className={styles.main}>
-          <ContentEditor type={contentTypes[activeId]} />
+          <ContentEditor key={activeId} type={contentTypes[activeId]} />
         </main>
       </div>
     </div>
