@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 .superpowers/
 .playwright-mcp/
+
+# The admin server's live data and secrets (never in git)
+server/.env
+server/storage/
