@@ -2,13 +2,14 @@ import PageHero from '../../components/PageHero/PageHero.jsx'
 import Reveal from '../../components/Reveal/Reveal.jsx'
 import Button from '../../components/Button/Button.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
-import { events } from '../../data/events.js'
+import { useContent } from '../../content/useContent.js'
 import { socials } from '../../data/socials.js'
 import styles from './EventsPage.module.css'
 
 const instagram = socials.find((social) => social.label === 'Instagram')
 
 export default function EventsPage() {
+  const events = useContent('events')
   usePageTitle('Events')
 
   return (

@@ -2,10 +2,11 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import SectionHeader from '../../components/SectionHeader/SectionHeader.jsx'
 import EventCard from '../../components/EventCard/EventCard.jsx'
 import Button from '../../components/Button/Button.jsx'
-import { events } from '../../data/events.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './Events.module.css'
 
 export default function Events() {
+  const events = useContent('events')
   if (events.length === 0) return null
 
   return (
