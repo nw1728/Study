@@ -8,6 +8,10 @@ import styles from './EventsPage.module.css'
 
 const instagram = socials.find((social) => social.label === 'Instagram')
 
+// Joined, not glued: an editor who clears the Time box must not leave a
+// dangling separator behind. EventCard does the same with the same parts.
+const details = (event) => [event.place, event.time, event.note].filter(Boolean).join(' · ')
+
 export default function EventsPage() {
   const events = useContent('events')
   usePageTitle('Events')
@@ -38,9 +42,7 @@ export default function EventsPage() {
                   </div>
                   <div className={styles.body}>
                     <h2>{event.title}</h2>
-                    <p className={styles.meta}>
-                      {event.place} · {event.time}
-                    </p>
+                    {details(event) && <p className={styles.meta}>{details(event)}</p>}
                     <p className={styles.description}>{event.description}</p>
                     {event.registerUrl && (
                       <div className={styles.register}>

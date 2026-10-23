@@ -15,7 +15,7 @@ export default function Events() {
         <SectionHeader label="Upcoming" title="Come see us." />
         <div className={styles.grid}>
           {events.map((event, i) => (
-            <Reveal key={event.title} from={i % 2 === 0 ? 'left' : 'right'} order={i}>
+            <Reveal key={event.id} from={i % 2 === 0 ? 'left' : 'right'} order={i}>
               <EventCard {...event} />
             </Reveal>
           ))}
