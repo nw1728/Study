@@ -1,6 +1,7 @@
 // Every editable content type, described once. The server and the admin page
 // both read these, so adding a new kind of content means adding a file here
 // and nothing else.
+import alumni from './alumni.js'
 import contact from './contact.js'
 import events from './events.js'
 import partners from './partners.js'
@@ -9,6 +10,7 @@ import partners from './partners.js'
 export const contentTypes = {
   [events.id]: events,
   [partners.id]: partners,
+  [alumni.id]: alumni,
   [contact.id]: contact,
 }
 

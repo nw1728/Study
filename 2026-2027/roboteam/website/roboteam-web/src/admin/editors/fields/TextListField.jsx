@@ -1,4 +1,5 @@
 import FieldShell from './FieldShell.jsx'
+import ImageField from './ImageField.jsx'
 import fieldStyles from './fields.module.css'
 import styles from './TextListField.module.css'
 
@@ -37,13 +38,22 @@ export default function TextListField({ field, value, error, onChange }) {
           // two partners can legitimately be typed the same for a moment.
           // eslint-disable-next-line react/no-array-index-key
           <div key={index} className={styles.row}>
-            <input
-              className={`${fieldStyles.input} ${error ? fieldStyles.invalid : ''}`}
-              type="text"
-              value={row ?? ''}
-              placeholder={field.placeholder ?? ''}
-              onChange={(event) => set(index, event.target.value)}
-            />
+            {field.of === 'image' ? (
+              // A row that is a picture, e.g. the pages of a newsletter.
+              <ImageField
+                field={{ label: `Page ${index + 1}` }}
+                value={row}
+                onChange={(next) => set(index, next)}
+              />
+            ) : (
+              <input
+                className={`${fieldStyles.input} ${error ? fieldStyles.invalid : ''}`}
+                type="text"
+                value={row ?? ''}
+                placeholder={field.placeholder ?? ''}
+                onChange={(event) => set(index, event.target.value)}
+              />
+            )}
             <div className={styles.actions}>
               <button
                 type="button"

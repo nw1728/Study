@@ -115,3 +115,14 @@ test('asking for a file outside the uploads folder gets nothing', async (t) => {
   assert.equal((await fetch(`${base}/uploads/..%2Fusers.json`)).status, 404)
   assert.equal((await fetch(`${base}/uploads/nope.png`)).status, 404)
 })
+
+test('a served picture may not be re-interpreted by the browser', async (t) => {
+  // A file can be a valid PNG and valid HTML at once. These headers are what
+  // stop such a polyglot from ever being treated as a page.
+  const { base, cookie } = await anApp(t)
+  const { path: stored } = await (await upload(base, PNG, { cookie })).json()
+  const served = await fetch(`${base}${stored}`)
+  assert.equal(served.headers.get('x-content-type-options'), 'nosniff')
+  assert.match(served.headers.get('content-security-policy'), /sandbox/)
+  assert.equal(served.headers.get('content-disposition'), 'inline')
+})

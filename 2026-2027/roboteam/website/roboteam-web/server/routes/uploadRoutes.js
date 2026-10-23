@@ -79,6 +79,12 @@ export function uploadFileRoutes({ uploads }) {
     if (!kind) return res.status(404).end()
 
     res.type(kind.mime)
+    // A file can be a valid picture AND valid HTML at the same time. The
+    // sniffing above decides what we call it; these say the browser may not
+    // decide otherwise, and that nothing inside may run if it ever tried.
+    res.set('x-content-type-options', 'nosniff')
+    res.set('content-security-policy', "default-src 'none'; sandbox")
+    res.set('content-disposition', 'inline')
     // The name is random and a file is never replaced, so it can be kept.
     res.set('cache-control', 'public, max-age=31536000, immutable')
     res.send(bytes)

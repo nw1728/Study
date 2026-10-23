@@ -7,11 +7,12 @@
 //
 // The server and the public site both import this, so a new content type can
 // never end up with a default on one side and none on the other.
+import { alumni } from '../src/data/alumni.js'
 import { contact } from '../src/data/contact.js'
 import { events } from '../src/data/events.js'
 import { partners } from '../src/data/partners.js'
 
-export const contentDefaults = { events, partners, contact }
+export const contentDefaults = { events, partners, alumni, contact }
 
 /**
  * Every described content type must have a default here. A type without one is

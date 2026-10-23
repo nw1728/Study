@@ -49,6 +49,26 @@ export async function putContent(typeId, value) {
   return { ok: true, ...(await response.json()) }
 }
 
+/**
+ * Sends one picture to the server and answers the path it was stored under.
+ *
+ * The browser sets the content type itself here, boundary and all, so this
+ * one request does not go through send().
+ */
+export async function uploadImage(file) {
+  const body = new FormData()
+  body.set('file', file)
+
+  const response = await fetch('/api/uploads', { method: 'POST', body })
+  if (response.ok) return { ok: true, path: (await response.json()).path }
+
+  const message = await response
+    .json()
+    .then((body) => body.error)
+    .catch(() => null)
+  return { ok: false, message: message ?? `The picture could not be uploaded (${response.status}).` }
+}
+
 export async function logout() {
   await send('/auth/logout', { method: 'POST' })
 }

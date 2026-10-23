@@ -1,3 +1,4 @@
+import ImageField from './fields/ImageField.jsx'
 import NumberField from './fields/NumberField.jsx'
 import SelectField from './fields/SelectField.jsx'
 import TextField from './fields/TextField.jsx'
@@ -8,6 +9,7 @@ import styles from './ItemForm.module.css'
 // One component per field type. Anything not listed falls back to a text box,
 // so a new field type shows up as editable rather than disappearing.
 const COMPONENTS = {
+  image: ImageField,
   number: NumberField,
   select: SelectField,
   textarea: TextareaField,
