@@ -37,6 +37,7 @@ export const join = {
 // Open positions on the /join page. `team` should match a subteam name.
 export const positions = [
   {
+    id: 'geologist',
     title: 'Geologist',
     team: 'Science',
     summary: "We're looking for a passionate geologist to help do scientific research for an upcoming project.",
@@ -45,6 +46,7 @@ export const positions = [
     ],
   },
   {
+    id: 'secretary',
     title: 'Secretary',
     team: 'Management',
     summary: 'Keep the administrative and organisational side of RoboTeam Twente running smoothly.',
@@ -55,6 +57,7 @@ export const positions = [
     ],
   },
   {
+    id: 'public-relations',
     title: 'Public Relations',
     team: 'Public Relations',
     summary: 'Shape how a young tech brand presents itself, online and at events.',
@@ -64,6 +67,7 @@ export const positions = [
     ],
   },
   {
+    id: 'external-affairs-board',
     title: 'External Affairs (Board)',
     team: 'Management',
     summary: 'Run the company side of the team and manage all our partnerships.',

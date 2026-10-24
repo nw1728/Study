@@ -1,9 +1,10 @@
-// The /education page: activities grouped into tabs.
-export const educationIntro =
-  'RoboTeam Twente aims to innovate and inspire. We make technology accessible to everyone through hands-on workshops and engaging activities.'
-
-export const educationNote =
-  'As our team is mostly international students, Dutch versions may take longer to arrange.'
+// The /education page: the two blocks of loose text, and the activities
+// grouped into tabs.
+export const educationPage = {
+  intro:
+    'RoboTeam Twente aims to innovate and inspire. We make technology accessible to everyone through hands-on workshops and engaging activities.',
+  note: 'As our team is mostly international students, Dutch versions may take longer to arrange.',
+}
 
 export const activityGroups = [
   {

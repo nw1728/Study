@@ -2,8 +2,10 @@
 // both read these, so adding a new kind of content means adding a file here
 // and nothing else.
 import achievements from './achievements.js'
+import activityGroups from './activityGroups.js'
 import alumni from './alumni.js'
 import contact from './contact.js'
+import educationPage from './educationPage.js'
 import events from './events.js'
 import join from './join.js'
 import members from './members.js'
@@ -27,6 +29,8 @@ export const contentTypes = {
   [alumni.id]: alumni,
   [pastTeams.id]: pastTeams,
   [socials.id]: socials,
+  [educationPage.id]: educationPage,
+  [activityGroups.id]: activityGroups,
   [join.id]: join,
   [positions.id]: positions,
   [contact.id]: contact,

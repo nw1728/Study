@@ -1,5 +1,6 @@
 export const alumni = [
   {
+    id: 'luuk',
     name: 'Luuk',
     year: '2023/24',
     role: 'Research Assistant at Aalto University',

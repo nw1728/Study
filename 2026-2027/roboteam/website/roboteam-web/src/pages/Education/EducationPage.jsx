@@ -4,15 +4,18 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import Button from '../../components/Button/Button.jsx'
 import ActivityCard from './ActivityCard.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
-import { activityGroups, educationIntro, educationNote } from '../../data/education.js'
 import { useContent } from '../../content/useContent.js'
 import styles from './EducationPage.module.css'
 
 export default function EducationPage() {
   const contact = useContent('contact')
+  const { intro: educationIntro, note: educationNote } = useContent('educationPage')
+  const activityGroups = useContent('activityGroups')
   usePageTitle('Education')
-  const [activeId, setActiveId] = useState(activityGroups[0].id)
-  const activeGroup = activityGroups.find((group) => group.id === activeId)
+  // The first tab is the one that opens; a tab that is renamed away falls
+  // back to the first rather than showing nothing.
+  const [activeId, setActiveId] = useState(null)
+  const activeGroup = activityGroups.find((group) => group.id === activeId) ?? activityGroups[0]
 
   return (
     <>
@@ -28,18 +31,18 @@ export default function EducationPage() {
                 key={group.id}
                 type="button"
                 role="tab"
-                aria-selected={group.id === activeId}
-                className={group.id === activeId ? styles.activeTab : ''}
+                aria-selected={group.id === activeGroup?.id}
+                className={group.id === activeGroup?.id ? styles.activeTab : ''}
                 onClick={() => setActiveId(group.id)}
               >
                 {group.label}
-                <span>{group.activities.length}</span>
+                <span>{group.activities?.length ?? 0}</span>
               </button>
             ))}
           </div>
           {/* key: re-mount on tab change so the cards fade in again */}
-          <div key={activeId} className={styles.grid} role="tabpanel">
-            {activeGroup.activities.map((activity, i) => (
+          <div key={activeGroup?.id} className={styles.grid} role="tabpanel">
+            {(activeGroup?.activities ?? []).map((activity, i) => (
               <Reveal key={activity.title} order={i}>
                 <ActivityCard {...activity} />
               </Reveal>
