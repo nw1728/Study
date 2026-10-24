@@ -1,7 +1,7 @@
 ---
 title: Decisions
 tags: [roboteam-web, decisions]
-updated: 2026-10-23
+updated: 2026-10-24
 ---
 
 # Decisions (and why)
@@ -36,3 +36,11 @@ Back to [[00 Index]]. Newest at the bottom of each section. Don't reverse these 
 - **Invite-only access list.** Starts with **only `e.bastian@roboteamtwente.nl`** as owner; Ethan adds others. Roles: owner / editor.
 - **Runs on a small office server** with HTTPS (`roboteamtwente.nl` will point there). The **team manager** creates the Google OAuth client.
 - **Sub-pages were built before the admin** (Ethan's call).
+
+## Admin phase 2 (spec `docs/superpowers/specs/2026-10-24-admin-phase-2-design.md`)
+- **Members split out of subteams into their own flat content type**, each person carrying a subteam slug. People join and leave roughly every three months, so the team list is the most-edited thing on the site; a flat list means moving someone is one dropdown instead of deleting and retyping them.
+- **A leaver's uploaded photo file is kept, never deleted** (Ethan, 2026-10-24). Safer: two entries can point at the same file and a mistaken removal is undoable. Unused files get tidied later, if ever.
+- **Past-team members stay plain text** (Ethan, 2026-10-24), one line of names per generation. They are history; no reason to make them real entries.
+- **People with no photo get a small flag in the Members list**, not a warning banner (Ethan, 2026-10-24). Makes the gaps visible during a changeover without nagging or blocking a save.
+- **Image upload happens in phase 2, not later**, with the file type decided by sniffing the first bytes (no SVG). Adding a member without their photo would be the most annoying half-feature.
+- **`navigation` and `story` stay in code**, being tied to which sections exist and how the scroll story is animated.
