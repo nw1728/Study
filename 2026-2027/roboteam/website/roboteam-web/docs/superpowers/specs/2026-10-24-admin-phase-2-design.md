@@ -1,7 +1,7 @@
 # Admin phase 2: the rest of the content
 
 Date: 2026-10-24
-Status: open questions answered by Ethan 2026-10-24; ready to turn into a plan
+Status: **built**, 2026-10-24. Plan: `../plans/2026-10-24-admin-phase-2.md`
 Follows: `2026-10-23-admin-design.md` (the original plan) and `../plans/2026-10-24-admin-phase-1.md` (built)
 
 ## Intent

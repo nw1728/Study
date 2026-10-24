@@ -93,4 +93,19 @@
   .main {
     padding: 1rem;
   }
+
+  /* Who is signed in wraps onto its own line rather than widening the page,
+     and a long address is cut rather than pushing the Sign out button off. */
+  .who {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .email {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }

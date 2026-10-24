@@ -45,16 +45,26 @@
 }
 
 @media (max-width: 48rem) {
+  /* The sidebar becomes a row of tabs that scrolls sideways. Both min-width:0
+     are load-bearing: without them a grid item keeps its content's full width
+     and the whole page ends up as wide as the list of types. */
   .sidebar {
     border-right: 0;
     border-bottom: 1px solid var(--line);
     padding: 0.8rem;
+    min-width: 0;
   }
 
   .list {
     grid-auto-flow: column;
     grid-auto-columns: max-content;
     overflow-x: auto;
+    min-width: 0;
+    gap: 0.3rem;
+  }
+
+  .entry {
+    white-space: nowrap;
   }
 
   .site {

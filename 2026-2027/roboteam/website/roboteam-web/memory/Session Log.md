@@ -8,7 +8,7 @@ updated: 2026-10-24
 
 Back to [[00 Index]]
 
-## 2026-10-24 · nw1728 (linux) — admin phase 2, tasks 1–10
+## 2026-10-24 · nw1728 (linux) — admin phase 2, finished (all 13 tasks)
 - Answered the spec's three open questions (keep a leaver's photo file, past-team members stay
   plain text, flag photo-less members) → [[Decisions]]; wrote the 13-task plan.
 - **Foundation first** (tasks 1–5): one shared defaults map asserted at boot; the dev login door
@@ -24,8 +24,19 @@ Back to [[00 Index]]
 - Editable now: events, subteams, members, news, results, numbers, partners, alumni, past teams,
   social links, contact. Partners gained a logo and a website link (Ethan asked mid-session).
 - A background security review flagged polyglot uploads; fixed with nosniff + sandbox CSP headers.
-- Stopped at task 10 of 13 because credits were tight — tasks 11–13 are listed in
-  [[Current Progress]] and in the plan.
+- **Finished the same day (tasks 11–13):** the nested `items` field (join page, open positions,
+  and the education activities inside their tabs), the education text and tabs, then the pass
+  over everything.
+- The 390px pass found the admin was **unusable on a phone** — the sidebar's list of types kept
+  its content width and pushed the page to 1440px (a grid item needs `min-width: 0`). Fixed;
+  all 15 editors now fit with no sideways scroll. The editor `<section>` had the site's 120px
+  page padding too.
+- Added a test that **every built-in default passes its own description** — it caught two data
+  files with no ids. A default an editor cannot re-save unchanged is a trap.
+- Rehearsed a changeover end to end (add two members → save once → live on `/team/electrical`)
+  and proved the boot guard refuses to start for a type with no default.
+- Wrote the admin and **backup** notes in `README.md`: `server/storage/` is not in git, so the
+  repo alone is no longer the whole site.
 
 ## 2026-10-23 · NW1728s-MacBook-Air (one long session)
 - Started from a fresh Vite + React template. Planned an "OOP-like" structure (one object per file).

@@ -44,3 +44,11 @@ Back to [[00 Index]]. Newest at the bottom of each section. Don't reverse these 
 - **People with no photo get a small flag in the Members list**, not a warning banner (Ethan, 2026-10-24). Makes the gaps visible during a changeover without nagging or blocking a save.
 - **Image upload happens in phase 2, not later**, with the file type decided by sniffing the first bytes (no SVG). Adding a member without their photo would be the most annoying half-feature.
 - **`navigation` and `story` stay in code**, being tied to which sections exist and how the scroll story is animated.
+- **Nested lists are one field type (`items`), not a special case per page.** The ways in and
+  waiting lists on the join page, and the activities inside an education tab, are the same
+  machinery one level down. Nested errors carry their path in the field name (`steps[1].title`)
+  so the shape on the wire stays flat.
+- **`join.applyEmail` became three plain fields** rather than earning a field type for one
+  nested object. Three boxes are also clearer to whoever edits them.
+- **Every built-in default must pass its own description**, enforced by a test. A default an
+  editor cannot re-save without changing anything is a trap, and it caught two real cases.

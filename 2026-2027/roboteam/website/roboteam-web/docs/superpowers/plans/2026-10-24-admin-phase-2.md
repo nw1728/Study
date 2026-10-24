@@ -37,8 +37,8 @@ Five things the spec implies, that no obvious happy-path test covers, and that w
 
 ## Where this stands (2026-10-24)
 
-**Tasks 1–10 are built and committed on `main`;** tasks 11, 12 and 13 are not started.
-At the last commit: `npm test` 147 pass, `npm run lint` clean, `npm run build` clean.
+**All 13 tasks are built and committed on `main`.**
+At the last commit: `npm test` 156 pass, `npm run lint` clean, `npm run build` clean.
 
 What changed from the plan as written, and why:
 
@@ -56,7 +56,13 @@ What changed from the plan as written, and why:
   security review flagged polyglot files (valid picture and valid HTML at once).
 - **`npm test` now covers `shared/` and `src/` too**, not only `server/`.
 
-Pick up at Task 11.
+Two more things found while finishing:
+
+- **The admin was unusable at phone width** — the sidebar's list of types kept its full
+  content width (a grid item will not shrink below its content without `min-width: 0`) and
+  pushed the whole page to 1440px. Fixed; all 15 editors now fit 390px with no sideways scroll.
+- **A test that every built-in default passes its own description.** It caught two data files
+  with no ids. A default an editor cannot re-save without changing anything is a trap.
 
 ---
 
@@ -538,7 +544,7 @@ git commit -m "feat(admin): achievements, stats, socials, news and past teams ed
 
 ---
 
-## Task 11: `items` — nested lists, proven on join and positions
+## ✅ Task 11 (done): `items` — nested lists, proven on join and positions
 
 **Files:**
 - Create: `shared/contentTypes/join.js`, `shared/contentTypes/positions.js`, `src/admin/editors/fields/ItemsField.jsx`, `src/admin/editors/fields/ItemsField.module.css`
@@ -548,7 +554,7 @@ git commit -m "feat(admin): achievements, stats, socials, news and past teams ed
 **Interfaces:**
 - Produces: field type `items` with its own `fields` array and `itemLabel`. Nested errors are reported on the wire as `field: '<name>[<i>].<subfield>'`, so the error shape stays flat; `ItemsField` filters the item's error map by that prefix.
 
-- [ ] **Step 1: Write the failing tests.**
+- [x] **Step 1: Write the failing tests.**
 
 ```js
 // fieldTypes.test.js
@@ -564,23 +570,23 @@ test('a nested error is reported with its path', () => {
 })
 ```
 
-- [ ] **Step 2: Run `npm test` and watch them fail.**
+- [x] **Step 2: Run `npm test` and watch them fail.**
 
-- [ ] **Step 3: Add the `items` entry to `fieldTypes.js`,** reusing the per-field check/clean the registry already provides, one level down. `check` returns the first row's message prefixed with its row number; the per-field paths come from `validate.js` (Step 4) so the admin can place them.
+- [x] **Step 3: Add the `items` entry to `fieldTypes.js`,** reusing the per-field check/clean the registry already provides, one level down. `check` returns the first row's message prefixed with its row number; the per-field paths come from `validate.js` (Step 4) so the admin can place them.
 
-- [ ] **Step 4: Make `validate.js` descend into `items`** when collecting errors, pushing `{ index, field: \`${field.name}[${i}].${sub.name}\`, message }`, and use the registry's `clean` for the stored value.
+- [x] **Step 4: Make `validate.js` descend into `items`** when collecting errors, pushing `{ index, field: \`${field.name}[${i}].${sub.name}\`, message }`, and use the registry's `clean` for the stored value.
 
-- [ ] **Step 5: Flatten `applyEmail` in `src/data/join.js`** into `applyEmailTo`, `applyEmailSubject`, `applyEmailBody`, and update `JoinPage.jsx` to read the three. (A nested one-off object is not worth a fifth field type; three plain boxes are clearer to an editor anyway.)
+- [x] **Step 5: Flatten `applyEmail` in `src/data/join.js`** into `applyEmailTo`, `applyEmailSubject`, `applyEmailBody`, and update `JoinPage.jsx` to read the three. (A nested one-off object is not worth a fifth field type; three plain boxes are clearer to an editor anyway.)
 
-- [ ] **Step 6: Write the descriptions.** `join`: `kind: 'single'`, fields `intro` (textarea, required), `benefits` (`list-of-text`, required), `cities` (`list-of-text`), `steps` (`items`: `title` text required, `text` textarea required), `requirements` (textarea, required), `callbackDay` (text), `applyEmailTo` (text, required), `applyEmailSubject` (text), `applyEmailBody` (textarea), `waitingLists` (`items`: `label` text required, `href` url required). `positions`: `kind: 'list'`, `itemLabel: (p) => p.title`, fields `id` (generated), `title` (text, required), `team` (`reference` to `subteams` with `refValue: 'name'`), `summary` (textarea, required), `text` (`list-of-text`, required — one row per paragraph).
+- [x] **Step 6: Write the descriptions.** `join`: `kind: 'single'`, fields `intro` (textarea, required), `benefits` (`list-of-text`, required), `cities` (`list-of-text`), `steps` (`items`: `title` text required, `text` textarea required), `requirements` (textarea, required), `callbackDay` (text), `applyEmailTo` (text, required), `applyEmailSubject` (text), `applyEmailBody` (textarea), `waitingLists` (`items`: `label` text required, `href` url required). `positions`: `kind: 'list'`, `itemLabel: (p) => p.title`, fields `id` (generated), `title` (text, required), `team` (`reference` to `subteams` with `refValue: 'name'`), `summary` (textarea, required), `text` (`list-of-text`, required — one row per paragraph).
 
-- [ ] **Step 7: Write `ItemsField.jsx`** — a nested `ListEditor`-shaped block: add / remove / up / down and an `ItemForm` per row, visibly indented and quieter than a top-level item so the nesting reads. It must not import `ListEditor` if that means a circular import; a small nested list of its own is fine and clearer.
+- [x] **Step 7: Write `ItemsField.jsx`** — a nested `ListEditor`-shaped block: add / remove / up / down and an `ItemForm` per row, visibly indented and quieter than a top-level item so the nesting reads. It must not import `ListEditor` if that means a circular import; a small nested list of its own is fine and clearer.
 
-- [ ] **Step 8: Register `items` in `ItemForm`'s map and switch `JoinPage.jsx` to `useContent('join')` and `useContent('positions')`.**
+- [x] **Step 8: Register `items` in `ItemForm`'s map and switch `JoinPage.jsx` to `useContent('join')` and `useContent('positions')`.**
 
-- [ ] **Step 9: Run `npm test`. Verify by hand, desktop and 390px:** add a benefit, reorder two steps, add a waiting list, add a position with three paragraphs; save; reload `/join`.
+- [x] **Step 9: Run `npm test`. Verify by hand, desktop and 390px:** add a benefit, reorder two steps, add a waiting list, add a position with three paragraphs; save; reload `/join`.
 
-- [ ] **Step 10: Run `npm run lint`, `npm run build`. Commit**
+- [x] **Step 10: Run `npm run lint`, `npm run build`. Commit**
 
 ```bash
 git add shared/ server/content/ src/admin/ src/data/join.js src/pages/Join/
@@ -589,7 +595,7 @@ git commit -m "feat(admin): nested items field; join page and positions editable
 
 ---
 
-## Task 12: Education
+## ✅ Task 12 (done): Education
 
 **Files:**
 - Create: `shared/contentTypes/educationPage.js`, `shared/contentTypes/activityGroups.js`
@@ -598,17 +604,17 @@ git commit -m "feat(admin): nested items field; join page and positions editable
 **Interfaces:**
 - Consumes: `single` (Task 6), `items` and `list-of-text` (Tasks 6, 11).
 
-- [ ] **Step 1: Reshape `src/data/education.js`** — replace the two loose exports `educationIntro` and `educationNote` with one `educationPage = { intro, note }`, keeping `activityGroups` as it is, and update `EducationPage.jsx` to read both through `useContent`.
+- [x] **Step 1: Reshape `src/data/education.js`** — replace the two loose exports `educationIntro` and `educationNote` with one `educationPage = { intro, note }`, keeping `activityGroups` as it is, and update `EducationPage.jsx` to read both through `useContent`.
 
-- [ ] **Step 2: Write `educationPage.js`** — `kind: 'single'`, fields `intro` (textarea, required), `note` (textarea).
+- [x] **Step 2: Write `educationPage.js`** — `kind: 'single'`, fields `intro` (textarea, required), `note` (textarea).
 
-- [ ] **Step 3: Write `activityGroups.js`** — `kind: 'list'`, `itemLabel: (g) => g.label`, fields `id` (generated from the label), `label` (text, required), `activities` (`items`: `title` text required, `level` text, `duration` text, `capacity` text, `language` text, `text` textarea required, `points` `list-of-text`, `tagline` text).
+- [x] **Step 3: Write `activityGroups.js`** — `kind: 'list'`, `itemLabel: (g) => g.label`, fields `id` (generated from the label), `label` (text, required), `activities` (`items`: `title` text required, `level` text, `duration` text, `capacity` text, `language` text, `text` textarea required, `points` `list-of-text`, `tagline` text).
 
-- [ ] **Step 4: Register both and add their defaults.**
+- [x] **Step 4: Register both and add their defaults.**
 
-- [ ] **Step 5: Verify by hand, desktop and 390px.** In `/admin`: change the intro; rename a tab; add an activity to Demonstrations with three bullet points; move an activity up; remove one. Save, reload `/education`: the tabs, the cards and the bullets all follow, and the tab switching still works.
+- [x] **Step 5: Verify by hand, desktop and 390px.** In `/admin`: change the intro; rename a tab; add an activity to Demonstrations with three bullet points; move an activity up; remove one. Save, reload `/education`: the tabs, the cards and the bullets all follow, and the tab switching still works.
 
-- [ ] **Step 6: Run `npm test`, `npm run lint`, `npm run build`. Commit**
+- [x] **Step 6: Run `npm test`, `npm run lint`, `npm run build`. Commit**
 
 ```bash
 git add shared/ src/data/education.js src/pages/Education/
@@ -617,24 +623,24 @@ git commit -m "feat(admin): education page and activity tabs editable"
 
 ---
 
-## Task 13: The whole thing, end to end
+## ✅ Task 13 (done): The whole thing, end to end
 
 **Files:**
 - Modify: `README.md`, `memory/Current Progress.md`, `memory/Session Log.md`, `memory/Decisions.md`, `docs/superpowers/specs/2026-10-24-admin-phase-2-design.md` (status line)
 
-- [ ] **Step 1: Every type, at 390px.** Walk the sidebar top to bottom in a 390px window: every editor is usable, nothing scrolls sideways, every button is reachable with a thumb.
+- [x] **Step 1: Every type, at 390px.** Walk the sidebar top to bottom in a 390px window: every editor is usable, nothing scrolls sideways, every button is reachable with a thumb.
 
-- [ ] **Step 2: The changeover, start to finish, timed.** From a clean login: add three members with uploaded photos, move two between subteams, remove two, fix a role, save once. It must be faster and calmer than editing `subteams.js` by hand — the anti-goal this phase is judged by. Note anything that felt slow.
+- [x] **Step 2: The changeover, start to finish, timed.** From a clean login: add three members with uploaded photos, move two between subteams, remove two, fix a role, save once. It must be faster and calmer than editing `subteams.js` by hand — the anti-goal this phase is judged by. Note anything that felt slow.
 
-- [ ] **Step 3: Prove the promise.** Add a throwaway description file for a type with no data file at all, start the server, and confirm it refuses to start naming the missing default (Task 1's assert) rather than blanking the site. Delete the throwaway file.
+- [x] **Step 3: Prove the promise.** Add a throwaway description file for a type with no data file at all, start the server, and confirm it refuses to start naming the missing default (Task 1's assert) rather than blanking the site. Delete the throwaway file.
 
-- [ ] **Step 4: `npm test`, `npm run lint`, `npm run build` — all three clean,** with the output in hand before anything is called done.
+- [x] **Step 4: `npm test`, `npm run lint`, `npm run build` — all three clean,** with the output in hand before anything is called done.
 
-- [ ] **Step 5: Write the deployment note** in `README.md`: `server/storage/` holds the content *and* the uploads and is not in git, so a backup means copying that folder; the repo alone is no longer the whole site.
+- [x] **Step 5: Write the deployment note** in `README.md`: `server/storage/` holds the content *and* the uploads and is not in git, so a backup means copying that folder; the repo alone is no longer the whole site.
 
-- [ ] **Step 6: Update the memory files** — overwrite `memory/Current Progress.md`, add a few lines to the top of `memory/Session Log.md`, and mark the spec as built.
+- [x] **Step 6: Update the memory files** — overwrite `memory/Current Progress.md`, add a few lines to the top of `memory/Session Log.md`, and mark the spec as built.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add README.md memory/ docs/

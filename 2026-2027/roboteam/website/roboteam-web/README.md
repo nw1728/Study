@@ -118,3 +118,44 @@ Wrap anything in `<Reveal>` to make it fade in when it scrolls into view. `from=
 ## Hosting note
 
 The site uses real page addresses (`/join`, `/team/mechanical`). The web server must answer **every** address with `index.html` (a "single-page app fallback"), so that opening `/join` directly, or refreshing on it, works. `npm run dev` already does this.
+
+## Editing the site without a developer (`/admin`)
+
+Everything a visitor reads is editable at `/admin`: events, subteams, members, news, results,
+the numbers on the front page, partners, alumni, past teams, social links, the education page
+and its activity tabs, the join page and its open positions, and the contact details.
+
+A save takes effect on the live site immediately. **Nothing has to be rebuilt or redeployed.**
+
+- Each kind of content is described by one file in `shared/contentTypes/`. The server checks
+  saves against that description and the admin builds its form from it, so the two can never
+  drift apart. Adding a new kind of content means adding a description there and its starting
+  content in `src/data/`, and nothing else.
+- `src/data/*.js` stays in the repo as the content the site ships with. It is what you see if
+  the content server is not running — which is how `npm run dev` works on its own — and what a
+  page falls back to if a stored file goes missing or is hand-edited into the wrong shape.
+- Pictures are uploaded in the admin, not committed. The ones already in the repo live at
+  `/images/…` and keep working; uploaded ones land in `/uploads/…`.
+
+### Backing it up
+
+**`server/storage/` holds the content *and* the uploaded pictures, and it is not in git.**
+
+```
+server/storage/
+├── content/     what every page says, as JSON, one file per kind
+├── history/     the last 30 versions of each, so a bad edit can be undone
+├── uploads/     every picture added through the admin
+└── users.json   who may sign in
+```
+
+The repo is no longer the whole site. A backup means copying that folder as well — if the
+office machine dies and only git survives, the site comes back as it was on the day it was
+deployed, with every edit and every uploaded photo since then gone.
+
+### Before it goes on a real domain
+
+The admin currently uses a **development login** that lets any address on the access list in
+without a password. It only runs locally: the server refuses to start if `AUTH_MODE=dev` is
+combined with `NODE_ENV=production` **or** with a `PUBLIC_URL` that is not localhost. Switching
+to `AUTH_MODE=google` (the team manager creates the OAuth client) is what makes it real.

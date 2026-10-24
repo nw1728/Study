@@ -5,6 +5,9 @@
   grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   align-content: start;
+  /* The admin shares the site's global.css, where every <section> is a page
+     section with 120px of air above and below. Not here. */
+  padding: 0;
 }
 
 .loading {
