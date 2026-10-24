@@ -4,11 +4,15 @@
 import alumni from './alumni.js'
 import contact from './contact.js'
 import events from './events.js'
+import members from './members.js'
 import partners from './partners.js'
+import subteams from './subteams.js'
 
 // The order here is the order of the admin's sidebar.
 export const contentTypes = {
   [events.id]: events,
+  [subteams.id]: subteams,
+  [members.id]: members,
   [partners.id]: partners,
   [alumni.id]: alumni,
   [contact.id]: contact,

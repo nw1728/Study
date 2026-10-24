@@ -3,6 +3,7 @@ import ItemForm from './editors/ItemForm.jsx'
 import ListEditor from './editors/ListEditor.jsx'
 import { withGeneratedIds } from './editors/generateIds.js'
 import { getContent, getMeta, putContent } from './api.js'
+import { useReferenceOptions } from './useReferenceOptions.js'
 import styles from './ContentEditor.module.css'
 
 /** Turns the server's flat error list into errors[index][field]. */
@@ -36,6 +37,8 @@ export default function ContentEditor({ type }) {
   const [errors, setErrors] = useState({ byIndex: {}, general: [] })
   const [meta, setMeta] = useState({ savedAt: null, savedBy: null })
   const [saving, setSaving] = useState(false)
+  // The choices for any dropdown that points at another type.
+  const refs = useReferenceOptions(type)
 
   // AdminApp gives this component a key per content type, so switching type
   // remounts it with fresh state rather than clearing state in an effect.
@@ -99,11 +102,11 @@ export default function ContentEditor({ type }) {
       )}
 
       {type.kind === 'single' && (
-        <ItemForm type={type} item={items} errors={errors.byIndex[0]} onChange={change} />
+        <ItemForm type={type} item={items} errors={errors.byIndex[0]} refs={refs} onChange={change} />
       )}
 
       {type.kind === 'list' && (
-        <ListEditor type={type} items={items} errors={errors.byIndex} onChange={change} />
+        <ListEditor type={type} items={items} errors={errors.byIndex} refs={refs} onChange={change} />
       )}
 
       <p className={styles.meta}>

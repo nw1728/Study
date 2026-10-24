@@ -4,12 +4,13 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import MemberCard from '../../components/MemberCard/MemberCard.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
 import NotFoundPage from '../NotFound/NotFoundPage.jsx'
-import { subteams } from '../../data/subteams.js'
+import { useMembers } from '../../content/useMembers.js'
 import styles from './SubteamPage.module.css'
 
 // One subteam and its members, e.g. /team/mechanical.
 export default function SubteamPage() {
   const { slug } = useParams()
+  const { subteams } = useMembers()
   const index = subteams.findIndex((team) => team.slug === slug)
   const subteam = subteams[index]
   usePageTitle(subteam?.name ?? 'Not found')
@@ -33,11 +34,13 @@ export default function SubteamPage() {
       <section>
         <div className="wrap">
           <Reveal as="h2" className={styles.heading}>
-            {subteam.members.length === 1 ? 'The member' : `The ${subteam.members.length} members`}
+            {subteam.members.length === 0 && 'No members listed yet'}
+            {subteam.members.length === 1 && 'The member'}
+            {subteam.members.length > 1 && `The ${subteam.members.length} members`}
           </Reveal>
           <div className={styles.grid}>
             {subteam.members.map((member, i) => (
-              <Reveal key={member.name} order={i % 4}>
+              <Reveal key={member.id ?? member.name} order={i % 4}>
                 <MemberCard {...member} />
               </Reveal>
             ))}

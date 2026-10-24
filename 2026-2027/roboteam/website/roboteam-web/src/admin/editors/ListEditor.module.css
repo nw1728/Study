@@ -113,3 +113,65 @@
 .add:hover {
   border-color: var(--lavender);
 }
+
+/* A group of items under one heading: members under their subteam.
+   The padding reset matters: the admin shares the site's global.css, where
+   every <section> is a page section with 120px of air above and below. */
+.group {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 1.4rem;
+  padding: 0;
+}
+
+.groupName {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lavender);
+  margin: 0.5rem 0 0.1rem;
+}
+
+.count {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0 0.4rem;
+}
+
+/* A note on an item that is fine but incomplete, e.g. a member with no photo.
+   Quieter than .flag, which means the server refused the save. */
+.note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  flex-shrink: 0;
+}
+
+.addSmall {
+  justify-self: start;
+  background: none;
+  border: 1px dashed var(--line);
+  border-radius: 0.5rem;
+  color: var(--lavender);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+}
+
+.addSmall:hover {
+  border-color: var(--lavender);
+}

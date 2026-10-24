@@ -10,9 +10,11 @@
 import { alumni } from '../src/data/alumni.js'
 import { contact } from '../src/data/contact.js'
 import { events } from '../src/data/events.js'
+import { members } from '../src/data/members.js'
 import { partners } from '../src/data/partners.js'
+import { subteams } from '../src/data/subteams.js'
 
-export const contentDefaults = { events, partners, alumni, contact }
+export const contentDefaults = { events, subteams, members, partners, alumni, contact }
 
 /**
  * Every described content type must have a default here. A type without one is

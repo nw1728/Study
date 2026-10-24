@@ -2,10 +2,12 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import SectionHeader from '../../components/SectionHeader/SectionHeader.jsx'
 import SubteamCard from '../../components/SubteamCard/SubteamCard.jsx'
 import Button from '../../components/Button/Button.jsx'
-import { subteams } from '../../data/subteams.js'
+import { useMembers } from '../../content/useMembers.js'
 import styles from './Team.module.css'
 
 export default function Team() {
+  const { subteams } = useMembers()
+
   return (
     <section id="team">
       <div className="wrap">

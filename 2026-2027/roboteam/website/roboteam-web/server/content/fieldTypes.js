@@ -113,6 +113,16 @@ export const fieldTypes = {
         .map((row, index) => rowOf(field, index).clean(rowField(field, index), row))
     },
   },
+  // A pick from another content type: a member's subteam, a position's team.
+  // The stored value is the other item's slug or name, never typed by hand —
+  // the admin shows a dropdown, so a subteam that doesn't exist cannot be
+  // chosen. It is not checked against the other type here: validate.js reads
+  // one file at a time, and the pages that join the two tolerate a value
+  // that has gone (a renamed subteam must not take a page down).
+  reference: {
+    check: checkText,
+    clean: text.clean,
+  },
   number: {
     check(field, value) {
       const number = Number(value)

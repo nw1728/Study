@@ -92,3 +92,16 @@ test('cleanFields keeps only described fields and drops the empty ones', () => {
   const cleaned = cleanFields(fields, { title: ' Science Day ', day: '14', note: '  ', junk: 'x' })
   assert.deepEqual(cleaned, { title: 'Science Day', day: 14 })
 })
+
+test('a reference is text and nothing cleverer', () => {
+  const field = { name: 'subteam', label: 'Subteam', type: 'reference', refType: 'subteams' }
+  assert.equal(fieldMessage(field, 'mechanical'), null)
+  assert.match(fieldMessage(field, 7), /must be text/)
+})
+
+test('a reference to something that no longer exists is still stored', () => {
+  // The join on the public side has to cope with this anyway, and refusing
+  // the save would lock an editor out of fixing it.
+  const field = { name: 'subteam', label: 'Subteam', type: 'reference', refType: 'subteams' }
+  assert.equal(fieldMessage(field, 'a-subteam-that-was-renamed'), null)
+})

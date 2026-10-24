@@ -4,6 +4,10 @@
      13rem column wider than the space there is. */
   grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr));
   gap: 0.9rem;
+  /* Fields sit at the top of their row rather than stretching: a tall one
+     (a picture, a list of rows) must not leave the text boxes beside it
+     floating in the middle of a tall empty cell. */
+  align-items: start;
   padding: 0.25rem 0 0.75rem;
 }
 

@@ -1,5 +1,6 @@
 import ImageField from './fields/ImageField.jsx'
 import NumberField from './fields/NumberField.jsx'
+import ReferenceField from './fields/ReferenceField.jsx'
 import SelectField from './fields/SelectField.jsx'
 import TextField from './fields/TextField.jsx'
 import TextListField from './fields/TextListField.jsx'
@@ -11,6 +12,7 @@ import styles from './ItemForm.module.css'
 const COMPONENTS = {
   image: ImageField,
   number: NumberField,
+  reference: ReferenceField,
   select: SelectField,
   textarea: TextareaField,
   'list-of-text': TextListField,
@@ -24,7 +26,7 @@ const WIDE = ['textarea', 'list-of-text']
  * nothing about events in particular, which is why the other content types
  * need no new form code.
  */
-export default function ItemForm({ type, item, errors, onChange }) {
+export default function ItemForm({ type, item, errors, refs = {}, onChange }) {
   return (
     <div className={styles.form}>
       {type.fields
@@ -37,6 +39,7 @@ export default function ItemForm({ type, item, errors, onChange }) {
                 field={field}
                 value={item[field.name]}
                 error={errors?.[field.name]}
+                options={refs[field.refType]}
                 onChange={(value) => onChange({ ...item, [field.name]: value })}
               />
             </div>
