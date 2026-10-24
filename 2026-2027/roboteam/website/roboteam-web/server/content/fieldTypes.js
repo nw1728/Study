@@ -113,6 +113,31 @@ export const fieldTypes = {
         .map((row, index) => rowOf(field, index).clean(rowField(field, index), row))
     },
   },
+  // A list of items with their own fields, nested inside one item: the steps
+  // on the join page, the activities inside an education tab. One level down,
+  // checked with exactly the same machinery as the level above.
+  items: {
+    blank(value) {
+      if (value === undefined || value === null) return true
+      return Array.isArray(value) && value.length === 0
+    },
+    check(field, value) {
+      if (!Array.isArray(value)) return `${field.label} must be a list`
+      for (const [index, row] of value.entries()) {
+        if (row === null || typeof row !== 'object' || Array.isArray(row)) {
+          return `${field.label} row ${index + 1} must be a set of fields`
+        }
+        for (const sub of field.fields) {
+          const message = fieldMessage(sub, row[sub.name])
+          if (message) return `${field.label} row ${index + 1}: ${message}`
+        }
+      }
+      return null
+    },
+    clean(field, value) {
+      return value.map((row) => cleanFields(field.fields, row))
+    },
+  },
   // A pick from another content type: a member's subteam, a position's team.
   // The stored value is the other item's slug or name, never typed by hand —
   // the admin shows a dropdown, so a subteam that doesn't exist cannot be

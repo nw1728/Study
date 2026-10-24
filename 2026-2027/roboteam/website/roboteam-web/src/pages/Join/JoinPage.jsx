@@ -4,13 +4,25 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import Button from '../../components/Button/Button.jsx'
 import PositionCard from './PositionCard.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
-import { join, positions } from '../../data/join.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './JoinPage.module.css'
 
-const { to, subject, body } = join.applyEmail
-const applyLink = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+/**
+ * The Apply button: a mail with the subject and body already written.
+ *
+ * encodeURIComponent, not URLSearchParams: the latter writes a space as "+",
+ * which some mail clients show literally in the body.
+ */
+function applyLinkFor(join) {
+  const subject = encodeURIComponent(join.applyEmailSubject ?? '')
+  const body = encodeURIComponent(join.applyEmailBody ?? '')
+  return `mailto:${join.applyEmailTo}?subject=${subject}&body=${body}`
+}
 
 export default function JoinPage() {
+  const join = useContent('join')
+  const positions = useContent('positions')
+  const applyLink = applyLinkFor(join)
   usePageTitle('Join us')
 
   return (

@@ -22,11 +22,12 @@ export const join = {
   requirements:
     'We welcome students with an interest in robotics, artificial intelligence, software engineering, electronics, mechanics or project management. Prior experience is valuable but not required; motivation and commitment are essential.',
   callbackDay: 'June 1st',
-  applyEmail: {
-    to: 'info@roboteamtwente.nl',
-    subject: 'Application RoboTeam Twente',
-    body: 'Dear RoboTeam Twente,\n\nName:\nSurname:\nCurrent education (university, programme, year):\n\nMotivation:\n[Describe the motivation behind your application]\n\nCV:\n[Attach your CV to this email]\n\nKind regards,\n[Your name]',
-  },
+  // The Apply button opens a mail to this address with the subject and body
+  // already filled in. Three plain boxes rather than one nested object, so
+  // each is a box of its own in the admin.
+  applyEmailTo: 'info@roboteamtwente.nl',
+  applyEmailSubject: 'Application RoboTeam Twente',
+  applyEmailBody: 'Dear RoboTeam Twente,\n\nName:\nSurname:\nCurrent education (university, programme, year):\n\nMotivation:\n[Describe the motivation behind your application]\n\nCV:\n[Attach your CV to this email]\n\nKind regards,\n[Your name]',
   waitingLists: [
     { label: 'Waiting list 2026–2027', href: 'https://docs.google.com/forms/d/e/1FAIpQLSeHZOOzleeb41mr-ocj4l_DS4eED5mh_LyCNujsy6tmpgdXgQ/viewform' },
     { label: 'Waiting list 2027–2028', href: 'https://docs.google.com/forms/d/e/1FAIpQLScIaRJjIdPBZ3oyyvAZPrhSWT76E3BgAUPQ4ECDTfw1dF6QUQ/viewform' },

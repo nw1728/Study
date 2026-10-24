@@ -1,0 +1,77 @@
+.rows {
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* Indented and quieter than a top-level item, so the nesting reads. */
+.row {
+  border-left: 2px solid var(--line);
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: var(--ink);
+  padding: 0.4rem 0.7rem 0;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actions {
+  display: flex;
+  gap: 0.2rem;
+  flex-shrink: 0;
+}
+
+.actions button {
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 0.4rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.8rem;
+  width: 1.7rem;
+  height: 1.7rem;
+}
+
+.actions button:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--lavender);
+}
+
+.actions button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.remove:hover:not(:disabled) {
+  color: #fca5a5;
+  border-color: #7f1d1d;
+}
+
+.add {
+  justify-self: start;
+  background: none;
+  border: 1px dashed var(--line);
+  border-radius: 0.5rem;
+  color: var(--lavender);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+}
+
+.add:hover {
+  border-color: var(--lavender);
+}

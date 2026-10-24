@@ -5,10 +5,12 @@ import achievements from './achievements.js'
 import alumni from './alumni.js'
 import contact from './contact.js'
 import events from './events.js'
+import join from './join.js'
 import members from './members.js'
 import news from './news.js'
 import partners from './partners.js'
 import pastTeams from './pastTeams.js'
+import positions from './positions.js'
 import socials from './socials.js'
 import stats from './stats.js'
 import subteams from './subteams.js'
@@ -25,6 +27,8 @@ export const contentTypes = {
   [alumni.id]: alumni,
   [pastTeams.id]: pastTeams,
   [socials.id]: socials,
+  [join.id]: join,
+  [positions.id]: positions,
   [contact.id]: contact,
 }
 

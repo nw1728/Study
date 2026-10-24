@@ -11,6 +11,7 @@ import { achievements } from '../src/data/achievements.js'
 import { alumni } from '../src/data/alumni.js'
 import { contact } from '../src/data/contact.js'
 import { events } from '../src/data/events.js'
+import { join, positions } from '../src/data/join.js'
 import { members } from '../src/data/members.js'
 import { news } from '../src/data/news.js'
 import { partners } from '../src/data/partners.js'
@@ -31,6 +32,8 @@ export const contentDefaults = {
   pastTeams,
   socials,
   contact,
+  join,
+  positions,
 }
 
 /**

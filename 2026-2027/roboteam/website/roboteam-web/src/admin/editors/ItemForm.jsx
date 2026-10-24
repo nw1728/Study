@@ -1,4 +1,5 @@
 import ImageField from './fields/ImageField.jsx'
+import ItemsField from './fields/ItemsField.jsx'
 import NumberField from './fields/NumberField.jsx'
 import ReferenceField from './fields/ReferenceField.jsx'
 import SelectField from './fields/SelectField.jsx'
@@ -11,6 +12,7 @@ import styles from './ItemForm.module.css'
 // so a new field type shows up as editable rather than disappearing.
 const COMPONENTS = {
   image: ImageField,
+  items: ItemsField,
   number: NumberField,
   reference: ReferenceField,
   select: SelectField,
@@ -19,7 +21,7 @@ const COMPONENTS = {
 }
 
 // Field types that get the full width of the form rather than a column.
-const WIDE = ['textarea', 'list-of-text']
+const WIDE = ['textarea', 'list-of-text', 'items']
 
 /**
  * One item's fields, built from the content type's description. It knows
@@ -39,7 +41,11 @@ export default function ItemForm({ type, item, errors, refs = {}, onChange }) {
                 field={field}
                 value={item[field.name]}
                 error={errors?.[field.name]}
+                // A field holding other fields gets the whole error map: its
+                // own messages are keyed by path, e.g. steps[0].title.
+                errors={field.type === 'items' ? errors : undefined}
                 options={refs[field.refType]}
+                refs={refs}
                 onChange={(value) => onChange({ ...item, [field.name]: value })}
               />
             </div>

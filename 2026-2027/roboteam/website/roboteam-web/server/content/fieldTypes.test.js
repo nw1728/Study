@@ -105,3 +105,39 @@ test('a reference to something that no longer exists is still stored', () => {
   const field = { name: 'subteam', label: 'Subteam', type: 'reference', refType: 'subteams' }
   assert.equal(fieldMessage(field, 'a-subteam-that-was-renamed'), null)
 })
+
+const stepsField = {
+  name: 'steps',
+  label: 'Steps',
+  type: 'items',
+  fields: [
+    { name: 'title', label: 'Title', type: 'text', required: true },
+    { name: 'text', label: 'Text', type: 'textarea', required: true },
+  ],
+}
+
+test('items wants a list', () => {
+  assert.match(check(stepsField, { a: 1 }), /must be a list/)
+})
+
+test('items wants each row to be a set of fields', () => {
+  assert.match(check(stepsField, [1]), /fields/)
+})
+
+test('items checks each row against its own fields', () => {
+  assert.match(check(stepsField, [{ text: 'x' }]), /Title is required/)
+})
+
+test('items names the row that is wrong', () => {
+  assert.match(check(stepsField, [{ title: 'a', text: 'b' }, { title: 'c' }]), /row 2/)
+})
+
+test('items cleans every row and drops what the description does not know', () => {
+  const cleaned = clean(stepsField, [{ title: ' a ', text: 'b', junk: 1 }])
+  assert.deepEqual(cleaned, [{ title: 'a', text: 'b' }])
+})
+
+test('an items list with no rows is blank, so required applies', () => {
+  assert.match(fieldMessage({ ...stepsField, required: true }, []), /required/)
+  assert.equal(fieldMessage(stepsField, []), null)
+})

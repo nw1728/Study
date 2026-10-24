@@ -182,3 +182,33 @@ test('a partner logo may not be an arbitrary path', () => {
   assert.equal(result.ok, false)
   assert.equal(result.errors[0].field, 'logo')
 })
+
+test('a nested error is reported with its path', () => {
+  const result = validateContent('join', {
+    intro: 'x',
+    benefits: ['a'],
+    steps: [{ title: 'Apply', text: 'Do it' }, { text: 'No title here' }],
+    requirements: 'y',
+    applyEmailTo: 'info@roboteamtwente.nl',
+  })
+  assert.equal(result.ok, false)
+  assert.equal(
+    result.errors.some((error) => error.field === 'steps[1].title'),
+    true,
+  )
+})
+
+test('a join page with everything filled in is stored whole', () => {
+  const result = validateContent('join', {
+    intro: 'x',
+    benefits: [' a ', ''],
+    cities: ['Nagoya'],
+    steps: [{ title: ' Apply ', text: 'Do it', junk: 1 }],
+    requirements: 'y',
+    applyEmailTo: 'info@roboteamtwente.nl',
+    waitingLists: [{ label: '2026–2027', href: 'https://example.com' }],
+  })
+  assert.equal(result.ok, true)
+  assert.deepEqual(result.value.benefits, ['a'])
+  assert.deepEqual(result.value.steps, [{ title: 'Apply', text: 'Do it' }])
+})
