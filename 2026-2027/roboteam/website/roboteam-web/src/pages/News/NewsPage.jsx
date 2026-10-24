@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom'
 import PageHero from '../../components/PageHero/PageHero.jsx'
 import Reveal from '../../components/Reveal/Reveal.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
-import { news } from '../../data/news.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './NewsPage.module.css'
 
 export default function NewsPage() {
+  const news = useContent('news')
   usePageTitle('News')
 
   return (

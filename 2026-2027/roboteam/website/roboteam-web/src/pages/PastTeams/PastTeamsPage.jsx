@@ -3,12 +3,14 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import Button from '../../components/Button/Button.jsx'
 import Alumni from '../../sections/Alumni/Alumni.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
-import { pastTeams } from '../../data/pastTeams.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './PastTeamsPage.module.css'
 
 export default function PastTeamsPage() {
+  const pastTeams = useContent('pastTeams')
   usePageTitle('Past teams')
-  const currentGeneration = pastTeams[0].generation + 1
+  // The newest generation listed here is last year's, so this year is one more.
+  const currentGeneration = (pastTeams[0]?.generation ?? 0) + 1
 
   return (
     <>

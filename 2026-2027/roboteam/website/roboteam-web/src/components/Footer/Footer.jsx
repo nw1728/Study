@@ -1,12 +1,14 @@
 import SmartLink from '../SmartLink/SmartLink.jsx'
 import { navLinks, footerLinks } from '../../data/navigation.js'
-import { socials } from '../../data/socials.js'
+import { useContent } from '../../content/useContent.js'
 import logo from '../../assets/images/whitefg_purplebg.png'
 import styles from './Footer.module.css'
 
 const year = new Date().getFullYear()
 
 export default function Footer() {
+  const socials = useContent('socials')
+
   return (
     <footer className={styles.footer}>
       <div className={`wrap ${styles.columns}`}>

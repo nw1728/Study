@@ -2,6 +2,7 @@
 // Copied from the previous website; check names with the team before publishing.
 export const pastTeams = [
   {
+    id: '2024-2025-9',
     years: '2024–2025',
     generation: 9,
     photo: '/images/past-teams/2024-2025.jpg',
@@ -9,6 +10,7 @@ export const pastTeams = [
     members: ['Deef van der Linde', 'Flim de Jong', 'Dylan Bruggeman', 'Jonathan Jeuring', 'Yuying Ba', 'Farida Elsadany', 'Omar Moustaga', 'Birlik Tubekbay', 'Lu Na Izquierdo Collantes', 'Reyhan Iri', 'Amine Ansri', 'Gulin Kesapli', 'Adeline Muchanga', 'Raswanth Vetrivel', 'Amirreza Akrami', 'Marijn Buitenweg', 'Adham Elhabashy', 'Crina Gurev', 'Hamza Elkady', 'Seif Elblalisy'],
   },
   {
+    id: '2023-2024-8',
     years: '2023–2024',
     generation: 8,
     photo: '/images/past-teams/2023-2024.jpg',
@@ -16,6 +18,7 @@ export const pastTeams = [
     members: ['Robin Roetenberg', 'Jonathan Willegers', 'Jorn de Jong', 'Chris Krommendijk', 'Luuk Winters', 'Jan Geert Kroijenga', 'Csongor Buzogany', 'Dario Captani', 'Leonie Hoekstra', 'Bas van der Kaaden', 'Razvan Petrea', 'Prawin Kumar', 'Julie Muchembled', 'Greg Ward', 'Simone Tollardo', 'Juan José González Torres', 'Moustafa Mahmoud', 'George Fawzi Ayad'],
   },
   {
+    id: '2022-2023-7',
     years: '2022–2023',
     generation: 7,
     photo: '/images/past-teams/2022-2023.jpg',
@@ -24,6 +27,7 @@ export const pastTeams = [
     members: ['Emy Ganzeboom', 'Umer Javed', 'Tom Meulenkamp', 'Mrinal Magar', 'Thijs Bink Brunon Bojków', 'Jibbe Andringa', 'Nikolai Schauer', 'Beatrice Beretta', 'Hilke van den Born', 'Silas Hoevers', 'Jitka Bojorge-Alvarez'],
   },
   {
+    id: '2021-2022-6',
     years: '2021–2022',
     generation: 6,
     photo: '/images/past-teams/2021-2022.jpg',
@@ -31,6 +35,7 @@ export const pastTeams = [
     members: ['Anne van Harten', 'Lotte Steenmeijer', 'Franka van Jaarsveld', 'Tijmen Westeneng', 'Floris Heinen', 'Sander Sijtsma', 'Elias Gudmundsson', 'Sarah Onrust', 'Oscar Lawson', 'Sabine van der Werff', 'Alexander de Ranitz', 'Agata Sowa', 'Martin Miksik', 'Dawid Kulikowski', 'Max Thielen', 'Corentin Monat', 'Elisa Dankers', 'Rohit Aggarwal', 'Aryan Kapoor', 'Stelios Diamantopoulos', 'Karina Skurule', 'Tijmen Smit', 'Emiel Steerneman', 'Cassandra Post', 'Jaro Kuiken'],
   },
   {
+    id: '2020-2021-5',
     years: '2020–2021',
     generation: 5,
     photo: '/images/past-teams/2020-2021.jpg',
@@ -38,6 +43,7 @@ export const pastTeams = [
     members: ['Cassandra Post', 'Floris Hoek', 'Franka van Jaarsveld', 'Jaro Kuiken', 'Alejandro López Téllez', 'Bruno Silva', 'Casper de Regt', 'David Elskamp', 'Dawid Kulikowski', 'Emiel Steerneman', 'Ioana Miu', 'Jayanshi Tripathi', 'Joost Bonekamp', 'Koen Vonk', 'Luuk Klein Nagelvoort', 'Martin Miksik', 'Max Lievense', 'Nathalie Kamp', 'Rohit Aggarwal', 'Rolf van der Hulst', 'Tycho van Leersum', 'Vicente Pinto', 'Víctor Antonio Carmona', 'Vignesh Balaji Vijayan', 'Yuhanun Citgez'],
   },
   {
+    id: '2019-2020-4',
     years: '2019–2020',
     generation: 4,
     photo: '/images/past-teams/2019-2020.jpg',
@@ -45,6 +51,7 @@ export const pastTeams = [
     members: ['Casper de Regt', 'Jente van Werven', 'Selina Zwerver', 'Luuk Klein Nagelvoort', 'Emiel Steerneman', 'Sabine van der Werff', 'Luc Schoot Uiterkamp', 'Lars Poort', 'Finn Prinsenberg', 'Rik Schrijver', 'Jordi Luong', 'Paul Vacariu', 'Haico Dorenbos', 'Timo van der Kuil', 'Yuhanun Citgez', 'Àngel Lorente Rogel', 'Carina Campisi'],
   },
   {
+    id: '2018-2019-3',
     years: '2018–2019',
     generation: 3,
     photo: '/images/past-teams/2018-2019.jpg',
@@ -52,6 +59,7 @@ export const pastTeams = [
     members: ['Rob Verbeek', 'Barış İmre', 'Selina Zwerver', 'Pepijn de Vos', 'Rolf van der Hulst', 'Cas Doornkamp', 'Lukas Bos', 'Antonio Sanchez Martin', 'Freek Nijweide', 'Emil Kerimov', 'Koen Hertenberg', 'Alice Petry', 'Simen Bootsma', 'Inkeri Kollmann', 'Thijs Luttikhuis'],
   },
   {
+    id: '2017-2018-2',
     years: '2017–2018',
     generation: 2,
     photo: '/images/past-teams/2017-2018.jpg',
@@ -59,6 +67,7 @@ export const pastTeams = [
     members: ['Emiel Steerneman', 'Jelle Zult', 'Jeroen Weener', 'Nahuel Manterola', 'Anouk Leunissen', 'Cas Doornkamp', 'Luka Sculac', 'Stefan Tersteeg', 'Wouter van Veelen', 'Zahra van Egdom', 'Christophe van der Walt', 'Gaël Humblot-Renaux', 'Haichuan Wang', 'Sebastian Schipper', 'Leon Klute'],
   },
   {
+    id: '2016-2017-1',
     years: '2016–2017',
     generation: 1,
     photo: '/images/past-teams/2016-2017.jpg',

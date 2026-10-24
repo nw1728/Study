@@ -7,14 +7,31 @@
 //
 // The server and the public site both import this, so a new content type can
 // never end up with a default on one side and none on the other.
+import { achievements } from '../src/data/achievements.js'
 import { alumni } from '../src/data/alumni.js'
 import { contact } from '../src/data/contact.js'
 import { events } from '../src/data/events.js'
 import { members } from '../src/data/members.js'
+import { news } from '../src/data/news.js'
 import { partners } from '../src/data/partners.js'
+import { pastTeams } from '../src/data/pastTeams.js'
+import { socials } from '../src/data/socials.js'
+import { stats } from '../src/data/stats.js'
 import { subteams } from '../src/data/subteams.js'
 
-export const contentDefaults = { events, subteams, members, partners, alumni, contact }
+export const contentDefaults = {
+  events,
+  subteams,
+  members,
+  news,
+  achievements,
+  stats,
+  partners,
+  alumni,
+  pastTeams,
+  socials,
+  contact,
+}
 
 /**
  * Every described content type must have a default here. A type without one is

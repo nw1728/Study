@@ -1,7 +1,7 @@
 export const socials = [
-  { label: 'Instagram', href: 'https://www.instagram.com/roboteamtwente/' },
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/company/roboteamtwente/' },
-  { label: 'GitHub', href: 'https://github.com/RoboTeamTwente' },
-  { label: 'YouTube', href: 'https://www.youtube.com/@RoboTeamTwente' },
-  { label: 'Facebook', href: 'https://www.facebook.com/roboteamtwente/' },
+  { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/roboteamtwente/' },
+  { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/company/roboteamtwente/' },
+  { id: 'github', label: 'GitHub', href: 'https://github.com/RoboTeamTwente' },
+  { id: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@RoboTeamTwente' },
+  { id: 'facebook', label: 'Facebook', href: 'https://www.facebook.com/roboteamtwente/' },
 ]

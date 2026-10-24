@@ -3,10 +3,7 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import Button from '../../components/Button/Button.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
 import { useContent } from '../../content/useContent.js'
-import { socials } from '../../data/socials.js'
 import styles from './EventsPage.module.css'
-
-const instagram = socials.find((social) => social.label === 'Instagram')
 
 // Joined, not glued: an editor who clears the Time box must not leave a
 // dangling separator behind. EventCard does the same with the same parts.
@@ -14,6 +11,8 @@ const details = (event) => [event.place, event.time, event.note].filter(Boolean)
 
 export default function EventsPage() {
   const events = useContent('events')
+  const socials = useContent('socials')
+  const instagram = socials.find((social) => social.label === 'Instagram')
   usePageTitle('Events')
 
   return (

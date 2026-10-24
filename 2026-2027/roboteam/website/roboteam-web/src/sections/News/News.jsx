@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
 import Reveal from '../../components/Reveal/Reveal.jsx'
 import SectionHeader from '../../components/SectionHeader/SectionHeader.jsx'
-import { news } from '../../data/news.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './News.module.css'
 
 export default function News() {
-  const [latest] = news
+  const [latest] = useContent('news')
   if (!latest) return null
 
   return (

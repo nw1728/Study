@@ -3,12 +3,13 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import WordRise from '../../components/WordRise/WordRise.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
 import NotFoundPage from '../NotFound/NotFoundPage.jsx'
-import { news } from '../../data/news.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './NewsArticlePage.module.css'
 
 // One news article, e.g. /news/3. The newsletter's pages are shown top to bottom.
 export default function NewsArticlePage() {
   const { id } = useParams()
+  const news = useContent('news')
   const article = news.find((item) => String(item.id) === id)
   usePageTitle(article?.title ?? 'Not found')
 

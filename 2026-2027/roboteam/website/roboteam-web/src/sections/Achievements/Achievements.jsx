@@ -1,10 +1,10 @@
 import Reveal from '../../components/Reveal/Reveal.jsx'
 import SectionHeader from '../../components/SectionHeader/SectionHeader.jsx'
 import RollingNumber from '../../components/RollingNumber/RollingNumber.jsx'
-import { achievements } from '../../data/achievements.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './Achievements.module.css'
 
-// A row opens to show more when the achievement has a `note` in data/achievements.js.
+// A row opens to show more when the achievement has a `note`.
 function ResultRow({ year, result, competition, note }) {
   const cells = (
     <>
@@ -25,6 +25,8 @@ function ResultRow({ year, result, competition, note }) {
 }
 
 export default function Achievements() {
+  const achievements = useContent('achievements')
+
   return (
     <section id="competitions">
       <div className="wrap">

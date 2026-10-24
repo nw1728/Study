@@ -3,7 +3,6 @@ import Reveal from '../../components/Reveal/Reveal.jsx'
 import SmartLink from '../../components/SmartLink/SmartLink.jsx'
 import usePageTitle from '../../hooks/usePageTitle.js'
 import { useContent } from '../../content/useContent.js'
-import { socials } from '../../data/socials.js'
 import styles from './ContactPage.module.css'
 
 /**
@@ -42,6 +41,7 @@ function cardsFrom(contact) {
 
 export default function ContactPage() {
   const cards = cardsFrom(useContent('contact'))
+  const socials = useContent('socials')
   usePageTitle('Contact')
 
   return (

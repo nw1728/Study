@@ -1,6 +1,6 @@
 import useInView from '../../hooks/useInView.js'
 import useCountUp from '../../hooks/useCountUp.js'
-import { stats } from '../../data/stats.js'
+import { useContent } from '../../content/useContent.js'
 import styles from './Stats.module.css'
 
 function Stat({ value, label }) {
@@ -16,6 +16,8 @@ function Stat({ value, label }) {
 }
 
 export default function Stats() {
+  const stats = useContent('stats')
+
   return (
     <section className={styles.stats}>
       <div className={`wrap ${styles.row}`}>

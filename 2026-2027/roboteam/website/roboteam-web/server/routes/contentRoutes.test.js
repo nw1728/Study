@@ -126,3 +126,31 @@ test('GET /api/me reports the active authMode', async (t) => {
   const { base } = await anApp(t)
   assert.equal((await (await fetch(`${base}/api/me`)).json()).authMode, 'dev')
 })
+
+test('PUT /api/content/news refuses two items with the same number', async (t) => {
+  const { base, cookie } = await anApp(t)
+  const two = [
+    { id: 3, date: 'August 20, 2026', title: 'One', summary: 'A' },
+    { id: 3, date: 'August 21, 2026', title: 'Two', summary: 'B' },
+  ]
+  const response = await put(base, 'news', two, { cookie })
+  assert.equal(response.status, 422)
+  assert.match((await response.json()).errors[0].message, /share the id/)
+})
+
+test('PUT /api/content/news refuses a page that is not a picture path', async (t) => {
+  const { base, cookie } = await anApp(t)
+  const item = [{ id: 3, date: 'x', title: 'T', summary: 'S', pages: ['/images/a.jpg', 'nope'] }]
+  const response = await put(base, 'news', item, { cookie })
+  assert.equal(response.status, 422)
+  assert.match((await response.json()).errors[0].message, /row 2/)
+})
+
+test('PUT /api/content/pastTeams keeps the member names as plain text', async (t) => {
+  const { base, cookie } = await anApp(t)
+  const item = [{ id: 'a', years: '2024–2025', generation: 9, members: ['Deef', ' Flim '] }]
+  const response = await put(base, 'pastTeams', item, { cookie })
+  assert.equal(response.status, 200)
+  const stored = await (await fetch(`${base}/api/content/pastTeams`)).json()
+  assert.deepEqual(stored[0].members, ['Deef', 'Flim'])
+})
