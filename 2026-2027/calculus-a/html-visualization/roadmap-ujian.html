@@ -1,0 +1,338 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Roadmap Ujian Kalkulus</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+/* Layout: vertical timeline — a day rail on the left, one card per day,
+   tasks as checkboxes. Points-locked bar tracks the path to 18/36. */
+:root{
+  --paper:#eef1ef; --card:#ffffff; --card-2:#f5f8f6;
+  --ink:#16201c; --ink-2:#4d5e57; --ink-3:#7e8f88;
+  --line:#d3ded8; --accent:#1b6b52; --accent-soft:#dff0e8;
+  --calc:#1b6b52; --calc-bg:#dff0e8;
+  --la:#8a4a13; --la-bg:#fae9d6;
+  --rest:#5c6a80; --rest-bg:#e5eaf0;
+  --exam:#a32a2a; --exam-bg:#fae0e0;
+  --font-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --font-read:"Source Serif 4",Georgia,serif;
+  --font-num:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0d1411; --card:#151e1a; --card-2:#1a2521;
+  --ink:#e6ede9; --ink-2:#a3b5ac; --ink-3:#7a8b83;
+  --line:#28352f; --accent:#5fcfa4; --accent-soft:#132d24;
+  --calc:#5fcfa4; --calc-bg:#132d24;
+  --la:#e0a860; --la-bg:#2f2113;
+  --rest:#9aa8bd; --rest-bg:#1e2733;
+  --exam:#f09a9a; --exam-bg:#3a1c1c;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#0d1411; --card:#151e1a; --card-2:#1a2521;
+  --ink:#e6ede9; --ink-2:#a3b5ac; --ink-3:#7a8b83;
+  --line:#28352f; --accent:#5fcfa4; --accent-soft:#132d24;
+  --calc:#5fcfa4; --calc-bg:#132d24;
+  --la:#e0a860; --la-bg:#2f2113;
+  --rest:#9aa8bd; --rest-bg:#1e2733;
+  --exam:#f09a9a; --exam-bg:#3a1c1c;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-ui);line-height:1.5;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--card)}
+.wrap{max-width:820px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--card);border-bottom:1px solid var(--line);
+     margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.bar-in{max-width:820px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;
+        padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px}
+.stat{display:flex;flex-direction:column;min-width:0}
+.stat .k{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.stat .v{font-family:var(--font-num);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.stat .v small{font-size:12px;color:var(--ink-3)}
+
+header{padding-block:28px 16px}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1{font-family:var(--font-read);font-size:clamp(26px,5vw,36px);line-height:1.1;margin:8px 0 8px;font-weight:600;text-wrap:balance}
+.lede{color:var(--ink-2);font-size:15px;margin:0;max-width:62ch}
+
+.meter{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.meter .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.meter .big{font-family:var(--font-num);font-size:26px;font-weight:600;color:var(--accent);font-variant-numeric:tabular-nums}
+.meter .cap{font-size:13px;color:var(--ink-2)}
+.track{position:relative;height:14px;background:var(--card-2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.fill{height:100%;background:var(--accent);width:0;transition:width .3s ease}
+@media (prefers-reduced-motion:reduce){.fill{transition:none}}
+.pass{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--exam);left:50%}
+.marks{display:flex;justify-content:space-between;font-family:var(--font-num);font-size:11px;color:var(--ink-3);margin-top:5px}
+
+.days{display:flex;flex-direction:column;gap:12px;margin-top:22px}
+.day{display:grid;grid-template-columns:76px 1fr;gap:14px;align-items:start}
+@media (max-width:520px){.day{grid-template-columns:1fr;gap:6px}}
+.rail{text-align:right;padding-top:14px}
+@media (max-width:520px){.rail{text-align:left;padding-top:0}}
+.rail .dow{font-size:12px;font-weight:600;color:var(--ink-2)}
+.rail .dm{font-family:var(--font-num);font-size:13px;color:var(--ink-3)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;min-width:0}
+.card.today{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
+.chead{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--card-2)}
+.ctitle{font-weight:600;font-size:15px;flex:1;min-width:0}
+.tag{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tag.calc{background:var(--calc-bg);color:var(--calc)}
+.tag.la{background:var(--la-bg);color:var(--la)}
+.tag.rest{background:var(--rest-bg);color:var(--rest)}
+.tag.exam{background:var(--exam-bg);color:var(--exam)}
+.tag.now{background:var(--accent);color:var(--card)}
+.cbody{padding:10px 14px 14px}
+.note{font-size:13px;color:var(--ink-2);margin:0 0 10px;font-family:var(--font-read);font-size:14px}
+ul.tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+ul.tasks li{display:flex;gap:10px;align-items:flex-start;padding:7px 8px;border-radius:7px;min-width:0}
+ul.tasks li:hover{background:var(--card-2)}
+ul.tasks input[type=checkbox]{margin:3px 0 0;width:17px;height:17px;accent-color:var(--accent);flex:none;cursor:pointer}
+.tbody{flex:1;min-width:0}
+.ttext{font-size:14px}
+li.done .ttext{text-decoration:line-through;color:var(--ink-3)}
+.tmeta{font-family:var(--font-num);font-size:11px;color:var(--ink-3);margin-top:1px}
+.must{color:var(--exam);font-weight:600}
+.locked{font-family:var(--font-num);font-size:12px;color:var(--accent);font-weight:600;margin-top:10px;padding-top:9px;border-top:1px dashed var(--line)}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin-top:20px}
+.panel h2{font-family:var(--font-read);font-size:19px;margin:0 0 10px;font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:top}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+td.n{font-family:var(--font-num);white-space:nowrap}
+.scroll{overflow-x:auto}
+.risk{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+.risk:last-child{border-bottom:0}
+.risk .i{font-size:17px;flex:none}
+.risk b{display:block;font-size:14px}
+.risk span{font-size:13px;color:var(--ink-2)}
+footer{margin-top:24px;font-size:12px;color:var(--ink-3);text-align:center}
+.sync{font-size:12px;color:var(--ink-3)}
+button{font-family:inherit;font-size:13px;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--card-2);color:var(--ink);padding:6px 11px}
+button:hover{border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+</style>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="stat"><span class="k">Ujian Kalkulus</span><span class="v" id="countdown">—</span></div>
+    <div class="stat"><span class="k">Tugas selesai</span><span class="v"><span id="done">0</span><small id="total">/0</small></span></div>
+    <div class="stat"><span class="k">Poin terkunci</span><span class="v"><span id="pts">10</span><small>/36</small></span></div>
+    <div class="stat"><span class="k">Perkiraan nilai</span><span class="v" id="grade">3,5</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="kicker">Senin 26 Okt — Rabu 4 Nov 2026</div>
+    <h1>Jalan 9 hari ke ujian</h1>
+    <p class="lede">Lulus butuh <b>18 dari 36 poin</b>. Rencana ini tidak mengejar nilai sempurna — dia mengejar poin termurah lebih dulu, supaya posisi amanmu didapat secepat mungkin.</p>
+  </header>
+
+  <div class="meter">
+    <div class="top">
+      <div><span class="big" id="pts2">10</span> <span class="cap">poin terkunci dari 36 &nbsp;·&nbsp; nilai <b id="grade2">3,5</b></span></div>
+      <div class="cap">batas lulus: <b>18 poin</b> (nilai 5,5)</div>
+    </div>
+    <div class="track"><div class="fill" id="fill"></div><div class="pass" id="passmark"></div></div>
+    <div class="marks"><span>0</span><span>18 — lulus</span><span>36</span></div>
+  </div>
+
+  <div class="days" id="days"></div>
+
+  <section class="panel">
+    <h2>Cara memakai 4 sample exam</h2>
+    <p class="note">Kesalahan paling umum: semua latihan dibakar di hari pertama, lalu tidak ada alat ukur yang jujur menjelang ujian.</p>
+    <div class="scroll"><table>
+      <tr><th>Sample</th><th>Kapan</th><th>Caranya</th></tr>
+      <tr><td class="n">#1</td><td class="n">Sel–Kam</td><td>Buku pelajaran, bukan ujian. Dibedah per topik. Kuncinya boleh dilihat setelah mencoba.</td></tr>
+      <tr><td class="n">#2</td><td class="n">Selasa 3</td><td>🔒 Jangan disentuh sampai hari itu. Simulasi 3 jam, tanpa catatan, tanpa kalkulator.</td></tr>
+      <tr><td class="n">#3</td><td class="n">Selasa 3 sore</td><td>Hanya soal yang gagal di #2.</td></tr>
+      <tr><td class="n">#4</td><td class="n">Cadangan</td><td>Kesempatan ukur kedua kalau #2 jelek.</td></tr>
+    </table></div>
+  </section>
+
+  <section class="panel">
+    <h2>Tiga risiko</h2>
+    <div class="risk"><div class="i">🧱</div><div><b>Fondasi goyang</b><span>Aturan turunan belum otomatis. Menjalar ke soal 2, 3, 7, 8, 9. Karena itu Selasa pagi adalah fondasi, tidak bisa ditawar.</span></div></div>
+    <div class="risk"><div class="i">🕳️</div><div><b>Jeda tiga hari untuk Aljabar Linear</b><span>Tanpa perawatan, 30–40% hilang. 15 menit per hari menyelamatkan 12 jam kerja — tukaran termurah di rencana ini.</span></div></div>
+    <div class="risk"><div class="i">🔋</div><div><b>Capek setelah ulangan Senin</b><span>Makanya Selasa 3 adalah simulasi, bukan materi baru. Simulasi bisa dikerjakan dengan tenaga 70%; belajar materi baru tidak bisa.</span></div></div>
+  </section>
+
+  <section class="panel">
+    <h2>Dua aturan keras</h2>
+    <div class="risk"><div class="i">🔒</div><div><b>Tidak ada materi baru setelah Kamis 29</b><span>Apa pun yang belum masuk sampai Kamis malam, relakan. Materi baru di hari terakhir mengacak yang sudah rapi.</span></div></div>
+    <div class="risk"><div class="i">🛌</div><div><b>Selasa 3 malam berhenti jam 9</b><span>Tidur cukup sebelum ujian itu bagian dari strategi, bukan kemalasan.</span></div></div>
+  </section>
+
+  <footer><span class="sync" id="sync">Centangan tersimpan otomatis.</span></footer>
+</div>
+
+<script>
+const EXAM_DATE = "2026-11-04";
+const BASE_PTS = 10; // soal 1, 2, 3a — sudah dipelajari sebelum rencana ini
+
+const DAYS = [
+ {id:"d0", date:"2026-10-26", dow:"Senin", dm:"26 Okt", title:"Istirahat", type:"rest",
+  note:"Kurang fit. Belajar dalam kondisi capek menanam ingatan yang rapuh — besok harus diulang lagi, rugi dua kali.",
+  tasks:[
+   {id:"t01", text:"Selesaikan soal 1c dan 2b yang menggantung", meta:"10 menit · opsional"},
+   {id:"t02", text:"Tidur cukup", meta:"ini tugas beneran"}]},
+
+ {id:"d1", date:"2026-10-27", dow:"Selasa", dm:"27 Okt", title:"Fondasi + panen pertama", type:"calc",
+  note:"Fondasi dulu. Aturan turunan menjalar ke soal 2, 3, 7, 8 dan 9 — memperbaikinya di hari pertama itu investasi, bukan buang waktu.",
+  lock:14,
+  tasks:[
+   {id:"t11", text:"Aturan turunan — 6 latihan (pangkat, hasil kali, hasil bagi, rantai)", meta:"1,5 jam · pagi", must:true},
+   {id:"t12", text:"Soal 1c + soal 2 selesai", meta:"1 jam · siang · 5 poin", pts:0},
+   {id:"t13", text:"Soal 6 — buktikan limit multivariabel tidak ada", meta:"1,5 jam · sore · 4 poin ⭐ termurah", pts:4}]},
+
+ {id:"d2", date:"2026-10-28", dow:"Rabu", dm:"28 Okt", title:"Panen resep besar", type:"calc",
+  note:"Tiga soal, semuanya resep. Setelah hari ini kamu lewat batas lulus di atas kertas — sisa rencana dikerjakan dari posisi aman, bukan dari panik.",
+  lock:24,
+  tasks:[
+   {id:"t21", text:"Soal 9 — PD linear orde satu, faktor integrasi", meta:"1,5 jam · pagi · 4 poin", pts:4},
+   {id:"t22", text:"Soal 7 — aturan rantai multivariabel", meta:"1,5 jam · siang · 4 poin", pts:4},
+   {id:"t23", text:"Soal 3b — integral parsial", meta:"1 jam · sore · 2 poin", pts:2}]},
+
+ {id:"d3", date:"2026-10-29", dow:"Kamis", dm:"29 Okt", title:"Sisa + kartu resep", type:"calc",
+  note:"Hari terakhir untuk materi baru. Apa pun yang belum masuk malam ini, relakan.",
+  lock:36,
+  tasks:[
+   {id:"t31", text:"Soal 8 — titik kritis + minimum pada ruas garis", meta:"2 jam · pagi · 5 poin", pts:5},
+   {id:"t32", text:"Soal 4 — cross product + persamaan bidang", meta:"2 jam · siang · 4 poin", pts:4},
+   {id:"t33", text:"Soal 5 — polar ke Cartesius", meta:"1 jam · sore · 3 poin", pts:3},
+   {id:"t34", text:"Tulis kartu resep: satu halaman, 9 resep, satu per soal", meta:"30 menit · malam", must:true}]},
+
+ {id:"d4", date:"2026-10-30", dow:"Jumat", dm:"30 Okt", title:"Aljabar Linear", type:"la",
+  note:"Fokus pindah. Kalkulus cuma dirawat, tidak dipelajari.",
+  tasks:[
+   {id:"t41", text:"Aljabar Linear — seharian", meta:"ulangan Senin"},
+   {id:"t42", text:"Kalkulus: kerjakan ulang SATU soal lama", meta:"15 menit · jangan bolos", must:true}]},
+
+ {id:"d5", date:"2026-10-31", dow:"Sabtu", dm:"31 Okt", title:"Aljabar Linear", type:"la",
+  tasks:[
+   {id:"t51", text:"Aljabar Linear — seharian", meta:""},
+   {id:"t52", text:"Kalkulus: kerjakan ulang SATU soal lama", meta:"15 menit · jangan bolos", must:true}]},
+
+ {id:"d6", date:"2026-11-01", dow:"Minggu", dm:"1 Nov", title:"Aljabar Linear", type:"la",
+  tasks:[
+   {id:"t61", text:"Aljabar Linear — seharian", meta:""},
+   {id:"t62", text:"Kalkulus: kerjakan ulang SATU soal lama", meta:"15 menit · jangan bolos", must:true}]},
+
+ {id:"d7", date:"2026-11-02", dow:"Senin", dm:"2 Nov", title:"Ulangan Aljabar Linear", type:"exam",
+  note:"Kalkulus: nol. Otakmu sudah dipakai hari ini.",
+  tasks:[
+   {id:"t71", text:"Ulangan Aljabar Linear", meta:"semoga lancar"},
+   {id:"t72", text:"Istirahat setelahnya", meta:"tidak ada kalkulus hari ini"}]},
+
+ {id:"d8", date:"2026-11-03", dow:"Selasa", dm:"3 Nov", title:"Simulasi penuh + tambal", type:"calc",
+  note:"Hari ini mengukur, bukan menambah. Tidak ada materi baru.",
+  tasks:[
+   {id:"t81", text:"Sample exam #2 — timer 3 jam, tanpa catatan, tanpa kalkulator", meta:"3 jam · pagi", must:true},
+   {id:"t82", text:"Koreksi bareng Claude, soal per soal", meta:"2 jam · siang"},
+   {id:"t83", text:"Tambal 2–3 titik terlemah saja (pakai sample #3)", meta:"1 jam · sore"},
+   {id:"t84", text:"Berhenti jam 9 malam. Tidur cukup.", meta:"bagian dari strategi", must:true}]},
+
+ {id:"d9", date:"2026-11-04", dow:"Rabu", dm:"4 Nov", title:"UJIAN KALKULUS A", type:"exam",
+  note:"08:45–11:45. Baca kartu resep 15 menit. Jangan mengerjakan soal baru pagi ini. Sarapan.",
+  tasks:[
+   {id:"t91", text:"Baca kartu resep", meta:"15 menit · pagi"},
+   {id:"t92", text:"Sarapan", meta:"serius"},
+   {id:"t93", text:"Ujian", meta:"08:45–11:45 · 36 poin"}]}
+];
+
+const TYPE_LABEL = {calc:"Kalkulus", la:"Aljabar Linear", rest:"Istirahat", exam:"Ujian"};
+const allTasks = DAYS.flatMap(d => d.tasks);
+const done = {};
+allTasks.forEach(t => done[t.id] = false);
+
+let db = null, canWrite = true;
+
+/* countdown */
+function todayISO(){
+  const n = new Date();
+  return n.getFullYear() + "-" + String(n.getMonth()+1).padStart(2,"0") + "-" + String(n.getDate()).padStart(2,"0");
+}
+(function(){
+  const today = todayISO();
+  const diff = Math.round((new Date(EXAM_DATE + "T00:00:00") - new Date(today + "T00:00:00")) / 86400000);
+  const el = document.getElementById("countdown");
+  el.textContent = diff > 1 ? diff + " hari lagi" : diff === 1 ? "besok" : diff === 0 ? "HARI INI" : "selesai";
+})();
+
+/* build */
+const host = document.getElementById("days");
+const today = todayISO();
+DAYS.forEach(d => {
+  const row = document.createElement("div");
+  row.className = "day";
+  const isToday = d.date === today;
+  row.innerHTML =
+    '<div class="rail"><div class="dow">' + d.dow + '</div><div class="dm">' + d.dm + '</div></div>' +
+    '<div class="card' + (isToday ? ' today' : '') + '">' +
+      '<div class="chead"><span class="ctitle">' + d.title + '</span>' +
+        (isToday ? '<span class="tag now">hari ini</span>' : '') +
+        '<span class="tag ' + d.type + '">' + TYPE_LABEL[d.type] + '</span></div>' +
+      '<div class="cbody">' + (d.note ? '<p class="note">' + d.note + '</p>' : '') +
+        '<ul class="tasks"></ul>' +
+        (d.lock ? '<div class="locked">▸ Target akhir hari: ' + d.lock + ' poin terkunci</div>' : '') +
+      '</div></div>';
+  const ul = row.querySelector("ul");
+  d.tasks.forEach(t => {
+    const li = document.createElement("li");
+    li.id = "li-" + t.id;
+    li.innerHTML =
+      '<input type="checkbox" id="cb-' + t.id + '">' +
+      '<label class="tbody" for="cb-' + t.id + '">' +
+        '<div class="ttext">' + t.text + (t.must ? ' <span class="must">· wajib</span>' : '') + '</div>' +
+        (t.meta ? '<div class="tmeta">' + t.meta + '</div>' : '') +
+      '</label>';
+    li.querySelector("input").addEventListener("change", e => toggle(t.id, e.target.checked));
+    ul.appendChild(li);
+  });
+  host.appendChild(row);
+});
+
+function toggle(id, val){
+  done[id] = val;
+  render();
+  if (!db || !canWrite) return;
+  db.collection("tasks").doc(id).set({done: val, at: new Date().toISOString()}).catch(e => {
+    if (e && e.code === "invalid_argument") { canWrite = false; document.getElementById("sync").textContent = "Mode baca saja — centangan tidak tersimpan."; }
+  });
+}
+
+function render(){
+  allTasks.forEach(t => {
+    const cb = document.getElementById("cb-" + t.id);
+    if (cb && cb.checked !== done[t.id]) cb.checked = done[t.id];
+    document.getElementById("li-" + t.id).classList.toggle("done", done[t.id]);
+  });
+  const n = allTasks.filter(t => done[t.id]).length;
+  const pts = BASE_PTS + allTasks.filter(t => done[t.id] && t.pts).reduce((s,t) => s + t.pts, 0);
+  const grade = (1 + pts/4).toFixed(1).replace(".", ",");
+  document.getElementById("done").textContent = n;
+  document.getElementById("total").textContent = "/" + allTasks.length;
+  document.getElementById("pts").textContent = pts;
+  document.getElementById("pts2").textContent = pts;
+  document.getElementById("grade").textContent = grade;
+  document.getElementById("grade2").textContent = grade;
+  document.getElementById("fill").style.width = Math.min(100, pts/36*100) + "%";
+  document.getElementById("passmark").style.left = (18/36*100) + "%";
+}
+render();
+
+(async () => {
+  if (!window.claude || !claude.use) { document.getElementById("sync").textContent = "Salinan lokal — centangan tidak tersimpan."; return; }
+  db = await claude.use("db");
+  if (!db) { document.getElementById("sync").textContent = "Tidak tersambung — centangan tidak tersimpan."; return; }
+  db.collection("tasks").onSnapshot(snap => {
+    snap.docs.forEach(d => { if (d.id in done) done[d.id] = !!(d.data() || {}).done; });
+    render();
+  }, () => { document.getElementById("sync").textContent = "Sinkronisasi terputus — muat ulang halaman."; });
+})();
+</script>

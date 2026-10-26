@@ -1,0 +1,469 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Turunan Secara Visual</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+/* Layout: three tabs — one canvas stage each, numbers panel beside it,
+   plain-words strip underneath that narrates whatever the stage shows. */
+:root{
+  --paper:#eceef3; --card:#ffffff; --card-2:#f5f7fa;
+  --ink:#141922; --ink-2:#4b5666; --ink-3:#7c8799;
+  --line:#d5dbe5; --accent:#2f4bbd; --accent-soft:#e4e9f9;
+  --curve:#2f4bbd; --tangent:#c2410c; --secant:#0d7a6f; --tri:#0d7a6f;
+  --u:#2563eb; --v:#d97706;
+  --font-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --font-read:"Source Serif 4",Georgia,serif;
+  --font-num:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0d1119; --card:#151b25; --card-2:#1a212d;
+  --ink:#e6eaf2; --ink-2:#a4b0c2; --ink-3:#7a8697;
+  --line:#28313f; --accent:#8da4ff; --accent-soft:#1b2440;
+  --curve:#8da4ff; --tangent:#ff9f6b; --secant:#5fd3c2; --tri:#5fd3c2;
+  --u:#60a5fa; --v:#fbbf24;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#0d1119; --card:#151b25; --card-2:#1a212d;
+  --ink:#e6eaf2; --ink-2:#a4b0c2; --ink-3:#7a8697;
+  --line:#28313f; --accent:#8da4ff; --accent-soft:#1b2440;
+  --curve:#8da4ff; --tangent:#ff9f6b; --secant:#5fd3c2; --tri:#5fd3c2;
+  --u:#60a5fa; --v:#fbbf24;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-ui);line-height:1.5;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--card)}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 56px}
+
+header{padding-block:26px 14px}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1{font-family:var(--font-read);font-size:clamp(25px,5vw,34px);line-height:1.1;margin:8px 0 6px;font-weight:600;text-wrap:balance}
+.lede{color:var(--ink-2);font-size:15px;margin:0;max-width:60ch}
+
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:2px;overflow-x:auto;
+      margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)));
+      padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.tab{border:0;background:none;font-family:inherit;font-size:13.5px;font-weight:500;color:var(--ink-2);padding:12px 12px 10px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.tab:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+.panel{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-top:16px}
+.panel h2{font-family:var(--font-read);font-size:19px;margin:0 0 6px;font-weight:600}
+.panel p.sub{margin:0 0 14px;color:var(--ink-2);font-size:14px}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{font-family:var(--font-num);font-size:13px;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--card-2);color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+:root[data-theme="dark"] .chip[aria-pressed="true"],:root:not([data-theme="light"]) .chip[aria-pressed="true"]{color:#0d1119}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .chip[aria-pressed="true"]{color:#fff}}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.stage{display:grid;grid-template-columns:1fr 210px;gap:14px;align-items:start}
+@media (max-width:680px){.stage{grid-template-columns:1fr}}
+canvas{width:100%;display:block;border:1px solid var(--line);border-radius:9px;background:var(--card-2);touch-action:none;cursor:crosshair}
+.nums{display:flex;flex-direction:column;gap:7px;min-width:0}
+.num{display:flex;justify-content:space-between;gap:8px;align-items:baseline;padding:7px 10px;border-radius:7px;background:var(--card-2);border:1px solid var(--line)}
+.num .k{font-size:11.5px;color:var(--ink-2)}
+.num .v{font-family:var(--font-num);font-size:14px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.num.hl{background:var(--accent-soft);border-color:var(--accent)}
+.num.hl .v{color:var(--accent)}
+.swatch{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:baseline}
+
+.ctrl{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.srow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.srow label{font-size:12.5px;color:var(--ink-2);min-width:116px}
+input[type=range]{flex:1;min-width:140px;accent-color:var(--accent)}
+button.act{font-family:inherit;font-size:13px;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--card-2);color:var(--ink);padding:7px 12px}
+button.act:hover{border-color:var(--accent)}
+button.act:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.act.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] button.act.primary,:root:not([data-theme="light"]) button.act.primary{color:#0d1119}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) button.act.primary{color:#fff}}
+
+.say{margin-top:13px;padding:12px 14px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 9px 9px 0;font-family:var(--font-read);font-size:15px}
+.say b{font-family:var(--font-num);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:12px;color:var(--ink-2)}
+
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.rule{border:1px solid var(--line);border-radius:10px;padding:14px;background:var(--card-2);min-width:0}
+.rule h3{font-size:15px;margin:0 0 4px;font-weight:600}
+.rule .plain{font-size:13.5px;color:var(--ink-2);margin:0 0 10px;font-family:var(--font-read)}
+.rule .math{overflow-x:auto;margin:8px 0}
+.rule .ex{font-size:13px;border-top:1px dashed var(--line);padding-top:9px;margin-top:9px;color:var(--ink-2)}
+.rule .ex b{color:var(--ink)}
+.warn{margin-top:9px;font-size:12.5px;color:var(--tangent);font-weight:500}
+mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%}
+footer{margin-top:22px;font-size:12px;color:var(--ink-3);text-align:center}
+</style>
+
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'},startup:{typeset:false}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg-full.js"></script>
+
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" id="tab-1" aria-selected="true">1 · Apa itu turunan</button>
+  <button class="tab" role="tab" id="tab-2" aria-selected="false">2 · f dan f′ bareng</button>
+  <button class="tab" role="tab" id="tab-3" aria-selected="false">3 · Aturan-aturan</button>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="kicker">Kalkulus A · alat bantu visual</div>
+    <h1>Turunan itu cuma kemiringan</h1>
+    <p class="lede">Tidak ada sihir di sini. Geser titiknya, perkecil langkahnya, dan lihat sendiri angka turunannya muncul.</p>
+  </header>
+
+  <!-- ===== TAB 1 ===== -->
+  <section class="panel" id="p1">
+    <h2>Geser x sedikit, lihat y ikut geser berapa</h2>
+    <p class="sub">Titik biru itu posisimu. Titik hijau adalah posisi setelah x digeser sejauh <b>dx</b>. Segitiga hijau itu geserannya.</p>
+    <div class="chips" id="chips1"></div>
+    <div class="stage">
+      <canvas id="c1" height="340"></canvas>
+      <div class="nums">
+        <div class="num"><span class="k">posisi x</span><span class="v" id="n-x">1,00</span></div>
+        <div class="num"><span class="k"><span class="swatch" style="background:var(--tri)"></span>dx (geser x)</span><span class="v" id="n-dx">1,000</span></div>
+        <div class="num"><span class="k"><span class="swatch" style="background:var(--tri)"></span>dy (y ikut geser)</span><span class="v" id="n-dy">—</span></div>
+        <div class="num hl"><span class="k">dy / dx</span><span class="v" id="n-slope">—</span></div>
+        <div class="num"><span class="k">rumus: f′(x)</span><span class="v" id="n-exact">—</span></div>
+        <div class="num"><span class="k">selisih</span><span class="v" id="n-gap">—</span></div>
+      </div>
+    </div>
+    <div class="ctrl">
+      <div class="srow"><label for="s-x">posisi titik (x)</label><input type="range" id="s-x" min="-30" max="30" value="10" step="1"></div>
+      <div class="srow"><label for="s-dx">geser kanan = dx makin kecil</label><input type="range" id="s-dx" min="0" max="100" value="0" step="1"></div>
+      <div class="srow">
+        <button class="act primary" id="shrink">▶ Kecilkan dx pelan-pelan</button>
+        <button class="act" id="reset1">Besarkan lagi</button>
+      </div>
+    </div>
+    <div class="say" id="say1">—</div>
+    <div class="legend">
+      <span><span class="swatch" style="background:var(--curve)"></span>kurva y = f(x)</span>
+      <span><span class="swatch" style="background:var(--secant)"></span>garis lewat 2 titik (dy/dx)</span>
+      <span><span class="swatch" style="background:var(--tangent)"></span>garis singgung asli (f′)</span>
+    </div>
+  </section>
+
+  <!-- ===== TAB 2 ===== -->
+  <section class="panel" id="p2" hidden>
+    <h2>Grafik atas = fungsinya. Grafik bawah = kemiringannya.</h2>
+    <p class="sub">Geser garis merahnya. Perhatikan: <b>di mana kurva atas mendatar, kurva bawah menyentuh nol.</b> Itu hubungan f dan f′ dalam satu kalimat.</p>
+    <div class="chips" id="chips2"></div>
+    <div class="stage">
+      <div style="min-width:0">
+        <canvas id="c2a" height="200"></canvas>
+        <div style="height:6px"></div>
+        <canvas id="c2b" height="200"></canvas>
+      </div>
+      <div class="nums">
+        <div class="num"><span class="k">x</span><span class="v" id="m-x">1,00</span></div>
+        <div class="num"><span class="k">f(x) — tinggi</span><span class="v" id="m-f">—</span></div>
+        <div class="num hl"><span class="k">f′(x) — kemiringan</span><span class="v" id="m-df">—</span></div>
+        <div class="num"><span class="k">artinya</span><span class="v" id="m-word">—</span></div>
+      </div>
+    </div>
+    <div class="ctrl">
+      <div class="srow"><label for="s-x2">posisi x</label><input type="range" id="s-x2" min="-30" max="30" value="10" step="1"></div>
+    </div>
+    <div class="say" id="say2">—</div>
+  </section>
+
+  <!-- ===== TAB 3 ===== -->
+  <section class="panel" id="p3" hidden>
+    <h2>Empat aturan, dengan warna</h2>
+    <p class="sub">Warna biru dan oranye menandai dua bagian yang digabung. Ikuti warnanya dan kamu lihat persis bagian mana yang diturunkan.</p>
+    <div class="rules" id="rules"></div>
+  </section>
+
+  <footer>Alat bantu Kalkulus A · pasangan dari halaman Ujian dan Roadmap</footer>
+</div>
+
+<script>
+const R = String.raw;
+const U = "#2563eb", V = "#d97706";
+
+/* ---------- functions ---------- */
+const FUNCS = [
+  {k:"x2",  label:"y = x²",    f:x=>x*x,        df:x=>2*x,        dtex:R`f'(x)=2x`,        xr:[-3,3],     yr:[-1.2,9.2]},
+  {k:"x3",  label:"y = x³",    f:x=>x*x*x,      df:x=>3*x*x,      dtex:R`f'(x)=3x^2`,      xr:[-2.2,2.2], yr:[-9,9]},
+  {k:"sin", label:"y = sin x", f:Math.sin,      df:Math.cos,      dtex:R`f'(x)=\cos x`,    xr:[-6.4,6.4], yr:[-1.7,1.7]},
+  {k:"exp", label:"y = eˣ",    f:Math.exp,      df:Math.exp,      dtex:R`f'(x)=e^x`,       xr:[-2.6,2.2], yr:[-1,9.2]},
+  {k:"rec", label:"y = 1/x",   f:x=>1/x,        df:x=>-1/(x*x),   dtex:R`f'(x)=-1/x^2`,    xr:[-3,3],     yr:[-4.5,4.5], pole:true}
+];
+let fn1 = FUNCS[0], fn2 = FUNCS[0];
+
+function css(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function nf(v, d){ if(!isFinite(v)) return "—"; return v.toFixed(d).replace(".", ","); }
+
+/* ---------- canvas plumbing ---------- */
+function fit(cv){
+  const r = Math.min(window.devicePixelRatio || 1, 2);
+  const w = cv.clientWidth || 320;
+  if (!cv._logicalH) cv._logicalH = parseInt(cv.getAttribute("height"), 10) || 300;
+  const h = cv._logicalH;
+  cv.style.height = h + "px";
+  const W = Math.round(w*r), H = Math.round(h*r);
+  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(r,0,0,r,0,0);
+  ctx.clearRect(0,0,w,h);
+  return {ctx, w, h};
+}
+function mapper(w,h,xr,yr,pad){
+  const p = pad || 26;
+  return {
+    X: x => p + (x - xr[0])/(xr[1]-xr[0]) * (w - 2*p),
+    Y: y => (h - p) - (y - yr[0])/(yr[1]-yr[0]) * (h - 2*p)
+  };
+}
+function grid(ctx,w,h,m,xr,yr){
+  ctx.strokeStyle = css("--line"); ctx.lineWidth = 1;
+  ctx.beginPath();
+  for (let x = Math.ceil(xr[0]); x <= xr[1]; x++) { ctx.moveTo(m.X(x), 12); ctx.lineTo(m.X(x), h-12); }
+  const step = (yr[1]-yr[0]) > 12 ? 4 : (yr[1]-yr[0]) > 6 ? 2 : 1;
+  for (let y = Math.ceil(yr[0]/step)*step; y <= yr[1]; y += step) { ctx.moveTo(12, m.Y(y)); ctx.lineTo(w-12, m.Y(y)); }
+  ctx.globalAlpha = .55; ctx.stroke(); ctx.globalAlpha = 1;
+  ctx.strokeStyle = css("--ink-3"); ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  if (yr[0] < 0 && yr[1] > 0) { ctx.moveTo(12, m.Y(0)); ctx.lineTo(w-12, m.Y(0)); }
+  if (xr[0] < 0 && xr[1] > 0) { ctx.moveTo(m.X(0), 12); ctx.lineTo(m.X(0), h-12); }
+  ctx.stroke();
+}
+function plot(ctx,m,fn,g,color,width,xr){
+  ctx.strokeStyle = color; ctx.lineWidth = width; ctx.beginPath();
+  let pen = false;
+  for (let i = 0; i <= 600; i++) {
+    const x = xr[0] + (xr[1]-xr[0]) * i/600;
+    if (fn.pole && Math.abs(x) < 0.22) { pen = false; continue; }
+    const y = g(x);
+    if (!isFinite(y)) { pen = false; continue; }
+    const px = m.X(x), py = m.Y(y);
+    if (py < -400 || py > 900) { pen = false; continue; }
+    if (pen) ctx.lineTo(px,py); else { ctx.moveTo(px,py); pen = true; }
+  }
+  ctx.stroke();
+}
+function dot(ctx,x,y,color,r){
+  ctx.fillStyle = color; ctx.beginPath(); ctx.arc(x,y,r||5,0,7); ctx.fill();
+  ctx.strokeStyle = css("--card"); ctx.lineWidth = 2; ctx.stroke();
+}
+
+/* ---------- TAB 1 ---------- */
+const c1 = document.getElementById("c1");
+let x1 = 1;                      // slider 0 => dx = 1 (besar) ; 100 => dx = 0,001 (kecil)
+function dxFrom(slider){ return Math.pow(10, -3 * (slider/100)); }
+let dxSlider = 0;
+
+function draw1(){
+  const {ctx,w,h} = fit(c1);
+  const xr = fn1.xr, yr = fn1.yr, m = mapper(w,h,xr,yr);
+  grid(ctx,w,h,m,xr,yr);
+  plot(ctx,m,fn1,fn1.f,css("--curve"),2.6,xr);
+
+  const dx = dxFrom(dxSlider);
+  const x = x1, xb = x + dx;
+  const y = fn1.f(x), yb = fn1.f(xb);
+  const dy = yb - y, slope = dy/dx, exact = fn1.df(x);
+
+  // triangle
+  if (isFinite(y) && isFinite(yb)) {
+    ctx.fillStyle = css("--tri"); ctx.globalAlpha = .16;
+    ctx.beginPath(); ctx.moveTo(m.X(x),m.Y(y)); ctx.lineTo(m.X(xb),m.Y(y)); ctx.lineTo(m.X(xb),m.Y(yb)); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = css("--tri"); ctx.lineWidth = 1.8; ctx.setLineDash([4,3]);
+    ctx.beginPath(); ctx.moveTo(m.X(x),m.Y(y)); ctx.lineTo(m.X(xb),m.Y(y)); ctx.lineTo(m.X(xb),m.Y(yb)); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+  // tangent (exact)
+  if (isFinite(exact)) {
+    ctx.strokeStyle = css("--tangent"); ctx.lineWidth = 2; ctx.setLineDash([7,4]);
+    ctx.beginPath();
+    ctx.moveTo(m.X(xr[0]), m.Y(y + exact*(xr[0]-x)));
+    ctx.lineTo(m.X(xr[1]), m.Y(y + exact*(xr[1]-x)));
+    ctx.stroke(); ctx.setLineDash([]);
+  }
+  // secant
+  if (isFinite(slope)) {
+    ctx.strokeStyle = css("--secant"); ctx.lineWidth = 2.2;
+    ctx.beginPath();
+    ctx.moveTo(m.X(xr[0]), m.Y(y + slope*(xr[0]-x)));
+    ctx.lineTo(m.X(xr[1]), m.Y(y + slope*(xr[1]-x)));
+    ctx.stroke();
+  }
+  dot(ctx, m.X(xb), m.Y(yb), css("--secant"), 4.5);
+  dot(ctx, m.X(x),  m.Y(y),  css("--curve"), 6);
+
+  document.getElementById("n-x").textContent = nf(x,2);
+  document.getElementById("n-dx").textContent = dx < 0.01 ? dx.toExponential(0).replace("e-","e−") : nf(dx,3);
+  document.getElementById("n-dy").textContent = Math.abs(dy) < 0.01 ? dy.toExponential(2).replace("e-","e−") : nf(dy,4);
+  document.getElementById("n-slope").textContent = nf(slope,4);
+  document.getElementById("n-exact").textContent = nf(exact,4);
+  document.getElementById("n-gap").textContent = nf(Math.abs(slope-exact),5);
+
+  const say = document.getElementById("say1");
+  if (!isFinite(slope)) { say.innerHTML = "Titik ini tidak ada nilainya (x = 0 untuk 1/x). Geser ke kiri atau kanan."; return; }
+  const times = Math.abs(slope) < 0.05 ? "hampir tidak bergerak" : "bergeser <b>" + nf(Math.abs(slope),2) + "</b> kali lipat " + (slope>0 ? "ke atas" : "ke bawah");
+  say.innerHTML = "x digeser sebesar <b>" + (dx < 0.01 ? dx.toExponential(0).replace("e-","e−") : nf(dx,3)) +
+    "</b> → y " + times + ". Jadi dy/dx = <b>" + nf(slope,4) + "</b>, sementara rumus bilang f′(x) = <b>" + nf(exact,4) +
+    "</b>. " + (Math.abs(slope-exact) < 0.005 ? "Sudah praktis sama — garis hijau menempel di garis oranye. ✅" : "Perkecil dx dan lihat garis hijau merayap menempel ke garis oranye.");
+}
+
+/* ---------- TAB 2 ---------- */
+function range2(fn){
+  let lo = Infinity, hi = -Infinity;
+  for (let i=0;i<=400;i++){
+    const x = fn.xr[0] + (fn.xr[1]-fn.xr[0])*i/400;
+    if (fn.pole && Math.abs(x) < 0.3) continue;
+    const v = fn.df(x);
+    if (isFinite(v)) { lo = Math.min(lo,v); hi = Math.max(hi,v); }
+  }
+  if (fn.pole) { lo = Math.max(lo,-12); hi = Math.min(hi,2); }
+  const pad = (hi-lo)*0.15 || 1;
+  return [lo-pad, hi+pad];
+}
+let x2 = 1;
+function draw2(){
+  const yr2 = range2(fn2);
+  [["c2a", fn2.f, fn2.yr, css("--curve"), true],
+   ["c2b", fn2.df, yr2,    css("--tangent"), false]].forEach(([id,g,yr,color,isTop]) => {
+    const cv = document.getElementById(id);
+    const {ctx,w,h} = fit(cv);
+    const m = mapper(w,h,fn2.xr,yr,20);
+    grid(ctx,w,h,m,fn2.xr,yr);
+    plot(ctx,m,fn2,g,color,2.6,fn2.xr);
+
+    // flat-point markers
+    if (isTop) {
+      let prev = null;
+      for (let i=0;i<=300;i++){
+        const x = fn2.xr[0] + (fn2.xr[1]-fn2.xr[0])*i/300;
+        const d = fn2.df(x);
+        if (prev !== null && isFinite(d) && isFinite(prev.d) && prev.d*d < 0) {
+          const xz = (prev.x + x)/2;
+          ctx.strokeStyle = css("--secant"); ctx.lineWidth = 1.6; ctx.setLineDash([3,3]);
+          ctx.beginPath(); ctx.moveTo(m.X(xz), 12); ctx.lineTo(m.X(xz), h-12); ctx.stroke(); ctx.setLineDash([]);
+          dot(ctx, m.X(xz), m.Y(fn2.f(xz)), css("--secant"), 5);
+        }
+        prev = {x,d};
+      }
+    }
+    // cursor
+    const v = g(x2);
+    ctx.strokeStyle = css("--tangent"); ctx.globalAlpha = .55; ctx.lineWidth = 1.6;
+    ctx.beginPath(); ctx.moveTo(m.X(x2), 12); ctx.lineTo(m.X(x2), h-12); ctx.stroke(); ctx.globalAlpha = 1;
+    if (isFinite(v)) dot(ctx, m.X(x2), m.Y(v), color, 6);
+    ctx.fillStyle = css("--ink-3"); ctx.font = "600 11px " + css("--font-ui");
+    ctx.fillText(isTop ? "f(x)" : "f′(x)  — kemiringan", 16, 20);
+  });
+
+  const f = fn2.f(x2), d = fn2.df(x2);
+  document.getElementById("m-x").textContent = nf(x2,2);
+  document.getElementById("m-f").textContent = nf(f,3);
+  document.getElementById("m-df").textContent = nf(d,3);
+  let word = "—";
+  if (isFinite(d)) word = Math.abs(d) < 0.08 ? "datar" : d > 0 ? "naik" : "turun";
+  document.getElementById("m-word").textContent = word;
+  const say = document.getElementById("say2");
+  if (!isFinite(d)) { say.textContent = "Di x = 0 fungsi 1/x tidak punya nilai."; return; }
+  say.innerHTML = Math.abs(d) < 0.08
+    ? "Di sini kurva atas sedang <b>mendatar</b> (puncak atau lembah), dan persis di bawahnya kurva f′ <b>menyentuh nol</b>. Titik hijau menandai tempat-tempat ini."
+    : "Kurva atas sedang <b>" + word + "</b> dengan kemiringan <b>" + nf(d,2) + "</b>, dan kurva bawah berada di ketinggian <b>" + nf(d,2) + "</b>. Tinggi grafik bawah = kecuraman grafik atas.";
+}
+
+/* ---------- TAB 3 ---------- */
+const RULES = [
+  {h:"Aturan Pangkat", plain:"Pangkatnya turun ke depan, lalu berkurang satu.",
+   tex:R`\[\frac{d}{dx}x^{n}=n\,x^{n-1}\]`,
+   ex:R`<b>Contoh:</b> \(x^{5}\to 5x^{4}\) · \(x\to 1\) · \(\sqrt{x}=x^{1/2}\to\tfrac12x^{-1/2}\) · \(\dfrac1x=x^{-1}\to-x^{-2}\)`,
+   warn:"Apa pun yang di penyebut: naikkan jadi pangkat negatif dulu."},
+  {h:"Aturan Hasil Kali", plain:"Turunkan yang biru, oranye diam. Tambah. Biru diam, turunkan yang oranye. Selalu DUA suku.",
+   tex:R`\[\bigl(\color{`+U+R`}{u}\,\color{`+V+R`}{v}\bigr)'=\color{`+U+R`}{u'}\,\color{`+V+R`}{v}+\color{`+U+R`}{u}\,\color{`+V+R`}{v'}\]`,
+   ex:R`<b>Contoh:</b> \(x^{3}e^{x}\to 3x^{2}e^{x}+x^{3}e^{x}\)`,
+   warn:"JANGAN u′v′ — itu salah. (x·x)′ = 2x, bukan 1."},
+  {h:"Aturan Hasil Bagi", plain:"Bawah kali turunan atas, MINUS atas kali turunan bawah, dibagi bawah kuadrat.",
+   tex:R`\[\left(\frac{\color{`+U+R`}{u}}{\color{`+V+R`}{v}}\right)'=\frac{\color{`+U+R`}{u'}\,\color{`+V+R`}{v}-\color{`+U+R`}{u}\,\color{`+V+R`}{v'}}{\color{`+V+R`}{v}^{2}}\]`,
+   ex:R`<b>Contoh:</b> \(\dfrac{x^{2}}{x+1}\to\dfrac{2x(x+1)-x^{2}}{(x+1)^{2}}\)`,
+   warn:"Urutannya tidak boleh dibalik — ada minus di situ."},
+  {h:"Aturan Rantai", plain:"Turunkan bungkusnya — isinya JANGAN disentuh — lalu kalikan turunan isinya.",
+   tex:R`\[\Bigl(\color{`+U+R`}{f}\bigl(\color{`+V+R`}{g(x)}\bigr)\Bigr)'=\color{`+U+R`}{f'}\bigl(\color{`+V+R`}{g(x)}\bigr)\cdot\color{`+V+R`}{g'(x)}\]`,
+   ex:R`<b>Contoh:</b> \(\sin(\color{`+V+R`}{x^{2}})\to\cos(\color{`+V+R`}{x^{2}})\cdot\color{`+V+R`}{2x}\)`,
+   warn:"Bocoran nomor satu kamu: turunan isi sering ketinggalan."}
+];
+document.getElementById("rules").innerHTML = RULES.map(r =>
+  '<div class="rule"><h3>' + r.h + '</h3><p class="plain">' + r.plain + '</p>' +
+  '<div class="math">' + r.tex + '</div><div class="ex">' + r.ex + '</div>' +
+  '<div class="warn">⚠️ ' + r.warn + '</div></div>').join("");
+
+/* ---------- wiring ---------- */
+function chips(host, sel, onPick){
+  host.innerHTML = "";
+  FUNCS.forEach(f => {
+    const b = document.createElement("button");
+    b.className = "chip"; b.textContent = f.label;
+    b.setAttribute("aria-pressed", String(f.k === sel().k));
+    b.addEventListener("click", () => { onPick(f); [...host.children].forEach((c,i) => c.setAttribute("aria-pressed", String(FUNCS[i].k === f.k))); });
+    host.appendChild(b);
+  });
+}
+chips(document.getElementById("chips1"), () => fn1, f => { fn1 = f; x1 = clampX(x1, f); syncX1(); draw1(); });
+chips(document.getElementById("chips2"), () => fn2, f => { fn2 = f; x2 = clampX(x2, f); syncX2(); draw2(); });
+function clampX(x, f){ return Math.max(f.xr[0]+0.15, Math.min(f.xr[1]-0.15, x)); }
+function syncX1(){ document.getElementById("s-x").value = Math.round((x1-fn1.xr[0])/(fn1.xr[1]-fn1.xr[0])*60-30); }
+function syncX2(){ document.getElementById("s-x2").value = Math.round((x2-fn2.xr[0])/(fn2.xr[1]-fn2.xr[0])*60-30); }
+
+document.getElementById("s-x").addEventListener("input", e => {
+  const t = (+e.target.value + 30)/60; x1 = fn1.xr[0] + t*(fn1.xr[1]-fn1.xr[0]); x1 = clampX(x1, fn1); draw1();
+});
+document.getElementById("s-dx").addEventListener("input", e => { dxSlider = +e.target.value; draw1(); });
+document.getElementById("s-x2").addEventListener("input", e => {
+  const t = (+e.target.value + 30)/60; x2 = fn2.xr[0] + t*(fn2.xr[1]-fn2.xr[0]); x2 = clampX(x2, fn2); draw2();
+});
+c1.addEventListener("pointerdown", pick1);
+c1.addEventListener("pointermove", e => { if (e.buttons) pick1(e); });
+function pick1(e){
+  const r = c1.getBoundingClientRect(), p = 26;
+  const t = (e.clientX - r.left - p)/(r.width - 2*p);
+  x1 = clampX(fn1.xr[0] + t*(fn1.xr[1]-fn1.xr[0]), fn1); syncX1(); draw1();
+}
+
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let anim = null;
+document.getElementById("shrink").addEventListener("click", () => {
+  if (anim) { cancelAnimationFrame(anim); anim = null; }
+  if (reduce) { dxSlider = 100; document.getElementById("s-dx").value = 100; draw1(); return; }
+  dxSlider = 0;
+  const step = () => {
+    dxSlider = Math.min(100, dxSlider + 1.1);
+    document.getElementById("s-dx").value = dxSlider;
+    draw1();
+    if (dxSlider < 100) anim = requestAnimationFrame(step); else anim = null;
+  };
+  anim = requestAnimationFrame(step);
+});
+document.getElementById("reset1").addEventListener("click", () => {
+  if (anim) { cancelAnimationFrame(anim); anim = null; }
+  dxSlider = 0; document.getElementById("s-dx").value = 0; draw1();
+});
+
+const panels = {"tab-1":"p1","tab-2":"p2","tab-3":"p3"};
+Object.keys(panels).forEach(id => {
+  document.getElementById(id).addEventListener("click", () => {
+    Object.keys(panels).forEach(o => {
+      document.getElementById(o).setAttribute("aria-selected", String(o === id));
+      document.getElementById(panels[o]).hidden = (o !== id);
+    });
+    try { localStorage.setItem("tv-tab", id); } catch(e){}
+    if (id === "tab-1") draw1(); if (id === "tab-2") draw2();
+  });
+});
+try { const t = localStorage.getItem("tv-tab"); if (t && panels[t]) document.getElementById(t).click(); } catch(e){}
+
+window.addEventListener("resize", () => { draw1(); draw2(); });
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { draw1(); draw2(); });
+syncX1(); syncX2(); draw1(); draw2();
+if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+</script>

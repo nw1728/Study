@@ -1,121 +1,139 @@
 ---
 title: Current Progress
-tags: [calculus-a, progress]
-updated: 2026-10-07
-last_device: "Arch laptop (nw1728)"
+tags: [calculus-a, progress, exam]
+updated: 2026-10-26
+last_device: "Arch laptop (nw1728) — via Remote Control, Ethan on claude.ai web GUI"
 ---
 
 # 📍 Current Progress — continue from here
 
-Back to [[00 Index]] · History: [[Session Log]]
+Back to [[00 Index]] · History: [[Session Log]] · Rencana: [[#🗺️ Roadmap sampai hari ujian]]
 
-> [!important] For Claude on any device
-> Read this file **first**. At the end of each session, **overwrite** it with the latest state (don't append — history goes in [[Session Log]]).
+> [!danger] 🚨 MODE UJIAN — ini mengalahkan semua rencana lama
+> **Ujian Kalkulus A: Rabu 4 November 2026, 08:45–11:45.** Hari ini 26 Oktober → **9 hari.**
+> Ethan ambil **202001172 (4 EC)**: soal **1–9**, maksimum **36 poin**, nilai $=1+\text{poin}\times\frac14$, **lulus di 18 poin**.
+> Soal 10 & 11 (bilangan kompleks, PD orde dua) **tidak perlu sama sekali**.
+> Rencana lama (L04 Materi 6–8 per materi, lalu L05 dari awal) **ditunda** — sekarang semuanya diurutkan berdasarkan poin per jam. Lihat roadmap di bawah.
 
-> [!warning] Formatting — read before you answer anything
-> Ethan reads the chat in a **terminal**, so `$...$` LaTeX does **not** render and he literally cannot read it.
-> In chat, write plain text: `a/b`, `s^(-3/2)`, `sqrt(2)`, `<3,4,-6>`, `u . v`, `u x v`.
-> LaTeX is fine (and wanted) **inside these Obsidian notes**. See [[Teaching Playbook]].
+> [!important] 🧮 ATURAN MENULIS MATH DI CHAT — sudah diuji langsung dengan Ethan (2026-10-26)
+> Ethan memakai **claude.ai web GUI** lewat `/remote-control`. Hasil tes:
+>
+> | Cara tulis | Hasil di layarnya |
+> |---|---|
+> | `$$...$$` di baris sendiri | ✅ **dirender, paling bagus** — pakai ini untuk rumus penting |
+> | `\(...\)` di tengah kalimat | ✅ dirender — pakai ini untuk sisipan pendek |
+> | `$...$` | ❌ **RUSAK**, muncul sebagai dolar mentah. **Jangan dipakai sama sekali.** |
+>
+> Kalimatnya sendiri: *"tes a sama tes b muncul, tapi tes b lebih bagus"*.
+> ⚠️ Sempat salah dua kali hari ini sebelum dites betul — pertama dikira semua render, lalu dikira tidak ada yang render. **Jangan menyimpulkan dari "all good"; tes dengan dua contoh berbeda.**
+> Aturan lama "plain text, no LaTeX" di [[Teaching Playbook]] dan [[00 Index]] **hanya berlaku kalau dia kembali ke terminal.**
 
-> [!important] Explain in "gogo gaga" mode
-> Ethan asked for this on **2026-09-18**: explain everything as if he is a complete beginner who has never seen the notation — name the wrong instinct first, restate every formula in plain words, one idea per step, and show the numbers when a variant is wrong. It is the **default** register now. Recipe: [[Teaching Playbook]].
+> [!important] 📸 Dia sekarang BISA kirim foto tulisan tangan (2026-10-26)
+> Lewat aplikasi Claude di tab-nya. **Ini pertama kalinya** — selama ini diagnosis harus ditebak dari jawaban akhir saja.
+> **Minta foto setiap kali ada kesalahan**, jangan cuma jawaban akhir. Kesalahan nomor 2 hari ini ketahuan persis karena fotonya.
+> KDE Connect **tidak perlu lagi ditawarkan**.
 
-> [!important] Format Ethan asked for on 2026-10-06 — **keep using it**
-> **Per materi, one at a time, with exercises at every materi, and mixed Bahasa Indonesia.**
-> The loop that works: **1 materi → explain → 5–6 exercises → he answers → correct each one → next materi.** Do not dump several materi at once, and do not continue past the exercises in the same message.
-> Indonesian is not decoration — he engages visibly more with it. Use *panah, panjang, arah, sejajar, tegak lurus, titik, bidang, garis, jarak, pusat, utang, selisih, pembilang, penyebut, turunan*.
-> Confirmed again on 2026-10-07: Materi 5 ran on this format and passed.
-
-> [!tip] Syncing is now one command
-> `gsync` commits every repo in its config with an AI-written message, rebases onto upstream and pushes. Run it at the end of a session instead of hand-writing commits — **only when Ethan asks.** `gsync -n` shows what it would do without touching anything.
+> [!important] Format mengajar — tetap dipakai
+> **Per materi, satu-satu, latihan di tiap materi, campur Bahasa Indonesia**, register **gogo gaga**.
+> Loop: 1 materi → jelaskan → 5–6 latihan → tunggu jawabannya → koreksi satu per satu → materi berikutnya.
+> Resep lengkap: [[Teaching Playbook]].
 
 ## Last session
-- **Date:** 2026-10-07
-- **Type:** L04 **Materi 5 — dot product** (slides 8–9) taught and passed, then **Materi 6 — projection** taught; Ethan asked for a visualizer mid-materi and one was built
+- **Date:** 2026-10-26 (Senin)
+- **Type:** Hari pertama mode ujian. Sample exam dibedah, soal 1 & 2 dikerjakan, aturan turunan di-refresh, roadmap 9 hari dibuat.
 - **What happened:**
-  - **Materi 5 taught and passed: 6 right, 1 half, 1 trap** (8 answer-parts). Full teaching text in [[L04 Walkthrough (Gogo Gaga)]], answers in [[Exercise Log]], new error patterns in [[Common Mistakes]].
-  - **All three promises from the previous handover were paid:** the one-line perpendicular test $\mathbf u\cdot\mathbf v=0$, the "vector = length AND direction" framing (dot product = the tool that *measures direction*), and the type trap (**two arrows in, one NUMBER out**).
-  - Derived $\cos\theta=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf u\rvert\lvert\mathbf v\rvert}$ in full from the **law of cosines + $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$**, and verified the key step numerically (both sides $15.380$). The push-a-box analogy ($W=\mathbf F\cdot\mathbf d$) carried it.
-  - **Ex 5.2 (half):** perfect to $k^2=4$, then only $k=2$ came back. $k=-2$ is equally valid (priced: it also gives exactly $90^\circ$).
-  - **Ex 5.4 (the trap):** he said all five expressions were meaningful; only three are. **But he asked the question that explains it** — *"apakah `*` dan `.` itu sama?"* — so the root cause was notation doubt, not carelessness.
-  - **Ex 5.6b was the high point:** he derived $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$ himself from the arithmetic **and trusted it** (the behaviour missing back in Ex 1.5).
-  - He asked to **save** after the corrections, then asked to continue, so **Materi 6 (projection) was taught in full** — including the derivation from "parallel to $\mathbf v$" + "remainder perpendicular to $\mathbf v$", the $\lvert\mathbf v\rvert^2$-is-two-$\lvert\mathbf v\rvert$s explanation, and three worked examples. **Latihan 6.1–6.6 were set and are still unanswered.**
-  - **He then said he did not understand the shadow idea and asked for an HTML visualizer** — so one was built and published (see Tools below). **This is the first time he has asked for a tool himself**; previous ones were offered. Worth noting: when a geometric idea does not land in text, he will now ask for a picture rather than go quiet.
-  - **KDE Connect re-offered, still not taken up.** He can only send **final answers** (handwriting lives in Samsung Notes on his tab). Reverse-engineering from numbers keeps working, so it is not blocking.
+  - Ethan menjalankan **`/remote-control`** → sekarang belajar lewat **claude.ai web GUI**. **LaTeX dirender** (dikonfirmasi langsung) dan **dia bisa mengirim foto tulisan tangan**. Dua hambatan terbesar selama ini hilang dalam satu sesi.
+  - `sample_exam/112025exam_with_solutions.pdf` dibaca lengkap (5 halaman, 11 soal + kunci). Setiap bagian dipetakan ke materi yang sudah/belum dia kuasai.
+  - **Temuan utama:** cuma **10 dari 36 poin** berasal dari materi yang pernah kita pelajari. Tapi **soal 6, 7, 8, 9 (17 poin) itu soal RESEP** — paling mekanis di seluruh ujian — sementara **soal 1 (4 poin) justru yang paling susah** dan sudah dia kerjakan. Strategi: panen poin resep dulu.
+  - **Lecture 6+ ternyata sudah diajarkan di kelas, tapi Ethan bolos / tidak paham.** Jadi soal 6–9 harus **diajarkan dari nol**, bukan di-review. ⚠️ **Slide lecture 6+ belum ada di `lectures_slides/` — minta dia kirim.**
+  - Dua halaman dibuat (lihat Tools di bawah): **halaman ujian interaktif** dan **roadmap 9 hari yang bisa dicentang**.
+  - Jadwal dia sendiri diterima apa adanya: Sel–Kam kalkulus, Jum–Min aljabar linear (ulangan Senin 2 Nov), Sel 3 Nov kalkulus lagi, Rab 4 Nov ujian.
 
-## Where we are now
-| Area | Status |
-|---|---|
-| L01 Functions, limits, continuity | ✅ done |
-| L02 Differentiation | ✅ done + 30+ exercises |
-| L02 extrema vocabulary | ✅ re-taught 2026-09-26, with an interactive page |
-| L03 Integration — note from slides | ✅ written |
-| L03 live lecture notes | ⬜ still empty |
-| L03 practice — FTC I/II, substitution | ✅ Ex 14, 17, 23, 29, 31, 35, 41, 47, 65 |
-| L03 practice — area between curves | 🟡 one worked |
-| L03 — integration by parts, trig integrals, improper integrals | ⬜ not started |
-| **L04 Materi 1** 3D coords + distance | ✅ **lulus** (4.5/5) |
-| **L04 Materi 2** spheres + completing the square | ✅ **lulus** (2.5/5, concepts fine, sign arithmetic fixed) |
-| **L04 Materi 3** vectors, components, magnitude | ✅ **lulus** (6/6) |
-| **L04 Materi 4** vector operations | ✅ **lulus** (6/6) |
-| **L04 Materi 5** dot product, angles, orthogonality | ✅ **lulus** (6.5/8) |
-| **L04 Materi 6** projection | 🟡 **taught 2026-10-07 + visualizer built; Latihan 6.1–6.6 AWAITING HIS ANSWERS** |
-| L04 Materi 7 cross product, area, determinants | ⬜ |
-| L04 Materi 8 lines & planes, distances, angles | ⬜ |
+## 🧮 Peta ujian — 202001172 (4 EC), 36 poin
 
-**Open exercise set, awaiting his answers:** Materi 6, **Latihan 6.1–6.6** — (6.1) proj of $\langle4,1,-2\rangle$ on $\langle2,-1,2\rangle$; (6.2) scalar component of $\langle1,2,2\rangle$ on $\langle-2,-2,-1\rangle$ + direction; (6.3) $\langle5,0,0\rangle$ on $\langle3,4,0\rangle$ + the "can a shadow beat the pole?" check; (6.4) is $\text{proj}_{\mathbf v}\mathbf u=\text{proj}_{\mathbf u}\mathbf v$?; (6.5) type check, 4 expressions; (6.6) the perpendicular and parallel edge cases. **Answers are in `html-visualization/vector-projection.html` only as live computation — do not hand them over before his attempt.**
+| Soal | Poin | Materi | Status Ethan |
+|---|---|---|---|
+| 1a,1b,1c | 4 | Limit + L'Hôpital | 🟢 **dikerjakan 26 Okt** — 1b benar, 1a/1c penalaran benar tapi penyajian gugur |
+| 2a,2b | 4 | Hasil kali, hasil bagi, rantai | 🔴 **dua-duanya salah 26 Okt** — menghitung nilai, bukan turunan |
+| 3a | 2 | Substitusi | 🟢 sudah dikuasai (Ex 23, 29, 31…) |
+| 3b | 2 | Integral parsial | 🟠 belum diajarkan — sisa L03 |
+| 4a,4b | 4 | Cross product, bidang, garis | 🟠 belum — L04 Materi 7 & 8 |
+| 5 | 3 | Polar → Cartesius | 🟠 belum — L05 Materi 4 (catatan sudah ada) |
+| 6 | 4 | Limit multivariabel tidak ada | ⚪ belum — **TAPI PALING MUDAH, 1 jam** ⭐ |
+| 7 | 4 | Rantai multivariabel | ⚪ belum — resep |
+| 8a,8b | 5 | Titik kritis + min pada ruas | ⚪ belum — resep |
+| 9 | 4 | PD linear orde satu | ⚪ belum — resep (faktor integrasi) |
 
-**Last exercise marked:** Materi 5, Latihan 5.6 — $\mathbf u=\langle2,-3,6\rangle$ → $\mathbf u\cdot\mathbf u=49$, so $\lvert\mathbf u\rvert=7$ without touching the magnitude formula ✓
+**Poin aman sekarang: ~2** (cuma 1b). **Target Kamis malam: 36 poin pernah disentuh semua.**
 
-**Set for Ethan, still unanswered (older, from L02/L03):**
-1. $f(x)=x^2-4x+1$ on $[0,5]$ — absolute max/min (set 2026-09-26). *Answer: max $f(5)=6$, min $f(2)=-3$ — do not reveal before his attempt.*
-2. $\int_1^4\frac{x^2+x}{x^{3/2}}dx$ — split-then-Power-Rule (open since 2026-09-16). *Answer $\frac{20}3$.*
-3. $\int_0^2x\sqrt{x^2+1}\,dx$ — substitution, cold re-test (set 2026-09-17). *Answer $\frac{5\sqrt5-1}3$, never revealed.*
+## 🗺️ Roadmap sampai hari ujian
+Versi lengkap yang bisa dicentang: **[Roadmap Ujian Kalkulus](https://claude.ai/artifact/JbWyN4VqhEpptjK3sjtxxs)** (salinan lokal `html-visualization/roadmap-ujian.html`).
 
-## ▶️ Continue with
-1. **Mark Latihan 6.1–6.6** when Ethan sends them (all verified numerically already; see [[Exercise Log]] for the key). Watch specifically for: the $\lvert\mathbf v\rvert$ vs $\lvert\mathbf v\rvert^2$ swap in 6.1/6.3, a missing sign in 6.2, and whether the type habit from 5.4 finally holds in 6.5.
-2. **Materi 7 — cross product (slides 11–17), the longest one.** The $\mathbf j$ minus sign is the killer; make him write the zero $\mathbf j$ component explicitly. Then Materi 8 (lines & planes) — **re-test the $\pm$ habit there**.
-3. *(reference, already delivered)* **Materi 6 — vector projection (slide 10).** Short: one slide, one main formula. Plan already written at the end of [[L04 Walkthrough (Gogo Gaga)]]:
-   $$\text{proj}_{\mathbf v}\mathbf u=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf v\rvert^2}\mathbf v\qquad\text{scalar component}=\frac{\mathbf u\cdot\mathbf v}{\lvert\mathbf v\rvert}$$
-   - **Open by cashing in his own Ex 5.6b discovery:** $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$, so the projection formula has **no square roots at all**. He found that property himself — start there so the formula feels like his.
-   - **Flag the main trap up front:** $\lvert\mathbf v\rvert^2$ in the *vector* formula vs $\lvert\mathbf v\rvert$ in the *scalar* one. Mnemonic given in the plan: *"arrow answer needs the squared denominator, number answer needs the plain one."*
-   - **Make the type check explicit** — projection returns an **ARROW**, scalar component returns a **NUMBER**. After Ex 5.4 this cannot be left implicit.
-   - Slide 10's worked example is ready: $\mathbf u=6\mathbf i+3\mathbf j+2\mathbf k$ onto $\mathbf v=\mathbf i-2\mathbf j-2\mathbf k$ → $-\frac49\mathbf i+\frac89\mathbf j+\frac89\mathbf k$, scalar component $-\frac43$ (negative → obtuse).
-4. Re-offer **KDE Connect** so he can send handwritten working.
-5. The three old open problems above.
-6. **Leftovers from L03:** integration by parts, trig integrals, improper integrals ($p$-test), more area between curves.
-7. **Leftovers from L02:** related rates, optimization word problems, second-derivative test, concavity/inflection.
-8. L03 live lecture notes are still an empty section in [[L03 Integration]].
+| Hari | Isi | Poin terkunci |
+|---|---|---|
+| Sen 26 | **Istirahat** (dia kurang fit). Maks: selesaikan 1c + 2b | — |
+| **Sel 27** | Pagi: **aturan turunan, 6 latihan — WAJIB** · Siang: soal 1c + 2 · Sore: **soal 6** | 14 |
+| **Rab 28** | Soal **9** (PD) · soal **7** (rantai multivar) · soal **3b** (integral parsial) | 24 |
+| **Kam 29** | Soal **8** · soal **4** · soal **5** · tulis **kartu resep** 1 halaman | 36 |
+| Jum 30 – Min 1 | **Aljabar Linear** + **15 menit kalkulus/hari (jangan bolos)** | 36 |
+| Sen 2 | Ulangan Aljabar Linear — kalkulus **nol** | — |
+| **Sel 3** | **Sample #2, simulasi 3 jam**, lalu koreksi + tambal pakai #3 | — |
+| **Rab 4** | **UJIAN** 08:45–11:45 | — |
+
+> [!warning] Dua aturan keras
+> 1. **Tidak ada materi baru setelah Kamis 29.** Yang belum masuk, relakan.
+> 2. **Selasa 3 malam berhenti jam 9.** Tidur itu bagian strategi.
+
+> [!tip] 4 sample exam — jangan dihabiskan di awal
+> **#1** (ada kuncinya) = buku pelajaran, Sel–Kam · **#2** = simulasi jujur, Selasa 3 (🔒 jangan disentuh sebelumnya) · **#3** = tambal soal yang gagal di #2 · **#4** = cadangan.
+
+## ▶️ Continue with (besok, Selasa 27)
+1. **Pagi — 6 latihan aturan turunan** yang sudah diberikan dan **belum dijawab**:
+   $x^5-3x^2+7$ · $x^3e^x$ · $\sin(4x^2)$ · $\frac{x^2}{x+1}$ · jebakan konseptual $(x^2\cdot x^3)'\overset{?}{=}2x\cdot3x^2$ · $\frac{1}{x^2+1}$ **dua cara** (nomor 6 ini kerangka soal 2a persis).
+2. **Soal 1c** — dia sudah tahu jawabannya $f'(2)=\frac12$; yang diminta sekarang **menulis justifikasi 3 kalimat**. Itu latihan yang sebenarnya.
+3. **Soal 2b** — dia sudah dapat isi dalam $=1$ ✅; tinggal ganti $f\to f'$ dan kalikan turunan dalam. Jawaban: $f'(1)\cdot(g'(1)-2)=2\cdot(-3)=\mathbf{-6}$. **Jangan diberikan sebelum dia coba.**
+4. **Soal 6 — limit multivariabel tidak ada.** Ajarkan dari nol, format per materi. Resepnya: dekati lewat $y=0$, lalu lewat $x=0$; hasil beda → limit tidak ada. Jawaban sample: $2$ vs $0$.
+5. **Minta slide lecture 6 ke atas** untuk `lectures_slides/`.
+6. **Minta dia cek isi formula sheet** yang dilampirkan di ujian — kalau rumus cross product / faktor integrasi ada di situ, beban hafalan turun drastis.
 
 ## Watch out for (right now)
-- **The negative solution evaporating.** This is *the* live leak, and its shape changed on 2026-10-07 — which is progress. His **sign arithmetic is fixed** (Ex 5.1 had two minus-times-minus, both right; Materi 3, 4 and 5 all at zero sign errors). What leaks now is **completeness**: he stops at one root when there are two ($k^2=4\to$ only $k=2$).
-  - He **owns** the rule (Ex 1.3, Ex 4.5, both unprompted) but has it bound to the wrong trigger: *"there are $\lvert\cdot\rvert$ bars"* instead of *"a square is being opened"*. Same rule, since $\sqrt{k^2}=\lvert k\rvert$.
-  - **Drill:** every time $(\cdot)^2=\text{number}$ appears, write $\pm$ **first**, then look for a reason to discard the negative. **Re-test this in Materi 8** (point-to-plane distance carries an absolute value).
-- **Type discipline is NOT yet automatic.** Ex 5.4 showed it fails under a notation he is unsure about. Materi 6 produces an arrow *and* a number from near-identical formulas, and Materi 7 produces an arrow where Materi 5 produced a number — state the type out loud at every step.
-- **Notation ambiguity is a real blocker for him, not an excuse.** The textbook uses the **same dot** for scalar multiplication and the dot product. He needs the operand rule repeated: *the symbol does not tell you the operation, the operands do.* Same for $\lvert\cdot\rvert$ (magnitude vs absolute value).
-- **Measuring from the origin instead of from the given point** (the Ex 1.3 error) — still due to come back in Materi 8 (point on a line, point on a plane).
-- **Doing unasked extra work** (he expanded a sphere equation nobody asked him to expand and lost the constant). Tell him to stop at the form the question wants.
-- **Stating the conclusion the question asked for.** Ex 5.5: he wrote $\cos120^\circ=-\frac12$ when the question asked for $\theta$. Right reasoning, incomplete answer — costs marks in an exam.
-- Still weak from earlier lectures: algebra simplification, trig minus signs, forgetting the inner derivative, skipping the domain, $+C$.
+- 🔴 **POLA NOMOR SATU: penalaran benar, kalimat terakhir hilang.** Muncul **empat kali** dalam satu sesi:
+  | Soal | Penalaran | Yang hilang |
+  |---|---|---|
+  | 1a | ✅ | kesimpulan $\lim f(x)=5$ tidak ditulis |
+  | 1b | ✅ | syarat $\lim A\neq0$ tidak ditulis |
+  | 1c | ✅ | berhenti di $\lim_{x\to2}f'(x)$, bukan di $f'(2)$ |
+  | Ex 5.5 (lama) | ✅ | $\theta$ tidak ditulis |
+  Di ujian ini tertulis *"Answers without explanation will not receive credit."* **Mantra yang sudah diberikan: setelah menghitung, baca ulang pertanyaannya, lalu tanya "tipe jawabannya apa, sudah ditulis belum?"** Harga pola ini di soal 1 saja ≈ 1,5 dari 4 poin.
+- 🔴 **Menghitung NILAI, bukan TURUNAN** (baru, 26 Okt, soal 2a **dan** 2b). Tandanya: **tabel punya 4 kolom, dia cuma pakai 2** — kolom $f'$ dan $g'$ tidak disentuh. Aturan: *kalau soal memberi data yang tidak kamu pakai, kamu sedang menjawab soal yang salah.*
+- 🔴 **Aturan turunan sudah pudar** ("mampus aku udah lupa"). Sudah di-refresh 26 Okt dalam satu halaman (6 kamus dasar + 3 aturan gabungan + pohon keputusan). **Belum dites.** Ini fondasi soal 2, 3, 7, 8, 9 — kalau goyang, semuanya goyang.
+- 🟠 **Mengarang fungsi dari sebuah limit.** Dia menyimpulkan $f(x)=\frac x2+4$ dari $\lim\frac{f(x)-5}{x-2}=\frac12$. Angkanya kebetulan benar, tapi $f$ **tidak tunggal** — tandingannya $g(x)=5+\frac{x-2}{2}+(x-2)^2$ memenuhi hal yang sama. **Boleh dipakai untuk MENGECEK, tidak boleh jadi ALASAN.** Dia sudah dua kali melakukannya (1a dan 1c).
+- 🟠 **Memakai alat baru ke semua soal.** Begitu kenal L'Hôpital, dia mau memakainya di 1b yang sebenarnya cuma butuh sifat limit. Ajarkan langkah "cek dulu, apakah ini bentuk yang sudah aku kenal?".
+- 🟡 **Notasi pecahan bertingkat.** Dia menulis `1/1/2`. $\frac{1}{1/2}=2$ vs $\frac{1/1}{2}=\frac12$ — beda 4×. Satu keluarga dengan pertanyaan `*` vs `.` dulu.
+- ⚪ **Akar negatif yang menguap** (pola lama, belum muncul lagi hari ini). Masih harus dites di soal 8a: $x^8=1$ punya **dua** akar real.
+- Masih lemah dari dulu: tanda minus trigonometri, lupa turunan dalam, lupa $+C$, lupa cek domain.
 
-## What is going well (say this to him, he responds to it)
-- **Sign arithmetic is fixed.** Materi 1: one sign error. Materi 2: three. Materi 3, 4, **and 5: zero.**
-- **He derives rules himself AND is starting to trust them.** Ex 1.5 he derived the right-angle test but would not believe it; Ex 5.6b he derived $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$ and **stated it as fact**. That is an attitude change, not just a skill gain.
-- **He uses the shortcut he was taught instead of the long route.** Ex 5.1b: answered "obtuse" from the sign alone and never touched the ugly magnitudes ($5.3852$, $5.9161$).
-- **He keeps surds unevaluated** until the end (Ex 5.3), so $\sqrt2\cdot\sqrt2$ collapses cleanly to $2$ and the answer comes out exact.
-- **He asks about notation when unsure** (Ex 3.6, Ex 5.4). Reward this every single time — it is the cheapest error class to fix, and in Ex 5.4 his question diagnosed his own mistake.
-- He **reports impossible results instead of hiding them** (Ex 2.5, the negative radius).
-- Lessons **transfer between materi** without reminders (1.3 → 4.5; 3.6 → 4.4).
+## What is going well (katakan ini ke dia, dia merespons)
+- **Tidak ada satu pun salah hitung, salah tanda, atau salah konsep hari ini.** Semua kesalahannya ada di *penyajian* dan *membaca perintah soal* — kelas kesalahan termurah yang ada.
+- **Dia mengirim foto tulisan tangan** tanpa diminta dua kali. Diagnosis jadi jauh lebih tajam.
+- **Dia bertanya waktu tidak paham** ("turunin nya di mana yak?", "f'(x) ambil dari f(x) kan?") dan itu selalu tepat sasaran — pertanyaannya mendiagnosis dirinya sendiri.
+- **Soal 2b bagian tersulit dikerjakan sempurna**: $3-2e^{0}=1$, termasuk $e^0=1$ yang sering dijatuhkan orang.
+- **Dia jujur soal kondisi badan** dan minta rencana realistis, bukan rencana heroik. Hargai itu — rencana yang dia percaya akan dijalankan.
+- Jalan pintas struktural di 1b (mengenali pecahan terbalik) persis seperti Ex 5.1b dulu.
 
 ## Open questions from Ethan
-- *(none open — the `*` vs `.` question was answered in full on 2026-10-07; the operand rule is recorded in [[Common Mistakes]] and in [[L04 Walkthrough (Gogo Gaga)]])*
+- *(tidak ada yang menggantung)*
 
 ## Tools built for this course
-- 🔵 [Interactive unit circle](https://claude.ai/artifact/VL1xCLnf4rfz58ezkdLZeG) — drag the angle, read off $\cos\theta$, $\sin\theta$ (2026-09-16). Local copy: `html-visualization/unit-circle.html`. **He used it twice on 2026-10-07** to recognise $\frac1{\sqrt2}\to45^\circ$ and $-\frac12\to120^\circ$ — it is paying off.
-- 🟢 `html-visualization/extrema-and-integral-checks.html` — peaks, valleys and the four integral checks (2026-09-26). Open it in a browser; needs internet for the rendered math.
-- 🟣 [Bayangan Vektor](https://claude.ai/artifact/Ff6iJ5L3aBUcUx4PXTukF6) — **built 2026-10-07, on Ethan's request**, because he said he did not understand the shadow idea. Drag the tips of $\mathbf u$ and $\mathbf v$; everything updates live: $\mathbf u\cdot\mathbf v$, $\mathbf v\cdot\mathbf v$, $c$, the projection arrow, its length, the scalar component, $\theta$ and the angle type. Local copy: `html-visualization/vector-projection.html`. Three deliberate teaching devices:
-  - **`sisa · v` shown live and never leaving zero** no matter how he drags — that is step 2 of the derivation happening in front of him.
-  - A **"rumus salah" ghost arrow** using $\lvert\mathbf v\rvert$ instead of $\lvert\mathbf v\rvert^2$, which visibly becomes longer than $\mathbf u$ itself — a shadow longer than the pole.
-  - A **3D tab** that shows the computation step by step and draws the picture *in the plane spanned by $\mathbf u$ and $\mathbf v$*, to make "3D is the same picture, just tilted" literal.
-  - **Latihan 6.1–6.6 are deliberately NOT presets** (same policy as the 2026-09-26 tool). The 2D tab instead has three *challenges* that make him discover the perpendicular and parallel cases by dragging, so Ex 6.6 stays his to answer.
-- 💡 *Idea, not built yet:* an interactive page for **Materi 7** — two arrows plus the cross product vector, the right-hand rule and the parallelogram area. The right-hand rule is the hardest thing in Lecture 4 to convey in text.
+- 🟠 **[Ujian Kalkulus A 2025](https://claude.ai/artifact/LApfMvRbq2vNa8KCjStbha)** — **dibuat 2026-10-26.** Seluruh sample exam #1 dengan math ter-render, chip kesiapan per bagian (🟢 siap / 🟠 berikutnya / ⚪ nanti), kotak jawaban yang tersimpan lintas perangkat, **kunci terkunci sampai ditandai "sudah dicoba"**, timer 3 jam, dan proyeksi nilai memakai rumus asli $1+\text{poin}\times\frac14$. Status jawaban tersimpan di `db` (`work/q1a`…). Salinan lokal `html-visualization/sample-exam-2025.html`.
+- 🟢 **[Roadmap Ujian Kalkulus](https://claude.ai/artifact/JbWyN4VqhEpptjK3sjtxxs)** — **dibuat 2026-10-26.** Rencana 9 hari, tugas bisa dicentang (tersimpan di `db`, koleksi `tasks`), bar poin terkunci dengan garis batas lulus di 18, hari ini disorot otomatis. Salinan lokal `html-visualization/roadmap-ujian.html`.
+- 🔵 [Interactive unit circle](https://claude.ai/artifact/VL1xCLnf4rfz58ezkdLZeG) — 2026-09-16. Local: `html-visualization/unit-circle.html`
+- 🟣 [Bayangan Vektor](https://claude.ai/artifact/Ff6iJ5L3aBUcUx4PXTukF6) — proyeksi vektor, 2026-10-07. Local: `html-visualization/vector-projection.html`
+- 🟢 `html-visualization/extrema-and-integral-checks.html` — 2026-09-26
+
+## Ditunda sampai setelah ujian (jangan dikerjakan sekarang)
+- L04 Materi 6 **Latihan 6.1–6.6** — masih belum dijawab sejak 2026-10-07
+- L04 Materi 7–8 per materi lengkap (sekarang cuma diajarkan seperlunya untuk soal 4)
+- L05 Materi 1–9 lengkap (sekarang cuma Materi 4 polar, untuk soal 5)
+- Tiga soal lama yang menggantung: $f(x)=x^2-4x+1$ pada $[0,5]$ (jawaban: maks $f(5)=6$, min $f(2)=-3$) · $\int_1^4\frac{x^2+x}{x^{3/2}}dx=\frac{20}3$ · $\int_0^2x\sqrt{x^2+1}\,dx=\frac{5\sqrt5-1}3$
+- Catatan live Lecture 3 (masih kosong) · integral trigonometri · integral tak wajar · related rates · optimasi
