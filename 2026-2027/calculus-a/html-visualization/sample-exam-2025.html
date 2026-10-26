@@ -1,0 +1,490 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Ujian Kalkulus A 2025</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+
+<style>
+/* Layout: exam paper — numbered gutter on the left, one card per exercise,
+   parts stacked inside. Sticky status bar carries timer + score projection. */
+:root{
+  --paper:#eceff4; --card:#ffffff; --card-2:#f6f8fb;
+  --ink:#141b26; --ink-2:#4c5a6e; --ink-3:#7d8ba0;
+  --line:#d4dbe6; --accent:#27419b; --accent-soft:#e5e9f8;
+  --ready:#0b6b5f; --ready-bg:#dcf0ec;
+  --next:#9a5610; --next-bg:#fbeada;
+  --later:#5c6a80; --later-bg:#e6eaf1;
+  --wrong:#a32a2a; --wrong-bg:#fae0e0;
+  --font-ui:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --font-read:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --font-num:"IBM Plex Mono",ui-monospace,monospace;
+  --radius:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#0e131b; --card:#161d27; --card-2:#1b2431;
+  --ink:#e7ecf3; --ink-2:#a6b3c6; --ink-3:#7a8699;
+  --line:#2a3545; --accent:#8fa6ff; --accent-soft:#1e2740;
+  --ready:#6fd6c1; --ready-bg:#11322d;
+  --next:#e5a860; --next-bg:#352512;
+  --later:#9aa8bd; --later-bg:#212a38;
+  --wrong:#f09a9a; --wrong-bg:#3a1c1c;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --paper:#0e131b; --card:#161d27; --card-2:#1b2431;
+  --ink:#e7ecf3; --ink-2:#a6b3c6; --ink-3:#7a8699;
+  --line:#2a3545; --accent:#8fa6ff; --accent-soft:#1e2740;
+  --ready:#6fd6c1; --ready-bg:#11322d;
+  --next:#e5a860; --next-bg:#352512;
+  --later:#9aa8bd; --later-bg:#212a38;
+  --wrong:#f09a9a; --wrong-bg:#3a1c1c;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-ui);line-height:1.5;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--card)}
+.wrap{max-width:900px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+
+/* --- header --- */
+header{padding-block:28px 18px;border-bottom:1px solid var(--line)}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1{font-family:var(--font-read);font-size:clamp(26px,5vw,38px);line-height:1.1;margin:8px 0 6px;text-wrap:balance;font-weight:600}
+.sub{color:var(--ink-2);font-size:14px;margin:0}
+.sub b{font-family:var(--font-num);font-weight:600;color:var(--ink)}
+
+/* --- sticky bar --- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:15;background:var(--card);border-bottom:1px solid var(--line);
+     margin-left:calc(-1*max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1*max(16px,env(safe-area-inset-right,0px)))}
+.bar-in{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;
+        padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px}
+.stat{display:flex;flex-direction:column;min-width:0}
+.stat .k{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+.stat .v{font-family:var(--font-num);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+.bar .spacer{flex:1 1 auto}
+button{font-family:inherit;font-size:13px;cursor:pointer;border-radius:8px;border:1px solid var(--line);background:var(--card-2);color:var(--ink);padding:6px 11px}
+button:hover{border-color:var(--accent)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.btn-main{background:var(--accent);color:#fff;border-color:var(--accent)}
+:root[data-theme="dark"] .btn-main,:root:not([data-theme="light"]) .btn-main{color:#0e131b}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn-main{color:#fff}}
+#timer{font-family:var(--font-num);font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* --- readiness panel --- */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-top:20px}
+.panel h2{font-family:var(--font-read);font-size:19px;margin:0 0 4px;font-weight:600}
+.panel p{margin:0 0 14px;color:var(--ink-2);font-size:14px}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.tier{border:1px solid var(--line);border-radius:8px;padding:11px 12px;min-width:0}
+.tier .t{font-size:12px;font-weight:600;letter-spacing:.03em}
+.tier .p{font-family:var(--font-num);font-size:22px;font-weight:600;line-height:1.2;font-variant-numeric:tabular-nums}
+.tier .d{font-size:12px;color:var(--ink-2);margin-top:2px}
+.tier.ready{background:var(--ready-bg)} .tier.ready .t,.tier.ready .p{color:var(--ready)}
+.tier.next{background:var(--next-bg)} .tier.next .t,.tier.next .p{color:var(--next)}
+.tier.later{background:var(--later-bg)} .tier.later .t,.tier.later .p{color:var(--later)}
+
+/* --- questions --- */
+.qlist{display:flex;flex-direction:column;gap:14px;margin-top:20px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.q.dimmed{opacity:.45}
+.q-head{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--card-2)}
+.q-num{font-family:var(--font-num);font-size:22px;font-weight:600;color:var(--accent);line-height:1.1;min-width:26px}
+.q-title{flex:1;min-width:0}
+.q-title .topic{font-size:14px;font-weight:600}
+.q-title .pts{font-family:var(--font-num);font-size:12px;color:var(--ink-3)}
+.q-body{padding:14px 16px}
+.stem{font-family:var(--font-read);font-size:16px;margin:0 0 8px;overflow-x:auto}
+.part{border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}
+.part:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.part-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:6px}
+.plabel{font-family:var(--font-num);font-weight:600;font-size:14px}
+.ppts{font-family:var(--font-num);font-size:12px;color:var(--ink-3)}
+.chip{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.chip.ready{background:var(--ready-bg);color:var(--ready)}
+.chip.next{background:var(--next-bg);color:var(--next)}
+.chip.later{background:var(--later-bg);color:var(--later)}
+.qtext{font-family:var(--font-read);font-size:16px;overflow-x:auto;margin:6px 0 10px}
+.cover{font-size:12px;color:var(--ink-3);margin:-4px 0 10px}
+.answer{width:100%;min-height:62px;resize:vertical;font-family:var(--font-num);font-size:13px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card-2);color:var(--ink)}
+.answer::placeholder{color:var(--ink-3)}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:8px}
+.row .grp{display:flex;gap:4px;flex-wrap:wrap}
+.sbtn{padding:5px 10px;font-size:12px}
+.sbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+:root[data-theme="dark"] .sbtn[aria-pressed="true"],:root:not([data-theme="light"]) .sbtn[aria-pressed="true"]{color:#0e131b}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .sbtn[aria-pressed="true"]{color:#fff}}
+.lock{font-size:12px;color:var(--ink-3);font-style:italic}
+.sol{margin-top:10px;padding:12px 14px;background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-family:var(--font-read);font-size:15px;overflow-x:auto}
+.sol .final{font-weight:600}
+.sol .lbl{font-family:var(--font-ui);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;display:block;margin-bottom:4px}
+
+/* --- point table --- */
+.ptable{width:100%;border-collapse:collapse;font-family:var(--font-num);font-size:12px;font-variant-numeric:tabular-nums}
+.ptable th,.ptable td{border:1px solid var(--line);padding:4px 6px;text-align:center;white-space:nowrap}
+.ptable th{background:var(--card-2);font-weight:600}
+.scroll{overflow-x:auto;margin-top:12px}
+.formula{font-family:var(--font-read);font-size:14px;color:var(--ink-2);margin-top:10px}
+footer{margin-top:26px;font-size:12px;color:var(--ink-3);text-align:center}
+mjx-container{overflow-x:auto;overflow-y:hidden;max-width:100%}
+@media (prefers-reduced-motion:no-preference){.sol{animation:fade .2s ease-out}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+</style>
+
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+  svg: { fontCache: 'global' },
+  startup: { typeset: false }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js"></script>
+
+<div class="bar">
+  <div class="bar-in">
+    <div class="stat"><span class="k">Waktu</span><span class="v" id="timer">3:00:00</span></div>
+    <button id="tstart">Mulai</button>
+    <button id="treset">Reset</button>
+    <div class="spacer"></div>
+    <div class="stat"><span class="k">Dicoba</span><span class="v" id="s-tried">0</span></div>
+    <div class="stat"><span class="k">Benar</span><span class="v" id="s-right">0</span></div>
+    <div class="stat"><span class="k">Perkiraan nilai</span><span class="v" id="s-grade">1,0</span></div>
+    <button id="track" class="btn-main">5 EC</button>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <div class="kicker">Sample exam · 6 November 2025 · 08:45–11:45</div>
+    <h1>Ujian Kalkulus A</h1>
+    <p class="sub">202001171 (5 EC, soal 1–11, <b>45</b> poin) · 202001172 (4 EC, soal 1–9, <b>36</b> poin) · tanpa kalkulator</p>
+  </header>
+
+  <section class="panel">
+    <h2>Yang bisa kamu kerjakan sekarang</h2>
+    <p>Setiap bagian soal dicocokkan dengan materi yang sudah kamu pelajari. Kunci jawaban terkunci sampai kamu menandai bagian itu sudah dicoba.</p>
+    <div class="tiers">
+      <div class="tier ready"><div class="t">SIAP — sudah diajarkan</div><div class="p" id="tier-ready">0</div><div class="d" id="tier-ready-d"></div></div>
+      <div class="tier next"><div class="t">BERIKUTNYA — tinggal selangkah</div><div class="p" id="tier-next">0</div><div class="d" id="tier-next-d"></div></div>
+      <div class="tier later"><div class="t">NANTI — kuliah yang belum ada</div><div class="p" id="tier-later">0</div><div class="d" id="tier-later-d"></div></div>
+    </div>
+    <div class="row" style="margin-top:14px">
+      <button id="filter">Tampilkan hanya yang siap</button>
+      <span class="lock" id="syncnote">Jawaban disimpan otomatis.</span>
+    </div>
+  </section>
+
+  <div class="qlist" id="qlist"></div>
+
+  <section class="panel">
+    <h2>Pembagian poin</h2>
+    <p>Persis seperti di lembar ujian.</p>
+    <div class="scroll">
+      <table class="ptable">
+        <tr><th>Soal</th><th>1a</th><th>1b</th><th>1c</th><th>2a</th><th>2b</th><th>3a</th><th>3b</th><th>4a</th><th>4b</th><th>5</th><th>6</th><th>7</th><th>8a</th><th>8b</th><th>9</th><th>10</th><th>11</th><th>Total</th></tr>
+        <tr><th>202001171</th><td>1</td><td>2</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>3</td><td>4</td><td>4</td><td>2</td><td>3</td><td>4</td><td>5</td><td>4</td><td>45</td></tr>
+        <tr><th>202001172</th><td>1</td><td>2</td><td>1</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>3</td><td>4</td><td>4</td><td>2</td><td>3</td><td>4</td><td>–</td><td>–</td><td>36</td></tr>
+      </table>
+    </div>
+    <p class="formula">Nilai ujian (202001171): \(1+(\text{poin})\times\tfrac15\) &nbsp;·&nbsp; Nilai ujian (202001172): \(1+(\text{poin})\times\tfrac14\)</p>
+  </section>
+
+  <footer>Dibuat dari <span style="font-family:var(--font-num)">sample_exam/112025exam_with_solutions.pdf</span> · Calculus A, Universiteit Twente</footer>
+</div>
+
+<script>
+const R = String.raw;
+
+const QUESTIONS = [
+{ n:1, topic:"Limit + aturan L'Hôpital",
+  stem: R`Misalkan \(f\) dan turunannya \(f'\) keduanya kontinu, dan \[\lim_{x\to 2}\frac{f(x)-5}{x-2}=\frac12.\] Dengan sifat-sifat limit dan aturan L'Hôpital, cari:`,
+  parts:[
+  { id:"q1a", label:"(a)", pts:1, tier:"ready", cover:"L01 — limit & sifatnya",
+    q: R`\(\displaystyle\lim_{x\to 2} f(x)\)`,
+    sol: R`Jangan langsung masukkan \(x=2\) — kamu belum tahu \(f(2)\). Triknya: kalikan dengan \((x-2)\) yang menuju nol. \[\lim_{x\to2}\bigl(f(x)-5\bigr)=\underbrace{\lim_{x\to2}\frac{f(x)-5}{x-2}}_{=\,1/2}\cdot\underbrace{\lim_{x\to2}(x-2)}_{=\,0}=0\] Kalau \(f(x)-5\to 0\), berarti <span class="final">\(\lim_{x\to2}f(x)=5\)</span>.` },
+  { id:"q1b", label:"(b)", pts:2, tier:"ready", cover:"L01 — limit pecahan terbalik + pangkat",
+    q: R`\(\displaystyle\lim_{x\to 2}\left(\frac{x-2}{f(x)-5}\right)^{2}\)`,
+    sol: R`Pecahannya adalah <em>kebalikan</em> dari yang diketahui, dan limitnya tidak nol, jadi boleh dibalik. \[\lim_{x\to2}\left(\frac{x-2}{f(x)-5}\right)^{2}=\left(\frac{1}{\lim\limits_{x\to2}\frac{f(x)-5}{x-2}}\right)^{2}=\left(\frac{1}{1/2}\right)^{2}=2^{2}=\;\]<span class="final">\(4\)</span>` },
+  { id:"q1c", label:"(c)", pts:1, tier:"ready", cover:"L02 — aturan L'Hôpital (slide 29–32)",
+    q: R`\(f'(2)\)`,
+    sol: R`Dari (a), pembilang \(\to 0\) dan penyebut \(\to 0\): bentuk \(0/0\), jadi L'Hôpital boleh dipakai. Turunkan atas dan bawah <em>terpisah</em>: \[\lim_{x\to2}\frac{f(x)-5}{x-2}=\lim_{x\to2}\frac{f'(x)}{1}=f'(2)\] (\(f'\) kontinu, jadi limitnya = nilainya). Maka <span class="final">\(f'(2)=\tfrac12\)</span>.` }]},
+
+{ n:2, topic:"Aturan hasil kali, hasil bagi, rantai",
+  stem: R`Fungsi \(f\) dan \(g\) beserta turunannya memenuhi tabel berikut. Cari turunan terhadap \(x\) dari tiap bentuk, pada nilai \(x\) yang diminta.`,
+  table:`<div class="scroll"><table class="ptable"><tr><th>x</th><th>f(x)</th><th>g(x)</th><th>f&prime;(x)</th><th>g&prime;(x)</th></tr><tr><td>1</td><td>1</td><td>3</td><td>2</td><td>&minus;1</td></tr><tr><td>3</td><td>3</td><td>1</td><td>&pi;</td><td>4</td></tr></table></div>`,
+  parts:[
+  { id:"q2a", label:"(a)", pts:2, tier:"ready", cover:"L02 — hasil kali + hasil bagi (atau pangkat −1 + rantai)",
+    q: R`\(\displaystyle\frac{1}{f(x)g(x)}\) pada \(x=3\)`,
+    sol: R`Tulis sebagai \(\bigl(f g\bigr)^{-1}\). Turunan luar \(-u^{-2}\), turunan dalam pakai aturan hasil kali: \[\frac{d}{dx}\frac{1}{f(x)g(x)}=-\frac{f'(x)g(x)+f(x)g'(x)}{\bigl(f(x)g(x)\bigr)^{2}}\] Pada \(x=3\): \(f=3,\ g=1,\ f'=\pi,\ g'=4\): \[-\frac{\pi(1)+3(4)}{(3\cdot1)^{2}}=\;\]<span class="final">\(-\dfrac{\pi+12}{9}\)</span> &nbsp;(≈ \(-1{,}682\))` },
+  { id:"q2b", label:"(b)", pts:2, tier:"ready", cover:"L02 — aturan rantai (turunan dalam!)",
+    q: R`\(f\bigl(g(x)-2e^{x-1}\bigr)\) pada \(x=1\)`,
+    sol: R`Aturan rantai: turunan luar di titik dalam, dikali turunan dalam. \[\frac{d}{dx}f\bigl(g(x)-2e^{x-1}\bigr)=f'\bigl(g(x)-2e^{x-1}\bigr)\cdot\bigl(g'(x)-2e^{x-1}\bigr)\] Pada \(x=1\): isi dalam \(=g(1)-2e^{0}=3-2=1\); turunan dalam \(=g'(1)-2e^{0}=-1-2=-3\); dan \(f'(1)=2\). \[2\cdot(-3)=\;\]<span class="final">\(-6\)</span>` }]},
+
+{ n:3, topic:"Integral: substitusi & integral parsial",
+  parts:[
+  { id:"q3a", label:"(a)", pts:2, tier:"ready", cover:"L03 — substitusi (sudah: Ex 23, 29, 31…)",
+    q: R`\(\displaystyle\int \frac{\sin\!\left(\sqrt{x}+1\right)}{\sqrt{x}}\,dx\)`,
+    sol: R`Ada "sesuatu di dalam sesuatu": \(\sqrt{x}+1\) di dalam \(\sin\). Misalkan \[u=\sqrt{x}+1,\qquad \frac{du}{dx}=\frac{1}{2\sqrt{x}}\ \Longrightarrow\ \frac{dx}{\sqrt{x}}=2\,du\] \[\int\frac{\sin(\sqrt{x}+1)}{\sqrt{x}}dx=2\int\sin u\,du=-2\cos u+C\] <span class="final">\(=-2\cos\!\left(\sqrt{x}+1\right)+C\)</span> — jangan lupa \(+C\) dan kembalikan ke \(x\).` },
+  { id:"q3b", label:"(b)", pts:2, tier:"next", cover:"L03 sisa — integral parsial, BELUM diajarkan",
+    q: R`\(\displaystyle\int_{1}^{2} x^{4}\ln x\,dx\)`,
+    sol: R`Hasil kali dua fungsi tak sejenis → integral parsial \(\int u\,dv=uv-\int v\,du\). Ambil \(u=\ln x\) (karena turunannya jadi sederhana) dan \(dv=x^{4}dx\), jadi \(du=\frac{dx}{x}\), \(v=\frac{x^{5}}{5}\). \[\int_{1}^{2}x^{4}\ln x\,dx=\left[\frac{x^{5}\ln x}{5}\right]_{1}^{2}-\frac15\int_{1}^{2}x^{4}dx=\frac{32\ln 2}{5}-\frac15\cdot\frac{31}{5}\] <span class="final">\(=\dfrac{32\ln 2}{5}-\dfrac{31}{25}=\dfrac{160\ln 2-31}{25}\)</span> &nbsp;(≈ \(3{,}196\))` }]},
+
+{ n:4, topic:"Bidang, cross product, luas segitiga",
+  stem: R`Segitiga dengan titik sudut \[P_1=(1,0,2),\qquad P_2=(3,2,0),\qquad P_3=(0,4,1).\]`,
+  parts:[
+  { id:"q4a", label:"(a)", pts:2, tier:"next", cover:"L04 Materi 7 — cross product (berikutnya di rencana)",
+    q: R`Cari persamaan bidang yang memuat segitiga itu, lalu hitung luas segitiganya.`,
+    sol: R`Dua panah di dalam bidang: \[\overrightarrow{P_1P_2}=\langle 2,2,-2\rangle,\qquad \overrightarrow{P_1P_3}=\langle -1,4,-1\rangle\] Vektor normal = cross product (perhatikan tanda minus di komponen \(\mathbf j\)): \[\mathbf n=\overrightarrow{P_1P_2}\times\overrightarrow{P_1P_3}=\langle 6,4,10\rangle\] Bidang lewat \(P_1\): \(6(x-1)+4(y-0)+10(z-2)=0\), disederhanakan <span class="final">\(3x+2y+5z-13=0\)</span>. Luas segitiga = setengah panjang cross product: \[A=\tfrac12\|\mathbf n\|=\tfrac12\sqrt{6^{2}+4^{2}+10^{2}}=\tfrac12\sqrt{152}=\;\]<span class="final">\(\sqrt{38}\approx 6{,}164\)</span>` },
+  { id:"q4b", label:"(b)", pts:2, tier:"next", cover:"L04 Materi 8 — garis & bidang (berikutnya)",
+    q: R`Cari persamaan parametrik garis yang lewat \(P_1\) dan tegak lurus bidang di (a). Buktikan tegak lurus dengan menunjukkan vektor arahnya ortogonal terhadap \(\overrightarrow{P_1P_2}\) dan \(\overrightarrow{P_1P_3}\).`,
+    sol: R`Tegak lurus bidang = searah normal, jadi vektor arahnya \(\mathbf n=\langle6,4,10\rangle\): \[\mathbf r(t)=(1,0,2)+t\langle6,4,10\rangle\] <span class="final">\(x=1+6t,\quad y=4t,\quad z=2+10t,\quad t\in\mathbb R\)</span> Pembuktian (dot product harus nol — dua panah masuk, satu ANGKA keluar): \[\mathbf n\cdot\overrightarrow{P_1P_2}=12+8-20=0,\qquad \mathbf n\cdot\overrightarrow{P_1P_3}=-6+16-10=0\]` }]},
+
+{ n:5, topic:"Koordinat polar → Cartesius", pts:3,
+  parts:[
+  { id:"q5", label:"", pts:3, tier:"next", cover:"L05 Materi 4 — koordinat polar (catatan sudah ada)",
+    q: R`Persamaan polar \[r=\frac{2}{1+\sin\theta},\qquad(\sin\theta\neq-1)\] dapat ditulis dalam koordinat Cartesius. Ubah ke bentuk Cartesius dan sebutkan kurvanya.`,
+    sol: R`Kalikan silang dulu supaya tidak ada pecahan: \[r(1+\sin\theta)=2\ \Longrightarrow\ r+r\sin\theta=2\] Pakai kamus polar: \(r=\sqrt{x^{2}+y^{2}}\) dan \(r\sin\theta=y\): \[\sqrt{x^{2}+y^{2}}+y=2\ \Longrightarrow\ \sqrt{x^{2}+y^{2}}=2-y\] Kuadratkan kedua ruas: \[x^{2}+y^{2}=4-4y+y^{2}\ \Longrightarrow\ x^{2}=4-4y\] <span class="final">\(y=1-\dfrac{x^{2}}{4}\)</span> — <span class="final">parabola terbuka ke bawah</span>, puncak \((0,1)\), memotong sumbu-\(x\) di \(x=\pm2\).` }]},
+
+{ n:6, topic:"Limit dua peubah tidak ada",
+  parts:[
+  { id:"q6", label:"", pts:4, tier:"later", cover:"Kalkulus multivariabel — kuliah berikutnya",
+    q: R`Tunjukkan bahwa limit \[\lim_{(x,y)\to(0,0)}\frac{2x}{x^{2}+x+y^{2}}\] tidak ada.`,
+    sol: R`Cara standar: dekati \((0,0)\) lewat dua jalan berbeda. Kalau hasilnya beda, limitnya tidak ada. Lewat sumbu-\(x\) (\(y=0\)): \[\lim_{x\to0}\frac{2x}{x^{2}+x}=\lim_{x\to0}\frac{2}{x+1}=2\] Lewat sumbu-\(y\) (\(x=0\)): \[\lim_{y\to0}\frac{0}{y^{2}}=0\] <span class="final">\(2\neq 0\) → limit tidak ada.</span>` }]},
+
+{ n:7, topic:"Aturan rantai multivariabel",
+  parts:[
+  { id:"q7", label:"", pts:4, tier:"later", cover:"Turunan parsial — kuliah berikutnya",
+    q: R`Diberikan \[z=\sin(xy)+x\sin y,\qquad x=u^{2}+v^{2},\qquad y=uv.\] Gunakan aturan rantai untuk mencari \(\dfrac{\partial z}{\partial u}\) dan \(\dfrac{\partial z}{\partial v}\) di titik \((u,v)=(1,0)\).`,
+    sol: R`Turunan parsial \(z\): \[\frac{\partial z}{\partial x}=y\cos(xy)+\sin y,\qquad \frac{\partial z}{\partial y}=x\cos(xy)+x\cos y\] Di \((u,v)=(1,0)\): \(x=1,\ y=0\), jadi \(\frac{\partial z}{\partial x}=0\) dan \(\frac{\partial z}{\partial y}=2\). Turunan \(x,y\): \[x_u=2u=2,\quad x_v=2v=0,\quad y_u=v=0,\quad y_v=u=1\] Rantai: \[\frac{\partial z}{\partial u}=z_x x_u+z_y y_u=(0)(2)+(2)(0)=\;\]<span class="final">\(0\)</span> \[\frac{\partial z}{\partial v}=z_x x_v+z_y y_v=(0)(0)+(2)(1)=\;\]<span class="final">\(2\)</span>` }]},
+
+{ n:8, topic:"Titik kritis & minimum mutlak",
+  stem: R`Diberikan fungsi \[f(x,y)=x^{4}+y^{4}-4xy.\]`,
+  parts:[
+  { id:"q8a", label:"(a)", pts:2, tier:"later", cover:"Gradien & titik kritis — kuliah berikutnya",
+    q: R`Cari semua titik kritis dari \(f\).`,
+    sol: R`Titik kritis = kedua turunan parsial nol. \[f_x=4x^{3}-4y=0\ \Rightarrow\ y=x^{3},\qquad f_y=4y^{3}-4x=0\ \Rightarrow\ x=y^{3}\] Substitusi: \(x=(x^{3})^{3}=x^{9}\Rightarrow x(x^{8}-1)=0\Rightarrow x=0,\pm1\). <span class="final">\((0,0),\ (1,1),\ (-1,-1)\)</span> — perhatikan: \(x^{8}=1\) memberi DUA akar real, jangan berhenti di \(x=1\) saja.` },
+  { id:"q8b", label:"(b)", pts:3, tier:"later", cover:"Ekstrem pada interval tertutup (L02 extrema, versi 2 peubah)",
+    q: R`Tentukan minimum mutlak \(f\) pada ruas garis \(x=1,\ -2\le y\le 2\).`,
+    sol: R`Di ruas itu \(x\) terkunci = 1, jadi soalnya jadi satu peubah: \[g(y)=f(1,y)=1+y^{4}-4y\] \[g'(y)=4y^{3}-4=0\ \Rightarrow\ y^{3}=1\ \Rightarrow\ y=1\] Cek titik kritis DAN kedua ujung: \[g(-2)=25,\qquad g(1)=-2,\qquad g(2)=9\] <span class="final">Minimum mutlak \(f(1,1)=-2\)</span>` }]},
+
+{ n:9, topic:"Persamaan diferensial linear orde satu",
+  parts:[
+  { id:"q9", label:"", pts:4, tier:"later", cover:"Persamaan diferensial — kuliah berikutnya",
+    q: R`Selesaikan \[x^{2}\frac{dy}{dx}+3xy=x^{4},\qquad y(1)=2,\qquad x>1.\]`,
+    sol: R`Bagi \(x^{2}\) supaya berbentuk baku \(y'+P(x)y=Q(x)\): \[\frac{dy}{dx}+\frac{3}{x}y=x^{2}\] Faktor integrasi: \(v=e^{\int 3/x\,dx}=e^{3\ln x}=x^{3}\). Kalikan — ruas kiri jadi turunan hasil kali: \[(x^{3}y)'=x^{5}\ \Longrightarrow\ x^{3}y=\frac{x^{6}}{6}+C\ \Longrightarrow\ y=\frac{x^{3}}{6}+\frac{C}{x^{3}}\] Syarat awal \(y(1)=2\): \(\frac16+C=2\Rightarrow C=\frac{11}{6}\). <span class="final">\(y=\dfrac{x^{3}}{6}+\dfrac{11}{6x^{3}}\)</span>` }]},
+
+{ n:10, topic:"Bilangan kompleks — akar-akar", only171:true,
+  parts:[
+  { id:"q10", label:"", pts:5, tier:"later", cover:"Bilangan kompleks — hanya 5 EC (202001171)",
+    q: R`Cari semua solusi dari \[x^{4}+7x^{2}+49=0,\] dan nyatakan semua akarnya dalam bentuk Cartesius \(a+bi\).`,
+    sol: R`Misalkan \(u=x^{2}\): \(u^{2}+7u+49=0\). Rumus abc: \[u=\frac{-7\pm\sqrt{49-196}}{2}=\frac{-7\pm 7i\sqrt3}{2}\] Bentuk polar: \(|u|=7\), jadi \(u=7e^{i2\pi/3}\) dan \(u=7e^{i4\pi/3}\). Akar kuadrat → bagi dua sudutnya, lalu tambah \(\pi\) untuk akar keduanya: \[x=\sqrt7 e^{i\pi/3},\ \sqrt7 e^{i2\pi/3},\ \sqrt7 e^{i4\pi/3},\ \sqrt7 e^{i5\pi/3}\] <span class="final">\(x=\pm\left(\dfrac{\sqrt7}{2}+i\dfrac{\sqrt{21}}{2}\right),\qquad x=\pm\left(\dfrac{\sqrt7}{2}-i\dfrac{\sqrt{21}}{2}\right)\)</span>` }]},
+
+{ n:11, topic:"PD orde dua, nilai awal", only171:true,
+  parts:[
+  { id:"q11", label:"", pts:4, tier:"later", cover:"PD orde dua — hanya 5 EC (202001171)",
+    q: R`Cari solusi tunggal dari \[y''+4y'+13y=0,\qquad y(0)=2,\qquad y'(0)=-3.\]`,
+    sol: R`Persamaan karakteristik: \[r^{2}+4r+13=0\ \Longrightarrow\ r=\frac{-4\pm\sqrt{16-52}}{2}=-2\pm 3i\] Akar kompleks \(\alpha\pm\beta i\) → solusi \(e^{\alpha t}(A\cos\beta t+B\sin\beta t)\): \[y(t)=e^{-2t}\bigl(A\cos 3t+B\sin 3t\bigr)\] \(y(0)=2\Rightarrow A=2\). Turunkan (aturan hasil kali!): \[y'(t)=e^{-2t}\bigl(-2(A\cos3t+B\sin3t)-3A\sin3t+3B\cos3t\bigr)\] \(y'(0)=-2A+3B=-3\Rightarrow -4+3B=-3\Rightarrow B=\tfrac13\). <span class="final">\(y(t)=e^{-2t}\left(2\cos 3t+\tfrac13\sin 3t\right)\)</span>` }]}
+];
+
+const STATUSES = [
+  {k:"belum",  t:"Belum"},
+  {k:"dicoba", t:"Sudah dicoba"},
+  {k:"benar",  t:"Benar"},
+  {k:"salah",  t:"Salah"}
+];
+const TIER_TEXT = {ready:"Siap", next:"Berikutnya", later:"Nanti"};
+
+const state = {};   // id -> {status, answer}
+const allParts = QUESTIONS.flatMap(q => q.parts.map(p => ({...p, n:q.n, only171:!!q.only171})));
+allParts.forEach(p => state[p.id] = {status:"belum", answer:""});
+
+let track171 = true;
+let onlyReady = false;
+let db = null, canWrite = true;
+
+/* ---------- build the page once, typeset once ---------- */
+const list = document.getElementById("qlist");
+QUESTIONS.forEach(q => {
+  const total = q.parts.reduce((s,p)=>s+p.pts,0);
+  const card = document.createElement("section");
+  card.className = "q";
+  card.dataset.n = q.n;
+  card.innerHTML =
+    '<div class="q-head"><div class="q-num">' + q.n + '</div>' +
+    '<div class="q-title"><div class="topic">' + q.topic + '</div>' +
+    '<div class="pts">' + total + ' poin' + (q.only171 ? ' · hanya 202001171 (5 EC)' : '') + '</div></div></div>' +
+    '<div class="q-body"></div>';
+  const body = card.querySelector(".q-body");
+  if (q.stem) { const s=document.createElement("p"); s.className="stem"; s.innerHTML=q.stem; body.appendChild(s); }
+  if (q.table) { const t=document.createElement("div"); t.innerHTML=q.table; body.appendChild(t); }
+
+  q.parts.forEach(p => {
+    const el = document.createElement("div");
+    el.className = "part";
+    el.innerHTML =
+      '<div class="part-head">' +
+        (p.label ? '<span class="plabel">' + p.label + '</span>' : '') +
+        '<span class="ppts">' + p.pts + ' poin</span>' +
+        '<span class="chip ' + p.tier + '">' + TIER_TEXT[p.tier] + '</span>' +
+      '</div>' +
+      '<div class="qtext">' + p.q + '</div>' +
+      '<div class="cover">' + p.cover + '</div>' +
+      '<textarea class="answer" id="a-' + p.id + '" placeholder="Jawaban akhir kamu…"></textarea>' +
+      '<div class="row"><div class="grp" id="st-' + p.id + '"></div>' +
+      '<button class="sbtn reveal" id="rv-' + p.id + '">Lihat kunci</button>' +
+      '<span class="lock" id="lk-' + p.id + '">Terkunci sampai ditandai sudah dicoba</span></div>' +
+      '<div class="sol" id="sol-' + p.id + '" hidden><span class="lbl">Kunci &amp; langkah</span>' + p.sol + '</div>';
+
+    const grp = el.querySelector("#st-" + p.id);
+    STATUSES.forEach(s => {
+      const b = document.createElement("button");
+      b.className = "sbtn"; b.textContent = s.t; b.dataset.id = p.id; b.dataset.status = s.k;
+      b.setAttribute("aria-pressed", String(s.k === "belum"));
+      b.addEventListener("click", () => setStatus(p.id, s.k));
+      grp.appendChild(b);
+    });
+    el.querySelector("#rv-" + p.id).addEventListener("click", () => {
+      const sol = document.getElementById("sol-" + p.id);
+      sol.hidden = !sol.hidden;
+      document.getElementById("rv-" + p.id).textContent = sol.hidden ? "Lihat kunci" : "Sembunyikan kunci";
+    });
+    const ta = el.querySelector("#a-" + p.id);
+    let timer;
+    ta.addEventListener("input", () => {
+      state[p.id].answer = ta.value;
+      clearTimeout(timer);
+      timer = setTimeout(() => save(p.id), 700);
+    });
+    body.appendChild(el);
+  });
+  list.appendChild(card);
+});
+
+if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise();
+
+/* ---------- state ---------- */
+function setStatus(id, status){
+  if (state[id].status === status) return;
+  state[id].status = status;
+  render();
+  save(id);
+}
+
+function save(id){
+  if (!db || !canWrite) return;
+  db.collection("work").doc(id).set({
+    status: state[id].status,
+    answer: state[id].answer,
+    updatedAt: new Date().toISOString()
+  }).catch(e => {
+    if (e && e.code === "invalid_argument") { canWrite = false; note("Mode baca saja — jawaban tidak tersimpan."); }
+  });
+}
+
+function activeParts(){ return allParts.filter(p => track171 || !p.only171); }
+
+function render(){
+  // per-part controls
+  allParts.forEach(p => {
+    const st = state[p.id].status;
+    document.querySelectorAll('#st-' + p.id + ' .sbtn').forEach(b =>
+      b.setAttribute("aria-pressed", String(b.dataset.status === st)));
+    const ta = document.getElementById("a-" + p.id);
+    if (ta && ta.value !== state[p.id].answer && document.activeElement !== ta) ta.value = state[p.id].answer;
+    const unlocked = st !== "belum";
+    const rv = document.getElementById("rv-" + p.id);
+    const lk = document.getElementById("lk-" + p.id);
+    rv.disabled = !unlocked; rv.hidden = !unlocked; lk.hidden = unlocked;
+    if (!unlocked) { const sol = document.getElementById("sol-" + p.id); sol.hidden = true; rv.textContent = "Lihat kunci"; }
+  });
+
+  // cards: track + filter
+  QUESTIONS.forEach(q => {
+    const card = list.querySelector('[data-n="' + q.n + '"]');
+    const offTrack = q.only171 && !track171;
+    const hiddenByFilter = onlyReady && !q.parts.some(p => p.tier === "ready");
+    card.hidden = hiddenByFilter;
+    card.classList.toggle("dimmed", offTrack);
+  });
+
+  // tiers
+  const parts = activeParts();
+  ["ready","next","later"].forEach(t => {
+    const set = parts.filter(p => p.tier === t);
+    const pts = set.reduce((s,p)=>s+p.pts,0);
+    document.getElementById("tier-" + t).textContent = pts + " poin";
+    document.getElementById("tier-" + t + "-d").textContent =
+      set.length + " bagian · " + set.map(p => p.n + (p.label ? p.label.replace(/[()]/g,"") : "")).join(", ");
+  });
+
+  // score
+  const tried = parts.filter(p => state[p.id].status !== "belum").reduce((s,p)=>s+p.pts,0);
+  const right = parts.filter(p => state[p.id].status === "benar").reduce((s,p)=>s+p.pts,0);
+  const grade = 1 + right * (track171 ? 1/5 : 1/4);
+  document.getElementById("s-tried").textContent = tried;
+  document.getElementById("s-right").textContent = right;
+  document.getElementById("s-grade").textContent = grade.toFixed(1).replace(".", ",");
+  document.getElementById("track").textContent = track171 ? "5 EC" : "4 EC";
+}
+
+function note(msg){ document.getElementById("syncnote").textContent = msg; }
+
+/* ---------- controls ---------- */
+document.getElementById("track").addEventListener("click", () => {
+  track171 = !track171; render();
+  if (db && canWrite) db.doc("meta/settings").set({track171}).catch(()=>{});
+});
+document.getElementById("filter").addEventListener("click", (e) => {
+  onlyReady = !onlyReady;
+  e.target.textContent = onlyReady ? "Tampilkan semua soal" : "Tampilkan hanya yang siap";
+  render();
+});
+
+/* ---------- timer (per-device only) ---------- */
+let left = 3*60*60, running = false, tick = null;
+try { const v = localStorage.getItem("exam-left"); if (v !== null) left = Math.max(0, parseInt(v,10) || left); } catch(e){}
+function showTime(){
+  const h = Math.floor(left/3600), m = Math.floor((left%3600)/60), s = left%60;
+  document.getElementById("timer").textContent = h + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+}
+showTime();
+document.getElementById("tstart").addEventListener("click", (e) => {
+  running = !running;
+  e.target.textContent = running ? "Jeda" : "Mulai";
+  if (running) {
+    tick = setInterval(() => {
+      left = Math.max(0, left-1); showTime();
+      try { localStorage.setItem("exam-left", String(left)); } catch(err){}
+      if (left === 0) { clearInterval(tick); running = false; document.getElementById("tstart").textContent = "Mulai"; }
+    }, 1000);
+  } else clearInterval(tick);
+});
+document.getElementById("treset").addEventListener("click", () => {
+  clearInterval(tick); running = false; left = 3*60*60; showTime();
+  document.getElementById("tstart").textContent = "Mulai";
+  try { localStorage.setItem("exam-left", String(left)); } catch(e){}
+});
+
+/* ---------- storage ---------- */
+render();
+(async () => {
+  if (!window.claude || !claude.use) { note("Salinan lokal — jawaban tidak tersimpan."); return; }
+  db = await claude.use("db");
+  if (!db) { note("Tidak tersambung — jawaban tidak tersimpan."); return; }
+  db.collection("work").onSnapshot(snap => {
+    snap.docs.forEach(d => {
+      const v = d.data() || {};
+      if (!state[d.id]) return;
+      if (typeof v.status === "string") state[d.id].status = v.status;
+      if (typeof v.answer === "string") state[d.id].answer = v.answer;
+    });
+    render();
+  }, () => note("Sinkronisasi terputus — muat ulang halaman."));
+  db.doc("meta/settings").onSnapshot(d => {
+    const v = d.data();
+    if (v && typeof v.track171 === "boolean") { track171 = v.track171; render(); }
+  }, () => {});
+  const user = await claude.use("user");
+  if (user && user.can) {
+    const w = await user.can("data.write");
+    if (w === false) { canWrite = false; note("Mode baca saja — jawaban tidak tersimpan."); }
+  }
+})();
+</script>
