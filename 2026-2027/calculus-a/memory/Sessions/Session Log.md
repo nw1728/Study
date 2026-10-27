@@ -1,12 +1,31 @@
 ---
 title: Session Log
 tags: [calculus-a, sessions]
-updated: 2026-10-07
+updated: 2026-10-27
 ---
 
 # 🗓️ Session Log
 
 Back to [[00 Index]] · Newest first
+
+## 2026-10-27 — Hari 1 mode ujian: turunan dibereskan, lalu 16 poin dipanen (Claude Code)
+
+**Hasil hari ini: 10 → 26 poin dari 45. Garis lulus 23 dilewati di hari pertama dari sembilan.**
+
+- **Pagi — fondasi.** Aturan turunan sudah lapuk. Yang akhirnya membuka semuanya adalah **metafora KOTAK (■)**: setiap turunan berakhir `× ■′`, dan aturan pangkat hanyalah kasus kotak berisi `x` polos sehingga `■′=1` tak terlihat. **Semua turunan adalah aturan rantai.** Setelah itu: drill 9/10, `f'(g(x))·g'(x)` ditulis tanpa diminta, dan **soal 2b sempurna** — padahal gagal sehari sebelumnya.
+- **Sempat terlalu lama di filosofi `dy/dx`.** Saat jam 11:46 dia bilang "masih bingung", diakui terus terang bahwa itu kesalahan pengajaran, lalu dialihkan ke prosedur murni. Dia tidak membutuhkan filosofi itu untuk ujian.
+- **Siang — soal 3a (substitusi).** Macet tiga kali, dan ketiganya pola yang sama: **simbol baru yang tugasnya belum disebutkan.** `u` dipecahkan dengan menyambungkannya ke kotak yang sudah dia kuasai — "u itu cuma nama panggilan untuk isi kotak" — plus menunjukkan arah mundurnya: `d/dx[−2cos(√x+1)]` menghasilkan persis integrannya. Dia menyelesaikannya sendiri, **+C ditulis tanpa diingatkan**.
+- **Ethan menemukan sendiri bahwa ujiannya 11 soal, bukan 9.** Diverifikasi langsung ke kertas: jalur **`202001171`, 5 EC, 45 poin, `×1/5`, lulus di 23** — bukan 36 poin seperti asumsi kami sejak awal. Toggle di halaman ujian sudah dibalik. Dua soal tambahan (10 dan 11) ternyata **termasuk yang paling resep di seluruh kertas**, jadi 9 poin itu murah.
+- **Lembar rumus ujian diperoleh dan dipetakan.** Temuan kunci: lembar itu **kamus, bukan resep** — dia memberi turunan `sin` tapi tidak memberi aturan rantai; memberi `∫xⁿ` tapi tidak memberi substitusi. `∫sin x dx = −cos x + C` **ada di lembar** — persis yang dia gelut 20 menit sore itu. Sejak itu setiap rumus ditandai **📄 LEMBAR** atau **🧠 HAFAL**. **Isi kartu resep Kamis kini sudah terdefinisi persis.**
+- **Ethan meminta metode yang lebih agresif**, dan metode itu terbukti dalam satu malam: **resep 4 langkah + satu contoh jadi DULU, baru dia kerjakan.** Waktu per soal turun dari ~1,5 jam ke ~40 menit.
+- **Malam (18:30–21:00) — tiga soal, semuanya materi yang belum pernah dilihat seumur hidup:**
+  - **Soal 6** (limit multivariabel, 4 poin). Kunci: dua jalan beda sudah cukup. Dia sempat bertanya *"kalau ketemu, limitnya sama?"* — pertanyaan terbaik hari itu, karena jawabannya **tidak**: diberi contoh tandingan `x²y/(x⁴+y²)` di mana tiga jalan setuju dan jalan keempat `y=x²` memberi ½.
+  - **Soal 5** (polar → Cartesius, 3 poin). Pertanyaannya *"x²+y²=r² kok kayak pythagoras?"* **memang Pythagoras** — dan segitiga Opp/Adj/Hyp-nya **ada di lembar rumus**, sehingga konversi polar bisa diturunkan ulang di ujian dalam 10 detik. Koreksi untuk diri sendiri: sebelumnya ini ditandai 🧠 HAFAL, terlalu keras.
+  - **Soal 11** (PD orde 2, 4 poin) — **dikerjakan utuh sendirian**, termasuk `B = ⅓` yang pecahan, dan **baris terakhirnya tidak bocor**. Ini momen terbaik hari itu.
+  - **Soal 10** (akar kompleks, 5 poin) — besaran dan struktur benar sendiri, hanya huruf `i` yang hilang di baris akhir. `e^{iθ}` dijelaskan jujur: **buktinya deret Taylor, di luar mata kuliah, jangan dipelajari** — yang dia butuhkan hanyalah bahwa `e^{iθ}` adalah **nama untuk sebuah arah**, dan "ditulis panjangnya" persis sama dengan konversi polar soal 5.
+- **Diagnosis terpenting, kini 7 kejadian:** penalarannya tidak pernah salah; **yang bocor selalu baris terakhir.** Perkiraan harga di ujian 5–6 poin terhadap garis lulus 23.
+- **Diagnosis kedua, baru hari ini:** dia **tidak lambat di matematika** — dia berhenti total setiap kali muncul simbol baru yang tugasnya belum disebutkan (`dy/dx`, `u`, `∂z/∂u`, `e^{iθ}`, `y(0)`). Obatnya: **sebutkan tugas simbol SEBELUM soal**, bukan setelah dia macet.
+- **Berikutnya:** tiga pengulangan dingin (soal 6, 5, 10) pagi hari, lalu soal 9 → 7 → 3b → 8 → 4. Roadmap masih perlu diperbarui ke 45 poin.
 
 ## 2026-10-07 — L04 Materi 5: dot product (Claude Code)
 - Picked up exactly where [[Current Progress]] said to: **Materi 5 of 8, dot product (slides 8–9)**, in the standing per-materi format (one materi → exercises → wait → correct every answer → next). Walkthrough updated in [[L04 Walkthrough (Gogo Gaga)]]; 8 answers logged in [[Exercise Log]].

@@ -1,7 +1,7 @@
 ---
 title: Exercise Log
 tags: [calculus-a, practice]
-updated: 2026-10-07
+updated: 2026-10-27
 ---
 
 # ✍️ Exercise Log
@@ -279,3 +279,29 @@ Answered honestly, including the confusing part: **textbooks and the slides use 
 Sharpest contrast of the set: **(a) $\mathbf u\cdot\mathbf v+7$ is legal but (e) $\mathbf u\cdot\mathbf v+\mathbf w$ is not** — one letter apart. (e) is the Materi 4 error $\mathbf u+5$ written backwards. New general lesson: **the dot product changes the type mid-expression, so the type check must be re-run on every line, not once at the start.**
 
 **Notes on the correct answers:** 5.1b — he never touched the magnitudes ($5.3852$, $5.9161$, ugly roots), exactly as asked; that is discipline, not luck. 5.3 — he kept surds unevaluated so $\sqrt2\cdot\sqrt2$ died cleanly into $2$, giving exact $\frac12$ instead of $0.4999\ldots$. 5.5 — **no components were given at all** and he still got the angle; the lesson drawn was that the angle formula needs only **three numbers** (one dot product, two lengths), components being merely a route to them. He should be reminded to state $\theta=120^\circ$ explicitly rather than only $\cos120^\circ=-\frac12$. 5.6b — he **derived $\mathbf u\cdot\mathbf u=\lvert\mathbf u\rvert^2$ himself** from the arithmetic, and this time **trusted his own finding** (unlike Ex 1.5). That property is the entry point for Materi 6, where $\lvert\mathbf v\rvert^2=\mathbf v\cdot\mathbf v$ removes every square root from the projection formula.
+
+## Sample Exam 2025-11-06 (jalur 202001171, 5 EC, 45 poin)
+Sumber: `sample_exam/112025exam_with_solutions.pdf`. Halaman interaktif: https://claude.ai/artifact/LApfMvRbq2vNa8KCjStbha
+
+| Soal | Poin | Teknik | Jawaban |
+|---|---|---|---|
+| 1a | 1 | sifat limit (bukan L'Hôpital) | $\lim_{x\to2}f(x)=5$ |
+| 1b | 2 | resiprokal + pangkat; syarat $\lim A\neq0$ | $4$ |
+| 1c | 1 | $f'$ kontinu $\Rightarrow f'(2)=\lim f'(x)$ | $f'(2)=\tfrac12$ |
+| 2a | 2 | hasil kali + rantai, baca tabel | $\pi+12$ |
+| 2b | 2 | rantai: $f'(g-2e^{x-1})\cdot(g'-2e^{x-1})$ | $-6$ |
+| 3a | 2 | substitusi $u=\sqrt x+1$, $2\,du=dx/\sqrt x$ | $-2\cos(\sqrt x+1)+C$ |
+| 5 | 3 | polar→Cartesius: $r+y=2$, kuadratkan | $x^2=-4y+4$, parabola buka ke **bawah**, puncak $(0,1)$ |
+| 6 | 4 | dua jalan: $y=0\Rightarrow2$, $x=0\Rightarrow0$ | limit **tidak ada** |
+| 10 | 5 | $u=x^2$ → ABC → polar $7e^{i2\pi/3}$ → akar $\sqrt7 e^{i\pi/3}$ → simetri | $x=\dfrac{\pm\sqrt7\pm i\sqrt{21}}{2}$ |
+| 11 | 4 | $r^2+4r+13=0\Rightarrow r=-2\pm3i$; $A$ dari $y(0)$, $B$ dari $y'(0)$ | $y=e^{-2x}\left(2\cos3x+\tfrac13\sin3x\right)$ |
+
+**Belum dikerjakan:** 3b (integral parsial, 2), 4 (cross product + bidang, 4), 7 (rantai multivariabel, 4), 8 (titik kritis, 5), 9 (faktor integrasi, 4).
+
+### Latihan pendukung 2026-10-27
+| Soal | Jawaban |
+|---|---|
+| $\int\cos(7x)\,dx$ (latihan substitusi) | $\tfrac17\sin(7x)+C$ |
+| $y''+2y'+5y=0,\ y(0)=1,\ y'(0)=1$ (contoh PD) | $y=e^{-x}(\cos2x+\sin2x)$ |
+| $x^4-2x^2+4=0$ (contoh akar kompleks) | $x=\dfrac{\pm\sqrt6\pm i\sqrt2}{2}$ |
+| $\lim_{(x,y)\to(0,0)}\dfrac{x^2y}{x^4+y^2}$ (contoh tandingan) | tidak ada — tiga jalan beri $0$, jalan $y=x^2$ beri $\tfrac12$ |

@@ -1,139 +1,122 @@
 ---
 title: Current Progress
-tags: [calculus-a, progress, exam]
-updated: 2026-10-26
-last_device: "Arch laptop (nw1728) — via Remote Control, Ethan on claude.ai web GUI"
+tags: [calculus-a, progress]
+updated: 2026-10-27
+last_device: 1770np
 ---
 
-# 📍 Current Progress — continue from here
+# 📍 Current Progress
 
-Back to [[00 Index]] · History: [[Session Log]] · Rencana: [[#🗺️ Roadmap sampai hari ujian]]
+Back to [[00 Index]]
 
-> [!danger] 🚨 MODE UJIAN — ini mengalahkan semua rencana lama
-> **Ujian Kalkulus A: Rabu 4 November 2026, 08:45–11:45.** Hari ini 26 Oktober → **9 hari.**
-> Ethan ambil **202001172 (4 EC)**: soal **1–9**, maksimum **36 poin**, nilai $=1+\text{poin}\times\frac14$, **lulus di 18 poin**.
-> Soal 10 & 11 (bilangan kompleks, PD orde dua) **tidak perlu sama sekali**.
-> Rencana lama (L04 Materi 6–8 per materi, lalu L05 dari awal) **ditunda** — sekarang semuanya diurutkan berdasarkan poin per jam. Lihat roadmap di bawah.
+> [!danger] 🚨 MODE UJIAN — Rabu 4 November 2026, 08:45–11:45
+> **Jalur dikonfirmasi 2026-10-27 dari kertas ujian: `202001171` — 5 EC.**
+> - Soal **1–11** (bukan 1–9). Total **45 poin**.
+> - Nilai = `1 + (poin) × 1/5`. **Lulus (5,5) = 23 poin.**
+> - Jalur 4 EC (`202001172`) hanya soal 1–9, 36 poin, `× 1/4` — **bukan jalur Ethan.**
+> - Koreksi: sampai 27 Okt sore kami bekerja dengan asumsi 4 EC. Ethan sendiri yang menemukan kekeliruannya.
 
 > [!important] 🧮 ATURAN MENULIS MATH DI CHAT — sudah diuji langsung dengan Ethan (2026-10-26)
-> Ethan memakai **claude.ai web GUI** lewat `/remote-control`. Hasil tes:
->
 > | Cara tulis | Hasil di layarnya |
 > |---|---|
-> | `$$...$$` di baris sendiri | ✅ **dirender, paling bagus** — pakai ini untuk rumus penting |
-> | `\(...\)` di tengah kalimat | ✅ dirender — pakai ini untuk sisipan pendek |
-> | `$...$` | ❌ **RUSAK**, muncul sebagai dolar mentah. **Jangan dipakai sama sekali.** |
+> | `$$...$$` di baris sendiri | ✅ **dirender, paling bagus** |
+> | `\(...\)` di tengah kalimat | ✅ dirender |
+> | `$...$` | ❌ **RUSAK**. **Jangan dipakai sama sekali.** |
 >
-> Kalimatnya sendiri: *"tes a sama tes b muncul, tapi tes b lebih bagus"*.
-> ⚠️ Sempat salah dua kali hari ini sebelum dites betul — pertama dikira semua render, lalu dikira tidak ada yang render. **Jangan menyimpulkan dari "all good"; tes dengan dua contoh berbeda.**
-> Aturan lama "plain text, no LaTeX" di [[Teaching Playbook]] dan [[00 Index]] **hanya berlaku kalau dia kembali ke terminal.**
+> ⚠️ Jangan menyimpulkan ulang dari konfirmasi samar ("i can see it", "all good"). Aturan di atas hasil tes A/B eksplisit.
 
-> [!important] 📸 Dia sekarang BISA kirim foto tulisan tangan (2026-10-26)
-> Lewat aplikasi Claude di tab-nya. **Ini pertama kalinya** — selama ini diagnosis harus ditebak dari jawaban akhir saja.
-> **Minta foto setiap kali ada kesalahan**, jangan cuma jawaban akhir. Kesalahan nomor 2 hari ini ketahuan persis karena fotonya.
-> KDE Connect **tidak perlu lagi ditawarkan**.
+> [!tip] 📸 Ethan bisa mengirim foto tulisan tangan dari tabletnya
+> Baru sejak 2026-10-26. Dulu hanya jawaban akhir yang bisa dikirim. **Minta foto kerjaannya** — di situ letak diagnosis terbaiknya. KDE Connect tidak perlu ditawarkan lagi.
 
-> [!important] Format mengajar — tetap dipakai
-> **Per materi, satu-satu, latihan di tiap materi, campur Bahasa Indonesia**, register **gogo gaga**.
-> Loop: 1 materi → jelaskan → 5–6 latihan → tunggu jawabannya → koreksi satu per satu → materi berikutnya.
-> Resep lengkap: [[Teaching Playbook]].
+> [!note] 📄 Lembar rumus ujian sudah ada (`uploads/.../calculus_formula_sheet-1.pdf`, dibaca 2026-10-27)
+> **ADA di lembar (jangan buang waktu menghafal):** tabel nilai trig (0…2π), sin²+cos²=1, segitiga Opp/Adj/Hyp, dot & cross product lengkap, turunan `c, xⁿ, eˣ, ln|x|, sin, cos, tan`, integral `xⁿ, 1/x, eˣ, sin, cos, 1/cos², tan`, turunan & integral invers trig.
+> **TIDAK ADA (wajib hafal):** aturan rantai ⚠️, hasil kali, hasil bagi, L'Hôpital, prosedur substitusi-u, integral parsial, konversi polar, aturan rantai multivariabel, titik kritis, faktor integrasi, **rumus ABC**, persamaan karakteristik PD orde 2, persamaan bidang, tabel kuadran/sudut acuan.
+> 👉 **Isi "kartu resep" Kamis = persis daftar kedua ini.** Sudah tidak perlu ditebak.
+> Protokol yang dipakai ke Ethan: setiap rumus ditandai **📄 LEMBAR** atau **🧠 HAFAL**.
 
-## Last session
-- **Date:** 2026-10-26 (Senin)
-- **Type:** Hari pertama mode ujian. Sample exam dibedah, soal 1 & 2 dikerjakan, aturan turunan di-refresh, roadmap 9 hari dibuat.
-- **What happened:**
-  - Ethan menjalankan **`/remote-control`** → sekarang belajar lewat **claude.ai web GUI**. **LaTeX dirender** (dikonfirmasi langsung) dan **dia bisa mengirim foto tulisan tangan**. Dua hambatan terbesar selama ini hilang dalam satu sesi.
-  - `sample_exam/112025exam_with_solutions.pdf` dibaca lengkap (5 halaman, 11 soal + kunci). Setiap bagian dipetakan ke materi yang sudah/belum dia kuasai.
-  - **Temuan utama:** cuma **10 dari 36 poin** berasal dari materi yang pernah kita pelajari. Tapi **soal 6, 7, 8, 9 (17 poin) itu soal RESEP** — paling mekanis di seluruh ujian — sementara **soal 1 (4 poin) justru yang paling susah** dan sudah dia kerjakan. Strategi: panen poin resep dulu.
-  - **Lecture 6+ ternyata sudah diajarkan di kelas, tapi Ethan bolos / tidak paham.** Jadi soal 6–9 harus **diajarkan dari nol**, bukan di-review. ⚠️ **Slide lecture 6+ belum ada di `lectures_slides/` — minta dia kirim.**
-  - Dua halaman dibuat (lihat Tools di bawah): **halaman ujian interaktif** dan **roadmap 9 hari yang bisa dicentang**.
-  - Jadwal dia sendiri diterima apa adanya: Sel–Kam kalkulus, Jum–Min aljabar linear (ulangan Senin 2 Nov), Sel 3 Nov kalkulus lagi, Rab 4 Nov ujian.
+## 📊 Papan skor — 26 dari 45 poin (lulus di 23) ✅ SUDAH LEWAT
 
-## 🧮 Peta ujian — 202001172 (4 EC), 36 poin
-
-| Soal | Poin | Materi | Status Ethan |
+| Soal | Poin | Status | Catatan |
 |---|---|---|---|
-| 1a,1b,1c | 4 | Limit + L'Hôpital | 🟢 **dikerjakan 26 Okt** — 1b benar, 1a/1c penalaran benar tapi penyajian gugur |
-| 2a,2b | 4 | Hasil kali, hasil bagi, rantai | 🔴 **dua-duanya salah 26 Okt** — menghitung nilai, bukan turunan |
-| 3a | 2 | Substitusi | 🟢 sudah dikuasai (Ex 23, 29, 31…) |
-| 3b | 2 | Integral parsial | 🟠 belum diajarkan — sisa L03 |
-| 4a,4b | 4 | Cross product, bidang, garis | 🟠 belum — L04 Materi 7 & 8 |
-| 5 | 3 | Polar → Cartesius | 🟠 belum — L05 Materi 4 (catatan sudah ada) |
-| 6 | 4 | Limit multivariabel tidak ada | ⚪ belum — **TAPI PALING MUDAH, 1 jam** ⭐ |
-| 7 | 4 | Rantai multivariabel | ⚪ belum — resep |
-| 8a,8b | 5 | Titik kritis + min pada ruas | ⚪ belum — resep |
-| 9 | 4 | PD linear orde satu | ⚪ belum — resep (faktor integrasi) |
+| 1a, 1b, 1c | 4 | ✅ benar | 1c masih **berhutang 3 kalimat justifikasi tertulis** |
+| 2a, 2b | 4 | ✅ benar | 2b sempurna percobaan pertama |
+| 3a | 2 | ✅ benar | `−2cos(√x+1)+C`, +C ditulis sendiri |
+| 3b | 2 | ⚪ belum | integral parsial |
+| 4 | 4 | ⚪ belum | cross product + bidang — **termahal per jam, dikerjakan terakhir** |
+| 5 | 3 | 🟠 perlu ulang dingin | `x²=−4y+4`, parabola buka ke bawah |
+| 6 | 4 | 🟠 perlu ulang dingin | dua jalan: `y=0 → 2`, `x=0 → 0` |
+| 7 | 4 | ⚪ belum | aturan rantai multivariabel |
+| 8 | 5 | ⚪ belum | titik kritis + minimum di ruas garis |
+| 9 | 4 | ⚪ belum | PD linear, faktor integrasi |
+| 10 | 5 | 🟠 perlu ulang dingin | `x = ±√7/2 ± i√21/2` |
+| 11 | 4 | ✅ benar | `y = e^(−2x)(2cos3x + ⅓sin3x)` — **dikerjakan utuh sendiri** |
 
-**Poin aman sekarang: ~2** (cuma 1b). **Target Kamis malam: 36 poin pernah disentuh semua.**
+🟠 = jawabannya benar tapi lahir dengan bantuan. **Resmi terkunci setelah ditulis ulang tanpa lihat catatan.**
 
-## 🗺️ Roadmap sampai hari ujian
-Versi lengkap yang bisa dicentang: **[Roadmap Ujian Kalkulus](https://claude.ai/artifact/JbWyN4VqhEpptjK3sjtxxs)** (salinan lokal `html-visualization/roadmap-ujian.html`).
+## ▶️ Lanjutkan dengan
 
-| Hari | Isi | Poin terkunci |
+1. **PR dingin (15 menit, pagi, tanpa catatan):** tulis ulang **soal 6**, **soal 5**, **soal 10**. Baru 12 poin itu resmi.
+2. **Soal 9** — PD linear orde satu, faktor integrasi (4 poin). Dia tetangga dekat soal 11, jadi mulai dari sini selagi panas.
+3. **Soal 7** — aturan rantai multivariabel (4 poin).
+4. **Soal 3b** — integral parsial (2 poin).
+5. **Soal 8** (5 poin), lalu **soal 4** (4 poin) hari Kamis.
+6. **Kamis malam:** tulis kartu resep satu halaman (isinya = daftar 🧠 HAFAL di atas). **Tidak ada materi baru setelah Kamis.**
+
+## 🧠 Alat mengajar yang TERBUKTI berhasil — pakai terus
+
+| Alat | Untuk apa |
+|---|---|
+| **KOTAK ■** | semua turunan berakhir `× ■′`. `sin(■)→cos(■)·■′`. Aturan pangkat = kotak berisi x polos, jadi `■′=1`. **Semua turunan itu aturan rantai.** Ini yang akhirnya membuka segalanya 27 Okt pagi. |
+| **"Turunan KALI, integral BAGI"** | menangkap `∫cos5x = ⅕sin5x` |
+| **Lingkaran trig** `sin→cos→−sin→−cos→sin` | turunan = maju kanan, integral = mundur kiri. (Catatan: untuk integral, **📄 ada di lembar** — jadi ini alat cadangan, bukan hafalan wajib) |
+| **Resep + contoh jadi DULU, baru dia coba** | diminta Ethan sendiri 27 Okt malam; memangkas waktu per soal dari ~1,5 jam ke ~40 menit |
+| **Cek numerik satu titik** | ambil θ atau x gampang, hitung dari soal asli, tes di jawaban. Menangkap error tanda dalam 20 detik. |
+| **Belah soal jadi potongan berlabel** | "potong A = isi kotak = u, potong B = yang ditukar jadi du" |
+
+## ⚠️ Waspadai
+
+> [!warning] **BARIS TERAKHIR BOCOR — 7 kejadian dalam satu hari**
+> Penalarannya tidak pernah salah. Yang bocor selalu baris terakhir.
+> `(π+12)→(π+2)` · `9×7=49` · `2/(x+1)` berhenti di `1` (lupa bagi 2) · `(2−y)²` kehilangan minus · huruf `i` hilang di jawaban akhir soal 10 · nama jalan ketukar dengan nilainya.
+> **Harga perkiraan: 5–6 poin.** Garis lulus 23 dari 45.
+> **Obat 3 detik:** baca baris terakhir, bandingkan dengan baris di atasnya, pastikan tidak ada yang tertinggal.
+
+| Pola | Contoh | Obat |
 |---|---|---|
-| Sen 26 | **Istirahat** (dia kurang fit). Maks: selesaikan 1c + 2b | — |
-| **Sel 27** | Pagi: **aturan turunan, 6 latihan — WAJIB** · Siang: soal 1c + 2 · Sore: **soal 6** | 14 |
-| **Rab 28** | Soal **9** (PD) · soal **7** (rantai multivar) · soal **3b** (integral parsial) | 24 |
-| **Kam 29** | Soal **8** · soal **4** · soal **5** · tulis **kartu resep** 1 halaman | 36 |
-| Jum 30 – Min 1 | **Aljabar Linear** + **15 menit kalkulus/hari (jangan bolos)** | 36 |
-| Sen 2 | Ulangan Aljabar Linear — kalkulus **nol** | — |
-| **Sel 3** | **Sample #2, simulasi 3 jam**, lalu koreksi + tambal pakai #3 | — |
-| **Rab 4** | **UJIAN** 08:45–11:45 | — |
+| **Pangkat negatif dibalik, bukan dinegatifkan** | `3⁻²=⅔`, `1/x^(1/2)=x²` | tangga 3²=9,3¹=3,3⁰=1,3⁻¹=⅓,3⁻²=1/9. "pindah lantai, bukan tukar angka" |
+| **Menjalankan prosedur yang salah arah** | `∫sin` dijawab pakai turunan cos; `∫cos5x = −5sin5x` | tanya dulu: "mesin maju atau mundur?" |
+| **Nilai vs turunan** | soal 2a/2b: hitung nilai padahal diminta turunan | "kalau ada data yang tidak kamu pakai, kamu menjawab soal yang salah" |
+| **Label ditukar dengan hasil** | "along y=1 dan x=2" (harusnya jalan `y=0`→nilai 2) | jalan = nama, nilai = temuan |
+| **sin↔y, cos↔x tertukar** | soal 5: `r sinθ` ditukar jadi x | gambar segitiga; Opp = sisi tegak = y |
+| **Simbol baru tanpa tugas = berhenti total** | `dy/dx`, `u`, `∂z/∂u`, `e^{iθ}`, `y(0)` | **sebutkan tugas simbolnya SEBELUM soal**, bukan setelah dia macet. Ini sumber hampir semua kemacetannya. |
 
-> [!warning] Dua aturan keras
-> 1. **Tidak ada materi baru setelah Kamis 29.** Yang belum masuk, relakan.
-> 2. **Selasa 3 malam berhenti jam 9.** Tidur itu bagian strategi.
+## 🌟 Yang sudah berjalan baik
 
-> [!tip] 4 sample exam — jangan dihabiskan di awal
-> **#1** (ada kuncinya) = buku pelajaran, Sel–Kam · **#2** = simulasi jujur, Selasa 3 (🔒 jangan disentuh sebelumnya) · **#3** = tambal soal yang gagal di #2 · **#4** = cadangan.
+- **Tidak lambat di matematika** — lambat hanya di awal, saat simbol baru belum diperkenalkan tugasnya.
+- 27 Okt: drill turunan **9/10**, menulis `f'(g(x))·g'(x)` tanpa diminta, soal 2b sempurna.
+- Malam 27 Okt: **soal 11 utuh sendirian** (termasuk B pecahan ⅓), soal 10 hampir utuh — dua materi yang 3 jam sebelumnya belum pernah dilihat seumur hidup.
+- Mempertanyakan hal yang tepat: *"x²+y²=r² kok kayak pythagoras?"* — memang Pythagoras. Instingnya bagus, percayai.
+- Menulis `+C` tanpa diingatkan.
+- Menemukan sendiri kekeliruan jalur 4 EC vs 5 EC.
 
-## ▶️ Continue with (besok, Selasa 27)
-1. **Pagi — 6 latihan aturan turunan** yang sudah diberikan dan **belum dijawab**:
-   $x^5-3x^2+7$ · $x^3e^x$ · $\sin(4x^2)$ · $\frac{x^2}{x+1}$ · jebakan konseptual $(x^2\cdot x^3)'\overset{?}{=}2x\cdot3x^2$ · $\frac{1}{x^2+1}$ **dua cara** (nomor 6 ini kerangka soal 2a persis).
-2. **Soal 1c** — dia sudah tahu jawabannya $f'(2)=\frac12$; yang diminta sekarang **menulis justifikasi 3 kalimat**. Itu latihan yang sebenarnya.
-3. **Soal 2b** — dia sudah dapat isi dalam $=1$ ✅; tinggal ganti $f\to f'$ dan kalikan turunan dalam. Jawaban: $f'(1)\cdot(g'(1)-2)=2\cdot(-3)=\mathbf{-6}$. **Jangan diberikan sebelum dia coba.**
-4. **Soal 6 — limit multivariabel tidak ada.** Ajarkan dari nol, format per materi. Resepnya: dekati lewat $y=0$, lalu lewat $x=0$; hasil beda → limit tidak ada. Jawaban sample: $2$ vs $0$.
-5. **Minta slide lecture 6 ke atas** untuk `lectures_slides/`.
-6. **Minta dia cek isi formula sheet** yang dilampirkan di ujian — kalau rumus cross product / faktor integrasi ada di situ, beban hafalan turun drastis.
+## 🛠️ Alat yang sudah dibangun
 
-## Watch out for (right now)
-- 🔴 **POLA NOMOR SATU: penalaran benar, kalimat terakhir hilang.** Muncul **empat kali** dalam satu sesi:
-  | Soal | Penalaran | Yang hilang |
-  |---|---|---|
-  | 1a | ✅ | kesimpulan $\lim f(x)=5$ tidak ditulis |
-  | 1b | ✅ | syarat $\lim A\neq0$ tidak ditulis |
-  | 1c | ✅ | berhenti di $\lim_{x\to2}f'(x)$, bukan di $f'(2)$ |
-  | Ex 5.5 (lama) | ✅ | $\theta$ tidak ditulis |
-  Di ujian ini tertulis *"Answers without explanation will not receive credit."* **Mantra yang sudah diberikan: setelah menghitung, baca ulang pertanyaannya, lalu tanya "tipe jawabannya apa, sudah ditulis belum?"** Harga pola ini di soal 1 saja ≈ 1,5 dari 4 poin.
-- 🔴 **Menghitung NILAI, bukan TURUNAN** (baru, 26 Okt, soal 2a **dan** 2b). Tandanya: **tabel punya 4 kolom, dia cuma pakai 2** — kolom $f'$ dan $g'$ tidak disentuh. Aturan: *kalau soal memberi data yang tidak kamu pakai, kamu sedang menjawab soal yang salah.*
-- 🔴 **Aturan turunan sudah pudar** ("mampus aku udah lupa"). Sudah di-refresh 26 Okt dalam satu halaman (6 kamus dasar + 3 aturan gabungan + pohon keputusan). **Belum dites.** Ini fondasi soal 2, 3, 7, 8, 9 — kalau goyang, semuanya goyang.
-- 🟠 **Mengarang fungsi dari sebuah limit.** Dia menyimpulkan $f(x)=\frac x2+4$ dari $\lim\frac{f(x)-5}{x-2}=\frac12$. Angkanya kebetulan benar, tapi $f$ **tidak tunggal** — tandingannya $g(x)=5+\frac{x-2}{2}+(x-2)^2$ memenuhi hal yang sama. **Boleh dipakai untuk MENGECEK, tidak boleh jadi ALASAN.** Dia sudah dua kali melakukannya (1a dan 1c).
-- 🟠 **Memakai alat baru ke semua soal.** Begitu kenal L'Hôpital, dia mau memakainya di 1b yang sebenarnya cuma butuh sifat limit. Ajarkan langkah "cek dulu, apakah ini bentuk yang sudah aku kenal?".
-- 🟡 **Notasi pecahan bertingkat.** Dia menulis `1/1/2`. $\frac{1}{1/2}=2$ vs $\frac{1/1}{2}=\frac12$ — beda 4×. Satu keluarga dengan pertanyaan `*` vs `.` dulu.
-- ⚪ **Akar negatif yang menguap** (pola lama, belum muncul lagi hari ini). Masih harus dites di soal 8a: $x^8=1$ punya **dua** akar real.
-- Masih lemah dari dulu: tanda minus trigonometri, lupa turunan dalam, lupa $+C$, lupa cek domain.
+| Halaman | Link |
+|---|---|
+| 📝 Sample exam 2025 interaktif (11 soal, kunci terkunci, timer, proyeksi nilai, toggle 5 EC sudah ON) | https://claude.ai/artifact/LApfMvRbq2vNa8KCjStbha |
+| 🗓️ Roadmap 9 hari (centang tersimpan) | https://claude.ai/artifact/JbWyN4VqhEpptjK3sjtxxs |
+| 📈 Turunan visual (3 tab, canvas interaktif) | https://claude.ai/artifact/91iXAEPTaZL93ME9cZJBSU |
+| 🔵 Unit circle | https://claude.ai/artifact/VL1xCLnf4rfz58ezkdLZeG |
 
-## What is going well (katakan ini ke dia, dia merespons)
-- **Tidak ada satu pun salah hitung, salah tanda, atau salah konsep hari ini.** Semua kesalahannya ada di *penyajian* dan *membaca perintah soal* — kelas kesalahan termurah yang ada.
-- **Dia mengirim foto tulisan tangan** tanpa diminta dua kali. Diagnosis jadi jauh lebih tajam.
-- **Dia bertanya waktu tidak paham** ("turunin nya di mana yak?", "f'(x) ambil dari f(x) kan?") dan itu selalu tepat sasaran — pertanyaannya mendiagnosis dirinya sendiri.
-- **Soal 2b bagian tersulit dikerjakan sempurna**: $3-2e^{0}=1$, termasuk $e^0=1$ yang sering dijatuhkan orang.
-- **Dia jujur soal kondisi badan** dan minta rencana realistis, bukan rencana heroik. Hargai itu — rencana yang dia percaya akan dijalankan.
-- Jalan pintas struktural di 1b (mengenali pecahan terbalik) persis seperti Ex 5.1b dulu.
+⚠️ **Roadmap masih memakai angka 36 poin / lulus 18 dan belum memuat soal 10 & 11.** Perlu diperbarui ke 45 poin / lulus 23 pada sesi berikutnya.
 
-## Open questions from Ethan
-- *(tidak ada yang menggantung)*
+## ❓ Pertanyaan terbuka
 
-## Tools built for this course
-- 🟠 **[Ujian Kalkulus A 2025](https://claude.ai/artifact/LApfMvRbq2vNa8KCjStbha)** — **dibuat 2026-10-26.** Seluruh sample exam #1 dengan math ter-render, chip kesiapan per bagian (🟢 siap / 🟠 berikutnya / ⚪ nanti), kotak jawaban yang tersimpan lintas perangkat, **kunci terkunci sampai ditandai "sudah dicoba"**, timer 3 jam, dan proyeksi nilai memakai rumus asli $1+\text{poin}\times\frac14$. Status jawaban tersimpan di `db` (`work/q1a`…). Salinan lokal `html-visualization/sample-exam-2025.html`.
-- 🟢 **[Roadmap Ujian Kalkulus](https://claude.ai/artifact/JbWyN4VqhEpptjK3sjtxxs)** — **dibuat 2026-10-26.** Rencana 9 hari, tugas bisa dicentang (tersimpan di `db`, koleksi `tasks`), bar poin terkunci dengan garis batas lulus di 18, hari ini disorot otomatis. Salinan lokal `html-visualization/roadmap-ujian.html`.
-- 🔵 [Interactive unit circle](https://claude.ai/artifact/VL1xCLnf4rfz58ezkdLZeG) — 2026-09-16. Local: `html-visualization/unit-circle.html`
-- 🟣 [Bayangan Vektor](https://claude.ai/artifact/Ff6iJ5L3aBUcUx4PXTukF6) — proyeksi vektor, 2026-10-07. Local: `html-visualization/vector-projection.html`
-- 🟢 `html-visualization/extrema-and-integral-checks.html` — 2026-09-26
+- **Slide kuliah 6 ke atas belum ada** di `lectures_slides/` (baru 1–5). Minta ke Ethan — soal 6,7,8 berasal dari sana.
+- Hutang Ethan: **3 kalimat justifikasi tertulis untuk soal 1c**, dan kalimat kesimpulan soal 1a.
 
-## Ditunda sampai setelah ujian (jangan dikerjakan sekarang)
-- L04 Materi 6 **Latihan 6.1–6.6** — masih belum dijawab sejak 2026-10-07
-- L04 Materi 7–8 per materi lengkap (sekarang cuma diajarkan seperlunya untuk soal 4)
-- L05 Materi 1–9 lengkap (sekarang cuma Materi 4 polar, untuk soal 5)
-- Tiga soal lama yang menggantung: $f(x)=x^2-4x+1$ pada $[0,5]$ (jawaban: maks $f(5)=6$, min $f(2)=-3$) · $\int_1^4\frac{x^2+x}{x^{3/2}}dx=\frac{20}3$ · $\int_0^2x\sqrt{x^2+1}\,dx=\frac{5\sqrt5-1}3$
-- Catatan live Lecture 3 (masih kosong) · integral trigonometri · integral tak wajar · related rates · optimasi
+## ⏸️ Ditunda sampai setelah ujian
+
+- Membuktikan limit multivariabel **ada** (squeeze theorem / koordinat polar) — tidak keluar di ujian ini.
+- Deret Taylor / bukti rumus Euler — di luar mata kuliah.
+- L04 Materi 7–8, L05 (kurva & fungsi vektor) materi penuh.

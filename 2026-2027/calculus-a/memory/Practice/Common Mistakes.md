@@ -1,7 +1,7 @@
 ---
 title: Common Mistakes
 tags: [calculus-a, practice, mistakes]
-updated: 2026-10-07
+updated: 2026-10-27
 ---
 
 # ⚠️ Common Mistakes
@@ -118,3 +118,47 @@ Ethan's own errors from past sessions, each with its fix. Add new ones as they h
 - **Not verifying.** Every final answer gets a check → [[Verification Methods]].
 - **Not simplifying first.** Trig identities or splitting fractions often make the problem much easier.
 - **Picking the technique before looking.** Name *why* a rule applies before using it — see the "inside something?" test above.
+
+## 🚨 Baris terakhir bocor (pola nomor satu — 7 kejadian pada 2026-10-27)
+Penalarannya tidak pernah salah. Yang bocor selalu **baris terakhir**.
+
+| Kejadian | Seharusnya |
+|---|---|
+| $(\pi+12)$ menjadi $(\pi+2)$ di baris akhir | $\pi+12$ |
+| $9\times7=49$ | $63$ |
+| $\dfrac{2}{x+1}$ di $x=0$ dijawab $1$ (penyebut saja) | $2$ — pembilangnya belum dibagi |
+| $(2-y)^2=4+4y+y^2$ | $4-4y+y^2$ — suku tengah membawa minus |
+| Jawaban soal 10 ditulis tanpa huruf $i$ | $\pm\tfrac{\sqrt7}{2}\pm i\tfrac{\sqrt{21}}{2}$ |
+| Nama jalan ditukar dengan nilainya: "along $y=1$ dan $x=2$" | jalan $y=0$ beri nilai $2$ |
+| Kurung hilang: $f'g+fg'$ tanpa kurung | $(f'g+fg')$ — tandanya bisa ikut terbalik |
+
+**Obat 3 detik:** baca baris terakhir, bandingkan dengan baris di atasnya, pastikan tidak ada yang tertinggal.
+**Harga perkiraan di ujian: 5–6 poin**, terhadap garis lulus 23 dari 45.
+
+## Pangkat dan akar
+| Mistake | Fix |
+|---|---|
+| $3^{-2}=\tfrac23$ dan $\tfrac1{x^{1/2}}=x^2$ — pangkatnya **dibalik** | Pangkat dapat **minus**, tidak dibalik: $\tfrac1{a^n}=a^{-n}$. Tangga: $3^2=9,3^1=3,3^0=1,3^{-1}=\tfrac13,3^{-2}=\tfrac19$. "Pindah lantai, bukan tukar angka." |
+| $\left(\tfrac{7\sqrt3}{2}\right)^2$ hanya angkanya dikuadratkan | Semuanya ikut: $\tfrac{7^2(\sqrt3)^2}{2^2}=\tfrac{147}{4}$ |
+| $\sqrt7\cdot\sqrt3$ dijadikan $\sqrt{10}$ atau $7\sqrt3$ | Akar kali akar digabung di dalam: $\sqrt{21}$ |
+| $\pi$ diganti $\tfrac{22}{7}$ | Itu hampiran; ujian minta eksak. Kesalahan ini **menyebabkan** salah hitung berikutnya ($9\times7$). |
+
+## Arah prosedur (maju vs mundur)
+| Mistake | Fix |
+|---|---|
+| $\int\cos(5x)dx=-5\sin(5x)+C$ (menjalankan prosedur turunan) | **"Turunan KALI, integral BAGI."** Benar: $\tfrac15\sin(5x)+C$ |
+| $\int\sin u\,du$ dijawab dengan turunan $\cos$ ($-\sin$) | $\int$ bertanya *"siapa yang kalau diturunkan jadi ini?"*. Lingkaran: $\sin\to\cos\to-\sin\to-\cos\to\sin$; turunan maju kanan, integral mundur kiri. ($\int\sin$ dan $\int\cos$ **ada di lembar rumus ujian** — tidak perlu dihafal) |
+| Menghitung **nilai** padahal diminta **turunan** (soal 2a/2b) | "Kalau ada data yang tidak kamu pakai, kamu menjawab soal yang salah." |
+| Menjawab $\lim_{x\to2}f'(x)$ padahal diminta $f'(2)$ | Itu jembatan, bukan tujuan. **Cek TIPE jawabannya.** |
+
+## Multivariabel & kompleks (baru 2026-10-27)
+| Mistake | Fix |
+|---|---|
+| Mengira dua jalan yang **sepakat** membuktikan limit ada | Tidak. Contoh tandingan $\tfrac{x^2y}{x^4+y^2}$: tiga jalan beri $0$, jalan $y=x^2$ beri $\tfrac12$. **Beda = bukti. Sama = belum apa-apa.** |
+| $r\sin\theta$ ditukar menjadi $x$ | $\sin\to$ Opp $\to$ sisi tegak $\to y$. Gambar segitiganya — **ada di lembar rumus**. |
+| Menurunkan **seluruh integran** saat mencari $du$ | $u$ hanya **satu potong** (isi kotak). Sisanya adalah barang yang ditukar jadi $du$. |
+| Membaca $a=0$ dari $r^2+2r+5$ | $r^2$ berarti $1r^2$ — **$a=1$**. Angka 1 tidak pernah ditulis. |
+
+## ⛔ Pemicu kemacetan nomor satu (bukan kesalahan — kesalahan pengajaran)
+**Simbol baru yang tugasnya belum disebutkan membuatnya berhenti total.** Terjadi pada $\frac{dy}{dx}$, $u$, $\frac{\partial z}{\partial u}$, $e^{i\theta}$, dan $y(0)$ — semuanya dalam satu hari.
+**Obat:** sebutkan **tugas** simbol itu dalam satu kalimat **sebelum** soal diberikan, bukan setelah dia macet. Matematikanya tidak pernah jadi masalah.
