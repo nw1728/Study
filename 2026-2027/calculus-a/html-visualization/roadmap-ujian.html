@@ -156,8 +156,23 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   </section>
 
   <section class="panel">
+    <h2>Urutan panen — poin per jam</h2>
+    <p class="note">Temuan terpenting dari sample exam: soal yang kelihatan serem (6, 7, 8, 9 — multivariabel dan PD) justru yang paling resep. Soal 1 yang cuma 4 poin itu yang paling susah. Jadi urutannya dibalik dari rasa takut ke poin per jam.</p>
+    <div class="scroll"><table>
+      <tr><th>Soal</th><th>Poin</th><th>Perkiraan</th><th>Poin / jam</th><th>Topik</th></tr>
+      <tr><td class="n">6</td><td class="n">4</td><td class="n">1 jam</td><td class="n">4,0</td><td>Limit multivariabel tidak ada</td></tr>
+      <tr><td class="n">5</td><td class="n">3</td><td class="n">1 jam</td><td class="n">3,0</td><td>Polar → Cartesius</td></tr>
+      <tr><td class="n">9</td><td class="n">4</td><td class="n">1,5 jam</td><td class="n">2,7</td><td>PD linear, faktor integrasi</td></tr>
+      <tr><td class="n">7</td><td class="n">4</td><td class="n">1,5 jam</td><td class="n">2,7</td><td>Aturan rantai multivariabel</td></tr>
+      <tr><td class="n">8</td><td class="n">5</td><td class="n">2 jam</td><td class="n">2,5</td><td>Titik kritis + minimum di ruas garis</td></tr>
+      <tr><td class="n">3b</td><td class="n">2</td><td class="n">1 jam</td><td class="n">2,0</td><td>Integral parsial</td></tr>
+      <tr><td class="n">4</td><td class="n">4</td><td class="n">2,5 jam</td><td class="n">1,6</td><td>Cross product + bidang</td></tr>
+    </table></div>
+  </section>
+
+  <section class="panel">
     <h2>Tiga risiko</h2>
-    <div class="risk"><div class="i">🧱</div><div><b>Fondasi goyang</b><span>Aturan turunan belum otomatis. Menjalar ke soal 2, 3, 7, 8, 9. Karena itu Selasa pagi adalah fondasi, tidak bisa ditawar.</span></div></div>
+    <div class="risk"><div class="i">🖋️</div><div><b>Baris terakhir bocor</b><span>Lima kali kejadian: penalarannya benar, tapi baris terakhir berubah sendiri (π+12 jadi π+2, tanda hilang, angka tertukar). Harganya 5–6 poin — padahal batas lulus cuma 18. Obatnya 3 detik: baca baris terakhir, bandingkan dengan baris di atasnya.</span></div></div>
     <div class="risk"><div class="i">🕳️</div><div><b>Jeda tiga hari untuk Aljabar Linear</b><span>Tanpa perawatan, 30–40% hilang. 15 menit per hari menyelamatkan 12 jam kerja — tukaran termurah di rencana ini.</span></div></div>
     <div class="risk"><div class="i">🔋</div><div><b>Capek setelah ulangan Senin</b><span>Makanya Selasa 3 adalah simulasi, bukan materi baru. Simulasi bisa dikerjakan dengan tenaga 70%; belajar materi baru tidak bisa.</span></div></div>
   </section>
@@ -183,16 +198,18 @@ const DAYS = [
    {id:"t02", text:"Tidur cukup", meta:"ini tugas beneran"}]},
 
  {id:"d1", date:"2026-10-27", dow:"Selasa", dm:"27 Okt", title:"Fondasi + panen pertama", type:"calc",
-  note:"Fondasi dulu. Aturan turunan menjalar ke soal 2, 3, 7, 8 dan 9 — memperbaikinya di hari pertama itu investasi, bukan buang waktu.",
-  lock:14,
+  note:"Fondasi sudah berdiri: metafora KOTAK (■) bikin aturan rantai klik, skor latihan 9/10, soal 2b benar. Pagi dipakai buat itu — jadi panennya digeser ke siang dan sore, bukan dihapus.",
+  lock:17,
   tasks:[
-   {id:"t11", text:"Aturan turunan — 6 latihan (pangkat, hasil kali, hasil bagi, rantai)", meta:"1,5 jam · pagi", must:true},
-   {id:"t12", text:"Soal 1c + soal 2 selesai", meta:"1 jam · siang · 5 poin", pts:0},
-   {id:"t13", text:"Soal 6 — buktikan limit multivariabel tidak ada", meta:"1,5 jam · sore · 4 poin ⭐ termurah", pts:4}]},
+   {id:"t11", text:"Aturan turunan — 6 latihan (pangkat, hasil kali, hasil bagi, rantai)", meta:"✓ selesai · pagi", must:true},
+   {id:"t12", text:"Soal 1c + soal 2 selesai", meta:"✓ selesai · pagi · 5 poin", pts:0},
+   {id:"t14", text:"Soal 3a — integral substitusi (u = isi kotak)", meta:"30 menit · siang · 2 poin", pts:0},
+   {id:"t13", text:"Soal 6 — buktikan limit multivariabel tidak ada", meta:"1,5 jam · siang · 4 poin ⭐ termurah", pts:4},
+   {id:"t15", text:"Soal 5 — polar ke Cartesius", meta:"1 jam · sore · 3 poin ⭐ nomor 2 termurah", pts:3}]},
 
  {id:"d2", date:"2026-10-28", dow:"Rabu", dm:"28 Okt", title:"Panen resep besar", type:"calc",
-  note:"Tiga soal, semuanya resep. Setelah hari ini kamu lewat batas lulus di atas kertas — sisa rencana dikerjakan dari posisi aman, bukan dari panik.",
-  lock:24,
+  note:"Tiga soal, semuanya resep. Batas lulus (18) sudah dilewati sejak Selasa sore — hari ini soal menambah jarak aman, bukan menyelamatkan diri.",
+  lock:27,
   tasks:[
    {id:"t21", text:"Soal 9 — PD linear orde satu, faktor integrasi", meta:"1,5 jam · pagi · 4 poin", pts:4},
    {id:"t22", text:"Soal 7 — aturan rantai multivariabel", meta:"1,5 jam · siang · 4 poin", pts:4},
@@ -203,9 +220,8 @@ const DAYS = [
   lock:36,
   tasks:[
    {id:"t31", text:"Soal 8 — titik kritis + minimum pada ruas garis", meta:"2 jam · pagi · 5 poin", pts:5},
-   {id:"t32", text:"Soal 4 — cross product + persamaan bidang", meta:"2 jam · siang · 4 poin", pts:4},
-   {id:"t33", text:"Soal 5 — polar ke Cartesius", meta:"1 jam · sore · 3 poin", pts:3},
-   {id:"t34", text:"Tulis kartu resep: satu halaman, 9 resep, satu per soal", meta:"30 menit · malam", must:true}]},
+   {id:"t32", text:"Soal 4 — cross product + persamaan bidang", meta:"2 jam · siang · 4 poin · paling mahal per poin", pts:4},
+   {id:"t34", text:"Tulis kartu resep: satu halaman, 9 resep, satu per soal", meta:"1 jam · sore", must:true}]},
 
  {id:"d4", date:"2026-10-30", dow:"Jumat", dm:"30 Okt", title:"Aljabar Linear", type:"la",
   note:"Fokus pindah. Kalkulus cuma dirawat, tidak dipelajari.",
