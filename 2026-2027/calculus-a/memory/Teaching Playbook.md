@@ -97,7 +97,18 @@ Jangan pernah merangkai langkah dengan panah dalam satu baris:
 
 > ❌ `mu' = mu*P  ==>  dmu/mu = P dx  ==>  ln mu = int P dx  ==>  mu = e^(int P dx)`
 
-Tulis **satu langkah per baris, masing-masing dengan alasannya**:
+**Format final yang dipakai (disepakati 2026-10-28 setelah dua kali revisi): TABEL DUA KOLOM.**
+Langkah di kolom kiri (pakai `\(...\)` inline, bukan `$$`), alasannya di kolom kanan baris yang sama:
+
+| Langkah | Kenapa begitu |
+|---|---|
+| \(\mu' = \mu P\) | syarat yang kita paksakan |
+| \(\frac{d\mu}{dx} = \mu P\) | tulis ulang \(\mu'\) |
+| \(\frac{d\mu}{\mu} = P\,dx\) | \(\mu\) ke kiri, \(dx\) ke kanan |
+
+Percobaan sebelumnya — satu langkah per baris dengan alasan di antaranya (`$$` lalu teks lalu `$$`) — **ditolak Ethan**: matanya harus naik-turun terus. Tabel membuat matanya bergerak **ke samping sekali per baris**, dan seluruh penurunan terlihat sebagai satu blok.
+
+Yang lama, untuk catatan:
 
 > ✅
 > $$\mu' = \mu P$$
@@ -111,3 +122,21 @@ Tulis **satu langkah per baris, masing-masing dengan alasannya**:
 **Alasannya:** Ethan visual learner dan membaca rantai panah horizontal sebagai satu blok yang tidak bisa dibedah. Secara vertikal, tiap baris jadi satu ide yang bisa dia ikuti — dan dia bisa menunjuk persis baris mana yang tidak dia mengerti. Ini sejalan dengan aturan "satu ide per langkah" di gogo gaga.
 
 Berlaku untuk **semua** manipulasi aljabar, bukan hanya penurunan rumus: pemindahan ruas, penyederhanaan pecahan, substitusi batas.
+
+### ✅ FORMAT FINAL (iterasi ke-3, 2026-10-28) — ATURAN DAN SOAL BERJALAN BERDAMPINGAN
+
+Bukan "teori dulu, lalu contoh". Ethan mau **aturan umum dan soalnya sendiri dikerjakan di baris yang sama**:
+
+| Aturan umum (+ kenapa) | Di soal Ethan |
+|---|---|
+| Bentuk baku \(y'+Py=Q\) — \(y'\) harus telanjang | \(x^2y'+3xy=x^4\) |
+| Bagi semua dengan yang di depan \(y'\) | \(y'+\frac3x y=x^2\) |
+| \(\mu=e^{\int P dx}\) | \(\mu=e^{3\ln x}=x^3\) |
+
+Kata-katanya sendiri: *"sambil jelasin ini kemana ini kemana, sambil kerjain soalnya juga, jadi aku ngerti banget."*
+
+**Kenapa ini yang bekerja:** dia tidak kesulitan dengan aturannya, dan tidak kesulitan dengan aritmetikanya — yang putus adalah **pemetaan dari aturan ke instansinya**. Kolom berdampingan membuat pemetaan itu terlihat, tanpa dia harus mengingat aturan dari layar sebelumnya.
+
+Dua format yang **ditolak** sebelum ini: (1) rantai panah horizontal dalam satu baris, (2) satu langkah per baris dengan teks alasan di antara blok-blok `$$` (matanya naik-turun).
+
+**Konsekuensi untuk aturan "biarkan dia coba dulu":** dalam mode ujian, pola yang disepakati adalah **tunjukkan penuh → dia tutup → kerjakan ulang dingin**, bukan dibiarkan macet dulu. Ulang dingin yang menggantikan fungsi "coba dulu".
