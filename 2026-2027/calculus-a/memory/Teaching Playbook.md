@@ -1,7 +1,7 @@
 ---
 title: Teaching Playbook
 tags: [calculus-a, workflow]
-updated: 2026-10-06
+updated: 2026-10-28
 ---
 
 # 🧑‍🏫 Teaching Playbook
@@ -90,3 +90,24 @@ Keep headings and formulas in the usual notation; switch to Indonesian for the e
 - Link with `[[wikilinks]]`; every note links back to [[00 Index]]
 - Update [[Session Log]] at the end of every session
 - Keep the original handover files unchanged
+
+## 📐 Tulis penurunan KE BAWAH, bukan ke samping (diminta Ethan 2026-10-28)
+
+Jangan pernah merangkai langkah dengan panah dalam satu baris:
+
+> ❌ `mu' = mu*P  ==>  dmu/mu = P dx  ==>  ln mu = int P dx  ==>  mu = e^(int P dx)`
+
+Tulis **satu langkah per baris, masing-masing dengan alasannya**:
+
+> ✅
+> $$\mu' = \mu P$$
+> *tulis ulang $\mu'$ sebagai $\frac{d\mu}{dx}$*
+> $$\frac{d\mu}{dx} = \mu P$$
+> *pindahkan $\mu$ ke kiri, $dx$ ke kanan*
+> $$\frac{d\mu}{\mu} = P\,dx$$
+> *integralkan kedua ruas*
+> $$\ldots$$
+
+**Alasannya:** Ethan visual learner dan membaca rantai panah horizontal sebagai satu blok yang tidak bisa dibedah. Secara vertikal, tiap baris jadi satu ide yang bisa dia ikuti — dan dia bisa menunjuk persis baris mana yang tidak dia mengerti. Ini sejalan dengan aturan "satu ide per langkah" di gogo gaga.
+
+Berlaku untuk **semua** manipulasi aljabar, bukan hanya penurunan rumus: pemindahan ruas, penyederhanaan pecahan, substitusi batas.
