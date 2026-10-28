@@ -1,12 +1,24 @@
 ---
 title: Session Log
 tags: [calculus-a, sessions]
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 # 🗓️ Session Log
 
 Back to [[00 Index]] · Newest first
+
+## 2026-10-28 — Hari 2 mode ujian: 23 → 41 poin, dan ujiannya ternyata punya cetakan tetap (Claude Code)
+
+- **Pagi dibuka dengan temuan yang bagus:** Ethan bertanya *"kok aku lupa semua soal nomor 1?"* — soal 1 dikerjakan Senin dan tidak pernah diulang. Dijawab jujur dengan angka (60–70% hilang dalam 2 hari tanpa pemanggilan ulang) **dan** dengan diagnosis kedua yang lebih berguna: soal 1 satu-satunya yang **tidak punya resep**, sehingga tidak punya pegangan. Obatnya: dibuatkan resep — **"satu baris, tiga fakta"** (dari \(\lim\frac{f(x)-L}{x-a}=m\) otomatis keluar \(\lim f=L\), \(f(a)=L\), \(f'(a)=m\)). Setelah itu soal 1 selesai lancar.
+- **Koreksi untuk diriku:** untuk 1c aku mengarahkan ke definisi turunan; **kunci resmi memakai L'Hôpital**. Keduanya sah, tapi yang resmi diajarkan sebagai utama — dan ternyata jawaban Ethan hari Senin (\(\lim f'(x)\)) adalah **jembatan yang benar**, dia hanya berhenti satu langkah sebelum ujung (kontinuitas \(f'\)).
+- **Ethan mengirim 2 resit (Feb 2026, Jul 2026) dengan kata "pusing banget".** Dibandingkan slot per slot: **struktur ujiannya TETAP** — 11 slot, topik yang sama di tiap slot, hanya angkanya berubah. Slot 6,7,8,9,10,11 **identik** di ketiga kertas. Ini dibingkai sebagai pengurang beban, bukan penambah, dan disertai daftar jujur **4 pelebaran** yang masih perlu (kali sekawan, integral tak wajar, bidang singgung, akar pangkat-n). Kedua resit **dikunci** sampai simulasi Selasa.
+- **Materi baru hari ini, semuanya tuntas:** 3b (integral parsial, LIPET), 9 (faktor integrasi), 7 (rantai multivariabel + \(\partial\)), 8 (titik kritis + minimum pada ruas), 4 (bidang, cross product, bidang singgung — diajarkan tapi belum dicoba).
+- **Momen terbaik: soal 9 dikerjakan dingin, benar percobaan pertama, tanpa satu pun petunjuk** (\(x^2y'+4xy=x^5,\ y(1)=3 \to y=\tfrac{x^4}{8}+\tfrac{23}{8x^4}\)).
+- **Format mengajar direvisi tiga kali atas permintaannya**, dan ini mungkin perubahan paling berdampak dalam dua hari: (1) rantai panah horizontal ❌ (2) satu langkah per baris dengan alasan di antara blok ❌ ("matanya naik-turun") (3) **tabel dua kolom — aturan umum di kiri, soalnya sendiri dikerjakan di kanan** ✅. Dicatat di [[Teaching Playbook]]. Diagnosis: yang putus bukan aturannya dan bukan aritmetikanya, melainkan **pemetaan dari aturan ke instansinya**.
+- **Pola kesalahan yang mengeras:** *baris terakhir bocor* naik jadi **8 kejadian**; *pangkat genap hanya ditulis satu akar* muncul **4 kali dalam satu hari** (\(k^2=4\), \(x^2=4\), \(x^8=1\), \(x^2=1\)). Keduanya murah diperbaiki dan mahal kalau tidak.
+- **Pelajaran aljabar baru yang penting:** jangan membagi dengan huruf yang bisa bernilai nol — \(x^9=x\) dibagi \(x\) akan **membunuh titik kritis \((0,0)\)**. Pindahkan ke satu ruas dan faktorkan.
+- **Berhenti atas permintaannya sendiri** setelah soal 8, dengan soal 4 latihan B belum dikerjakan. Posisi akhir: **41 dari 45 poin dikerjakan, 32 terverifikasi dingin**, garis lulus 23 dilewati sejak siang.
 
 ## 2026-10-27 — Hari 1 mode ujian: turunan dibereskan, lalu 16 poin dipanen (Claude Code)
 

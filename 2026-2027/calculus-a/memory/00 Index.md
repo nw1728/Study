@@ -1,7 +1,7 @@
 ---
 title: Calculus A — Memory Index
 tags: [calculus-a, index]
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 # 📚 Calculus A — Memory Index
@@ -16,7 +16,8 @@ updated: 2026-10-27
 
 > [!danger] 🚨 MODE UJIAN — Rabu **4 November 2026**, 08:45–11:45
 > Jalur **`202001171` (5 EC)** · soal **1–11** · **45 poin** · nilai `1 + poin × 1/5` · **lulus di 23 poin**
-> Posisi 27 Okt malam: **26/45 — sudah lewat garis lulus.** Sisa: soal 3b, 4, 7, 8, 9.
+> Posisi **28 Okt malam: 41/45 poin dikerjakan, 32 terverifikasi dingin.** Sisa: soal 4 (belum dicoba) + 4 pelebaran rasa-resit.
+> 🗺️ **Ujian punya cetakan tetap** — 3 kertas dibandingkan slot per slot, topik tiap slot sama. Detail di [[Current Progress]].
 > 📄 Lembar rumus ujian sudah dipetakan (apa yang gratis vs wajib hafal) — lihat [[Current Progress]].
 > 📝 Halaman ujian interaktif: https://claude.ai/artifact/LApfMvRbq2vNa8KCjStbha
 > 🗓️ Roadmap: https://claude.ai/artifact/JbWyN4VqhEpptjK3sjtxxs

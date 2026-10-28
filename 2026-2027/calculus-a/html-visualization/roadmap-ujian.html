@@ -120,8 +120,8 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   <div class="bar-in">
     <div class="stat"><span class="k">Ujian Kalkulus</span><span class="v" id="countdown">—</span></div>
     <div class="stat"><span class="k">Tugas selesai</span><span class="v"><span id="done">0</span><small id="total">/0</small></span></div>
-    <div class="stat"><span class="k">Poin terkunci</span><span class="v"><span id="pts">10</span><small>/36</small></span></div>
-    <div class="stat"><span class="k">Perkiraan nilai</span><span class="v" id="grade">3,5</span></div>
+    <div class="stat"><span class="k">Poin terkunci</span><span class="v"><span id="pts">10</span><small>/45</small></span></div>
+    <div class="stat"><span class="k">Perkiraan nilai</span><span class="v" id="grade">3,0</span></div>
   </div>
 </div>
 
@@ -129,44 +129,47 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
   <header>
     <div class="kicker">Senin 26 Okt — Rabu 4 Nov 2026</div>
     <h1>Jalan 9 hari ke ujian</h1>
-    <p class="lede">Lulus butuh <b>18 dari 36 poin</b>. Rencana ini tidak mengejar nilai sempurna — dia mengejar poin termurah lebih dulu, supaya posisi amanmu didapat secepat mungkin.</p>
+    <p class="lede">Lulus butuh <b>23 dari 45 poin</b> (jalur 202001171, 5 EC, soal 1—11). Rencana ini tidak mengejar nilai sempurna — dia mengejar poin termurah lebih dulu, supaya posisi amanmu didapat secepat mungkin.</p>
   </header>
 
   <div class="meter">
     <div class="top">
-      <div><span class="big" id="pts2">10</span> <span class="cap">poin terkunci dari 36 &nbsp;·&nbsp; nilai <b id="grade2">3,5</b></span></div>
-      <div class="cap">batas lulus: <b>18 poin</b> (nilai 5,5)</div>
+      <div><span class="big" id="pts2">10</span> <span class="cap">poin terkunci dari 45 &nbsp;·&nbsp; nilai <b id="grade2">3,0</b></span></div>
+      <div class="cap">batas lulus: <b>23 poin</b> (nilai 5,5)</div>
     </div>
     <div class="track"><div class="fill" id="fill"></div><div class="pass" id="passmark"></div></div>
-    <div class="marks"><span>0</span><span>18 — lulus</span><span>36</span></div>
+    <div class="marks"><span>0</span><span>23 — lulus</span><span>45</span></div>
   </div>
 
   <div class="days" id="days"></div>
 
   <section class="panel">
-    <h2>Cara memakai 4 sample exam</h2>
-    <p class="note">Kesalahan paling umum: semua latihan dibakar di hari pertama, lalu tidak ada alat ukur yang jujur menjelang ujian.</p>
+    <h2>Cara memakai tiga kertas ujian</h2>
+    <p class="note">Kesalahan paling umum: semua latihan dibakar lebih awal, lalu tidak ada alat ukur yang jujur menjelang ujian.</p>
     <div class="scroll"><table>
-      <tr><th>Sample</th><th>Kapan</th><th>Caranya</th></tr>
-      <tr><td class="n">#1</td><td class="n">Sel–Kam</td><td>Buku pelajaran, bukan ujian. Dibedah per topik. Kuncinya boleh dilihat setelah mencoba.</td></tr>
-      <tr><td class="n">#2</td><td class="n">Selasa 3</td><td>🔒 Jangan disentuh sampai hari itu. Simulasi 3 jam, tanpa catatan, tanpa kalkulator.</td></tr>
-      <tr><td class="n">#3</td><td class="n">Selasa 3 sore</td><td>Hanya soal yang gagal di #2.</td></tr>
-      <tr><td class="n">#4</td><td class="n">Cadangan</td><td>Kesempatan ukur kedua kalau #2 jelek.</td></tr>
+      <tr><th>Kertas</th><th>Kapan</th><th>Caranya</th></tr>
+      <tr><td class="n">Nov 2025</td><td class="n">Sel sampai Kam</td><td>Buku pelajaran, bukan ujian. Dibedah per topik. <b>Sudah 41/45.</b></td></tr>
+      <tr><td class="n">Feb 2026</td><td class="n">Selasa 3 pagi</td><td>Terkunci sampai hari itu. Simulasi 3 jam, tanpa catatan, tanpa kalkulator.</td></tr>
+      <tr><td class="n">Jul 2026</td><td class="n">Selasa 3 sore</td><td>Terkunci. Hanya soal yang gagal di simulasi pagi.</td></tr>
     </table></div>
   </section>
 
   <section class="panel">
-    <h2>Urutan panen — poin per jam</h2>
-    <p class="note">Temuan terpenting dari sample exam: soal yang kelihatan serem (6, 7, 8, 9 — multivariabel dan PD) justru yang paling resep. Soal 1 yang cuma 4 poin itu yang paling susah. Jadi urutannya dibalik dari rasa takut ke poin per jam.</p>
+    <h2>Ujian punya cetakan tetap</h2>
+    <p class="note">Tiga kertas dibandingkan slot per slot (Nov 2025, resit Feb 2026, resit Jul 2026). Topik tiap slot <b>sama di ketiganya</b> — yang berubah hanya angkanya. Slot 6 sampai 11 bahkan identik.</p>
     <div class="scroll"><table>
-      <tr><th>Soal</th><th>Poin</th><th>Perkiraan</th><th>Poin / jam</th><th>Topik</th></tr>
-      <tr><td class="n">6</td><td class="n">4</td><td class="n">1 jam</td><td class="n">4,0</td><td>Limit multivariabel tidak ada</td></tr>
-      <tr><td class="n">5</td><td class="n">3</td><td class="n">1 jam</td><td class="n">3,0</td><td>Polar → Cartesius</td></tr>
-      <tr><td class="n">9</td><td class="n">4</td><td class="n">1,5 jam</td><td class="n">2,7</td><td>PD linear, faktor integrasi</td></tr>
-      <tr><td class="n">7</td><td class="n">4</td><td class="n">1,5 jam</td><td class="n">2,7</td><td>Aturan rantai multivariabel</td></tr>
-      <tr><td class="n">8</td><td class="n">5</td><td class="n">2 jam</td><td class="n">2,5</td><td>Titik kritis + minimum di ruas garis</td></tr>
-      <tr><td class="n">3b</td><td class="n">2</td><td class="n">1 jam</td><td class="n">2,0</td><td>Integral parsial</td></tr>
-      <tr><td class="n">4</td><td class="n">4</td><td class="n">2,5 jam</td><td class="n">1,6</td><td>Cross product + bidang</td></tr>
+      <tr><th>Slot</th><th>Topik</th><th>Variasi antar kertas</th></tr>
+      <tr><td class="n">1</td><td>Limit</td><td>L'Hopital, atau tak hingga kurang tak hingga (kali sekawan)</td></tr>
+      <tr><td class="n">2</td><td>Tabel nilai ke turunan</td><td>sama</td></tr>
+      <tr><td class="n">3</td><td>Dua integral</td><td>substitusi + parsial, atau tak wajar</td></tr>
+      <tr><td class="n">4</td><td>Bidang</td><td>cross product, atau bidang singgung</td></tr>
+      <tr><td class="n">5</td><td>Polar</td><td>ke Cartesius, atau lingkaran</td></tr>
+      <tr><td class="n">6</td><td>Limit multivariabel tidak ada</td><td><b>identik</b></td></tr>
+      <tr><td class="n">7</td><td>Rantai multivariabel</td><td><b>identik</b></td></tr>
+      <tr><td class="n">8</td><td>Titik kritis + min pada ruas</td><td><b>identik</b></td></tr>
+      <tr><td class="n">9</td><td>PD linear orde 1</td><td><b>identik</b></td></tr>
+      <tr><td class="n">10</td><td>Akar kompleks</td><td>pangkat 4, atau pangkat 6</td></tr>
+      <tr><td class="n">11</td><td>PD orde 2</td><td><b>identik</b></td></tr>
     </table></div>
   </section>
 
@@ -199,29 +202,37 @@ const DAYS = [
 
  {id:"d1", date:"2026-10-27", dow:"Selasa", dm:"27 Okt", title:"Fondasi + panen pertama", type:"calc",
   note:"Fondasi sudah berdiri: metafora KOTAK (■) bikin aturan rantai klik, skor latihan 9/10, soal 2b benar. Pagi dipakai buat itu — jadi panennya digeser ke siang dan sore, bukan dihapus.",
-  lock:17,
+  lock:26,
   tasks:[
    {id:"t11", text:"Aturan turunan — 6 latihan (pangkat, hasil kali, hasil bagi, rantai)", meta:"✓ selesai · pagi", must:true},
    {id:"t12", text:"Soal 1c + soal 2 selesai", meta:"✓ selesai · pagi · 5 poin", pts:0},
    {id:"t14", text:"Soal 3a — integral substitusi (u = isi kotak)", meta:"30 menit · siang · 2 poin", pts:0},
    {id:"t13", text:"Soal 6 — buktikan limit multivariabel tidak ada", meta:"1,5 jam · siang · 4 poin ⭐ termurah", pts:4},
-   {id:"t15", text:"Soal 5 — polar ke Cartesius", meta:"1 jam · sore · 3 poin ⭐ nomor 2 termurah", pts:3}]},
+   {id:"t15", text:"Soal 5 — polar ke Cartesius", meta:"selesai · sore · 3 poin", pts:3},
+   {id:"t16", text:"Soal 11 — PD orde 2 (utuh sendirian)", meta:"selesai · malam · 4 poin", pts:4},
+   {id:"t17", text:"Soal 10 — akar kompleks, bentuk polar", meta:"selesai · malam · 5 poin", pts:5}]},
 
  {id:"d2", date:"2026-10-28", dow:"Rabu", dm:"28 Okt", title:"Panen resep besar", type:"calc",
   note:"Tiga soal, semuanya resep. Batas lulus (18) sudah dilewati sejak Selasa sore — hari ini soal menambah jarak aman, bukan menyelamatkan diri.",
-  lock:27,
+  lock:41,
   tasks:[
-   {id:"t21", text:"Soal 9 — PD linear orde satu, faktor integrasi", meta:"1,5 jam · pagi · 4 poin", pts:4},
-   {id:"t22", text:"Soal 7 — aturan rantai multivariabel", meta:"1,5 jam · siang · 4 poin", pts:4},
-   {id:"t23", text:"Soal 3b — integral parsial", meta:"1 jam · sore · 2 poin", pts:2}]},
+   {id:"t20", text:"Ulang dingin soal 1, 6, 5, 10, 11 — tanpa catatan", meta:"selesai · pagi · mengunci 17 poin", must:true},
+   {id:"t23", text:"Soal 3b — integral parsial (LIPET)", meta:"selesai · 2 poin", pts:2},
+   {id:"t21", text:"Soal 9 — faktor integrasi (dingin, benar percobaan pertama)", meta:"selesai · 4 poin", pts:4},
+   {id:"t22", text:"Soal 7 — aturan rantai multivariabel", meta:"selesai · 4 poin", pts:4},
+   {id:"t24", text:"Soal 8 — titik kritis + min pada ruas garis", meta:"selesai · 5 poin", pts:5}]},
 
  {id:"d3", date:"2026-10-29", dow:"Kamis", dm:"29 Okt", title:"Sisa + kartu resep", type:"calc",
   note:"Hari terakhir untuk materi baru. Apa pun yang belum masuk malam ini, relakan.",
-  lock:36,
+  lock:45,
   tasks:[
-   {id:"t31", text:"Soal 8 — titik kritis + minimum pada ruas garis", meta:"2 jam · pagi · 5 poin", pts:5},
-   {id:"t32", text:"Soal 4 — cross product + persamaan bidang", meta:"2 jam · siang · 4 poin · paling mahal per poin", pts:4},
-   {id:"t34", text:"Tulis kartu resep: satu halaman, 9 resep, satu per soal", meta:"1 jam · sore", must:true}]},
+   {id:"t30", text:"Rep bersih soal 7 dan soal 8(a)", meta:"15 menit · pagi", must:true},
+   {id:"t32", text:"Soal 4 — bidang: cross product DAN bidang singgung", meta:"2 jam · pagi · 4 poin", pts:4},
+   {id:"t35", text:"Pelebaran 1: limit tak hingga kurang tak hingga — trik kali sekawan", meta:"20 menit · rasa resit slot 1"},
+   {id:"t36", text:"Pelebaran 2: integral tak wajar (batas tak hingga)", meta:"20 menit · rasa resit slot 3a"},
+   {id:"t37", text:"Pelebaran 3: polar lingkaran — lengkapkan kuadrat", meta:"30 menit · rasa resit slot 5"},
+   {id:"t38", text:"Pelebaran 4: akar pangkat n — n akar berjarak merata", meta:"45 menit · rasa resit slot 10"},
+   {id:"t34", text:"Tulis kartu resep: satu halaman, isinya daftar HAFAL", meta:"1 jam · sore", must:true}]},
 
  {id:"d4", date:"2026-10-30", dow:"Jumat", dm:"30 Okt", title:"Aljabar Linear", type:"la",
   note:"Fokus pindah. Kalkulus cuma dirawat, tidak dipelajari.",
@@ -330,15 +341,15 @@ function render(){
   });
   const n = allTasks.filter(t => done[t.id]).length;
   const pts = BASE_PTS + allTasks.filter(t => done[t.id] && t.pts).reduce((s,t) => s + t.pts, 0);
-  const grade = (1 + pts/4).toFixed(1).replace(".", ",");
+  const grade = (1 + pts/5).toFixed(1).replace(".", ",");
   document.getElementById("done").textContent = n;
   document.getElementById("total").textContent = "/" + allTasks.length;
   document.getElementById("pts").textContent = pts;
   document.getElementById("pts2").textContent = pts;
   document.getElementById("grade").textContent = grade;
   document.getElementById("grade2").textContent = grade;
-  document.getElementById("fill").style.width = Math.min(100, pts/36*100) + "%";
-  document.getElementById("passmark").style.left = (18/36*100) + "%";
+  document.getElementById("fill").style.width = Math.min(100, pts/45*100) + "%";
+  document.getElementById("passmark").style.left = (23/45*100) + "%";
 }
 render();
 

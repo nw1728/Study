@@ -1,7 +1,7 @@
 ---
 title: Exercise Log
 tags: [calculus-a, practice]
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 # ✍️ Exercise Log
@@ -305,3 +305,26 @@ Sumber: `sample_exam/112025exam_with_solutions.pdf`. Halaman interaktif: https:/
 | $y''+2y'+5y=0,\ y(0)=1,\ y'(0)=1$ (contoh PD) | $y=e^{-x}(\cos2x+\sin2x)$ |
 | $x^4-2x^2+4=0$ (contoh akar kompleks) | $x=\dfrac{\pm\sqrt6\pm i\sqrt2}{2}$ |
 | $\lim_{(x,y)\to(0,0)}\dfrac{x^2y}{x^4+y^2}$ (contoh tandingan) | tidak ada — tiga jalan beri $0$, jalan $y=x^2$ beri $\tfrac12$ |
+
+### Lanjutan sample exam 2026-10-28
+| Soal | Poin | Teknik | Jawaban |
+|---|---|---|---|
+| 3b | 2 | integral parsial, LIPET → $u=\ln x$, $dv=x^4dx$ | $\dfrac{160\ln2-31}{25}\approx3{,}196$ |
+| 4a | 2 | cross product → normal; bidang = titik + normal | $3x+2y+5z=13$; luas $=\tfrac12\lvert\langle6,4,10\rangle\rvert=\sqrt{38}$ |
+| 4b | 2 | arah garis = normal bidang; verifikasi dot $=0$ | $x=1+3t,\ y=2t,\ z=2+5t$ |
+| 7 | 4 | rantai multivariabel (pohon) di $(u,v)=(1,0)$ | $\partial z/\partial u=0$, $\partial z/\partial v=2$ |
+| 8a | 2 | $f_x=0$ dan $f_y=0$; $y=x^3,\ x=y^3\Rightarrow x^9=x$ | $(0,0),\ (1,1),\ (-1,-1)$ |
+| 8b | 3 | ruas membekukan $x=1$ → $g(y)=1+y^4-4y$; cek titik kritis **dan kedua ujung** | min mutlak $=-2$ di $(1,1)$ |
+| 9 | 4 | faktor integrasi $\mu=e^{\int P dx}=x^3$ | $y=\dfrac{x^3}{6}+\dfrac{11}{6x^3}$ |
+
+### Latihan ulang dingin 2026-10-28 (angka berbeda, bentuk sama)
+| Soal | Jawaban | Hasil |
+|---|---|---|
+| $\int_1^3 x^2\ln x\,dx$ | $9\ln3-\tfrac{26}{9}\approx6{,}998$ | contoh jadi |
+| $x^2y'+4xy=x^5,\ y(1)=3$ | $y=\tfrac{x^4}{8}+\tfrac{23}{8x^4}$ | ✅ **benar, percobaan pertama, nol petunjuk** |
+| $\partial f/\partial x=4x,\ \partial f/\partial y=2y,\ x=\ln t,\ y=t^3$ | $\tfrac{4\ln t}{t}+6t^5$ | ✅ |
+| $\partial f/\partial x=2x,\ \partial f/\partial y=6y,\ x=t^2,\ y=\ln t$ | $4t^3+\tfrac{6\ln t}{t}$ | 🟠 ditulis $2t^3$ — $\tfrac{d}{dt}t^2$ dihitung $t$ |
+| $f=x^3+y^2-3x-4y$: titik kritis | $(1,2)$ dan $(-1,2)$ | 🟠 butuh bantuan: kapan substitusi vs langsung |
+| idem, min pada $x=1,\ 0\le y\le3$ | $-6$ di $(1,2)$ | ✅ benar sendiri |
+| **belum dikerjakan:** $Q_1(1,1,0),Q_2(2,0,1),Q_3(0,2,3)$ → bidang | — | ⚪ |
+| **belum dikerjakan:** bidang singgung $f=x^2+3y^2$ di $(1,1,4)$ | $z=4+2(x-1)+6(y-1)$ | ⚪ |

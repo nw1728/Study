@@ -1,7 +1,7 @@
 ---
 title: Common Mistakes
 tags: [calculus-a, practice, mistakes]
-updated: 2026-10-27
+updated: 2026-10-28
 ---
 
 # ⚠️ Common Mistakes
@@ -162,3 +162,42 @@ Penalarannya tidak pernah salah. Yang bocor selalu **baris terakhir**.
 ## ⛔ Pemicu kemacetan nomor satu (bukan kesalahan — kesalahan pengajaran)
 **Simbol baru yang tugasnya belum disebutkan membuatnya berhenti total.** Terjadi pada $\frac{dy}{dx}$, $u$, $\frac{\partial z}{\partial u}$, $e^{i\theta}$, dan $y(0)$ — semuanya dalam satu hari.
 **Obat:** sebutkan **tugas** simbol itu dalam satu kalimat **sebelum** soal diberikan, bukan setelah dia macet. Matematikanya tidak pernah jadi masalah.
+
+## 🚨 PANGKAT GENAP = DUA JAWABAN (pola nomor dua — 4 kejadian pada 2026-10-28)
+
+| Kejadian | Ditulis | Seharusnya |
+|---|---|---|
+| Ex 5.2 lama | $k^2=4\Rightarrow k=2$ | $k=\pm2$ |
+| Soal 5 | $x^2=4\Rightarrow x=2$ | $x=\pm2$ |
+| Soal 8a | $x^8=1\Rightarrow x=1$ | $x=\pm1$ — kalau tidak, titik $(-1,-1)$ hilang |
+| Latihan 8a | $x^2=1$ dibiarkan tidak diselesaikan | $x=\pm1$ |
+
+**Obat:** tulis **±** dulu, baru cari alasan membuang yang negatif ("panjang tidak boleh negatif", "soal minta $x>1$). Jangan sebaliknya.
+**Dan:** $\pm$ menempel pada **blok yang dikuadratkan**, bukan pada $x$. $(x-3)^2=4 \Rightarrow x-3=\pm2 \Rightarrow x=5$ atau $1$ — tetap dua, tapi bukan $\pm2$.
+
+## 💀 Jangan membagi dengan huruf yang bisa bernilai nol (baru 2026-10-28)
+| ❌ | ✅ |
+|---|---|
+| $x^9=x \Rightarrow$ bagi $x \Rightarrow x^8=1 \Rightarrow x=\pm1$ | $x^9-x=0 \Rightarrow x(x^8-1)=0 \Rightarrow x=0,\pm1$ |
+| **titik kritis $(0,0)$ hilang diam-diam** | ketiga titik selamat |
+
+Membagi dengan huruf membunuh akar nol. **Pindahkan ke satu ruas dan faktorkan**, lalu pakai "$A\cdot B=0 \Rightarrow A=0$ atau $B=0$" — aturan itu hanya berlaku terhadap nol.
+
+## Kapan substitusi, kapan tidak (sistem titik kritis)
+| Bentuk sistemnya | Caranya |
+|---|---|
+| Setiap persamaan **mencampur** $x$ dan $y$ (mis. $y=x^3$ dan $x=y^3$) | **substitusi** yang satu ke yang lain |
+| Setiap persamaan **hanya satu huruf** (mis. $x^2=1$ dan $y=2$) | selesaikan sendiri-sendiri, lalu **pasangkan setiap $x$ dengan setiap $y$** |
+
+## Minimum/maksimum pada selang tertutup
+| Mistake | Fix |
+|---|---|
+| Hanya mengecek titik di mana $g'=0$ | **Calon = titik kritis di dalam + KEDUA ujung.** Jalur bisa berakhir di pagar sementara masih menurun. |
+| Memakai $\vec n$ yang sudah disederhanakan untuk menghitung **luas** | Penyederhanaan boleh untuk **persamaan bidang** (arah sama), tidak boleh untuk **panjang**. Luas $=\tfrac12\lvert\vec n\text{ asli}\rvert$. |
+
+## Notasi yang bisa memakan poin
+| Tulisan ambigu | Bisa dibaca sebagai | Tulis begini |
+|---|---|---|
+| `1/1/2` | $\tfrac{1}{1}/2=\tfrac12$ (4× meleset) | $\dfrac{1}{1/2}=2$ |
+| `6lnt/t` | $6\ln\tfrac{t}{t}=0$ | $\dfrac{6\ln t}{t}$ |
+| $f'g+fg'$ tanpa kurung di dalam pecahan | tandanya ikut terbalik | $(f'g+fg')$ |
