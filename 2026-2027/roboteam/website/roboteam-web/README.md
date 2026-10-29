@@ -155,7 +155,12 @@ deployed, with every edit and every uploaded photo since then gone.
 
 ### Before it goes on a real domain
 
-The admin currently uses a **development login** that lets any address on the access list in
-without a password. It only runs locally: the server refuses to start if `AUTH_MODE=dev` is
-combined with `NODE_ENV=production` **or** with a `PUBLIC_URL` that is not localhost. Switching
-to `AUTH_MODE=google` (the team manager creates the OAuth client) is what makes it real.
+The admin logs in with **Sign in with Google** (`AUTH_MODE=google`, `server/auth/google.js`).
+Only verified accounts from the team's Google Workspace that are on the access list get in.
+The Google Cloud project is "RoboTeam Website" (consent screen: Internal). On the real domain,
+add `https://<domain>/auth/google/callback` as a second redirect URI on its OAuth client, and set
+`PUBLIC_URL` to the domain.
+
+There is also a **development login** (`AUTH_MODE=dev`) that lets any address on the access list
+in without a password, for working offline. It only runs locally: the server refuses to start if
+`AUTH_MODE=dev` is combined with `NODE_ENV=production` **or** with a `PUBLIC_URL` that is not localhost.

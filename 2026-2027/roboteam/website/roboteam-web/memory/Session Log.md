@@ -13,7 +13,8 @@ Back to [[00 Index]]
 - Rover pet now only lives on the planet: drives home when the stage scrolls away (`rover-home` event back to StoryDirector), no pet on other pages.
 - "Skip to about ↓" button on the story stage (`SkipStory.jsx`, text in `data/story.js`).
 - Rover is four-wheeled now: story rover and pet show two wheels on a single rocker (bogie removed), "six wheels" → "four wheels" in `data/story.js`.
-- Checked in Playwright on desktop and at 390px; lint, build, 156 tests pass.
+- Google login: Ethan set up the Cloud project (Internal consent screen, web client, localhost redirect) and filled `server/.env`. Built `server/auth/google.js` + 8 tests, switched this laptop to `AUTH_MODE=google`; the redirect to Google checked out. Ethan's own login test pending.
+- Checked in Playwright on desktop and at 390px; lint, build, 164 tests pass.
 
 ## 2026-10-24 · nw1728 (linux) — admin phase 2, finished (all 13 tasks)
 - Answered the spec's three open questions (keep a leaver's photo file, past-team members stay

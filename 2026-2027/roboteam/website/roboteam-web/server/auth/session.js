@@ -47,22 +47,22 @@ function serialise(name, value, { maxAgeSeconds, isProduction }) {
   return parts.join('; ')
 }
 
-export function createSession(res, { email, name }, config, { now = Date.now() } = {}) {
-  const payload = Buffer.from(
-    JSON.stringify({ email, name, expiresAt: now + EIGHT_HOURS_MS }),
-  ).toString('base64url')
-
-  res.setHeader(
-    'Set-Cookie',
-    serialise(COOKIE_NAME, `${payload}.${sign(payload, config.sessionSecret)}`, {
-      maxAgeSeconds: Math.round(EIGHT_HOURS_MS / 1000),
-      isProduction: config.isProduction,
-    }),
-  )
+/**
+ * A signed cookie holding `data` as JSON, as the text of a Set-Cookie header.
+ * The login cookie is one; the Google door's short-lived "login in progress"
+ * cookie is another.
+ */
+export function signedCookie(name, data, { maxAgeMs, config }) {
+  const payload = Buffer.from(JSON.stringify(data)).toString('base64url')
+  return serialise(name, `${payload}.${sign(payload, config.sessionSecret)}`, {
+    maxAgeSeconds: Math.round(maxAgeMs / 1000),
+    isProduction: config.isProduction,
+  })
 }
 
-export function readSession(req, config) {
-  const cookie = readCookie(req, COOKIE_NAME)
+/** The data in a signed cookie, or null if it is missing, broken or tampered with. */
+export function readSignedCookie(req, name, config) {
+  const cookie = readCookie(req, name)
   if (!cookie) return null
 
   const separator = cookie.lastIndexOf('.')
@@ -72,13 +72,30 @@ export function readSession(req, config) {
   const signature = cookie.slice(separator + 1)
   if (!signatureMatches(sign(payload, config.sessionSecret), signature)) return null
 
-  let session
   try {
-    session = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'))
+    return JSON.parse(Buffer.from(payload, 'base64url').toString('utf8'))
   } catch {
     return null
   }
+}
 
+/** The Set-Cookie text that deletes a cookie. */
+export function expiredCookie(name, config) {
+  return serialise(name, '', { maxAgeSeconds: 0, isProduction: config.isProduction })
+}
+
+export function createSession(res, { email, name }, config, { now = Date.now() } = {}) {
+  res.setHeader(
+    'Set-Cookie',
+    signedCookie(COOKIE_NAME, { email, name, expiresAt: now + EIGHT_HOURS_MS }, {
+      maxAgeMs: EIGHT_HOURS_MS,
+      config,
+    }),
+  )
+}
+
+export function readSession(req, config) {
+  const session = readSignedCookie(req, COOKIE_NAME, config)
   if (!session?.email || typeof session.expiresAt !== 'number') return null
   if (session.expiresAt <= Date.now()) return null
 
@@ -86,8 +103,5 @@ export function readSession(req, config) {
 }
 
 export function clearSession(res, config) {
-  res.setHeader(
-    'Set-Cookie',
-    serialise(COOKIE_NAME, '', { maxAgeSeconds: 0, isProduction: config.isProduction }),
-  )
+  res.setHeader('Set-Cookie', expiredCookie(COOKIE_NAME, config))
 }

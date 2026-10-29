@@ -19,5 +19,5 @@ Back to [[00 Index]]. Remove items once answered (and note the answer in [[Decis
 
 ## Before going live
 - [ ] Office server setup: HTTPS via Caddy, SPA fallback (every path → `index.html`).
-- [ ] Google OAuth client (team manager) for the admin.
+- [x] Google OAuth client for the admin (done 2026-10-29, project "RoboTeam Website").
 - [ ] Remove or keep the old site's `/admin` and API (replaced by the new admin plan).

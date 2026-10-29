@@ -40,6 +40,13 @@ Back to [[00 Index]]. Newest at the bottom of each section. Don't reverse these 
 - **Runs on a small office server** with HTTPS (`roboteamtwente.nl` will point there). The **team manager** creates the Google OAuth client.
 - **Sub-pages were built before the admin** (Ethan's call).
 
+## Google login (built 2026-10-29)
+- **`openid-client` does the protocol** (as the spec said), `server/auth/google.js` only decides who gets in: verified email + `hd` = team domain + on the access list. Consent screen **Internal** is the lock on Google's side.
+- **The one-time values (state, PKCE verifier) live in a 10-minute signed cookie** `rtt_login`, signed like the session cookie (helpers `signedCookie` / `readSignedCookie` in `session.js`). No server-side memory needed.
+- **Google is asked for its settings on the first login, not at start**, so the server still starts without internet.
+- **While developing, Google returns to port 3000 but the admin page lives on Vite's 5173**, so the callback sends you back to the address the login started from (only for localhost, only outside production). Refused logins go to `/admin?error=no-access`.
+- **Ethan's Google Cloud rights:** Owner on project "RoboTeam Website" only; Google Cloud switched on for him via a `Cloud users` group, off for the rest of the org.
+
 ## Admin phase 2 (spec `docs/superpowers/specs/2026-10-24-admin-phase-2-design.md`)
 - **Members split out of subteams into their own flat content type**, each person carrying a subteam slug. People join and leave roughly every three months, so the team list is the most-edited thing on the site; a flat list means moving someone is one dropdown instead of deleting and retyping them.
 - **A leaver's uploaded photo file is kept, never deleted** (Ethan, 2026-10-24). Safer: two entries can point at the same file and a mistaken removal is undoable. Unused files get tidied later, if ever.

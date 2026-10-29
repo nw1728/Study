@@ -13,6 +13,10 @@ Back to [[00 Index]] · History: [[Session Log]]
 > Read this **first**. At the end of each session, **overwrite** it (history goes in [[Session Log]]).
 
 ## Latest (2026-10-29)
+- **Google login is built** (`server/auth/google.js`, tests in `google.test.js`) and this laptop's
+  `server/.env` is on `AUTH_MODE=google`. The redirect to Google is checked. **Waiting on Ethan's
+  real login test:** his account gets in, a personal Gmail and an off-list team account are refused.
+  The other laptop still needs the two GOOGLE_ values in its own `server/.env` (copy them over by hand, never through git).
 - **The rover pet only lives on the planet now.** Scroll past the story and it drives back onto
   the planet and the story rover takes over again; no pet on other pages. The two-way protocol:
   `rover-handoff` (StoryDirector → pet, now with a `home()` position getter) and `rover-home`
@@ -65,8 +69,7 @@ something else is refused; no SVG; 5 MB; the stored name is a random uuid we pic
 ## ▶️ Continue with
 Ask Ethan which of these he wants next — none is started:
 
-1. **The Google login door** (`server/auth/door.js` has the branch waiting) once the OAuth
-   client exists.
+1. ~~The Google login door~~ built 2026-10-29; only the real-domain redirect URI is left (see Deployment).
 2. **The history and restore panel.** Every save already writes a version to
    `server/storage/history/` and keeps the last 30; there is no UI to browse or restore them yet.
 3. **The team access page** — add and remove people, change owner/editor — so Ethan is not the
@@ -77,6 +80,9 @@ Ask Ethan which of these he wants next — none is started:
 5. **Deployment itself**: the office server, HTTPS via Caddy, the SPA fallback.
 
 ### Traps worth knowing first
+- Vite's proxy rewrites the Host header to 3000 unless `changeOrigin: false`. The `/auth` proxy in
+  `vite.config.js` has it off, so the Google login returns to 5173. Without it you land on
+  "Cannot GET /admin" on port 3000.
 - The admin shares the site's `global.css`, where every `<section>` has 120px of padding. Any
   `<section>` inside the admin needs `padding: 0`.
 - A grid item will not shrink below its content without `min-width: 0` — that is what made the

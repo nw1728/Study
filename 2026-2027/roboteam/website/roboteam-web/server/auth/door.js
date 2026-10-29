@@ -2,9 +2,9 @@
 //
 // The door is the ONLY part that knows whether login went through Google or
 // through the development form. Everything downstream — the session cookie, the
-// access list, the roles — works the same either way. Swapping in Google on
-// Monday means filling in google.js and adding its branch here.
+// access list, the roles — works the same either way.
 import { mountDevDoor } from './devDoor.js'
+import { mountGoogleDoor } from './google.js'
 import { clearSession, readSession } from './session.js'
 
 export function mountDoor(app, { config, users }) {
@@ -21,13 +21,7 @@ export function mountDoor(app, { config, users }) {
     return
   }
 
-  app.get('/auth/google', (req, res) => {
-    res.status(501).json({
-      error:
-        'The Google door is not built yet. It arrives with the OAuth client on 2026-10-26; ' +
-        'until then run with AUTH_MODE=dev.',
-    })
-  })
+  mountGoogleDoor(app, { config, users })
 }
 
 /**

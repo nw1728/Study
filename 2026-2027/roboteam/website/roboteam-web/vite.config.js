@@ -15,7 +15,9 @@ export default defineConfig({
     // While developing, the site runs on 5173 and the content server on 3000.
     proxy: {
       '/api': 'http://localhost:3000',
-      '/auth': 'http://localhost:3000',
+      // Keeps the browser's Host (localhost:5173), so the Google login knows to
+      // come back here afterwards and not to 3000, which has no admin page.
+      '/auth': { target: 'http://localhost:3000', changeOrigin: false },
       '/uploads': 'http://localhost:3000',
     },
   },
