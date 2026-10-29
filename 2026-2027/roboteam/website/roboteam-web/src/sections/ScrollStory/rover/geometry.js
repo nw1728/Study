@@ -5,11 +5,10 @@ export const GROUND_Y = 340
 export const WHEEL_RADIUS = 26
 export const WHEEL_Y = GROUND_Y - WHEEL_RADIUS
 
-export const WHEELS = { rear: 150, middle: 290, front: 430 } // x positions
+export const WHEELS = { rear: 170, front: 420 } // x positions (a side view of four wheels shows two)
 
 export const PIVOTS = {
-  rocker: [300, 232], // where the suspension hangs from the body
-  bogie: [220, 262], // the smaller arm carrying the rear and middle wheels
+  rocker: [295, 232], // where the suspension hangs from the body
   head: [200, 92], // camera head on the mast
   shoulder: [420, 200],
   elbow: [490, 140],

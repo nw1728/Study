@@ -12,6 +12,7 @@ Back to [[00 Index]]
 - This laptop had no `server/.env` and stale `node_modules` (express missing). Made `.env` from the example (dev login, new secret), `npm install`. Its `server/storage/` is fresh, so no edits from the other laptop.
 - Rover pet now only lives on the planet: drives home when the stage scrolls away (`rover-home` event back to StoryDirector), no pet on other pages.
 - "Skip to about ↓" button on the story stage (`SkipStory.jsx`, text in `data/story.js`).
+- Rover is four-wheeled now: story rover and pet show two wheels on a single rocker (bogie removed), "six wheels" → "four wheels" in `data/story.js`.
 - Checked in Playwright on desktop and at 390px; lint, build, 156 tests pass.
 
 ## 2026-10-24 · nw1728 (linux) — admin phase 2, finished (all 13 tasks)

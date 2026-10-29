@@ -17,6 +17,8 @@ Back to [[00 Index]] · History: [[Session Log]]
   the planet and the story rover takes over again; no pet on other pages. The two-way protocol:
   `rover-handoff` (StoryDirector → pet, now with a `home()` position getter) and `rover-home`
   (pet → StoryDirector, when it has arrived). The trip is capped at 2.5 s (`MAX_TRIP_HOME`).
+- **Four wheels:** both rover drawings show two wheels (side view) on one rocker; story text says four.
+- **Spotted, not fixed:** the planet outline has a gap at its top-left (left of the rover / under the flag). It was there before the wheel change.
 - **"Skip to about ↓" button** on the story stage (`ScrollStory/SkipStory.jsx`, text in `data/story.js`).
 - **Admin login on a new laptop:** `server/.env` is not in git. Copy `server/.env.example`, fill
   `SESSION_SECRET`, run `npm install`, then `npm run dev:server` + `npm run dev`, and open

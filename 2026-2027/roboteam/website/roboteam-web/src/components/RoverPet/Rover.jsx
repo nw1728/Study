@@ -1,13 +1,13 @@
 import styles from './RoverPet.module.css'
 
-const WHEEL_XS = [14, 32, 50]
+const WHEEL_XS = [16, 46] // four wheels, seen from the side
 
 // The drawing of the mini Mars rover (side view). Moods are animated in RoverPet.module.css.
 export default function Rover() {
   return (
     <svg viewBox="0 0 64 48" width="56" height="42" aria-hidden="true">
-      {/* rocker-bogie legs */}
-      <path d="M22 30 L14 40 M22 30 L32 40 M42 30 L50 40" className={styles.leg} />
+      {/* rocker legs */}
+      <path d="M31 30 L16 40 M31 30 L46 40" className={styles.leg} />
 
       {WHEEL_XS.map((x) => (
         <g key={x} data-wheel={x}>

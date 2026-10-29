@@ -25,6 +25,7 @@ Back to [[00 Index]]. Newest at the bottom of each section. Don't reverse these 
 - **First version copied droneteamtwente.nl's layout** (pinned text left, drawing right, numbered chapter bar, fact chips, flat ground). **Ethan said it felt like a copycat.**
 - **Current version (approved):** a 2D line-drawn rover on a **tiny rotating planet**, a **mission log** (commands + rover replies, "SOL 014 > drive crater_rim") instead of chapters, a **sol counter**, rover moods (!, ?, ♥) shared with the pet, a zoom-out to show the whole planet, and the **story rover becoming the rover pet**. That handover is the signature moment.
 - **2D line drawing, not 3D** (Ethan's choice; no CAD model needed, light bundle).
+- **The rover has four wheels** (Ethan, 2026-10-29: the real rover is four-wheeled now). Side view shows two wheels on one rocker leg; the bogie is gone. Story text says "four wheels". Same for the pet drawing.
 
 ## Rover pet (cursor companion)
 - **It does not follow the cursor tightly.** **Click** and it drives there; otherwise it wanders to stay near the cursor. It has moods (happy, sad, dance, curious, sleepy, lonely) like a pet.

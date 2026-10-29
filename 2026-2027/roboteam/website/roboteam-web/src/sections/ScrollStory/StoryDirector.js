@@ -139,23 +139,19 @@ export default class StoryDirector {
           return Math.abs(d) < 1 ? height * (1 - d * d) : 0
         }),
       )
-    const lifts = { front: liftAt(WHEELS.front), middle: liftAt(WHEELS.middle), rear: liftAt(WHEELS.rear) }
+    const lifts = { front: liftAt(WHEELS.front), rear: liftAt(WHEELS.rear) }
     this.tiltSuspension(lifts)
 
-    const bumping = lifts.front + lifts.middle + lifts.rear > 2
+    const bumping = lifts.front + lifts.rear > 2
     const mood = MOODS.find(({ range }) => p >= range[0] && p <= range[1])
     this.bubble.textContent = bumping ? '!' : (mood?.symbol ?? '')
     return turned
   }
 
-  // rocker-bogie: a lifted wheel tips the leg that carries it, the body stays level
-  tiltSuspension({ front, middle, rear }) {
-    const rocker = -toDegrees(Math.atan2(front, WHEELS.front - PIVOTS.rocker[0]))
-    const bogie = toDegrees(
-      Math.atan2(rear, PIVOTS.bogie[0] - WHEELS.rear) - Math.atan2(middle, WHEELS.middle - PIVOTS.bogie[0]),
-    )
+  // rocker: a lifted wheel tips the leg that carries both wheels, the body stays level
+  tiltSuspension({ front, rear }) {
+    const rocker = -toDegrees(Math.atan2(front - rear, WHEELS.front - PIVOTS.rocker[0]))
     this.rotate(this.joints.rocker, rocker)
-    this.rotate(this.joints.bogie, bogie)
   }
 
   science(p) {

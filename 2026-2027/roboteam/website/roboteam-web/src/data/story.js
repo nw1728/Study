@@ -14,7 +14,7 @@ export const phases = [
     id: 'drive',
     start: 0.3,
     title: 'Built for rough ground.',
-    text: 'Mars has no roads. The rover crosses rocks and slopes on its own, keeping all six wheels on the ground.',
+    text: 'Mars has no roads. The rover crosses rocks and slopes on its own, keeping all four wheels on the ground.',
   },
   {
     id: 'science',
@@ -34,9 +34,9 @@ export const phases = [
 // The mission log in the corner: commands sent to the rover and its replies.
 export const missionLog = [
   { at: 0, sol: 0, command: 'connect future-factory.enschede', reply: 'link established' },
-  { at: 0.09, sol: 1, command: 'assemble rover', reply: '✓ chassis  ✓ six wheels  ✓ mast  ✓ arm' },
+  { at: 0.09, sol: 1, command: 'assemble rover', reply: '✓ chassis  ✓ four wheels  ✓ mast  ✓ arm' },
   { at: 0.31, sol: 14, command: 'drive crater_rim', reply: 'rock ahead … climbing' },
-  { at: 0.48, sol: 19, command: 'status', reply: 'all six wheels on the ground' },
+  { at: 0.48, sol: 19, command: 'status', reply: 'all four wheels on the ground' },
   { at: 0.6, sol: 27, command: 'collect sample --site crater_rim', reply: 'arm deploying …' },
   { at: 0.77, sol: 28, command: 'check sample_box', reply: 'sample stored ♥' },
   { at: 0.81, sol: 31, command: 'zoom out', reply: 'that is a small planet' },
