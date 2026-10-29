@@ -1,12 +1,18 @@
 ---
 title: Session Log
 tags: [roboteam-web, log]
-updated: 2026-10-24
+updated: 2026-10-29
 ---
 
 # Session log (newest first)
 
 Back to [[00 Index]]
+
+## 2026-10-29 · 1770np (mac) — admin login on this laptop, pet stays on the planet, skip button
+- This laptop had no `server/.env` and stale `node_modules` (express missing). Made `.env` from the example (dev login, new secret), `npm install`. Its `server/storage/` is fresh, so no edits from the other laptop.
+- Rover pet now only lives on the planet: drives home when the stage scrolls away (`rover-home` event back to StoryDirector), no pet on other pages.
+- "Skip to about ↓" button on the story stage (`SkipStory.jsx`, text in `data/story.js`).
+- Checked in Playwright on desktop and at 390px; lint, build, 156 tests pass.
 
 ## 2026-10-24 · nw1728 (linux) — admin phase 2, finished (all 13 tasks)
 - Answered the spec's three open questions (keep a leaver's photo file, past-team members stay

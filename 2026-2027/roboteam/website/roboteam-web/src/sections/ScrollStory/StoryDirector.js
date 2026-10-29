@@ -52,6 +52,7 @@ const LOOK = [0.82, 0.86]
 const LEAVE = [0.9, 0.97]
 const LEAVE_DEGREES = 75
 const HANDOFF = 0.95 // past this, the small rover pet takes over
+const STAGE_LEAVING = 0.8 // once the stage's bottom edge is above 80% of the screen, the pet drives home
 
 // Mood symbols, like the rover pet
 const MOODS = [
@@ -65,6 +66,7 @@ const toDegrees = (rad) => (rad * 180) / Math.PI
 export default class StoryDirector {
   constructor(section) {
     const q = (selector) => section.querySelector(selector)
+    this.section = section
     this.rover = q('[data-rover]')
     this.parts = {}
     for (const name of Object.keys(DRAW)) {
@@ -83,6 +85,11 @@ export default class StoryDirector {
     this.stars = q('[data-stars]')
     this.orbitDot = q('[data-orbit-dot]')
     this.handedOff = null
+    // the pet tells us when it has driven back onto the planet, so our rover can reappear
+    this.onPetHome = () => {
+      if (this.handedOff === false) this.rover.style.opacity = 1
+    }
+    window.addEventListener('rover-home', this.onPetHome)
   }
 
   update(p) {
@@ -184,26 +191,33 @@ export default class StoryDirector {
 
     const orbited = easeInOut(between(p, ...LEAVE)) * LEAVE_DEGREES
     this.rotate(this.orbit, orbited, `${cx} ${cy}`)
-    this.handOff(p >= HANDOFF)
+    // the pet only lives on the planet: scrolling on to the rest of the page sends it home
+    const onStage = this.section.getBoundingClientRect().bottom > window.innerHeight * STAGE_LEAVING
+    this.handOff(p >= HANDOFF && onStage)
     return orbited
   }
 
-  // tell the rover pet (components/RoverPet) whether it's on stage, and where the story rover is
+  // Tell the rover pet (components/RoverPet) whether it's out, and where the story rover is.
+  // Going out, our rover hides at once. Coming back, it stays hidden until the pet has driven
+  // home ('rover-home'); `home` lets the pet follow the planet while the page scrolls.
   handOff(toPet) {
     if (!petAvailable || toPet === this.handedOff) return // no pet (e.g. phones): the rover stays
+    const firstCall = this.handedOff === null
     this.handedOff = toPet
-    this.rover.style.opacity = toPet ? 0 : 1
-    const box = this.rover.getBoundingClientRect()
-    window.dispatchEvent(
-      new CustomEvent('rover-handoff', {
-        detail: { toPet, x: box.left + box.width / 2, y: box.top + box.height / 2 },
-      }),
-    )
+    if (toPet || firstCall) this.rover.style.opacity = toPet ? 0 : 1
+    const home = () => this.roverCenter()
+    window.dispatchEvent(new CustomEvent('rover-handoff', { detail: { toPet, ...home(), home } }))
   }
 
-  // leaving the page mid-story (e.g. clicking to /events): the pet takes over wherever the rover is
+  roverCenter() {
+    const box = this.rover.getBoundingClientRect()
+    return { x: box.left + box.width / 2, y: box.top + box.height / 2 }
+  }
+
+  // leaving the page (e.g. clicking to /events): no planet there, so the pet just disappears
   release() {
-    this.handOff(true)
+    window.removeEventListener('rover-home', this.onPetHome)
+    if (petAvailable) window.dispatchEvent(new CustomEvent('rover-handoff', { detail: { toPet: false } }))
   }
 
   rotate(el, degrees, pivot = el.dataset.pivot) {

@@ -6,6 +6,7 @@ import { petAvailable } from '../../lib/petAvailable.js'
 import styles from './RoverPet.module.css'
 
 const WHEEL_RADIUS = 6
+const MAX_TRIP_HOME = 2500 // ms; if the planet scrolls away faster than it can drive, it just fades
 const SIZE = { width: 56, height: 42 }
 
 // Little symbol shown above the rover for each mood
@@ -24,8 +25,10 @@ const BUBBLES = {
  * Click anywhere and it drives there like a little car, steering around text.
  * Otherwise it stays near the cursor and does its own thing.
  * RoverBrain.js decides what it does, TextObstacles.js finds the text, and this file draws it.
- * While the scroll story at the top is playing, the pet waits offstage: the story's rover
- * "hands over" to it at the end (the 'rover-handoff' event from StoryDirector.js).
+ * It only lives on the planet of the scroll story at the top of the front page. The story's rover
+ * "hands over" to it at the end (the 'rover-handoff' event from StoryDirector.js); scroll on to
+ * the rest of the page and it drives back to the planet and the story rover takes over again
+ * (the 'rover-home' event). Other pages have no planet, so no pet.
  * Only on devices with a mouse, and never for people who prefer reduced motion.
  */
 export default function RoverPet() {
@@ -52,24 +55,37 @@ export default function RoverPet() {
     const onGrabEnd = () => el.classList.remove(styles.grabbing)
     const onPageMoved = () => obstacles.markDirty()
 
-    let storyHasSpoken = false
+    let out = false // visible on the page (also while driving home)
+    let home = null // where the story rover is, while driving back to it
+    let homeBy = 0 // give up driving home after this time
+
+    const arriveHome = () => {
+      home = null
+      out = false
+      brain.stayOut()
+      el.classList.remove(styles.active)
+      window.dispatchEvent(new Event('rover-home'))
+    }
+
     const onHandoff = (e) => {
-      storyHasSpoken = true
       const { toPet, x, y } = e.detail
       const now = performance.now()
       if (toPet) {
-        brain.teleport(x, y, false)
+        // turned back while driving home: carry on from where it is
+        if (!out) brain.teleport(x, y, false)
+        home = null
+        out = true
+        brain.stayOut()
         brain.setMood('happy', now, 1800)
         if (brain.mouse) brain.onClick(brain.mouse.x, brain.mouse.y, now) // come say hi
         el.classList.add(styles.active)
+      } else if (out && e.detail.home) {
+        home = e.detail.home
+        homeBy = now + MAX_TRIP_HOME
       } else {
-        el.classList.remove(styles.active)
+        arriveHome() // not out, or leaving the page: just gone
       }
     }
-    // if the page didn't open on the story (e.g. a link to #contact), just show the pet
-    const showIfNoStory = setTimeout(() => {
-      if (!storyHasSpoken) el.classList.add(styles.active)
-    }, 600)
 
     const grab = () => {
       // remove + re-add so the grab animation restarts every time
@@ -80,8 +96,13 @@ export default function RoverPet() {
 
     const tick = (now) => {
       obstacles.refreshIfNeeded(now)
-      const { speed, arrived } = brain.update(now, obstacles)
+      if (home) {
+        const spot = home()
+        brain.goHome(spot.x, spot.y)
+      }
+      const { speed, arrived, atHome } = brain.update(now, obstacles)
       if (arrived) grab()
+      if (home && (atHome || now > homeBy)) arriveHome()
 
       if (brain.mood !== shownMood) {
         el.dataset.mood = brain.mood // RoverPet.module.css animates each mood
@@ -113,7 +134,6 @@ export default function RoverPet() {
     frame = requestAnimationFrame(tick)
 
     return () => {
-      clearTimeout(showIfNoStory)
       window.removeEventListener('rover-handoff', onHandoff)
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mousedown', onClick)

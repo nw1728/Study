@@ -1,8 +1,8 @@
 ---
 title: Current Progress
 tags: [roboteam-web, progress]
-updated: 2026-10-24
-last_device: "nw1728 (linux)"
+updated: 2026-10-29
+last_device: "1770np (mac)"
 ---
 
 # 📍 Current Progress: continue from here
@@ -11,6 +11,17 @@ Back to [[00 Index]] · History: [[Session Log]]
 
 > [!important] For Claude on any device
 > Read this **first**. At the end of each session, **overwrite** it (history goes in [[Session Log]]).
+
+## Latest (2026-10-29)
+- **The rover pet only lives on the planet now.** Scroll past the story and it drives back onto
+  the planet and the story rover takes over again; no pet on other pages. The two-way protocol:
+  `rover-handoff` (StoryDirector → pet, now with a `home()` position getter) and `rover-home`
+  (pet → StoryDirector, when it has arrived). The trip is capped at 2.5 s (`MAX_TRIP_HOME`).
+- **"Skip to about ↓" button** on the story stage (`ScrollStory/SkipStory.jsx`, text in `data/story.js`).
+- **Admin login on a new laptop:** `server/.env` is not in git. Copy `server/.env.example`, fill
+  `SESSION_SECRET`, run `npm install`, then `npm run dev:server` + `npm run dev`, and open
+  `/admin.html`. Each laptop has its own `server/storage/`.
+- Not committed yet.
 
 ## State on 2026-10-24
 

@@ -227,6 +227,25 @@
   fill: var(--lavender);
 }
 
+/* ---- skip button (above the sol counter) ---- */
+.skip {
+  position: absolute;
+  right: max(24px, (100% - 1080px) / 2);
+  bottom: 96px;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.4s,
+    visibility 0s 0.4s;
+}
+
+/* hidden on the intro, which has its own "Learn more" button */
+.skip.shown {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.4s;
+}
+
 /* ---- phones: headline on top, rover in the middle, a one-line log at the bottom ---- */
 @media (max-width: 800px) {
   .story {
@@ -288,6 +307,12 @@
 
   .solCounter {
     display: none;
+  }
+
+  /* above the one-line log */
+  .skip {
+    right: 12px;
+    bottom: 84px;
   }
 }
 

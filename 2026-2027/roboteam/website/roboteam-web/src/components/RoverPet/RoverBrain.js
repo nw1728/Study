@@ -17,6 +17,8 @@ const TURN_RATE = 0.08 // radians per frame at full speed
 const TURN_IN_PLACE = 0.035 // like real Mars rovers, it can slowly turn on the spot
 const ARRIVE_DISTANCE = 6
 const WAYPOINT_DISTANCE = 20 // px; close enough to a corner of the route to head for the next one
+const HOME_DISTANCE = 16 // px; close enough to the story rover to count as back on the planet
+const NOTHING_SOLID = { hits: () => false } // driving home, it goes straight over text
 
 // obstacles
 const RADIUS = 14 // the rover's size for collisions
@@ -49,6 +51,7 @@ export default class RoverBrain {
     this.speed = 0
     this.mouse = null
     this.target = null // set by a click
+    this.home = null // set while driving back to the planet in the scroll story
     this.route = [] // points to drive through to reach the target, planned around text
     this.reachable = true
     this.routeVersion = -1
@@ -92,7 +95,18 @@ export default class RoverBrain {
     this.target = null
   }
 
+  // head back to the story rover's spot on the planet; called every frame, as the planet scrolls
+  goHome(x, y) {
+    this.home = { x, y }
+    this.target = null
+  }
+
+  stayOut() {
+    this.home = null
+  }
+
   onClick(x, y, now) {
+    if (this.home) return // on its way home: clicks don't call it back
     this.target = { x, y }
     this.routeVersion = -1 // plan a new route
     this.closestSoFar = Infinity
@@ -103,6 +117,7 @@ export default class RoverBrain {
 
   // Called every frame. Returns its speed and whether it just arrived at a click.
   update(now, obstacles) {
+    if (this.home) return this.driveHome()
     let arrived = false
     if (this.target && this.routeVersion !== obstacles.version) this.planRoute(obstacles)
     const goal = this.pickGoal(now)
@@ -135,6 +150,12 @@ export default class RoverBrain {
     }
 
     return { speed: this.speed, arrived }
+  }
+
+  driveHome() {
+    const dist = Math.hypot(this.home.x - this.x, this.home.y - this.y)
+    this.drive(this.home, dist, MAX_SPEED, NOTHING_SOLID)
+    return { speed: this.speed, arrived: false, atHome: dist < HOME_DISTANCE }
   }
 
   planRoute(obstacles) {

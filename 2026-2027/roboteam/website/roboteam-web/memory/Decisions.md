@@ -1,7 +1,7 @@
 ---
 title: Decisions
 tags: [roboteam-web, decisions]
-updated: 2026-10-24
+updated: 2026-10-29
 ---
 
 # Decisions (and why)
@@ -30,6 +30,8 @@ Back to [[00 Index]]. Newest at the bottom of each section. Don't reverse these 
 - **It does not follow the cursor tightly.** **Click** and it drives there; otherwise it wanders to stay near the cursor. It has moods (happy, sad, dance, curious, sleepy, lonely) like a pet.
 - **It drives like a car** (heading, steering, braking, tilts with direction). **Text is solid:** it plans a route around words (grid + A*) and gets **sad when stuck** or when you click on text.
 - **Mouse devices only;** off for reduced motion.
+- **It only lives on the planet** (Ethan, 2026-10-29). It appears when the story hands over, and once the stage scrolls away (bottom edge above 80% of the screen) it drives back to the story rover, fades, and the story rover reappears. Scroll back up and it comes out again. **No pet on other pages** (no planet there). Ethan wanted it to belong to the Mars scene instead of wandering the whole site.
+- **A "Skip to about ↓" button on the story stage** (Ethan, 2026-10-29), bottom right above the sol counter (above the log on phones). Hidden during the intro, which already has "Learn more". So nobody has to scroll through the whole story to reach the facts. Text and target in `data/story.js` (`skipStory`).
 
 ## Admin (planned, on hold)
 - **Login only via Google** (team domain is Google Workspace); **no password login at all**.

@@ -6,6 +6,7 @@ import StoryIntro from './StoryIntro.jsx'
 import PhaseText from './PhaseText.jsx'
 import MissionLog from './MissionLog.jsx'
 import SolCounter from './SolCounter.jsx'
+import SkipStory from './SkipStory.jsx'
 import Stars from '../../components/Stars/Stars.jsx'
 import StoryScene from './rover/StoryScene.jsx'
 import styles from './ScrollStory.module.css'
@@ -54,6 +55,7 @@ export default function ScrollStory() {
         </div>
         <MissionLog count={reducedMotion ? missionLog.length : logCount} />
         <SolCounter count={logCount} />
+        {!reducedMotion && <SkipStory shown={phase !== -1} />}
       </div>
       {reducedMotion && (
         <div className={`wrap ${styles.staticList}`}>

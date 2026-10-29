@@ -51,6 +51,9 @@ export const missionLog = [
   },
 ]
 
+// The button on the story stage that jumps past the story, for visitors who want the facts.
+export const skipStory = { label: 'Skip to about', href: '#about' }
+
 // Which phase is showing at this progress; -1 means the intro.
 export const phaseAt = (progress) => phases.findLastIndex((phase) => progress >= phase.start)
 
