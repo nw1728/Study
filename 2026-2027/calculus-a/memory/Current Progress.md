@@ -90,14 +90,31 @@ Di luar cetakan sekarang (jangan dikejar): fraksi parsial (Nov24 #4b), garis sej
 Ethan flu parah. Ujian **Kamis 5 Nov 08:45**. Dia ~90% bisa di kertas Nov 2025.
 **Hitungan yang dikatakan ke Ethan:** slot identik Nov 2025 (2, 6, 7, 8, 9, 11) = 24 poin ≥ garis lulus 23; slot beda (1, 3, 4, 5, 10) = 21 poin bonus. Risiko utama: kurang tidur + baris terakhir bocor.
 
-### ▶️ Rabu 4 Nov
+### 🙋 Penilaian diri Ethan atas resit Feb 2026 (Selasa 19:15)
+| Soal | Kata Ethan | Tindakan Rabu |
+|---|---|---|
+| 1 | bisa | ✅ |
+| 2 | bisa | ✅ (ingat 3 lapis = 3 faktor) |
+| 3 | 3a dijelaskan penuh | 3b dibantu |
+| 4 | bisa | ✅ |
+| 5 | "harusnya bisa" — tahu lingkaran berarti koefisien $x^2$ dan $y^2$ sama; minta cara cari $a$ dan jari-jari | dijelaskan Selasa malam (contoh lain); cukup cek cepat |
+| 6 | konsep ngerti (analogi solar) | ✅ — penjelasan limit dikirim Selasa malam |
+| 7 | agak ngerti | review |
+| 8 | dulu lancar, sekarang lupa | **review penuh** |
+| 9 | dulu lancar, lupa | review singkat |
+| 10 | lupa; ingat "misalkan $w=z^3$" | **review penuh** |
+| 11 | ingat, perlu review sedikit | review singkat |
+
+### ▶️ Rabu 4 Nov (direvisi 19:15)
 | Jam | Apa |
 |---|---|
-| 09:30–11:00 | **Feb dibantu, sisa:** 3b ($\int_0^{\pi^2}\sin\sqrt x\,dx$ = substitusi lalu parsial, jawaban $2\pi$) → 5 (polar lingkaran, $a=10$, $r=\sqrt6$) → 10 ($z^6-2z^3-3$) |
-| 11:30–13:00 | **Mini simulasi DINGIN Jul 2026: soal 1, 3, 4, 5, 10 saja**, sendirian. Kalau masih sakit berat: 3, 5, 10 saja |
-| 13:00 | Koreksi bareng |
-| 14:00–14:20 | PD orde 2 akar kembar ($y''-4y'+4y=0$ → $y=(1-2x)e^{2x}$) |
-| 15:00–16:00 | Kartu resep satu halaman |
+| 09:30–10:00 | Feb 3b dibantu ($\int_0^{\pi^2}\sin\sqrt x\,dx$, substitusi lalu parsial, $=2\pi$) |
+| 10:00–11:30 | **Review cepat Feb 8 → 10 → 9 → 11 → 7** (resep + soal Feb-nya, ~15–20 menit per soal) |
+| 11:30–12:30 | Makan, istirahat |
+| 12:30–15:30 | **Simulasi DINGIN resit Jul 2026, penuh 11 soal** (kalau sakit berat: 2 jam, soal yang paling ragu dulu) |
+| 15:30–16:15 | Koreksi bareng |
+| 16:15–16:35 | PD orde 2 akar kembar ($y''-4y'+4y=0$ → $y=(1-2x)e^{2x}$) |
+| 16:45–17:45 | Kartu resep satu halaman |
 | ≤ 21:30 | Tidur |
 
 **Kamis:** bangun 06:45, baca kartu resep sekali, tidak ada soal baru.
