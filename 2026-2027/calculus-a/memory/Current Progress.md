@@ -152,7 +152,8 @@ Protokol ke Ethan: tiap rumus ditandai **📄 LEMBAR** atau **🧠 HAFAL**.
 | Halaman | Link |
 |---|---|
 | 📝 Sample exam interaktif (status per soal, toggle 5 EC ON) | https://claude.ai/artifact/LApfMvRbq2vNa8KCjStbha |
-| 🗓️ Roadmap 9 hari | https://claude.ai/artifact/JbWyN4VqhEpptjK3sjtxxs |
+| 🚚 **Supir Lintas Kalkulus** — roadmap 2 hari terakhir (Bandung → Prabumulih), centang per halte + skor simulasi Feb | https://claude.ai/artifact/MPo1SoUGmConNAqJ8aayx6 · lokal `html-visualization/roadmap-supir-lintas.html` |
+| 🗓️ Roadmap 9 hari (lama) | https://claude.ai/artifact/JbWyN4VqhEpptjK3sjtxxs |
 | 📈 Turunan visual | https://claude.ai/artifact/91iXAEPTaZL93ME9cZJBSU |
 | 🔵 Unit circle | https://claude.ai/artifact/VL1xCLnf4rfz58ezkdLZeG |
 
