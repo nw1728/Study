@@ -1,7 +1,7 @@
 ---
 title: Calculus A — Memory Index
 tags: [calculus-a, index]
-updated: 2026-10-28
+updated: 2026-11-03
 ---
 
 # 📚 Calculus A — Memory Index
@@ -14,7 +14,8 @@ updated: 2026-10-28
 
 ## 🧭 Start here
 
-> [!danger] 🚨 MODE UJIAN — Rabu **4 November 2026**, 08:45–11:45
+> [!danger] 🚨 MODE UJIAN — **Kamis 5 November 2026** (dikoreksi 3 Nov; jam: cek Osiris)
+> 📁 Enam kertas ujian kini di `../sample_exam/` — peta per slot di [[Current Progress]].
 > Jalur **`202001171` (5 EC)** · soal **1–11** · **45 poin** · nilai `1 + poin × 1/5` · **lulus di 23 poin**
 > Posisi **28 Okt malam: 41/45 poin dikerjakan, 32 terverifikasi dingin.** Sisa: soal 4 (belum dicoba) + 4 pelebaran rasa-resit.
 > 🗺️ **Ujian punya cetakan tetap** — 3 kertas dibandingkan slot per slot, topik tiap slot sama. Detail di [[Current Progress]].

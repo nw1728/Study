@@ -1,12 +1,21 @@
 ---
 title: Session Log
 tags: [calculus-a, sessions]
-updated: 2026-10-28
+updated: 2026-11-03
 ---
 
 # 🗓️ Session Log
 
 Back to [[00 Index]] · Newest first
+
+## 2026-11-03 — H-2: tanggal ujian dikoreksi, enam kertas ujian dikumpulkan (Claude Code, cloud)
+
+- **Ujian ternyata Kamis 5 Nov, bukan Rabu 4 Nov** (dari Ethan). Catatan diperbaiki. Sisa: Selasa + Rabu.
+- Tidak ada catatan sesi Kalkulus 29 Okt–2 Nov; status daftar Kamis 29 Okt belum diketahui.
+- Ethan mengunggah **lima kertas**: resit Feb 2026 dan Jul 2026 (dengan kunci), plus **tiga kertas lama** Nov 2024, Mar 2025, Jul 2025 (tanpa kunci). Semua disalin ke `sample_exam/`, sehingga laptop lain juga punya.
+- **Kunci Feb/Jul 2026 dicek ulang dengan sympy: semuanya benar.**
+- **Temuan:** tiga kertas lama memakai **cetakan lama** (kalkulator, tanpa lembar rumus, tanpa slot 6 dan 8). Tiga kertas terbaru tetap peramal utama; kertas lama dipetakan per slot sebagai latihan tambahan (tabel di [[Current Progress]]). Celah baru yang ketahuan: **PD orde 2 kasus akar kembar** (Nov24 #11) belum pernah dilatih.
+- Rencana dua hari ditulis di [[Current Progress]]: soal 4 (bidang singgung dulu) → simulasi Feb 2026 hari ini → tambal pakai Jul 2026 + akar kembar + kartu resep besok.
 
 ## 2026-10-28 — Hari 2 mode ujian: 23 → 41 poin, dan ujiannya ternyata punya cetakan tetap (Claude Code)
 

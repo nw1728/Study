@@ -1,15 +1,15 @@
 ---
 title: Current Progress
 tags: [calculus-a, progress]
-updated: 2026-10-28
-last_device: 1770np
+updated: 2026-11-03
+last_device: claude-code-cloud
 ---
 
 # 📍 Current Progress
 
 Back to [[00 Index]]
 
-> [!danger] 🚨 MODE UJIAN — Rabu 4 November 2026, 08:45–11:45
+> [!danger] 🚨 MODE UJIAN — **Kamis 5 November 2026** (dikoreksi Ethan 3 Nov — bukan Rabu 4 Nov). Jam: cek Osiris (kertas lama 08:45–11:45)
 > **Jalur `202001171` — 5 EC, dikonfirmasi dari kertas ujian DAN dari Osiris (28 Okt).**
 > Soal **1–11** · total **45 poin** · nilai `1 + poin × 1/5` · **lulus (5,5) = 23 poin**
 
@@ -47,8 +47,25 @@ Ethan mengirim 2 resit (Feb 2026, Jul 2026) pada 28 Okt. Dibandingkan slot per s
 | 10 | akar kompleks (Nov: pangkat 4 · resit: **pangkat 6**, \(z^6-az^3-b=0\)) |
 | 11 | PD orde 2 + nilai awal — **identik** |
 
-📁 Kedua resit ada di `~/.claude/uploads/.../` (`4ea36ffa-022026resit.pdf`, `50366621-072026resit.pdf`).
-🔒 **JANGAN dibahas isinya sampai Selasa 3 Nov** — itu alat simulasi, bukan bahan ajar.
+📁 **Semua kertas kini ada di repo, folder `sample_exam/`** (diunggah 3 Nov):
+`112025exam_with_solutions.pdf` · `2026-02_resit_with_solutions.pdf` · `2026-07_resit_with_solutions.pdf` (soal di **hal. 1–2**, kunci mulai **hal. 3** — jangan dibuka saat simulasi) · `2024-11_exam.pdf` · `2025-03_exam.pdf` · `2025-07_exam.pdf` (tanpa kunci).
+✅ Kunci Feb 2026 dan Jul 2026 **dicek ulang dengan sympy, semuanya benar**.
+
+### 🧓 Tiga kertas lama (Nov 2024, Mar 2025, Jul 2025) = CETAKAN LAMA
+Format lain: kalkulator boleh, tanpa lembar rumus, urutan soal lain, tidak ada slot 6 (limit multivariabel) maupun slot 8 (titik kritis 2 variabel). **Peramal utama tetap tiga kertas terbaru.** Kertas lama hanya dipakai sebagai **latihan tambahan per slot**:
+
+| Slot sekarang | Soal lama yang cocok | Jawaban (dicek sympy) |
+|---|---|---|
+| 1 limit, kali sekawan | Nov24 #1 \(\lim(\sqrt{x^2+x}-\sqrt{x^2-x})\) · Jul25 #3 \(\frac{\sqrt{ay+a^2}-a}{y}\) | \(1\) · \(\tfrac12\) |
+| 3 substitusi / tak wajar | Nov24 #4a \(\int\frac{\cos(\sqrt t+3)}{\sqrt t}dt\) · Jul25 #4b \(\int_0^1\frac{dx}{\sqrt{1-x}}\) (tak wajar tipe II) | \(2\sin(\sqrt t+3)+C\) · \(2\) |
+| 4 cross product | Nov24 #5 \(\mathbf u\times\mathbf v\), \(\mathbf u=\tfrac32\mathbf i-\mathbf j+\tfrac12\mathbf k,\ \mathbf v=\mathbf i+\mathbf j+2\mathbf k\) | \(\langle-\tfrac52,-\tfrac52,\tfrac52\rangle\), panjang \(\tfrac{5\sqrt3}2\), arah \(\tfrac1{\sqrt3}\langle-1,-1,1\rangle\) |
+| 5 polar | Nov24 #6 \(r^2=4r\sin\theta\) | \(x^2+(y-2)^2=4\), lingkaran pusat \((0,2)\) jari-jari 2 |
+| 7 rantai multivariabel | Nov24 #8 \(\partial z/\partial u\) di \(u=0,v=1\) | \(2\) |
+| 9 PD linear orde 1 | Nov24 #9 \(ty'+2y=t^3,\ y(2)=1\) | \(y=\frac{t^3}{5}-\frac{12}{5t^2}\) |
+| 10 akar kompleks | Nov24 #10 \(x^4+4x^2+16\) · Jul25 #10 \(x^4-5x^2+25\) | \(\pm1\pm i\sqrt3\) · \(\pm\tfrac{\sqrt{15}}2\pm\tfrac{\sqrt5}2i\) |
+| 11 PD orde 2 | Nov24 #11 \(y''-4y'+4y=0\) — **kasus AKAR KEMBAR, belum pernah dilatih** · Jul25 #11 \(y''+12y=0\) | \(y=(1-2x)e^{2x}\) · \(y=\frac{\sqrt3}{6}\sin(2\sqrt3x)\) |
+
+Di luar cetakan sekarang (jangan dikejar): fraksi parsial (Nov24 #4b), garis sejajar/bersilang, panjang kurva, kecepatan, turunan berarah, PD tak homogen (Mar25 #10).
 
 ## 📊 Papan skor per soal
 
@@ -67,7 +84,22 @@ Ethan mengirim 2 resit (Feb 2026, Jul 2026) pada 28 Okt. Dibandingkan slot per s
 | 10 | 5 | 🔒 dingin ✅ | \(x=\tfrac{\pm\sqrt7\pm i\sqrt{21}}{2}\) |
 | 11 | 4 | 🔒 dingin ✅ | \(y=e^{-2x}(2\cos3x+\tfrac13\sin3x)\) |
 
-## ▶️ Lanjutkan dengan (Kamis 29 Okt — HARI TERAKHIR MATERI BARU)
+## ▶️ Rencana baru — 2 hari tersisa (dibuat Selasa 3 Nov)
+
+> [!question] Belum tercatat: apakah daftar Kamis 29 Okt di bawah sudah dikerjakan? Tidak ada catatan sesi 29 Okt–2 Nov. Tanyakan ke Ethan.
+
+**Selasa 3 Nov**
+1. **Soal 4** — prioritas **bidang singgung** (ini yang keluar di Feb DAN Jul 2026), lalu cross product.
+2. **Simulasi resit Feb 2026**: 3 jam, hanya hal. 1–2, lembar rumus saja. Koreksi pakai kunci hal. 3–10.
+
+**Rabu 4 Nov**
+3. Tambal slot yang bocor di simulasi, pakai soal **Jul 2026** pada slot yang sama (bukan simulasi penuh kedua kecuali tenaganya ada).
+4. Drill pendek dari kertas lama: **PD orde 2 akar kembar** (Nov24 #11) — kasus ke-3 dari persamaan karakteristik.
+5. Kartu resep satu halaman. Tidur cukup.
+
+**Kamis 5 Nov — UJIAN.**
+
+### (Daftar lama Kamis 29 Okt — status belum diketahui)
 
 1. **Soal 4** — selesaikan latihan A (cross product: \(Q_1(1,1,0), Q_2(2,0,1), Q_3(0,2,3)\)) dan **latihan B** (bidang singgung: \(f=x^2+3y^2\) di \((1,1,4)\), jawaban \(z=4+2(x-1)+6(y-1)\)).
 2. **Rep bersih soal 7 dan soal 8(a)** — 15 menit.
@@ -126,6 +158,7 @@ Protokol ke Ethan: tiap rumus ditandai **📄 LEMBAR** atau **🧠 HAFAL**.
 
 ## ❓ Terbuka
 
+- Apakah item Kamis 29 Okt sudah dikerjakan (soal 4, rep 7 & 8a, pelebaran, kartu resep)?
 - **Slide kuliah 6+ belum ada** di `lectures_slides/` (baru 1–5). Soal 6,7,8 berasal dari sana.
 - Soal 4 belum pernah dicoba Ethan sama sekali.
 
