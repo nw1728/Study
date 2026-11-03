@@ -84,6 +84,15 @@ Di luar cetakan sekarang (jangan dikejar): fraksi parsial (Nov24 #4b), garis sej
 | 10 | 5 | 🔒 dingin ✅ | \(x=\tfrac{\pm\sqrt7\pm i\sqrt{21}}{2}\) |
 | 11 | 4 | 🔒 dingin ✅ | \(y=e^{-2x}(2\cos3x+\tfrac13\sin3x)\) |
 
+## 🤒 Rencana versi FLU (Selasa 3 Nov sore) — menggantikan rencana di bawahnya
+
+Ethan flu parah, tidur maks. 21:00. Ujian **Kamis 5 Nov 08:45**. Dia bilang sudah ~90% bisa di kertas Nov 2025.
+**Hitungan yang dikatakan ke Ethan:** slot yang identik dengan Nov 2025 (2, 6, 7, 8, 9, 11) = 24 poin ≥ garis lulus 23. Slot yang beda (1, 3, 4, 5, 10) = 21 poin tambahan. Risiko utama bukan materi, melainkan kurang tidur + baris terakhir bocor.
+
+- **Selasa malam:** Feb dibantu, **hanya slot yang beda** — 1 ✅, 2 ✅ (b lupa ×f′), 3 (sedang), 5, 10. Stop 20:00, tidur 21:00.
+- **Rabu:** mini simulasi dingin Jul — soal 1, 3, 4, 5, 10 saja (~1,5 jam) → koreksi → akar kembar (20 menit) → kartu resep → tidur ≤ 21:30.
+- **Kamis:** bangun 06:45, baca kartu resep sekali, tidak ada soal baru.
+
 ## ▶️ Rencana baru — 2 hari tersisa (dibuat Selasa 3 Nov)
 
 > [!question] Belum tercatat: apakah daftar Kamis 29 Okt di bawah sudah dikerjakan? Tidak ada catatan sesi 29 Okt–2 Nov. Tanyakan ke Ethan.
