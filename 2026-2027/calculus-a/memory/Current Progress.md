@@ -84,14 +84,29 @@ Di luar cetakan sekarang (jangan dikejar): fraksi parsial (Nov24 #4b), garis sej
 | 10 | 5 | 🔒 dingin ✅ | \(x=\tfrac{\pm\sqrt7\pm i\sqrt{21}}{2}\) |
 | 11 | 4 | 🔒 dingin ✅ | \(y=e^{-2x}(2\cos3x+\tfrac13\sin3x)\) |
 
-## 🤒 Rencana versi FLU (Selasa 3 Nov sore) — menggantikan rencana di bawahnya
+## 🛑 BERHENTI Selasa 3 Nov 19:07 (flu) — LANJUTKAN DARI SINI
 
-Ethan flu parah, tidur maks. 21:00. Ujian **Kamis 5 Nov 08:45**. Dia bilang sudah ~90% bisa di kertas Nov 2025.
-**Hitungan yang dikatakan ke Ethan:** slot yang identik dengan Nov 2025 (2, 6, 7, 8, 9, 11) = 24 poin ≥ garis lulus 23. Slot yang beda (1, 3, 4, 5, 10) = 21 poin tambahan. Risiko utama bukan materi, melainkan kurang tidur + baris terakhir bocor.
+**Hari ini (Selasa):** soal 4 bidang singgung tuntas (4.1–4.4, 4.4 dingin benar) · Feb #1 ✅ · Feb #2a ✅, #2b ❌ (lupa ×f′) · Feb #3a dijelaskan sampai akhir (diverges), Ethan paham kenapa batas diganti saat tidak kembali ke $x$.
+Ethan flu parah. Ujian **Kamis 5 Nov 08:45**. Dia ~90% bisa di kertas Nov 2025.
+**Hitungan yang dikatakan ke Ethan:** slot identik Nov 2025 (2, 6, 7, 8, 9, 11) = 24 poin ≥ garis lulus 23; slot beda (1, 3, 4, 5, 10) = 21 poin bonus. Risiko utama: kurang tidur + baris terakhir bocor.
 
-- **Selasa malam:** Feb dibantu, **hanya slot yang beda** — 1 ✅, 2 ✅ (b lupa ×f′), 3 (sedang), 5, 10. Stop 20:00, tidur 21:00.
-- **Rabu:** mini simulasi dingin Jul — soal 1, 3, 4, 5, 10 saja (~1,5 jam) → koreksi → akar kembar (20 menit) → kartu resep → tidur ≤ 21:30.
-- **Kamis:** bangun 06:45, baca kartu resep sekali, tidak ada soal baru.
+### ▶️ Rabu 4 Nov
+| Jam | Apa |
+|---|---|
+| 09:30–11:00 | **Feb dibantu, sisa:** 3b ($\int_0^{\pi^2}\sin\sqrt x\,dx$ = substitusi lalu parsial, jawaban $2\pi$) → 5 (polar lingkaran, $a=10$, $r=\sqrt6$) → 10 ($z^6-2z^3-3$) |
+| 11:30–13:00 | **Mini simulasi DINGIN Jul 2026: soal 1, 3, 4, 5, 10 saja**, sendirian. Kalau masih sakit berat: 3, 5, 10 saja |
+| 13:00 | Koreksi bareng |
+| 14:00–14:20 | PD orde 2 akar kembar ($y''-4y'+4y=0$ → $y=(1-2x)e^{2x}$) |
+| 15:00–16:00 | Kartu resep satu halaman |
+| ≤ 21:30 | Tidur |
+
+**Kamis:** bangun 06:45, baca kartu resep sekali, tidak ada soal baru.
+
+### ⚠️ Pola hari ini
+- **$(x_0-x)$ bukan $(x-x_0)$** di bidang singgung, 2×, lolos cek titik → cek koefisien = $f_x, f_y$.
+- **Lupa ekor dalam** di $\ln(g(f(x)))$: 3 lapis = 3 faktor ("tiap gerbang tol bayar sekali").
+- **Hanya menulis jawaban akhir** (soal 1, 2) → ingatkan: tanpa jalan = 0 poin.
+- Yang berhasil: **trik angka 7** untuk turunan parsial, analogi pizza/balapan truk untuk $\frac{\text{angka}}x\to0$, "huruf dan batas dari jalan yang sama".
 
 ## ▶️ Rencana baru — 2 hari tersisa (dibuat Selasa 3 Nov)
 

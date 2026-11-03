@@ -15,7 +15,10 @@ Back to [[00 Index]] · Newest first
 - Ethan mengunggah **lima kertas**: resit Feb 2026 dan Jul 2026 (dengan kunci), plus **tiga kertas lama** Nov 2024, Mar 2025, Jul 2025 (tanpa kunci). Semua disalin ke `sample_exam/`, sehingga laptop lain juga punya.
 - **Kunci Feb/Jul 2026 dicek ulang dengan sympy: semuanya benar.**
 - **Temuan:** tiga kertas lama memakai **cetakan lama** (kalkulator, tanpa lembar rumus, tanpa slot 6 dan 8). Tiga kertas terbaru tetap peramal utama; kertas lama dipetakan per slot sebagai latihan tambahan (tabel di [[Current Progress]]). Celah baru yang ketahuan: **PD orde 2 kasus akar kembar** (Nov24 #11) belum pernah dilatih.
-- Rencana dua hari ditulis di [[Current Progress]]: soal 4 (bidang singgung dulu) → simulasi Feb 2026 hari ini → tambal pakai Jul 2026 + akar kembar + kartu resep besok.
+- **Soal 4 (bidang singgung), 4.1–4.4.** Ethan bertanya *"kenapa harus keluar 4?"* → dijelaskan titik = (x, y, tinggi) dan cek titik menangkap salah hitung (mis. $e^0=0$). Kemacetan utama: membekukan huruf. **Trik angka 7** (ganti huruf beku dengan 7, turunkan, kembalikan) yang akhirnya membuka. 4.2 dan 4.3 turunan benar, tapi jawaban akhir tepat negatif → diagnosis awal (pindah ruas) **salah**, diagnosis benar: menulis $(x_0-x)$. 4.4 dingin, benar percobaan pertama.
+- Atas permintaan Ethan dibuat halaman **[Supir Lintas Kalkulus](https://claude.ai/artifact/MPo1SoUGmConNAqJ8aayx6)**: roadmap Bandung → Mesuji → Palembang → Gelumbang → Prabumulih, satu halte = satu soal, jam target, skor simulasi.
+- Atas permintaan Ethan, **resit Feb dikerjakan bareng** (bukan simulasi), dan **Jul jadi simulasi dingin**. Feb #1 benar (jalan tidak ditulis), #2a benar, #2b lupa ×f′. #3a dijelaskan penuh; pertanyaan bagus: *"kok integral normal batasnya tidak diganti?"* → dua jalan (ganti batas / kembali ke $x$), dilarang mencampur.
+- **Ethan flu parah**, berhenti 19:07, tidur 21:00. Diberi hitungan jujur: slot identik Nov 2025 = 24 poin ≥ 23. Rencana Rabu di [[Current Progress]].
 
 ## 2026-10-28 — Hari 2 mode ujian: 23 → 41 poin, dan ujiannya ternyata punya cetakan tetap (Claude Code)
 
