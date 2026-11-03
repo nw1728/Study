@@ -16,7 +16,7 @@ Source for entries before 2026-09-14 (afternoon): the two original handovers. An
 | 4.1 $f=x^2+3y^2$ di $(1,1,4)$ | $z=2x+6y-4$ | dikerjakan bareng (worked) | 📘 contoh |
 | 4.2 $f=\sqrt{x+e^{3y}}$ di $(8,0,3)$ | $f_x=\frac16,\ f_y=\frac12$, $z=\frac x6+\frac y2+\frac53$ | turunan ✅ (setelah koreksi $\blacksquare'$), akhir $z=\frac{13}3-\frac x6-\frac y2$ ❌ | ⚠️ tanda |
 | 4.3 $f=\ln(x+2y)$ di $(1,0,0)$ | $f_x=1,\ f_y=2$, $z=x+2y-1$ | $z=1-x-2y$ ❌ | ⚠️ tanda |
-| 4.4 $f=\sqrt{x^2+5y}$ di $(2,0,2)$ (rep bersih) | $z=x+\frac54y$ | — | ⬜ |
+| 4.4 $f=\sqrt{x^2+5y}$ di $(2,0,2)$ (rep bersih) | $z=x+\frac54y$ | $z=x+\frac54y$ ✅ dingin, percobaan pertama | 🔒 ✅ |
 
 ## Lecture 2
 ### Limit definition
