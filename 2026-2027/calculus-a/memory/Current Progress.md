@@ -90,10 +90,10 @@ Di luar cetakan sekarang (jangan dikejar): fraksi parsial (Nov24 #4b), garis sej
 
 **Selasa 3 Nov**
 1. **Soal 4** — prioritas **bidang singgung** (ini yang keluar di Feb DAN Jul 2026), lalu cross product.
-2. **Simulasi resit Feb 2026**: 3 jam, hanya hal. 1–2, lembar rumus saja. Koreksi pakai kunci hal. 3–10.
+2. ~~Simulasi dingin Feb 2026~~ → **diubah atas permintaan Ethan (16:20): Feb 2026 dikerjakan BARENG** (dia coba dulu, Claude bantu di langkah yang macet). Poin dicatat = yang dia dapat sendiri.
 
 **Rabu 4 Nov**
-3. Tambal slot yang bocor di simulasi, pakai soal **Jul 2026** pada slot yang sama (bukan simulasi penuh kedua kecuali tenaganya ada).
+3. **Jul 2026 = simulasi DINGIN** 09:00–12:00 (sendirian, hal. 1–2, lembar rumus saja), koreksi 12:00–12:45. Ini satu-satunya ukuran dingin sebelum ujian — jangan dibantu.
 4. Drill pendek dari kertas lama: **PD orde 2 akar kembar** (Nov24 #11) — kasus ke-3 dari persamaan karakteristik.
 5. Kartu resep satu halaman. Tidur cukup.
 

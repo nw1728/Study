@@ -154,7 +154,7 @@ input:focus-visible, button:focus-visible { outline: 3px solid var(--marker); ou
     <div class="cab-grid">
       <div class="gauge"><span class="lbl">Posisi truk</span><span class="val" id="g-pos">Bandung</span><span class="sub" id="g-pos-sub">belum berangkat</span></div>
       <div class="gauge"><span class="lbl">Halte dilewati</span><span class="val" id="g-stops">0 / 0</span><span class="sub">centang tiap halte yang beres</span></div>
-      <div class="gauge"><span class="lbl">Skor simulasi Feb 2026</span><span class="val" id="g-score">0 / 45</span><span class="sub" id="g-score-sub">isi poin di tiap soal</span></div>
+      <div class="gauge"><span class="lbl">Skor Feb 2026 (dibantu)</span><span class="val" id="g-score">0 / 45</span><span class="sub" id="g-score-sub">isi poin di tiap soal</span></div>
     </div>
     <div>
       <div class="fuel" aria-hidden="true"><i id="fuel-bar"></i><b style="left: calc(23 / 45 * 100%)"></b></div>
@@ -216,14 +216,14 @@ const ROUTE = [
     hint: "Tulis langsung z = z₀ + f_x(x − x₀) + f_y(y − y₀). Cek 2 detik: depan x = f_x, depan y = f_y." },
   { type: "warn", sym: "!", title: "Rawan: baris terakhir bocor", text: "9 kejadian. Obat 3 detik: baca baris terakhir, bandingkan dengan baris di atasnya." },
   { id: "mrk", place: "Merak", region: "Banten · pelabuhan", km: "PREP", eta: "16:25–16:40",
-    task: "Siapkan simulasi resit Feb 2026",
+    task: "Buka resit Feb 2026: dikerjakan bareng, soal per soal",
     math: "sample_exam/2026-02_resit_with_solutions.pdf  → hal. 1–2 saja",
-    hint: "Lembar rumus boleh. Catatan tidak boleh. Ke toilet, ambil minum, HP jauh. Kunci (hal. 3+) jangan dibuka." },
+    hint: "Mode bantu: kamu coba dulu, Claude bantu di langkah yang bikin bingung. Kunci (hal. 3+) tetap jangan dibuka." },
 
-  { type: "band", title: "Kapal ferry · Selat Sunda · 16:40", text: "Timer 3 jam mulai, selesai 19:40. Dari sini sampai Palembang = 11 soal. Jam di tiap halte cuma patokan: kalau macet di satu soal lebih dari 20 menit, lompati dan balik lagi nanti." },
+  { type: "band", title: "Kapal ferry · Selat Sunda · 16:40", text: "Dari sini sampai Palembang = 11 soal resit Feb, dikerjakan bareng. Tiap soal: terjemahkan maunya apa, lihat resepnya, kamu kerjakan, Claude cek. Jam di tiap halte cuma patokan." },
 
-  { type: "leg", day: "SELASA 3 NOV · 16:40–19:40", title: "Tol Trans-Sumatera: 11 soal resit Feb 2026",
-    note: "Satu halte = satu soal. Petunjuk di sini cuma nama resep, bukan jawaban." },
+  { type: "leg", day: "SELASA 3 NOV · 16:40–19:40", title: "Tol Trans-Sumatera: resit Feb 2026, dikerjakan bareng",
+    note: "Satu halte = satu soal. Poin = yang kamu dapat sendiri, sebelum dikasih tahu jawabannya." },
   { id: "s1", place: "Bakauheni", region: "Lampung Selatan", km: "SOAL 1", max: 4, eta: "16:55",
     task: "Limit ∞ − ∞", hint: "Resep: kali sekawan, lalu bagi atas dan bawah dengan x." },
   { id: "s2", place: "Kalianda", region: "Lampung Selatan", km: "SOAL 2", max: 4, eta: "17:10",
@@ -248,23 +248,23 @@ const ROUTE = [
   { id: "s11", place: "Jembatan Ampera", region: "Palembang", km: "SOAL 11", max: 4, eta: "19:40",
     task: "PD orde 2 + nilai awal", hint: "Persamaan karakteristik. Akar real beda → c₁e^(r₁x) + c₂e^(r₂x)." },
 
-  { type: "band", title: "Nginep di Palembang · 19:40", text: "19:40–20:15 makan malam pempek. 20:15–21:15 koreksi bareng Claude pakai kunci hal. 3–10, isi poin tiap soal. Stop jam 21:15. Tidur sebelum 23:00." },
+  { type: "band", title: "Nginep di Palembang · 19:40", text: "Makan malam pempek sekitar 19:40. Kalau 11 soal belum habis, lanjut sampai 21:30, sisanya pindah ke besok. Tidur sebelum 23:00." },
 
   { type: "leg", day: "RABU 4 NOV", title: "Palembang → Gelumbang: tambal ban",
     note: "Tidak ada materi baru. Cuma menambal yang bocor di simulasi." },
-  { id: "plg", place: "Benteng Kuto Besak", region: "Palembang", km: "TAMBAL", eta: "09:00–11:30",
-    task: "Tambal slot yang bocor pakai resit Jul 2026",
+  { id: "plg", place: "Benteng Kuto Besak", region: "Palembang", km: "TAMBAL", eta: "09:00–12:45",
+    task: "SIMULASI DINGIN resit Jul 2026: 3 jam, sendirian",
     math: "sample_exam/2026-07_resit_with_solutions.pdf",
-    hint: "Hanya nomor yang kurang dari penuh di simulasi. Slot yang sama, angka beda." },
-  { id: "p16", place: "Pasar 16 Ilir", region: "Palembang", km: "4 LAMA", eta: "11:30–12:00",
+    hint: "Hal. 1–2 saja, lembar rumus saja, tanpa chat dan tanpa catatan. 12:00–12:45 koreksi bareng Claude, lalu makan siang." },
+  { id: "p16", place: "Pasar 16 Ilir", region: "Palembang", km: "4 LAMA", eta: "13:30–14:00",
     task: "Soal 4 versi Nov 2025: bidang lewat 3 titik (cross product)",
     math: "Q₁(1,1,0), Q₂(2,0,1), Q₃(0,2,3)",
     hint: "Jaga-jaga kalau Kamis keluar versi lama. Dua panah dari Q₁, cross product = normal. Komponen j: minusnya." },
-  { id: "ktp", place: "Kertapati", region: "Palembang", km: "BARU", eta: "13:00–13:30",
+  { id: "ktp", place: "Kertapati", region: "Palembang", km: "BARU", eta: "14:00–14:30",
     task: "PD orde 2 kasus akar kembar",
     math: "y″ − 4y′ + 4y = 0,  y(0) = 1,  y′(0) = 0",
     hint: "Akar kembar r → y = (c₁ + c₂x)e^(rx). Kasus ke-3 yang belum pernah dilatih." },
-  { id: "glb", place: "Gelumbang", region: "Muara Enim", km: "KARTU", eta: "14:00–15:30",
+  { id: "glb", place: "Gelumbang", region: "Muara Enim", km: "KARTU", eta: "14:30–16:00",
     task: "Kartu resep satu halaman",
     hint: "Semua yang 🧠 HAFAL: rantai, hasil bagi, L'Hôpital, substitusi, parsial, polar, bidang singgung, μ, rumus ABC, 3 kasus karakteristik, e^(iθ)." },
   { id: "tdr", place: "Rest area", region: "sebelum Prabumulih", km: "TIDUR", eta: "≤ 22:30",
