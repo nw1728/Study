@@ -16,6 +16,10 @@ Source for entries before 2026-09-14 (afternoon): the two original handovers. An
 | 4.1 $f=x^2+3y^2$ di $(1,1,4)$ | $z=2x+6y-4$ | dikerjakan bareng (worked) | 📘 contoh |
 | 4.2 $f=\sqrt{x+e^{3y}}$ di $(8,0,3)$ | $f_x=\frac16,\ f_y=\frac12$, $z=\frac x6+\frac y2+\frac53$ | turunan ✅ (setelah koreksi $\blacksquare'$), akhir $z=\frac{13}3-\frac x6-\frac y2$ ❌ | ⚠️ tanda |
 | 4.3 $f=\ln(x+2y)$ di $(1,0,0)$ | $f_x=1,\ f_y=2$, $z=x+2y-1$ | $z=1-x-2y$ ❌ | ⚠️ tanda |
+| **Rabu 4 Nov siang — ulang Nov 2025 (pilihan Ethan setelah "reset")** | | | |
+| Nov25 #6 | tidak ada (0 vs 2) | ✅ — $\frac2{x+1}\to2$ tidak bocor lagi | ✅ 4/4 |
+| Nov25 #11 | $e^{-2x}(2\cos3x+\frac13\sin3x)$ | $r$, bentuk, $A=2$ ✅; Aturan Hasil Kali ditulis $u'v\cdot v'$ (KALI, harus PLUS) → $B=\frac14$ ❌; tulis $\beta$ untuk $B$ | ⚠️ ~3/4 |
+| Nov25 #9 | $\frac{x^3}6+\frac{11}{6x^3}$ | A, B ✅; $\mu Q=x^3\cdot x^2$ ditulis $\frac{x^5}5$ (salin dari contoh) ❌; hanya $C$ yang dibagi $\mu$ ❌; setelah koreksi $C=\frac{11}6$ ✅ | ⚠️ ~2/4 |
 | Feb26 #1 $\lim(\sqrt{x^2+4x}-x)$ | $2$ | $2$ ✅ (jalan belum ditulis; diberi model jawaban) | ✅ |
 | Feb26 #2a $\left(\frac{\sqrt f}{g}\right)'(1)$ | $2$ | $2$ ✅ | ✅ |
 | Feb26 #2b $(\ln g(f(x)))'(1)$ | $-2$ | $-1$ ❌ lupa $\times f'(1)$ (3 lapis = 3 faktor) | ⚠️ |
