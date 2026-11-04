@@ -84,6 +84,26 @@ Di luar cetakan sekarang (jangan dikejar): fraksi parsial (Nov24 #4b), garis sej
 | 10 | 5 | 🔒 dingin ✅ | \(x=\tfrac{\pm\sqrt7\pm i\sqrt{21}}{2}\) |
 | 11 | 4 | 🔒 dingin ✅ | \(y=e^{-2x}(2\cos3x+\tfrac13\sin3x)\) |
 
+## 🏁 MALAM SEBELUM UJIAN (Rabu 4 Nov, 21:00) — PARKIR
+
+**Ujian: Kamis 5 Nov 08:45.** Ethan flu tapi bertahan. Hari ini: reset siang → Nov 2025 slot 6–11 → Feb lagi → Jul (5, 8, 11, 9, 10, 2).
+
+| Slot | Status akhir |
+|---|---|
+| 1 | ✅ (Feb) |
+| 2 | ✅ Jul 4/4 — "3 lapis = 3 faktor" sudah masuk |
+| 3 | 3a ✅ dijelaskan · 3b tidak dilatih |
+| 4 | ✅ 4.1–4.4 |
+| 5 | ✅ Jul **dingin 4/4** |
+| 6 | ✅✅ (Nov25, Feb26) |
+| 7 | ✅✅ (Nov25, Feb26) |
+| 8 | (a) ✅ selalu · (b) bocor hitungan kecil |
+| 9 | ✅ Jul 4/4 (mesin 4 kotak) |
+| 10 | ✅ mesin 3 kotak (Jul: lupa $^{1/3}$ di baris akhir) |
+| 11 | 🟡 **Aturan Hasil Kali ditulis kali (2×)** → pakai rumus jadi $y'(0)=\alpha A+\beta B$ (kompleks) / $y'(0)=r_1c_1+r_2c_2$ (real) |
+
+**Kalau ada sesi setelah ujian:** tanyakan hasilnya dulu. Jangan langsung materi baru.
+
 ## 🛑 BERHENTI Selasa 3 Nov 19:07 (flu) — LANJUTKAN DARI SINI
 
 **Hari ini (Selasa):** soal 4 bidang singgung tuntas (4.1–4.4, 4.4 dingin benar) · Feb #1 ✅ · Feb #2a ✅, #2b ❌ (lupa ×f′) · Feb #3a dijelaskan sampai akhir (diverges), Ethan paham kenapa batas diganti saat tidak kembali ke $x$.

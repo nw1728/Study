@@ -23,6 +23,19 @@ Source for entries before 2026-09-14 (afternoon): the two original handovers. An
 | Nov25 #7 | $\partial z/\partial u=0,\ \partial z/\partial v=2$ | ✅ — trik 7 di semua turunan parsial; bingung di $x\sin 7$ ("sin harus jadi cos?") dan "x nempel ke sin?" → dijawab: lihat di mana huruf hidupnya (depan vs dalam kurung) | ✅ 4/4 |
 | Nov25 #8a | $(0,0),(1,1),(-1,-1)$ | ✅ setelah dibantu langkah 5–6 ($x=(x^3)^3=x^9$, faktorkan, jangan bagi) | ✅ 2/2 |
 | Nov25 #8b | min $-2$ di $(1,1)$ | $g$, $g'$, $y=1$, $g(1)=-2$ ✅; $g(\pm2)$ dihitung dengan $y^2$ bukan $y^4$ (13 dan −3, harus 25 dan 9) → "min di $(1,2)$" ❌ | ⚠️ ~1/3 |
+| **Rabu 4 Nov sore — resit Feb lagi (pilihan Ethan)** | | | |
+| Feb26 #6 | tidak ada (0 vs 2) | ✅ dengan kalimat yang menyebut angkanya | ✅ 4/4 |
+| Feb26 #7 | $4t^3+\frac{3\ln t}{t}$ | ✅ | ✅ 4/4 |
+| Feb26 #11 | $-\frac34e^x-\frac14e^{-3x}$ | $r=1,-3$ ✅; di $y'(0)$ ekor $-3$ jadi 0 ❌; lalu $c_1=c_2=-\frac12$ (hanya 1 persamaan) ❌ | ⚠️ ~3/4 |
+| Feb26 #9 | $\frac{\sin x+\pi^2}{x^2}$ | mesin 4 kotak ✅; $\int\cos=-\sin$ ❌ | ⚠️ ~3/4 |
+| Feb26 #5 | $a=10,\ r=\sqrt6$ | lengkapkan kuadrat: $x^2$ di dalam kurung, setengah dari $-2x$ → dibantu sampai akhir | 📘 dibantu |
+| **Rabu 4 Nov malam — resit Jul "Palembang → Bengkulu"** | | | |
+| Jul26 #5 | $a=4,\ r=3$ | ✅ **dingin, 10 menit, tanpa petunjuk** | ✅ 4/4 |
+| Jul26 #8 | $(3,-3),(-1,1)$ · min $-2\sqrt3$ di $(\sqrt3,0)$ | (a) ✅; (b) titik benar, tapi $\sqrt3-3\sqrt3$ ditulis $\sqrt3-3$, nilai ditulis sebagai koordinat $y$, ± tidak ditulis | ⚠️ ~3/4 |
+| Jul26 #11 | $e^{-x}(\cos2x+\sin2x)$ | $r$, $A$ ✅; $\alpha$ kehilangan minus; Aturan Hasil Kali ditulis KALI (ke-2 kali hari ini) → $B=\frac12$ ❌. Diberi rumus jadi $y'(0)=\alpha A+\beta B$ | ⚠️ ~2/4 |
+| Jul26 #9 | $\frac{e^x}{x^2}$ ($C=0$) | ✅ | ✅ 4/4 |
+| Jul26 #10 | $4^{1/3}e^{i\cdot0},4^{1/3}e^{i2\pi/3},4^{1/3}e^{i4\pi/3},e^{i\pi/3},e^{i\pi},e^{i5\pi/3}$ | semua sudut ✅; panjang ditulis $4$ bukan $4^{1/3}$ (baris terakhir bocor) | ⚠️ ~4/5 |
+| Jul26 #2 | (a) $\frac78$ (b) $-\frac34$ | ✅✅ (slip notasi: $u'=\frac{f'}{2\sqrt{f'}}$, tapi angkanya benar) | ✅ 4/4 |
 | Feb26 #1 $\lim(\sqrt{x^2+4x}-x)$ | $2$ | $2$ ✅ (jalan belum ditulis; diberi model jawaban) | ✅ |
 | Feb26 #2a $\left(\frac{\sqrt f}{g}\right)'(1)$ | $2$ | $2$ ✅ | ✅ |
 | Feb26 #2b $(\ln g(f(x)))'(1)$ | $-2$ | $-1$ ❌ lupa $\times f'(1)$ (3 lapis = 3 faktor) | ⚠️ |
