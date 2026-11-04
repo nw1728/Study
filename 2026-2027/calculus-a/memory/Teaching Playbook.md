@@ -140,3 +140,8 @@ Kata-katanya sendiri: *"sambil jelasin ini kemana ini kemana, sambil kerjain soa
 Dua format yang **ditolak** sebelum ini: (1) rantai panah horizontal dalam satu baris, (2) satu langkah per baris dengan teks alasan di antara blok-blok `$$` (matanya naik-turun).
 
 **Konsekuensi untuk aturan "biarkan dia coba dulu":** dalam mode ujian, pola yang disepakati adalah **tunjukkan penuh → dia tutup → kerjakan ulang dingin**, bukan dibiarkan macet dulu. Ulang dingin yang menggantikan fungsi "coba dulu".
+
+
+## 🏭 2026-11-04 — "Mesin formulir" mengalahkan penjelasan konsep di H-1
+Soal 10 (akar kompleks): penjelasan kompas (panah, sudut dikali 3, putaran 360°) **dua kali tidak masuk** ("aku masih ga ngerti"). Yang langsung berhasil: **tabel 3 kotak yang tinggal diisi** — ① panjang = $\lvert w\rvert^{1/3}$ tanpa minus · ② $\varphi=0$ kalau positif, $\pi$ kalau negatif · ③ $\frac{\varphi}3,\frac{\varphi+2\pi}3,\frac{\varphi+4\pi}3$. Enam akar benar dalam satu kali coba.
+Pelajaran (sama dengan `dy/dx` 27 Okt): **dekat ujian, kalau konsep tidak masuk dalam satu putaran, langsung beri mesinnya.** Konsep boleh menyusul setelah ujian.
