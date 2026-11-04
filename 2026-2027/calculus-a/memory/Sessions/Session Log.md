@@ -8,6 +8,14 @@ updated: 2026-11-03
 
 Back to [[00 Index]] · Newest first
 
+## 2026-11-04 — H-1, flu: reset, lalu semua slot identik ditulis ulang (Claude Code, cloud)
+
+- Mulai 11:00 (telat). Pagi: Feb #8 (dua slip: $y=\frac23-x$, kandidat di luar selang dipakai), Feb #10 **benar keenamnya** setelah penjelasan kompas gagal dua kali dan diganti **mesin 3 kotak**. Feb #9 macet total ("aku bener-bener ga ngerti") → mesin 4 kotak, lalu di-skip.
+- ~12:30 Ethan **pusing dan minta reset**, mengusulkan kertas Jul 2025. Dijelaskan: itu cetakan lama, justru paling beda. Target dipersempit jadi satu kalimat: **bisa menulis ulang slot 6–11 + 2 Nov 2025 (28 poin)**. Istirahat 30 menit.
+- Siang: **ulang Nov 2025** — #6 ✅, #11 ~3/4 (Aturan Hasil Kali ditulis kali), #9 ~2/4 → benar setelah koreksi, #7 ✅ (bingung "$x\sin 7$ — sin harus jadi cos?" → di mana huruf hidupnya), #8 a ✅ b ~1/3 ($y^4$ dihitung $y^2$).
+- Sore: Ethan sendiri memilih **resit Feb lagi** "biar mantep" — #6 ✅, #7 ✅, #11 ~3/4 (ekor −3 jadi 0; $c_1=c_2=-\frac12$ hanya memenuhi satu persamaan), #9 ~3/4 ($\int\cos=-\sin$), #5 dibantu (lengkapkan kuadrat: $x^2$ di dalam kurung, setengah dari $-2x$).
+- 19:30 Ethan minta lanjut "mode supir lintas Palembang → Bengkulu" dengan resit Jul. Disetujui dengan batas keras 21:15.
+
 ## 2026-11-03 — H-2: tanggal ujian dikoreksi, enam kertas ujian dikumpulkan (Claude Code, cloud)
 
 - **Ujian ternyata Kamis 5 Nov, bukan Rabu 4 Nov** (dari Ethan). Catatan diperbaiki. Sisa: Selasa + Rabu.
