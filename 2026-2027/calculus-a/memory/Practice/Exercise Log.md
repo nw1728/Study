@@ -20,6 +20,7 @@ Source for entries before 2026-09-14 (afternoon): the two original handovers. An
 | Nov25 #6 | tidak ada (0 vs 2) | ✅ — $\frac2{x+1}\to2$ tidak bocor lagi | ✅ 4/4 |
 | Nov25 #11 | $e^{-2x}(2\cos3x+\frac13\sin3x)$ | $r$, bentuk, $A=2$ ✅; Aturan Hasil Kali ditulis $u'v\cdot v'$ (KALI, harus PLUS) → $B=\frac14$ ❌; tulis $\beta$ untuk $B$ | ⚠️ ~3/4 |
 | Nov25 #9 | $\frac{x^3}6+\frac{11}{6x^3}$ | A, B ✅; $\mu Q=x^3\cdot x^2$ ditulis $\frac{x^5}5$ (salin dari contoh) ❌; hanya $C$ yang dibagi $\mu$ ❌; setelah koreksi $C=\frac{11}6$ ✅ | ⚠️ ~2/4 |
+| Nov25 #7 | $\partial z/\partial u=0,\ \partial z/\partial v=2$ | ✅ — trik 7 di semua turunan parsial; bingung di $x\sin 7$ ("sin harus jadi cos?") dan "x nempel ke sin?" → dijawab: lihat di mana huruf hidupnya (depan vs dalam kurung) | ✅ 4/4 |
 | Feb26 #1 $\lim(\sqrt{x^2+4x}-x)$ | $2$ | $2$ ✅ (jalan belum ditulis; diberi model jawaban) | ✅ |
 | Feb26 #2a $\left(\frac{\sqrt f}{g}\right)'(1)$ | $2$ | $2$ ✅ | ✅ |
 | Feb26 #2b $(\ln g(f(x)))'(1)$ | $-2$ | $-1$ ❌ lupa $\times f'(1)$ (3 lapis = 3 faktor) | ⚠️ |
