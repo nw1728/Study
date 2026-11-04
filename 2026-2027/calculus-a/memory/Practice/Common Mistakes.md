@@ -18,6 +18,9 @@ Ethan's own errors from past sessions, each with its fix. Add new ones as they h
 | "Turunan $e$ tetap $e$" dipakai untuk $e^{3y}$ tanpa ekor | $e$ polos/angka → 0 · $e^x\to e^x$ · $e^{\blacksquare}\to e^{\blacksquare}\cdot\blacksquare'$ |
 | Turunan $-6x$ ditulis $+6$ (2026-11-04) | Minusnya ikut turun. Alarm: kalau sistem titik kritis memberi $D<0$, cek ulang turunan |
 | $2y=3-2x \Rightarrow y=\frac23-x$ — pecahan terbalik (2026-11-04) | "Yang dibagi di atas": $3\div2=\frac32$. Cek titik kritis dengan memasukkannya ke $f_x$ dan $f_y$ (harus 0) |
+| Menghitung $g(\pm2)$ dengan pangkat yang salah ($y^4$ jadi $(-2)^2$) — salah salin (2026-11-04) | Salin $g(y)$ utuh dulu, baru ganti $y$ dengan (angka) dalam kurung |
+| Aturan Hasil Kali ditulis $u'v\cdot v'$ (2026-11-04) | $(uv)'=u'v\,+\,uv'$ — PLUS. "Dua supir gantian, hasilnya dijumlah" |
+| $\mu Q=x^3\cdot x^2$ ditulis seperti contoh ($x^4$) (2026-11-04) | Kali → pangkat ditambah; bagi → dikurang |
 | Min di ruas: kandidat $g'=0$ di **luar** selang tetap dipakai (2026-11-04) | Langkah 3 wajib: "kandidatnya di dalam selang?" Gambar garis bilangan selangnya |
 | Angka ketiga titik $(1,0,0)$ ikut dimasukkan ke dalam $\ln$ → "$\ln 0$" | Titik = $(x,y,\text{tinggi})$. Hanya dua angka pertama masuk ke $f$; angka ketiga adalah hasil yang harus keluar |
 
