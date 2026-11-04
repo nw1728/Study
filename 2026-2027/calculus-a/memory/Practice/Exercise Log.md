@@ -19,6 +19,8 @@ Source for entries before 2026-09-14 (afternoon): the two original handovers. An
 | Feb26 #1 $\lim(\sqrt{x^2+4x}-x)$ | $2$ | $2$ ✅ (jalan belum ditulis; diberi model jawaban) | ✅ |
 | Feb26 #2a $\left(\frac{\sqrt f}{g}\right)'(1)$ | $2$ | $2$ ✅ | ✅ |
 | Feb26 #2b $(\ln g(f(x)))'(1)$ | $-2$ | $-1$ ❌ lupa $\times f'(1)$ (3 lapis = 3 faktor) | ⚠️ |
+| Feb26 #8a titik kritis $\frac13x^3+y^2+2xy-6x-3y+4$ | $(3,-\frac32),\ (-1,\frac52)$ | $f_x$ awalnya $+6$ (dikoreksi); $x=3,-1$ ✅; $y=\frac23-x$ ❌ (harus $\frac32-x$) → $(3,-\frac73),(-1,\frac53)$ | ⚠️ ~1/2 |
+| Feb26 #8b min di $x=0,\ -1\le y\le1$ | $g=y^2-3y+4$, min $=2$ di $(0,1)$ | $g$, $g'$, $g(\pm1)$ ✅, tapi kandidat $y=\frac32$ (di luar selang) dipakai → "min $\frac74$" ❌ | ⚠️ ~1/2 |
 | 4.4 $f=\sqrt{x^2+5y}$ di $(2,0,2)$ (rep bersih) | $z=x+\frac54y$ | $z=x+\frac54y$ ✅ dingin, percobaan pertama | 🔒 ✅ |
 
 ## Lecture 2

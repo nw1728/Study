@@ -16,6 +16,9 @@ Ethan's own errors from past sessions, each with its fix. Add new ones as they h
 | **Bidang singgung: menulis $(x_0-x)$ bukan $(x-x_0)$** — 2× berturut-turut (4.2, 4.3); jawabannya selalu tepat negatif dari yang benar, dan **tetap lolos cek titik** | "Langkah = huruf dulu, baru angka titik" (KM sekarang − KM berangkat). Cek 2 detik: koefisien $x$ = $f_x$, koefisien $y$ = $f_y$, tanda sama |
 | Partial: suku yang isinya hanya huruf beku ($e^{3y}$ saat $f_x$) ikut diturunkan jadi $e^3$ | **Trik angka 7**: ganti huruf beku dengan 7, turunkan, kembalikan. $e^{21}$ cuma angka → 0. Di luar (salinan kotak) huruf beku tetap ada; di $\blacksquare'$ hilang |
 | "Turunan $e$ tetap $e$" dipakai untuk $e^{3y}$ tanpa ekor | $e$ polos/angka → 0 · $e^x\to e^x$ · $e^{\blacksquare}\to e^{\blacksquare}\cdot\blacksquare'$ |
+| Turunan $-6x$ ditulis $+6$ (2026-11-04) | Minusnya ikut turun. Alarm: kalau sistem titik kritis memberi $D<0$, cek ulang turunan |
+| $2y=3-2x \Rightarrow y=\frac23-x$ — pecahan terbalik (2026-11-04) | "Yang dibagi di atas": $3\div2=\frac32$. Cek titik kritis dengan memasukkannya ke $f_x$ dan $f_y$ (harus 0) |
+| Min di ruas: kandidat $g'=0$ di **luar** selang tetap dipakai (2026-11-04) | Langkah 3 wajib: "kandidatnya di dalam selang?" Gambar garis bilangan selangnya |
 | Angka ketiga titik $(1,0,0)$ ikut dimasukkan ke dalam $\ln$ → "$\ln 0$" | Titik = $(x,y,\text{tinggi})$. Hanya dua angka pertama masuk ke $f$; angka ketiga adalah hasil yang harus keluar |
 
 ## Algebra
