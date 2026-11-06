@@ -592,6 +592,10 @@ def run_heartbeat(bus: Broadcaster, stop: threading.Event, period: float = 0.2) 
 # --------------------------------------------------------------------------
 
 CONFIG_TOOL = "/usr/local/bin/piglo-config"
+# The enclosure covers the board's power button, so the interface has to be
+# able to restart and shut down. Same shape as CONFIG_TOOL: a helper with a
+# fixed verb whitelist, reached through a NOPASSWD sudoers rule.
+POWER_TOOL = "/usr/local/bin/piglo-power"
 
 # Audio lives in the user's PipeWire session, which a system service does not
 # join automatically, so its socket has to be pointed at explicitly.
@@ -875,6 +879,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self._post_wifi()
         if path == "/api/bluetooth":
             return self._post_bluetooth()
+        if path == "/api/power":
+            return self._post_power()
         kind = self.ACCEPTS.get(path)
         if kind is None:
             self.send_error(404, "unknown endpoint")
@@ -908,6 +914,26 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return True
         self.send_error(403, "settings are only available on the device itself")
         return False
+
+    def _post_power(self) -> None:
+        """Restart or shut down the Pi.
+
+        The demo lives in a wooden box with no reachable power button, and
+        pulling the plug risks the SD card. Loopback only, like every other
+        settings endpoint, so the phones watching the stream cannot reach it.
+        The helper accepts two fixed verbs and nothing is built from input.
+        """
+        if not self._local_only():
+            return
+        payload = self._read_json()
+        if payload is None:
+            return
+        action = str(payload.get("action") or "")
+        if action not in ("reboot", "poweroff"):
+            self.send_error(400, "action must be 'reboot' or 'poweroff'")
+            return
+        ok, out = _run(["sudo", "-n", POWER_TOOL, action])
+        self._json({"ok": ok, "action": action, "detail": out})
 
     def _post_settings(self) -> None:
         if not self._local_only():

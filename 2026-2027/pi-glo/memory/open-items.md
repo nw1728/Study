@@ -181,6 +181,38 @@ Two things to re-measure rather than inherit, because both are tuned to the Pi
   compositor. It may not reproduce, and the comment in the file says to measure
   before changing it.
 
+## The BLE bridge steals the GloveSense hand — found 2026-11-06
+
+`glove_ble.py` matches a device by name **or**, failing that, by service UUID
+(`SERVICE_UUID in uuids`, around line 259). The 6-IMU hand firmware advertises
+as `GloveSense` on the *same* service UUID as the swipe Nano,
+`4fafc201-1fb5-459e-8fcc-c5c9c331914b`, so the bridge connects to it:
+
+```
+[bridge] scanning for 'NanoCmd' / 4fafc201-1fb5-459e-8fcc-c5c9c331914b
+[bridge] found GloveSense @ DA:24:6F:D7:30:FC (advertised 'GloveSense')
+[bridge] link error:
+[bridge] disconnected
+```
+
+It then fails, drops the link and retries about every 20 seconds, forever. While
+that loop runs, nobody else can keep hold of the hand — this was caught when a
+teammate could not connect to it from a laptop.
+
+**`--simulate` does not prevent this.** `PIGLO_SOURCE` only selects `server.py`'s
+sensor source; `piglo-ble.service` is a separate unit and ignores it entirely.
+That is the surprising part, and the reason it went unnoticed.
+
+Mitigated 2026-11-06 by `systemctl disable --now piglo-ble.service`, so the
+service is **off and will not return on reboot**. Re-enable with
+`sudo systemctl enable --now piglo-ble.service` when the swipe demo is wanted.
+
+While it is off, the link chip in the top bar keeps whatever it last read —
+"Scanning" — because nothing POSTs `/api/link` any more. Stale, not live.
+
+A real fix is to match on the advertised **name** only, or to exclude the hand's
+name explicitly, so the two gloves can coexist on one adapter.
+
 ## Never tested
 
 - **The 6-IMU hand over USB serial on the Pi.** The parser is tested against the

@@ -80,6 +80,11 @@
     flex: 1; min-width: 0; background: var(--screen); border-radius: 10px;
     position: relative; overflow: hidden;
     box-shadow: inset 0 1px 3px rgba(0,0,0,.5), 0 1px 0 #fff;
+    /* Load-bearing on the touch panel. Without it the browser treats a drag
+       across the hand as a page pan, claims the gesture mid-drag and fires
+       pointercancel, which is what made turning the hand feel choppy. It also
+       stops a two-finger pinch being read as a page zoom. */
+    touch-action: none;
     /* Full width again. This was capped to 1000x500 on 2026-09-11 while the
        kiosk still ran Firefox, where frame cost tracked the on-screen area of
        this element and a full-width view managed only 11 fps. Under Chromium
@@ -88,6 +93,84 @@
        but check which browser is running first. */
   }
   .screen canvas { display: block; width: 100%; height: 100%; }
+
+  /* ---------- calibrate ----------
+     Laid out for the panel's 960x540 logical area, not a desktop: the step
+     strip is 29 chips, so it wraps and is sized down rather than scrolling. */
+  /* Two columns, like the hand and swipe views: the instructions want a
+     readable measure rather than the full 960, and the hand wants the height. */
+  .cal-left {
+    flex: 0 0 clamp(300px, 38%, 430px); min-width: 0; min-height: 0;
+    display: flex; flex-direction: column; gap: 10px; overflow-y: auto;
+  }
+  .cal-screen { flex: 1; min-width: 0; }
+  .cal-head { display: flex; flex-direction: column; gap: 4px; }
+  .cal-headline { display: flex; align-items: baseline; gap: 12px; }
+  .cal-headline > :first-child {
+    font: 600 13px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase;
+    color: var(--cobalt);
+  }
+  .cal-progress { font: 500 12px var(--mono); color: var(--muted); }
+  .cal-source {
+    margin-left: auto; font: 500 10.5px var(--mono); letter-spacing: .09em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .cal-instruction { font-size: 14px; line-height: 1.5; max-width: 76ch; }
+  .cal-phases { display: flex; flex-wrap: wrap; align-items: baseline; gap: 3px 7px;
+                font: 500 12px var(--sans); }
+  .cal-warning { font-size: 12.5px; line-height: 1.45; color: var(--amber); max-width: 80ch; }
+
+  /* Plex Sans, not Mono. Mono is reserved in this page for live numerals, which
+     these are not -- and the team's panel being a terminal is not a reason for
+     this one to look like one. */
+  .cal-steps {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 3px 6px;
+    font: 500 11px var(--sans); color: var(--muted);
+  }
+  /* The bundle writes each chip's colour and border inline as it marks them
+     done / current, so only the shape is set here. Rounded, to sit with the
+     chips elsewhere in the page rather than read as terminal boxes.
+     Only the steps carry a border; the group headings (gravity, index, ...)
+     are styled inline too but without one, which is what separates them. */
+  .cal-steps > span[style*="border"] {
+    white-space: nowrap; border-radius: 999px; padding: 2px 9px !important;
+    line-height: 1.55;
+  }
+  .cal-steps > span:not([style*="border"]) {
+    white-space: nowrap; text-transform: uppercase; letter-spacing: .08em;
+    font-size: 9.5px; font-weight: 600; padding-right: 1px;
+  }
+
+  .cal-screen canvas { cursor: grab; }
+  /* The bundle's 2-D canvas has to stay in the document -- it resolves the
+     element at load -- but it is never drawn to. The `hidden` attribute alone
+     is not enough: `.screen canvas { display: block }` is more specific than
+     the user-agent rule for [hidden], so it stayed laid out at full height and
+     pushed the WebGL canvas below the visible area. */
+  #cal-canvas { display: none !important; }
+
+  .cal-mock {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
+    margin-top: auto; padding-top: 10px; border-top: 1px solid var(--rule);
+  }
+  .cal-mock-label {
+    font: 500 10px var(--mono); letter-spacing: .09em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .cal-mock-fingers { display: flex; gap: 4px; }
+  .cal-sep { width: 1px; height: 18px; background: var(--rule); margin: 0 4px; }
+  /* The bundle creates the finger toggles itself and gives them .tui-btn, so
+     that class has to resolve to something sensible in this page's language. */
+  .cal-btn, .cal-mock .tui-btn {
+    font: 500 11.5px var(--sans); padding: 5px 10px; border-radius: 7px;
+    border: 1px solid var(--rule); background: var(--card); color: var(--ink);
+    cursor: pointer; touch-action: manipulation;
+  }
+  .cal-btn:active, .cal-mock .tui-btn:active { background: var(--rule); }
+  .cal-mock .tui-btn.active, .cal-btn.active {
+    background: var(--cobalt); border-color: var(--cobalt); color: #f4f6fb;
+  }
+  .cal-btn-go { background: var(--ink); border-color: var(--ink); color: var(--card); }
   .screen .cap {
     position: absolute; left: 16px; top: 14px; color: #8b96a8; font-size: 12.5px;
     pointer-events: none;
@@ -257,6 +340,14 @@
   .set-btnrow .set-btn:first-child {
     background: var(--paper); color: var(--ink); border: 1px solid var(--rule);
   }
+  /* Power controls. Armed state is deliberately loud: this is the only
+     control in Settings that can end the demo mid-visitor. */
+  .set-btn.danger { background: #8d2b1b; color: #fdf6f4; }
+  .set-btnrow .set-btn.danger:first-child { background: #8d2b1b; color: #fdf6f4;
+    border: 0; }
+  .set-btn.armed { background: var(--amber); color: #1b1407; }
+  .set-btnrow .set-btn.armed:first-child { background: var(--amber);
+    color: #1b1407; border: 0; }
 
   /* ---------- on-screen keyboard ----------
      Built into the page on purpose. The kiosk has a touchscreen and no physical
@@ -340,6 +431,7 @@
     <button class="tab" role="tab" aria-selected="true"  data-mode="hand">Hand</button>
     <button class="tab" role="tab" aria-selected="false" data-mode="spell">Fingerspell</button>
     <button class="tab" role="tab" aria-selected="false" data-mode="swipe">Swipe</button>
+    <button class="tab" role="tab" aria-selected="false" data-mode="calibrate">Calibrate</button>
     <button class="tab" role="tab" aria-selected="false" data-mode="settings">Settings</button>
   </div>
   <div class="end">
@@ -353,7 +445,7 @@
   <section class="stage" data-mode="hand" data-active>
     <div class="screen" id="screenMain">
       <div class="cap"><b id="capMain">Constrained pose</b>Joint limits applied</div>
-      <div class="hint">Drag to turn &nbsp;·&nbsp; scroll to zoom</div>
+      <div class="hint">Drag to turn &nbsp;·&nbsp; pinch to zoom</div>
     </div>
     <div class="screen" id="screenCmp" hidden>
       <div class="cap"><b>Raw sensor</b>No limits applied</div>
@@ -429,6 +521,59 @@
     </div>
     </div>
   </section>
+  <!-- ============ calibrate ============
+       The step model, the instructions and the animated hand all come from the
+       team repo (Saxion-SSP/ui/record/src/lib), bundled to static/calibration.js
+       by build-calibration.sh. The ids below are the contract that bundle
+       expects; renaming one silently disables that part of the panel.
+
+       Source is "mock" until the glove reports for itself: the controls along
+       the bottom stand in for the firmware so the flow can be walked through,
+       and taught, with no hardware attached. -->
+  <section class="stage calibrate" data-mode="calibrate">
+    <div class="cal-left">
+
+      <div class="cal-head">
+        <div class="cal-headline">
+          <span id="cal-title"></span>
+          <span id="cal-progress" class="cal-progress"></span>
+          <span id="cal-source" class="cal-source"></span>
+        </div>
+        <div id="cal-instruction" class="cal-instruction"></div>
+        <div id="cal-phases" class="cal-phases"></div>
+        <div id="cal-warning" class="cal-warning" style="display:none"></div>
+      </div>
+
+      <div id="cal-steps" class="cal-steps"></div>
+
+      <div id="cal-mock" class="cal-mock">
+        <span class="cal-mock-label">mock</span>
+        <span class="cal-mock-label">fingers</span>
+        <span id="cal-mock-fingers" class="cal-mock-fingers"></span>
+        <span class="cal-sep"></span>
+        <button id="cal-mock-prev"   class="cal-btn">&#9664; Step</button>
+        <button id="cal-mock-next"   class="cal-btn">Step &#9654;</button>
+        <button id="cal-mock-done"   class="cal-btn cal-btn-go"
+                title="the user did what the phase asks">Did it &#9654;</button>
+        <button id="cal-mock-still"  class="cal-btn"
+                title="the user holds still: holds fill and finish">Still</button>
+        <button id="cal-mock-count"  class="cal-btn">Count +1</button>
+        <button id="cal-mock-reject" class="cal-btn">Reject</button>
+      </div>
+
+    </div>
+
+    <!-- The same wooden mannequin as the Hand tab, posed from the calibration
+         animation rather than from sensors. cal-canvas stays in the document
+         because the bundle resolves it at load, but it is never drawn to: the
+         2-D renderer is switched off and this viewport draws instead. -->
+    <div class="screen cal-screen" id="calScreen">
+      <canvas id="cal-canvas" hidden></canvas>
+      <div class="cap"><b id="calCap">Calibration</b><span id="calSub"></span></div>
+      <div class="hint">Drag to turn &nbsp;·&nbsp; pinch to zoom &nbsp;·&nbsp; double&#8209;tap to reset</div>
+    </div>
+  </section>
+
   <!-- ============ settings ============ -->
   <section class="stage settings" data-mode="settings">
     <div class="set-grid">
@@ -529,6 +674,18 @@
         <p class="set-note" id="setStatus">Settings are only reachable from this device.</p>
       </div>
 
+      <div class="panel set-card">
+        <h2>Power</h2>
+        <div class="set-btnrow">
+          <button class="set-btn" id="pwrReboot">Restart</button>
+          <button class="set-btn danger" id="pwrOff">Shut down</button>
+        </div>
+        <p class="set-note" id="pwrNote">
+          The button on the board is inside the enclosure. Shut down from here
+          rather than pulling the plug &mdash; it protects the SD card.
+        </p>
+      </div>
+
     </div>
   </section>
 </main>
@@ -588,6 +745,11 @@
 </div>
 
 <script src="vendor/three.min.js"></script>
+<!-- After the markup, deliberately. calibration.js resolves its elements at
+     load time, and a script that throws there takes every declaration after it
+     into the temporal dead zone -- the failure that once broke tab switching
+     with "Cannot access 'rafId' before initialization". -->
+<script src="calibration.js"></script>
 <script>
 "use strict";
 
@@ -832,20 +994,62 @@ function placeCameras(vs) {
   }
 }
 
-function orbit(el) {
-  let on = false, px = 0, py = 0;
-  el.addEventListener("pointerdown", e => { on = true; px = e.clientX; py = e.clientY;
-                                            el.setPointerCapture(e.pointerId); });
-  el.addEventListener("pointerup",   e => { on = false; el.releasePointerCapture(e.pointerId); });
-  el.addEventListener("pointermove", e => {
-    if (!on) return;
-    cam.theta -= (e.clientX - px) * 0.008; invalidate();
-    cam.phi = clamp(cam.phi - (e.clientY - py) * 0.008, 0.18, Math.PI - 0.18);
-    px = e.clientX; py = e.clientY;
+/* Orbit and zoom, for a finger as well as a mouse.
+   Rewritten 2026-11-06. Pointer events alone were not enough on the panel:
+   without `touch-action: none` (set on .screen) the browser decides partway
+   through a drag that the gesture is a page pan, takes it, and fires
+   pointercancel. That is what made turning the hand feel choppy -- the stream
+   of moves simply stopped. The old code also never listened for pointercancel,
+   so after one of those the handler stayed stuck believing a button was down.
+   And zoom was bound to `wheel`, which a touchscreen never sends, so there was
+   no way to zoom at all. One finger turns, two pinch. */
+function orbit(el, c = cam, onChange = invalidate) {
+  const pts = new Map();          // live pointers: id -> last position
+  let pinch = 0;                  // finger separation at the last pinch frame
+
+  const spread = () => {
+    const [a, b] = [...pts.values()];
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  };
+
+  el.addEventListener("pointerdown", e => {
+    pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pts.size === 2) pinch = spread();
+    try { el.setPointerCapture(e.pointerId); } catch {}
   });
+
+  const release = e => {
+    pts.delete(e.pointerId);
+    // Lifting one of two fingers must re-measure, or the next move jumps.
+    pinch = pts.size === 2 ? spread() : 0;
+    try { el.releasePointerCapture(e.pointerId); } catch {}
+  };
+  el.addEventListener("pointerup", release);
+  el.addEventListener("pointercancel", release);
+
+  el.addEventListener("pointermove", e => {
+    const p = pts.get(e.pointerId);
+    if (!p) return;
+    const dx = e.clientX - p.x, dy = e.clientY - p.y;
+    p.x = e.clientX; p.y = e.clientY;
+
+    if (pts.size === 1) {
+      c.theta -= dx * 0.008;
+      c.phi = clamp(c.phi - dy * 0.008, 0.18, Math.PI - 0.18);
+      onChange();
+    } else if (pts.size === 2 && pinch > 0) {
+      const d = spread();
+      if (d > 0) {
+        c.dist = clamp(c.dist * (pinch / d), 1.4, 12);
+        pinch = d;
+        onChange();
+      }
+    }
+  });
+
   el.addEventListener("wheel", e => {
     e.preventDefault();
-    cam.dist = clamp(cam.dist * (1 + Math.sign(e.deltaY) * 0.08), 1.4, 12); invalidate();
+    c.dist = clamp(c.dist * (1 + Math.sign(e.deltaY) * 0.08), 1.4, 12); onChange();
   }, { passive: false });
 }
 
@@ -866,6 +1070,9 @@ function setMode(m) {
   mode = m;
   eDirty = true;
   if (m === "settings" && !settingsLoaded) { loadSettings(); loadWifi(); loadBt(0); }
+  // The calibration hand animates continuously, so it only runs while it is on
+  // screen. rAF costs real time on the Pi even with nothing to draw.
+  if (typeof CAL !== "undefined" && CAL) CAL.setLive(m === "calibrate");
   tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.mode === m)));
   stages.forEach(s => s.toggleAttribute("data-active", s.dataset.mode === m));
   invalidate();
@@ -1224,6 +1431,58 @@ setEl.setSink.onchange = () => saveSettings({ audio_sink: setEl.setSink.value })
 setEl.setVol.onchange  = () => saveSettings({ audio_volume: setEl.setVol.value / 100 });
 setEl.setLogical.onchange   = () => saveSettings({ config: { PIGLO_LOGICAL: setEl.setLogical.value } });
 setEl.setTransform.onchange = () => saveSettings({ config: { PIGLO_PANEL_TRANSFORM: setEl.setTransform.value } });
+
+/* ---------- power ----------
+   Two taps on purpose. This is a touch panel at an open day and these are
+   the only controls here that can end the demo, so a brush against the
+   glass must not shut the Pi down. The arm expires after five seconds. */
+const pwrEl   = { reboot: document.getElementById("pwrReboot"),
+                  poweroff: document.getElementById("pwrOff"),
+                  note: document.getElementById("pwrNote") };
+const PWR_LABEL = { reboot: "Restart", poweroff: "Shut down" };
+let pwrArmed = null, pwrTimer = null;
+
+function pwrDisarm() {
+  clearTimeout(pwrTimer);
+  pwrArmed = null;
+  for (const k of ["reboot", "poweroff"]) {
+    pwrEl[k].textContent = PWR_LABEL[k];
+    pwrEl[k].classList.remove("armed");
+  }
+}
+
+function pwrPress(action) {
+  if (pwrArmed !== action) {
+    pwrDisarm();
+    pwrArmed = action;
+    pwrEl[action].textContent = "Tap again to confirm";
+    pwrEl[action].classList.add("armed");
+    pwrTimer = setTimeout(pwrDisarm, 5000);
+    return;
+  }
+  clearTimeout(pwrTimer);
+  pwrArmed = null;
+  pwrEl.reboot.disabled = pwrEl.poweroff.disabled = true;
+  pwrEl[action].textContent = action === "reboot" ? "Restarting\u2026"
+                                                  : "Shutting down\u2026";
+  pwrEl[action].classList.remove("armed");
+  fetch("/api/power", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ action })
+  }).then(r => r.json()).then(d => {
+    setText(pwrEl.note, d.ok ? (action === "reboot"
+        ? "Restarting now. The interface comes back on its own."
+        : "Powering off. Wait for the screen to go dark before unplugging.")
+      : ("Could not " + PWR_LABEL[action].toLowerCase() + ": " + (d.detail || "refused")));
+    if (!d.ok) { pwrEl.reboot.disabled = pwrEl.poweroff.disabled = false; pwrDisarm(); }
+  }).catch(() => {
+    setText(pwrEl.note, "No reply \u2014 the Pi is probably already going down.");
+  });
+}
+
+pwrEl.reboot.onclick   = () => pwrPress("reboot");
+pwrEl.poweroff.onclick = () => pwrPress("poweroff");
 
 /* ------------------------------------------------- on-screen keyboard */
 
@@ -1822,6 +2081,392 @@ if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
 }
 
 resize();
+/* ------------------------------------------------- calibration 3-D view
+
+   The Hand tab's wooden mannequin, posed from the calibration animation
+   instead of from sensors, with a green arc tracing the move the step is
+   asking for.
+
+   The pose and its timing come from the bundle (pigloFrame), so the easing and
+   the loop are the team's, not a second copy. cal-viz's own 2-D renderer is
+   never switched on -- see build-calibration.sh.
+
+   Arc geometry is NOT converted out of the bundle's coordinate frame. The hand
+   model there has its own axes, scale and finger lengths, and matching them by
+   hand would be a standing invitation to subtle drift. Instead the arc is
+   traced by posing a hidden copy of *this* mannequin at points along the move
+   and reading where its fingertip actually lands, so the arrow is guaranteed to
+   follow the hand that is on screen. It is recomputed only when the phase
+   changes, not per frame. */
+
+const CAL = (() => {
+  const api = window.pigloCal;
+  const screenEl = document.getElementById("calScreen");
+  if (!api || !screenEl || !api.pigloFrame) return null;
+
+  const TONE = { bone: 0xd2ae80, joint: 0xb38d5c, palm: 0xe0bd92 };
+  const GREEN = 0x6fa883;            // the same lifted sage the bundle uses
+  const COUPLING = 0.55;             // spread the curl over the phalanges
+  const ARC_N = 36;
+
+  const view = makeViewport(screenEl, TONE);
+
+  /* The palm is a flat single-sided shape. Upright on the Hand tab it is only
+     ever seen from the front, but lying flat it is seen from above -- its back
+     face -- and rendered as a black hole in the middle of the hand. The user
+     can orbit freely here, so every face has to be real. */
+  view.hand.group.traverse((o) => { if (o.material) o.material.side = THREE.DoubleSide; });
+
+  // A second hand, never added to the scene, used only to measure where a
+  // fingertip goes for a given pose.
+  const probe = buildHand(TONE);
+  probe.group.position.y = -0.42;
+  const probeRoot = new THREE.Group();
+  probeRoot.add(probe.group);
+
+  /* Further back and framed higher than the Hand tab: the arcs reach past the
+     fingertips, and clipping the very thing the step is pointing at defeats the
+     purpose. */
+  /* Framed for a hand lying down, not standing up: once it is flat its reach
+     is in Z, so the camera looks slightly down at the middle of the palm from
+     behind the wrist, the way you would look at your own hand on a table. */
+  const cam3 = { theta: 0.0, phi: 1.02, dist: 3.5 };
+  const tgt = new THREE.Vector3(0.04, -0.34, -0.46);
+  let raf = 0, live = false, w = 0, h = 0, orbited = false;
+
+  orbit(view.el, cam3, () => { orbited = true; });   // the loop redraws anyway
+  view.el.addEventListener("dblclick", () => { orbited = false; });
+
+  /* Each step says which way it wants to be seen. Ease toward that rather than
+     cutting, so the hand appears to turn to show you the move -- and stop
+     steering the moment the user takes over, until they double-tap to hand it
+     back. cal-viz's yaw/pitch map onto this page's azimuth/polar pair. */
+  function aimCamera() {
+    const fr = api.pigloFrame();
+    if (!fr || !fr.view || orbited) return;
+    const [yaw, pitch] = fr.view;
+    /* cal-viz's pitch is negative for looking down from above, so this is a
+       PLUS. With a minus the camera swings under the table and looks up at the
+       unlit palm, which is what made the flat hand read as a black slab. The
+       clamp keeps it above the surface. */
+    const wantTheta = yaw, wantPhi = clamp(Math.PI / 2 + pitch, 0.30, Math.PI / 2 + 0.05);
+    cam3.theta += (wantTheta - cam3.theta) * 0.08;
+    cam3.phi += (wantPhi - cam3.phi) * 0.08;
+  }
+
+  /* A table. Several steps are about holding the hand flat, or turning it onto
+     its side and back, and without a surface to read them against there is
+     nothing in the picture that says which way is down. It sits just under the
+     flat palm, is lit like the rest of the scene, and takes a soft grid so the
+     turn in the gravity steps is legible as motion rather than as the hand
+     drifting in the dark. */
+  const arcGroup = new THREE.Group();
+  arcGroup.renderOrder = 10;
+  view.scene.add(arcGroup);
+
+  /* ---- posing ---- */
+
+  // The bundle's palm quaternion is in its own frame: X right, Y forward away
+  // from the wearer, Z up. three.js here is Y up, Z toward the viewer, so the
+  // axis part maps (x, y, z) -> (x, z, -y). That is a rotation, so the scalar
+  // part is untouched.
+  /* The two hands disagree about what "no rotation" means. This page's
+     mannequin rests upright, fingers along +Y, because that is how the Hand tab
+     wants it. The bundle's rest is the hand lying FLAT, palm down, fingers
+     forward -- its own header says "the flat hand is the palm frame as is".
+     Without this quarter turn every step that says "hold the hand flat" drew it
+     standing on end, which is what made the instruction read as wrong. */
+  const FLAT = new THREE.Quaternion().setFromAxisAngle(AX_X, -Math.PI / 2);
+
+  const palmQ = new THREE.Quaternion();
+  function applyPalm(hand, p) {
+    // Quat is {w,x,y,z}, an object rather than an array -- reading it as one
+    // yields undefined, a NaN quaternion, and a hand that silently vanishes.
+    const q = p.palm;
+    palmQ.set(q.x, q.z, -q.y, q.w).normalize();
+    /* Order matters: the bundle rotates its own rest hand into the world, so
+       the conversion from this mannequin's rest to the bundle's must happen
+       first and the step's rotation second -- q * FLAT, not FLAT * q. With the
+       operands the other way round the hand still sits flat at rest (both give
+       FLAT when q is identity) but every turn goes about the wrong axis, which
+       is why "turn it on its side" looked like it was not moving at all. */
+    hand.palmPivot.quaternion.copy(palmQ).multiply(FLAT);
+  }
+
+  /* The bundle's pose angles are in DEGREES -- hand-pose.ts says so in as many
+     words -- while setFromAxisAngle wants radians. Missing this just bends the
+     fingers ~57x too far and looks like a broken rig. */
+  const DEG = Math.PI / 180;
+
+  const _cq = new THREE.Quaternion(), _sq = new THREE.Quaternion();
+  function applyFinger(hand, name, curlDeg, spreadDeg) {
+    const curl = curlDeg * DEG, spread = spreadDeg * DEG;
+    const p = hand.fingers[name].pivots, n = p.length;
+    for (let i = 0; i < n; i++) {
+      const wgt = (i === 0 ? 1 : 0) * (1 - COUPLING) + (1 / n) * COUPLING;
+      _cq.setFromAxisAngle(AX_X, curl * wgt);
+      if (i === 0) { _sq.setFromAxisAngle(AX_Z, spread); _cq.premultiply(_sq); }
+      p[i].pivot.quaternion.copy(_cq);
+    }
+  }
+
+  // Order matches: the bundle's FINGERS are thumb, index, middle, ring, little
+  // and this page's are thumb, index, middle, ring, pinky.
+  const NAME = ["thumb", "index", "middle", "ring", "pinky"];
+
+  function applyPose(hand, pose) {
+    applyPalm(hand, pose);
+    for (let f = 1; f < 5; f++) {
+      applyFinger(hand, NAME[f], -pose.curl[f], pose.spread[f]);
+    }
+    // The thumb is described as a lift away from the palm and a sweep across
+    // it, not as curl and spread.
+    applyFinger(hand, "thumb", -pose.lift, pose.sweep);
+  }
+
+  /* ---- the arc ---- */
+
+  const _v = new THREE.Vector3();
+
+  /* The two hands describe the palm differently, and one axis is MIRRORED: the
+     bundle puts the little finger at +X and the thumb at -X, this mannequin the
+     other way round. Fitted from the knuckles the two models agree on --
+     bundle index [0,-0.25] .. little [0.75,-0.25] against this one's
+     index x 0.245 .. pinky x -0.248, and the wrist-to-knuckle span 0.75 against
+     0.757 -- which reproduces every long-finger root to about a millimetre. */
+  const P2M_X = -0.657, P2M_XC = 0.375, P2M_X0 = -0.0015, P2M_YZ = 1.009;
+  function palmPointToLocal(v) {
+    return new THREE.Vector3(
+      (v[0] - P2M_XC) * P2M_X + P2M_X0,
+      (v[1] + 1.0) * P2M_YZ,
+      v[2] * P2M_YZ);
+  }
+  // The bundle rotates and pushes about the palm centre, not the wrist pivot.
+  const PALM_CENTRE_LOCAL = palmPointToLocal([0.375, -0.625, 0]);
+
+  function palmArcPoint(hand, v, push) {
+    const q = palmPointToLocal(v).sub(PALM_CENTRE_LOCAL).multiplyScalar(push).add(PALM_CENTRE_LOCAL);
+    return hand.palmPivot.localToWorld(q);
+  }
+
+  /* Where the bundle puts an arc point: a fraction `push` along the finger,
+     measured from its knuckle toward the tip, so the trace floats just off the
+     fingertip rather than through it. The fingertip itself is not a node in the
+     model -- the last pivot plus its bone length is. */
+  function arcPointFor(hand, fingerIdx, push) {
+    const p = hand.fingers[NAME[fingerIdx]].pivots;
+    const last = p[p.length - 1];
+    const root = p[0].pivot.getWorldPosition(new THREE.Vector3());
+    const tip = last.pivot.localToWorld(new THREE.Vector3(0, last.len, 0));
+    return root.clone().add(tip.sub(root).multiplyScalar(push));
+  }
+
+  /* Drawn over the hand, not through it. The arc is an instruction, not a
+     physical object: on the thumb steps it sweeps across the palm and would
+     otherwise be hidden behind the fingers, which is exactly when the user
+     most needs to see where the thumb is meant to go. */
+  function arcMaterial(lit) {
+    return new THREE.MeshBasicMaterial({
+      color: GREEN, transparent: true, opacity: lit ? 0.95 : 0.38,
+      depthTest: false, depthWrite: false,
+    });
+  }
+
+  function buildArcs(phase, seg) {
+    arcGroup.clear();
+    if (!phase || !phase.arcs) return;
+    try { buildArcsInner(phase, seg); }
+    catch (e) { console.warn("calibration arc skipped:", e.message); }
+  }
+
+  function buildArcsInner(phase, seg) {
+    for (const a of phase.arcs) {
+      const lit = !a.segs || a.segs.length === 0 || a.segs.includes(seg);
+      const tipIdx = a.point && typeof a.point.tip === "number" ? a.point.tip : null;
+      const palmPt = a.point && a.point.palm ? a.point.palm : null;
+      if (tipIdx === null && !palmPt) continue;
+      const pts = [];
+      for (let i = 0; i <= ARC_N; i++) {
+        applyPose(probe, api.pigloLerpPose(a.from, a.to, i / ARC_N));
+        probeRoot.updateMatrixWorld(true);
+        // A move of the whole hand -- turning it on its side, palm forward --
+        // is anchored to a point on the palm rather than to a fingertip. Those
+        // used to be skipped, which left the gravity steps with no arrow at
+        // all, and they are the steps that need one most.
+        pts.push(tipIdx !== null ? arcPointFor(probe, tipIdx, a.push ?? 1.15)
+                                 : palmArcPoint(probe, palmPt, (a.push ?? 1.15) * 1.45));
+      }
+      // TubeGeometry divides by the distance between points, so coincident
+      // ones (a move whose start and end barely differ) give NaN and throw.
+      const uniq = pts.filter((q, i) => i === 0 || q.distanceToSquared(pts[i - 1]) > 1e-8);
+      if (uniq.length < 3) continue;
+      const curve = new THREE.CatmullRomCurve3(uniq);
+      const tube = new THREE.Mesh(
+        new THREE.TubeGeometry(curve, uniq.length, 0.012, 6, false),
+        arcMaterial(lit));
+      arcGroup.add(tube);
+
+      // Arrowheads: always at the end, and at the start too when the move is
+      // meant to be made in both directions.
+      const head = (at, from) => {
+        const cone = new THREE.Mesh(new THREE.ConeGeometry(0.035, 0.1, 10),
+                                    arcMaterial(lit));
+        cone.position.copy(at);
+        _v.copy(at).sub(from).normalize();
+        cone.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), _v);
+        arcGroup.add(cone);
+      };
+      head(uniq[uniq.length - 1], uniq[uniq.length - 3]);
+      if (a.arrows === "both") head(uniq[0], uniq[2]);
+    }
+  }
+
+  /* ---- loop ---- */
+
+  let lastPhase = null, lastSeg = -1;
+
+  function frame() {
+    raf = 0;
+    if (!live) return;
+    const fr = api.pigloFrame();
+    if (fr) {
+      applyPose(view.hand, fr.pose);
+      // Fingers not in this build are dimmed by the bundle's own view; here
+      // they simply stay at rest, which is what the pose already says.
+      if (fr.phase !== lastPhase || fr.seg !== lastSeg) {
+        lastPhase = fr.phase; lastSeg = fr.seg;
+        buildArcs(fr.phase, fr.seg);
+      }
+      const hold = api.pigloHold ? api.pigloHold() : null;
+      if (hold && hold.target > 0) {
+        setText(document.getElementById("calSub"),
+                `${hold.held.toFixed(1)} s of ${hold.target.toFixed(1)} s`);
+      } else {
+        setText(document.getElementById("calSub"), "");
+      }
+    }
+    sizeTo();
+    aimCamera();
+    view.camera.position.set(
+      tgt.x + cam3.dist * Math.sin(cam3.phi) * Math.sin(cam3.theta),
+      tgt.y + cam3.dist * Math.cos(cam3.phi),
+      tgt.z + cam3.dist * Math.sin(cam3.phi) * Math.cos(cam3.theta));
+    view.camera.lookAt(tgt);
+    view.renderer.render(view.scene, view.camera);
+    raf = requestAnimationFrame(frame);
+  }
+
+  function sizeTo() {
+    const cw = view.el.clientWidth, ch = view.el.clientHeight;
+    if (!cw || !ch || (cw === w && ch === h)) return;
+    w = cw; h = ch;
+    const dpr = Math.min((devicePixelRatio || 1) * UI_ZOOM, 2);
+    view.renderer.setPixelRatio(Math.max(0.5, Math.min(dpr, MAX_BUFFER_W / cw)));
+    view.renderer.setSize(cw, ch, false);
+    view.camera.aspect = cw / ch;
+    view.camera.updateProjectionMatrix();
+  }
+
+  /* Where the table has to sit. Picking a height by eye put it through the
+     hand as soon as a step turned it on its side -- the hand pivots about its
+     palm, so edge-on it reaches much further down than it does lying flat.
+     Rather than guess, every pose in every step is tried once at startup and
+     the table goes just under the lowest the hand ever gets. Done once, so the
+     surface never moves while a step is playing. */
+  function lowestHandPoint() {
+    const box = new THREE.Box3();
+    let lo = Infinity;
+    const steps = api.calibrationSteps([true, true, true, true, true]);
+    for (const st of steps) {
+      const total = Math.max(1, st.total || 1);
+      for (let c = 0; c < total; c++) {
+        const anim = st.anim(c);
+        for (const ph of anim.phases) {
+          const poses = [ph.start, ...ph.segs.map((g) => g.to)];
+          for (const po of poses) {
+            applyPose(probe, po);
+            probeRoot.updateMatrixWorld(true);
+            box.setFromObject(probe.group);
+            if (box.min.y < lo) lo = box.min.y;
+          }
+        }
+      }
+    }
+    return Number.isFinite(lo) ? lo : -0.9;
+  }
+
+  let TABLE_Y = -0.9;
+
+  /* Oak, drawn rather than downloaded: this project vendors everything and
+     fetches nothing at runtime, and a canvas costs no file. Grain runs along
+     the table, muted enough that the wooden hand still reads against it. */
+  function woodTexture() {
+    const c = document.createElement("canvas");
+    c.width = 512; c.height = 512;
+    const g = c.getContext("2d");
+    g.fillStyle = "#2b2017";
+    g.fillRect(0, 0, 512, 512);
+    for (let i = 0; i < 230; i++) {
+      const y = Math.random() * 512;
+      const light = Math.random() < 0.45;
+      g.strokeStyle = light ? "rgba(86, 65, 43, 0.45)" : "rgba(22, 15, 9, 0.5)";
+      g.lineWidth = 0.6 + Math.random() * 2.4;
+      g.beginPath();
+      g.moveTo(0, y);
+      // A slow waver, so the grain is not a set of ruled lines.
+      for (let x = 0; x <= 512; x += 32) {
+        g.lineTo(x, y + Math.sin((x / 512) * Math.PI * (1 + Math.random()) + i) * 5);
+      }
+      g.stroke();
+    }
+    // A few knots.
+    for (let k = 0; k < 5; k++) {
+      const kx = Math.random() * 512, ky = Math.random() * 512;
+      for (let r = 2; r < 16; r += 2.2) {
+        g.strokeStyle = "rgba(20, 13, 8, 0.45)";
+        g.lineWidth = 1.1;
+        g.beginPath();
+        g.ellipse(kx, ky, r, r * 0.62, Math.random(), 0, Math.PI * 2);
+        g.stroke();
+      }
+    }
+    const tex = new THREE.Texture(c);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(3, 3);
+    tex.anisotropy = 4;
+    tex.needsUpdate = true;
+    return tex;
+  }
+
+  function buildTable() {
+    TABLE_Y = lowestHandPoint() - 0.03;
+    /* A board, not an infinite floor. Filling the frame edge to edge left the
+       hand competing with the background and made the hint text unreadable;
+       with the table ending, the dark screen still frames the picture. */
+    const top = new THREE.Mesh(
+      new THREE.PlaneGeometry(6.5, 5.0),
+      new THREE.MeshStandardMaterial({ map: woodTexture(), roughness: 0.9, metalness: 0.0 }));
+    top.rotation.x = -Math.PI / 2;
+    top.position.y = TABLE_Y;
+    view.scene.add(top);
+  }
+
+
+  buildTable();
+
+  /* rAF is the right primitive *here*, unlike the rest of this page: the
+     calibration hand is genuinely animating every frame for as long as the tab
+     is open, which is the one case the measurement in `schedule()` allows. It
+     stops dead the moment the tab is left. */
+  return {
+    setLive(v) {
+      live = v;
+      if (v && !raf) { w = h = 0; raf = requestAnimationFrame(frame); }
+      if (!v && raf) { cancelAnimationFrame(raf); raf = 0; }
+    },
+  };
+})();
+
 drawEnergy();
 schedule();
 </script>
