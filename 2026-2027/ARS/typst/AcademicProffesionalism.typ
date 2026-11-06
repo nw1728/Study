@@ -120,9 +120,13 @@ His main feedback in the meeting, and what I did with it:
 
 - *Expect to read a few dozen papers.* Because our topic is specialised, he told us that we would need at least a few dozen papers before the picture becomes consistent. My Sections 2.1 and 2.3 are based on 21 studies and 7 grey-literature sources, selected from 509 screened records.
 
+On 12 October I sent Prof. Heijenk our research proposal and literature review draft, together with the course number he had asked for. At the time of writing we have not yet received a reply or feedback on these drafts. I will follow up with him before the next deadline, so that his feedback can still be used in the next iteration.
+
 = Teamwork
 
 My teammate and I divided the work by research question. We have four sub-questions in total: two on cybersecurity and two on embedded systems. I worked on the two embedded-systems questions. We planned to review each other's sections, but because of time constraints from other work we have not done this yet. I will schedule it before the next deadline.
+
+Besides working with my teammate, I peer-reviewed the literature reviews and research proposals of two other students, Levi and Luiz, on 6 November. I sent each of them the filled-in review form together with a short summary of their strongest points and the main things to improve. For Levi I could only review the literature review, because I had not received his research proposal.
 
 = Reflection
 
@@ -151,3 +155,11 @@ The emails below show how I contacted my supervisor and how the supervision was 
 #evidence("firstemailtobbayhan.png")[4 Oct: my email to Suzan Bayhan, the contact named by the coordinator, explaining our situation and apologising for the late message.]
 
 #evidence("answerfrombayhan.png")[5 Oct: her reply, confirming that no involvement is needed from her side.]
+
+The last three emails show what happened after the first meeting. On 12 October I sent Prof. Heijenk the course number he had asked for, together with our research proposal and literature review drafts, and apologised for sending it later than promised. We have not received a reply or any feedback on these drafts yet, so I will send a short follow-up and ask whether we can discuss the drafts in a next meeting. On 6 November I sent my peer reviews to Levi and Luiz. For each of them I filled in the review form and wrote a short summary in the email: first what was strong in their work, then the main points to improve. For Levi I could only review the literature review, because I had not received his research proposal, and I told him this openly. Writing these reviews also helped me look more critically at our own drafts, for example at whether our screening numbers and our gap are as clear as I asked from them.
+
+#evidence("submitted_lr_rp.png")[12 Oct: my email to Prof. Heijenk with the course number and our research proposal and literature review drafts. No reply has been received yet.]
+
+#evidence("peerreviewlevi.png")[6 Nov: my peer review sent to Levi, with a summary of strengths and points to improve.]
+
+#evidence("peerreviewluiz.png")[6 Nov: my peer review sent to Luiz, with a summary of strengths and points to improve.]
