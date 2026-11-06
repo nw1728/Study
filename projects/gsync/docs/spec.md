@@ -50,6 +50,7 @@ Dependencies: git, bash, jq (for parsing Cline JSON), cline (optional).
 |---|---|---|
 | `REPOS` | `"$HOME/study $HOME/study/work"` | space-separated repo paths |
 | `IDLE_MINUTES` | `10` | minutes without file changes before auto-commit |
+| `LID_MIN_ANGLE` | `15` | macOS lid angle threshold in degrees (<= stops gsync; -1 to disable) |
 | `AI_CMD` | `cline` | AI CLI (may include extra args); empty disables AI |
 | `AI_TIMEOUT` | `60` | seconds before AI is abandoned |
 | `MAX_DIFF_LINES` | `300` | diff lines sent to AI per group |
@@ -64,6 +65,7 @@ lives under `$XDG_RUNTIME_DIR`) so services find git, jq and cline.
 gsync            sync all repos now (ignores idle check)
 gsync --idle     only commit repos that have been idle (used by timer)
 gsync --fast     AI_TIMEOUT capped at 20s (used by sleep/shutdown)
+gsync --ignore-lid run even if laptop lid is closed/nearly closed
 gsync -n         dry run: print planned commits, change nothing, no AI call
 gsync -h | -V
 ```

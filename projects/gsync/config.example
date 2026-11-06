@@ -6,6 +6,11 @@ REPOS="$HOME/study $HOME/study/work"
 # Only auto-commit (gsync --idle) when no changed file was touched for this long.
 IDLE_MINUTES=10
 
+# macOS lid angle sensor threshold in degrees. If the lid is closed or
+# nearly closed (<= LID_MIN_ANGLE), gsync exits to avoid heating up the Mac in
+# a backpack. Set to -1 to disable, or 0 for fully closed only.
+LID_MIN_ANGLE=15
+
 # AI command used to write commit messages. Extra arguments are allowed,
 # e.g. AI_CMD="cline -m cline-free/deepseek-v4.1-flash".
 # Leave empty to always use the fallback message.

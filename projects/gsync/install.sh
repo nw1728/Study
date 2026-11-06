@@ -96,6 +96,14 @@ uninstall_linux() {
 }
 
 install_macos() {
+	if command -v clang >/dev/null 2>&1 && [ -f "$DIR/macos/lid-angle.c" ]; then
+		if clang -O2 -framework IOKit -framework CoreFoundation "$DIR/macos/lid-angle.c" -o "$BIN/gsync-lid-angle" 2>/dev/null; then
+			say "compiled lid angle sensor helper: $BIN/gsync-lid-angle"
+		else
+			warn "failed to compile lid angle helper (will use python/built-in fallback if available)"
+		fi
+	fi
+
 	mkdir -p "$(dirname "$PLIST")"
 	subst "$DIR/macos/com.gsync.agent.plist.in" >"$PLIST"
 	launchctl bootout "gui/$(id -u)" "$PLIST" 2>/dev/null || true
@@ -114,6 +122,7 @@ install_macos() {
 }
 
 uninstall_macos() {
+	rm -f "$BIN/gsync-lid-angle"
 	launchctl bootout "gui/$(id -u)" "$PLIST" 2>/dev/null || true
 	rm -f "$PLIST"
 	if [ -f "$HOME/.sleep" ]; then
